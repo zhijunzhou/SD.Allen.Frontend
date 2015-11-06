@@ -4793,29 +4793,61 @@ define('component/Section030204', function (require) {
         vm = {},
         sectionLoaderViewModel = {};
 
+    ko.oneTimeDirtyFlag = function (root) {
+        var _initialized;
+
+        //one-time dirty flag that gives up its dependencies on first change
+        var result = ko.computed(function () {
+            if (!_initialized) {
+                //just for subscriptions
+                ko.toJS(root);
+
+                //next time return true and avoid ko.toJS
+                _initialized = true;
+
+                //on initialization this flag is not dirty
+                return false;
+            }
+
+            //on subsequent changes, flag is now dirty
+            return true;
+        });
+
+        return result;
+    };
+
+    ko.dirtyFlag = function (root, isInitiallyDirty) {
+        var result = function () { },
+            _initialState = ko.observable(ko.toJSON(root)),
+            _isInitiallyDirty = ko.observable(isInitiallyDirty);
+
+        result.isDirty = ko.computed(function () {
+            return _isInitiallyDirty() || _initialState() !== ko.toJSON(root);
+        });
+
+        result.reset = function () {
+            _initialState(ko.toJSON(root));
+            _isInitiallyDirty(false);
+        };
+
+        return result;
+    };
+
     function PricingApproach(data) {
         if (data != null) {
             if (data.yellowPadPricePercentage() == undefined || data.yellowPadPricePercentage() == null || data.yellowPadPricePercentage() == "")
                 data.yellowPadPricePercentage(0);
-            return {
-                isYellowPadPrice : data.isYellowPadPrice() == 1 ? true : false,
-                yellowPadPricePercentage: data.yellowPadPricePercentage() * vm.lowOrHigher(),
-                clientPriceExpectDetail : escape(data.clientPriceExpectDetail()),
-                clientPriceStrategyDetail : escape(data.clientPriceStrategyDetail()),
-                cmpyPriceStrategyDetail : escape(data.cmpyPriceStrategyDetail()),
-                competitorPriceStrategyDetail : escape(data.competitorPriceStrategyDetail()),
-                majorFinancialIssue : escape(data.majorFinancialIssue())
-            };
+            //return {
+            this.isYellowPadPrice = data.isYellowPadPrice() == 1 ? true : false;
+            this.yellowPadPricePercentage = data.yellowPadPricePercentage() * vm.lowOrHigher();
+            this.clientPriceExpectDetail = escape(data.clientPriceExpectDetail());
+            this.clientPriceStrategyDetail = escape(data.clientPriceStrategyDetail());
+            this.cmpyPriceStrategyDetail = escape(data.cmpyPriceStrategyDetail());
+            this.competitorPriceStrategyDetail = escape(data.competitorPriceStrategyDetail());
+            this.majorFinancialIssue = escape(data.majorFinancialIssue());
+            this.dirtyFlag = new ko.dirtyFlag(this);//dirty flag
+            //};  
         }
-        return {
-            isYellowPadPrice: true,
-            yellowPadPricePercentage: "",
-            clientPriceExpectDetail: "",
-            clientPriceStrategyDetail: "",
-            cmpyPriceStrategyDetail: "",
-            competitorPriceStrategyDetail:"",
-            majorFinancialIssue:""
-        };
     }
 
     function unescapeData(data) {
@@ -4894,6 +4926,16 @@ define('component/Section030204', function (require) {
                 competitorPriceStrategyDetail : ko.observable(),
                 majorFinancialIssue : ko.observable()
             };
+
+            self.dirtyItems = ko.computed(function () {
+                return ko.utils.arrayFilter(self.data, function (item) {
+                    return item.dirtyFlag.isDirty();
+                });
+            });
+
+            self.isDirty = ko.computed(function () {
+                return this.dirtyItems().length > 0;
+            });
 
             //low or higher
             self.lowOrHigher = ko.observable(1);
