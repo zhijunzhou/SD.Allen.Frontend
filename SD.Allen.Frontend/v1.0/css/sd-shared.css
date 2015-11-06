@@ -316,6 +316,10 @@ h1, .h1, h2, .h2, h3, .h3 {
     vertical-align: middle;
     text-align: center;
 }
+#sd-section-menulist ul li div {
+    min-height:160px;
+    min-width:160px;
+}
 
 
 
