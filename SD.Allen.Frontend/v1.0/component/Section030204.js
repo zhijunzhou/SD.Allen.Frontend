@@ -13,46 +13,6 @@ define('component/Section030204', function (require) {
         vm = {},
         sectionLoaderViewModel = {};
 
-    ko.oneTimeDirtyFlag = function (root) {
-        var _initialized;
-
-        //one-time dirty flag that gives up its dependencies on first change
-        var result = ko.computed(function () {
-            if (!_initialized) {
-                //just for subscriptions
-                ko.toJS(root);
-
-                //next time return true and avoid ko.toJS
-                _initialized = true;
-
-                //on initialization this flag is not dirty
-                return false;
-            }
-
-            //on subsequent changes, flag is now dirty
-            return true;
-        });
-
-        return result;
-    };
-
-    ko.dirtyFlag = function (root, isInitiallyDirty) {
-        var result = function () { },
-            _initialState = ko.observable(ko.toJSON(root)),
-            _isInitiallyDirty = ko.observable(isInitiallyDirty);
-
-        result.isDirty = ko.computed(function () {
-            return _isInitiallyDirty() || _initialState() !== ko.toJSON(root);
-        });
-
-        result.reset = function () {
-            _initialState(ko.toJSON(root));
-            _isInitiallyDirty(false);
-        };
-
-        return result;
-    };
-
     function PricingApproach(data) {
         if (data != null) {
             if (data.yellowPadPricePercentage() == undefined || data.yellowPadPricePercentage() == null || data.yellowPadPricePercentage() == "")
@@ -65,7 +25,6 @@ define('component/Section030204', function (require) {
             this.cmpyPriceStrategyDetail = escape(data.cmpyPriceStrategyDetail());
             this.competitorPriceStrategyDetail = escape(data.competitorPriceStrategyDetail());
             this.majorFinancialIssue = escape(data.majorFinancialIssue());
-            this.dirtyFlag = new ko.dirtyFlag(this);//dirty flag
             //};  
         }
     }
@@ -113,6 +72,7 @@ define('component/Section030204', function (require) {
                         var bizSoln = oppty.data.bizSoln;
                         if (bizSoln != null && bizSoln.winStrategy != null && bizSoln.winStrategy.pricingApproach != null) {
                             var data = bizSoln.winStrategy.pricingApproach.data;
+                            vm.draftData(data);
                             vm.section.eTag = xhr.getResponseHeader('ETag');
                             unescapeData(data);
                         } else {
@@ -147,15 +107,8 @@ define('component/Section030204', function (require) {
                 majorFinancialIssue : ko.observable()
             };
 
-            self.dirtyItems = ko.computed(function () {
-                return ko.utils.arrayFilter(self.data, function (item) {
-                    return item.dirtyFlag.isDirty();
-                });
-            });
+            self.draftData = ko.observable();
 
-            self.isDirty = ko.computed(function () {
-                return this.dirtyItems().length > 0;
-            });
 
             //low or higher
             self.lowOrHigher = ko.observable(1);
@@ -182,16 +135,21 @@ define('component/Section030204', function (require) {
         }
     }
 
-    function saveOppty(event, argu) {
+    function saveOppty(event, argu) {        
         var sid = argu.sid();
         if (sid !== '030204') {
             return;
         } else {
             var newData = new PricingApproach(vm.data);
-            requestAPI.updateSection(vm.section.opptyID, vm.section.sectionName, newData, vm.section.eTag).done(function (data, textStatus, jqXHR) {
-                if(jqXHR != undefined) vm.section.eTag = jqXHR.getResponseHeader('ETag');
-                requestAPI.errorUpdateSection(data, sid, vm.section.opptyID);
-            });
+            if (JSON.stringify(newData) === JSON.stringify(ko.toJS(vm.draftData))) {
+                alert("Nothing Changed!");
+            } else {
+                vm.draftData(newData);
+                requestAPI.updateSection(vm.section.opptyID, vm.section.sectionName, newData, vm.section.eTag).done(function (data, textStatus, jqXHR) {
+                    if(jqXHR != undefined) vm.section.eTag = jqXHR.getResponseHeader('ETag');
+                    requestAPI.errorUpdateSection(data, sid, vm.section.opptyID);
+                });
+            }
         }
         
     }
