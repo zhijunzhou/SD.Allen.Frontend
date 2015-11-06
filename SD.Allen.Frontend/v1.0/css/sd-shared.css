@@ -310,6 +310,11 @@ h1, .h1, h2, .h2, h3, .h3 {
     background-color: #32B9B2;
     border-bottom: 8px solid #2AD2C9;
     border-top: 8px solid #2AD2C9;
+    color: #ffffff;
+    font-size: 20px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }
 
 

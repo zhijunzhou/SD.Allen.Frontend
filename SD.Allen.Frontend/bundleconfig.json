@@ -95,12 +95,6 @@
       "v1.0/css/sd-shared.css"
     ]
   },
-  //{
-  //  "outputFileName": "v1.0/css/sd-css.css",
-  //  "inputFiles": [
-  //    "v1.0/css/sd-css.css"
-  //  ]
-  //},
   {
     "outputFileName": "v1.0/css/sd.css",
     "inputFiles": [
