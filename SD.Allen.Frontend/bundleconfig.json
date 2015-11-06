@@ -1,0 +1,91 @@
+[
+  {
+    "outputFileName": "v1.0/js/sd-3rdpartylib.js",
+    "inputFiles": [
+      "v1.0/js/domReady.js",
+      "v1.0/js/jasny-bootstrap.min.js",
+      "v1.0/js/bootstrap-datetimepicker.min.js",
+      "v1.0/js/jquery-ui.js",
+      "v1.0/js/jquery.dataTables.js",
+      "v1.0/js/jquery.magnific-popup.js",
+      "v1.0/js/knockout-bootstrap.min.js",
+      "v1.0/js/knockout-jqAutocomplete.js",
+      "v1.0/js/dataTables.tableTools.min.js",
+      "v1.0/js/moment.min.js",
+      "v1.0/js/select2.min.js",
+      "v1.0/js/wysiwyg.js",
+      "v1.0/js/sd-shared.js",
+      "v1.0/js/jquery.numbox-1.2.0.min.js"
+    ]
+  },
+  {
+    "outputFileName": "v1.0/js/sd-components.js",
+    "inputFiles": [
+      "v1.0/model/AppConfig.js",
+      "v1.0/util/apputility.js",
+      "v1.0/model/Oppty.js",
+      "v1.0/model/RequestAPI.js",
+      "v1.0/component/TopLink.js",
+      "v1.0/component/TopLinkHome.js",
+      "v1.0/component/OpptyID.js",
+      "v1.0/component/DateTimePicker.js",
+      "v1.0/component/PeoplePicker.js",
+      "v1.0/component/PopQuesArea.js",
+      "v1.0/component/QuestionArea.js",
+      "v1.0/component/AllOppty.js",
+      "v1.0/component/AppHome.js",
+      "v1.0/component/MyOppty.js",
+      "v1.0/component/SDInputText.js",
+      "v1.0/component/SDErrorPage.js",
+      "v1.0/component/CountrySelector.js",
+      "v1.0/component/ReviewAndExtract.js",
+      "v1.0/component/AttachmentManager.js",
+      "v1.0/component/Section0201.js",
+      "v1.0/component/Section0202.js",
+      "v1.0/component/Section0301.js",
+      "v1.0/component/Section030201.js",
+      "v1.0/component/Section030202.js",
+      "v1.0/component/Section030203.js",
+      "v1.0/component/Section030204.js",
+      "v1.0/component/Section040101.js",
+      "v1.0/component/Section040102.js",
+      "v1.0/component/Section0402.js",
+      "v1.0/component/Section040301.js",
+      "v1.0/component/Section040302.js",
+      "v1.0/component/Section040303.js",
+      "v1.0/component/Section040304.js",
+      "v1.0/component/Section040305.js",
+      "v1.0/component/Section040306.js",
+      "v1.0/component/Section040307.js",
+      "v1.0/component/Section0404.js",
+      "v1.0/component/Section040501.js",
+      "v1.0/component/Section040502.js",
+      "v1.0/component/Section040503.js",
+      "v1.0/component/Section040504.js",
+      "v1.0/component/Section040505.js",
+      "v1.0/component/Section040506.js",
+      "v1.0/component/Section0406.js",
+      "v1.0/component/Section0407.js",
+      "v1.0/component/SDContents.js",
+      "v1.0/component/SectionLoader.js"
+    ]
+  },
+  {
+    "outputFileName": "v1.0/css/sd-shared.css",
+    "inputFiles": [
+      "v1.0/css/sd-shared.css"
+    ]
+  },
+  {
+    "outputFileName": "v1.0/css/sd-css.css",
+    "inputFiles": [
+      "v1.0/css/sd-css.css"
+    ]
+  },
+  {
+    "outputFileName": "v1.0/css/sd.css",
+    "inputFiles": [
+      "v1.0/css/sd.css"
+    ]
+  }
+]

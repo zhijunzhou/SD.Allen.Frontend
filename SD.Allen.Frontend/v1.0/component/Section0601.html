@@ -1,0 +1,455 @@
+﻿<p class="bg-info">
+    <a href="#c1" data-toggle="collapse"><label class="lead text-left">Service Management, Tools & Interfaces Integration Components </label></a>
+</p>
+<div id="c1" class="collapse">
+    <div class="row">
+        <div class="col-lg-10">
+            <label class="control-label">Service Management is N/A for Apps and BPS. Data Migration is N/A for BPS </label>
+        </div>
+        <div class="col-lg-2">
+            <a href="#">
+                <span class="glyphicon glyphicon-info-sign"></span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <textarea class="form-control" rows="20"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">&nbsp;</div>
+        <div class="col-lg-6">
+            <a href="#" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-ok"></span> Save
+            </a>
+        </div>
+    </div>
+</div>
+
+<p class="bg-info">
+    <a href="#c2" data-toggle="collapse"><label class="lead text-left">T & T Strategy and Approach </label></a>
+</p>
+<div id="c2" class="collapse">
+    <div class="row">
+        <div class="col-lg-10">
+            <label class="control-label">Complete the tables for each major transition and transformation approach or activity.
+            Be sure to address teh questions shown in the pop-up to the right. </label>
+        </div>
+        <div class="col-lg-2">
+            <a href="#">
+                <span class="glyphicon glyphicon-info-sign"></span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label">Transiton</label>
+        </div>
+        <div class="col-lg-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="bg-primary">
+                        <th>T & T Approach</th>
+                        <th>Approach</th>
+                        <th>Top 3 <br /> Assumptions</th>
+                        <th>Top 3 <br /> Risks</th>
+                        <th>Top 3 <br />  Deliverables</th>
+                        <th>Top 3 <br /> Milestones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-info">
+                        <td class="bg-primary">(Name of major transiton<br />approach/ Activity #1)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="bg-primary">(Name of major transiton<br />approach/ Activity #2)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-right">
+            <a class="btn btn-info btn-xs" href="#"><span class="glyphicon glyphicon-plus text-info">Add Row</span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label">Transformation</label>
+        </div>
+        <div class="col-lg-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="bg-primary">
+                        <th>T & T Approach</th>
+                        <th>Approach</th>
+                        <th>Top 3 <br /> Assumptions</th>
+                        <th>Top 3 <br /> Risks</th>
+                        <th>Top 3 <br />  Deliverables</th>
+                        <th>Top 3 <br /> Milestones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-info">
+                        <td class="bg-primary">(Name of major transformation<br />approach/ Activity #1)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="bg-primary">(Name of major transformation<br />approach/ Activity #2)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-right">
+            <a class="btn btn-info btn-xs" href="#"><span class="glyphicon glyphicon-plus text-info">Add Row</span></a>
+        </div>
+    </div>
+</div>
+<p class="bg-info">
+    <a href="#c3" data-toggle="collapse"><label class="lead text-left">T & T Strategy and Approach - Client Benefits</label></a>
+</p>
+<div id="c3" class="collapse">
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label text-info">Complete the table to identify client benefits of T & T. </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="bg-primary">
+                        <th>Business Problem/IT Objective <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+                        <th>Transformation Project <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+                        <th>Client Transformation Benefits <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+                        <th><a href="#"><span class="glyphicon glyphicon-minus-sign" data-bind="text:InRow.length"></span></a></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:InRow">
+                    
+                   <tr data-bind="attr:{class:$index() % 2 == 0 ? 'bg-info' : ''}">
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td><a href="#" data-bind="click:$parent.remove"><span class="glyphicon glyphicon-minus-sign"></span></a></td>
+                    </tr>
+                     <!--
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="bg-info">
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="bg-info">
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+        </tr>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-right">
+            <a class="btn btn-info btn-xs" href="#" data-bind="click:addRow"><span class="glyphicon glyphicon-plus text-info">Add Row</span></a>
+        </div>
+    </div>
+</div>
+<p class="bg-info">
+    <a href="#c4" data-toggle="collapse"><label class="lead text-left">T & T Strategy and Approach - Due Diligence</label></a>
+</p>
+<div id="c4" class="collapse">
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label text-info">Complete the following to document key Due Diligence findings. </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            Key/Major Findings<br /> & Impacts
+        </div>
+        <div class="col-lg-8 table-bordered text-muted">
+            <ul>
+                <li>Finding - Impact</li>
+                <li>Finding - Impact</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            Open Issues & Risks<br /> & Planned Actions
+        </div>
+        <div class="col-lg-8 table-bordered text-muted">
+            <ul>
+                <li>Issue - Planned Action</li>
+                <li>Risks - Planned Action</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            Open Assumptions<br /> & Planned Actions
+        </div>
+        <div class="col-lg-8 table-bordered text-muted">
+            <ul>
+                <li>Assumptions - Planned Action</li>
+                <li>Assumptions - Planned Action</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            Outstanding Data
+        </div>
+        <div class="col-lg-8 table-bordered text-muted">
+            <ul>
+                <li>Outstanding Data 1</li>
+                <li>Outstanding Data 2</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<p class="bg-info">
+    <a href="#c5" data-toggle="collapse"><label class="lead text-left">T & T Solution Overview - Key Projects and Timelines</label></a>
+</p>
+<div id="c5" class="collapse">
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label text-info">This section should be used to attach all of the timelines. </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
+            <table class="table">
+                <tr>
+                    <td class="bg-info">Insert high-level overall T & T timeline</td>
+                    <td>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-paperclip"></span> Attach file
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Insert tower solution T & T timeline</td>
+                    <td>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-paperclip"></span> Attach file
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bg-info">Insert timeline for client in-flight projects(may be N/A)</td>
+                    <td>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-paperclip"></span> Attach file
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Insert other relevant timelines</td>
+                    <td>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-paperclip"></span> Attach file
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">&nbsp;</div>
+        <div class="col-lg-6">
+            <a href="#" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-ok"></span> Save
+            </a>
+        </div>
+    </div>
+</div>
+
+<p class="bg-info">
+    <a href="#c6" data-toggle="collapse"><label class="lead text-left">T & T Solution Overview - Key Projects Interdependencies</label></a>
+</p>
+<div id="c6" class="collapse">
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label text-info">Complete the table to document key T & T project interdependencies. </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Project <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+                        <th>Dependencies <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+                        <th>Required actions to align projects <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-info">
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="bg-info">
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="bg-info">
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">&nbsp;</div>
+        <div class="col-lg-6">
+            <a href="#" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-ok"></span> Save
+            </a>
+        </div>
+    </div>
+</div>
+<p class="bg-info">
+    <a href="#c7" data-toggle="collapse"><label class="lead text-left">T & T Solution Overview - Governance Structure and Management of Change</label></a>
+</p>
+<div id="c7" class="collapse">
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label text-info">This section should be used to attach the governance structure, and add 
+            details regarding the Management of Change. </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
+            <table class="table">
+                <tr>
+                    <td class="bg-info">Insert Acount Org Chart</td>
+                    <td>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-paperclip"></span> Attach file
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Insert T & T Program Team Structure</td>
+                    <td>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-paperclip"></span> Attach file
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bg-info">Insert T & T Project Structure by Offering</td>
+                    <td>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-paperclip"></span> Attach file
+                        </a>
+                    </td>
+                </tr>                
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 text-right">What Management of Change is included in the Transition Phase?</div>
+        <div class="col-lg-6">
+            <input type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 text-right">What Management of Change is included in the Transformation Phase?</div>
+        <div class="col-lg-6">
+            <input type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 text-right">Are client obligations contractually documented to support the MoC process
+        across all regions and business entities/departments?</div>
+        <div class="col-lg-6">
+            <input type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 text-right">Do T & T contractual R & R ensure that the client owns running a MoC
+        Program, specifically around the end user facing changes?</div>
+        <div class="col-lg-6">
+            <input type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 text-right">Is the overall governance structure positioned to trigger/support MoC activities?</div>
+        <div class="col-lg-6">
+            <input type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 text-right">Has regional/business customization been clearly defined and costed?</div>
+        <div class="col-lg-6">
+            <input type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">&nbsp;</div>
+        <div class="col-lg-6">
+            <a href="#" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-ok"></span> Save
+            </a>
+        </div>
+    </div>
+</div>

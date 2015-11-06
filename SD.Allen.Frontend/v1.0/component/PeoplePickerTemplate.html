@@ -1,0 +1,19 @@
+﻿<!--ko if: editable()-->
+<div placeholder="" data-bind="attr: {id: guid}, clientPeoplePicker: users, peopleOnly: peopleOnly, multiple: multiple"></div>
+<!--/ko-->
+<!--ko ifnot: editable()-->
+<div class="row form-horizontal">
+    <div class="col-lg-12">
+        <!--ko if: users() instanceof Array -->
+        <!-- ko foreach:users -->
+        <div class="text-nowrap"><a data-bind="text: email,attr:{href:'mailto:' + email}" title="Click to send email"></a></div>
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko if: users() instanceof Object -->
+        <div class="text-nowrap">
+            <a data-bind="text: users().email,attr:{href:'mailto:' + users().email}" title="Click to send email"></a>
+        </div>
+        <!--/ko-->
+    </div>
+</div>
+<!--/ko-->

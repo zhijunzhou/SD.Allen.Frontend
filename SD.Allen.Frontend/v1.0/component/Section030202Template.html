@@ -1,0 +1,56 @@
+﻿<!-- ko with: data -->
+
+<div class="row form-horizontal">
+    <div class="col-lg-6">
+        <label class="control-label">How many total competitors are pursuing the opportunity?</label>
+        <!-- ko if:!$component.editable() -->
+        <i><label class="control-label" data-bind="text:competitorNum"></label></i>
+        <!-- /ko -->
+    </div>
+    <!-- ko if:$component.editable() -->
+    <div class="col-lg-1">
+        <input type="number" class="form-control text-right" min="1" data-bind="value:competitorNum" />
+    </div>
+    <div class="col-lg-3" data-bind="if:!$component.isInteger()">
+        <div class="alert alert-error">Can only input is an integer! </div>
+    </div>
+    <!-- /ko -->   
+
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <label class="control-label">
+            Provide the following information for a maximum of 4 competitors.Be sure to identify their plans and approaches for transformation.
+        </label>
+    </div>
+    <div class="col-lg-12" data-bind="foreach:content">
+        <!-- ko if : 0 > ($index() - $parent.competitorNum())  && 4 > $index()   -->
+        <div class="panel panel-default panel-primary">
+            <div class="panel-heading form-inline form-horizontal">
+                Competitor <label data-bind="text:$index() + 1"></label> : &nbsp;&nbsp;
+                <!-- ko if:$component.editable() -->
+                <input type="text" class="form-control" size="40" data-bind="value: $data.name" />
+                <!-- /ko -->
+                <!-- ko if:!$component.editable() -->
+                <span class="control-label" data-bind="text:$data.name"></span>
+                <!-- /ko -->
+            </div>
+            <div class="panel-body">
+                <div class="col-lg-4">
+                    <b>Key strengths</b>
+                    <sd-questionarea params="{content: $data.strengthDetail,editable:$component.editable,inLoop:true}"></sd-questionarea>
+                </div>
+                <div class="col-lg-4">
+                    <b>Key weaknesses</b>
+                    <sd-questionarea params="{content: $data.weaknessDetail,editable:$component.editable,inLoop:true}"></sd-questionarea>
+                </div>
+                <div class="col-lg-4">
+                    <b>How will they win?</b>
+                    <sd-questionarea params="{content: $data.advantageDetail,editable:$component.editable,inLoop:true}"></sd-questionarea>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

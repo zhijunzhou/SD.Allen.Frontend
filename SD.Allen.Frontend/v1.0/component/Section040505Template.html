@@ -1,0 +1,75 @@
+﻿
+
+<div class="accordion" id="accordion1">
+    <div class="accordion-group">
+        <div id="c1" class="panel-body">
+            <p class="bg-success sd-info">
+                <label>Use this table to document the delivery responsibilities for the in-scope offerings. The responsibility may be with HPE directly, with other HPE or HPI groups or with HPE partners or third parties. Be sure to highlight delivery responsibilities that support the Transformation Strategy and Plan. </label>
+            </p>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>In-Scope Offering</th>
+                                        <th>HPE ES Delivery</th>
+                                        <th>Other HPE or HPI Delivery</th>
+                                        <th>ES Partner Delivery</th>
+                                        <th>ES Third Party</th>
+                                        <th>
+                                            Comments
+                                                         <a href="#" class="popover-content" title="Include comments required to explain the reasoning for the delivery responsibilities or to document relationship managers for third parties or partners.">
+                                                             <span class="glyphicon glyphicon-info-sign"></span>
+                                                         </a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:svcDeliveryResp">
+                                    <!-- ko if: $component.editable()-->
+                                    <tr>
+                                        <td data-bind="text:offering">&nbsp;</td>
+                                        <td>
+                                            <select class="form-control" data-bind="value:delivery,enable:$component.editable()">
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" data-bind="value:otherBuDelivery,enable:$component.editable(),attr:{ id: $index() }">
+                                                <option value="NA">N/A</option>
+                                                <option value="HPESoftware">HPE Software</option>
+                                                <option value="HPEHardware">HPE Hardware</option>
+                                                <option value="HPETechnicalServices">HPE Technical Services</option>
+                                                <option value="HPIHardware">HPI Hardware</option>
+                                                <option value="HPFinancialServices">HP Financial Services</option>
+                                                <option value="Other">Other(Specify)</option>
+                                            </select>
+                                            <input type="text" placeholder="Input other option" class="form-control" data-bind="value: specificBuDelivery, visible:otherOptionVisible " />
+                                        </td>
+                                        <td><input type="text" placeholder="name of partner or N/A" class="form-control" data-bind="value:partnerDelivery"></td>
+                                        <td><input type="text" placeholder="name of third party or N/A" class="form-control" data-bind="value:thirdPartyDelivery"></td>
+                                        <td class="col-lg-3"><textarea class="form-control sd-comment" rows="3" data-bind="textInput:comment"></textarea></td>
+                                    </tr>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: $component.editable()-->
+                                    <tr>
+                                        <td data-bind="text:offering">&nbsp;</td>
+                                        <td data-bind="text:delivery">&nbsp;</td>
+                                        <td data-bind="text:otherBuDelivery">&nbsp;</td>
+                                        <td data-bind="text:partnerDelivery">&nbsp;</td>
+                                        <td data-bind="text:thirdPartyDelivery">&nbsp;</td>
+                                        <td data-bind="text:comment">&nbsp;</td>
+                                    </tr>
+                                    <!-- /ko -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

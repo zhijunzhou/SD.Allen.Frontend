@@ -1,0 +1,40 @@
+﻿
+<!-- ko with:section.data --> 
+<div id="c1" class="panel-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- ko if: $component.editable()-->  
+                    <p class="bg-success sd-info">
+                        <label>If available, insert a diagram or picture of the client’s current state architecture,
+                        identifying in and out of scope items and then answer the following questions.</label>
+                    </p>
+                    <!--/ko-->
+                    <sd-component-attachmentManager params="{viewModel:$component,editable:$component.editable}"></sd-component-attachmentManager>
+                </div>                
+            </div>
+        <sd-questionarea params="{title: 'Describe the key components of the client’s architecture that are relevant to the in-scope services',
+                     content: keyComponentDetail,editable:$component.editable}"></sd-questionarea>
+
+        <sd-questionarea params="{title: 'Which areas of the client’s architecture are causing the greatest pain/issue?',
+                     content: painAreaDetail,editable:$component.editable}"></sd-questionarea>
+
+        <sd-questionarea params="{title: 'What are the key technology drivers to change this architecture?',
+                     content: keyTechDriverDetail,editable:$component.editable}"></sd-questionarea>
+
+        <sd-questionarea params="{title: 'What areas of client’s architecture do they view as business critical?',
+                     content: bizCriticalAreaDetail,editable:$component.editable}"></sd-questionarea>
+
+        <sd-questionarea params="{title: 'How will the new service for the client operate alongside the client’s other services?',
+                     content: serviceCollaborationDetail,editable:$component.editable}"></sd-questionarea>
+
+        <sd-questionarea params="{title: 'Describe the integration needs with the Client’s current IT environment.',
+                     content: integrationNeedDetail,editable:$component.editable}"></sd-questionarea>
+
+        <sd-questionarea params="{title: 'Which client architectural principles MUST the solution adhere to?',
+                     content: archPrincipleDetail,editable:$component.editable}"></sd-questionarea>
+
+        <sd-questionarea params="{title: 'Are there any client or account architectural principles or standards which conflict with those of HPE?',
+                     content: archPrincipleConflictDetail,editable:$component.editable}"></sd-questionarea>
+    </div>
+
+     <!-- /ko -->

@@ -1,0 +1,339 @@
+﻿<!-- ko if:$component.editable() -->
+<div class="row">
+    <div class="col-lg-12">
+        <p class="alert alert-danger">
+            <label>
+                ATTENTION: Enter an @hpe.com email address into all name fields and select the name that appears.
+                If you receive a ‘name not found’ message, re-enter the email address using @hp.com.
+                This will be required until all emails are migrated.
+            </label>
+        </p>
+    </div>
+</div>
+<!-- /ko -->
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="bg-primary">
+                    <th class="text-nowrap text-center" style="width: 250px">Pursuit Core Team</th>
+                    <th class="text-nowrap text-center">Primary (Global)</th>
+                    <!--ko with:leadRegion -->
+                    <th class="text-nowrap text-center" data-bind="text:title"></th>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <th class="text-nowrap text-center" data-bind="text:title"></th>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <th class="text-nowrap text-center" data-bind="text:title"></th>
+                    <!--/ko-->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-text-nowrap">Account Executive</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['acctExecutive'],editable:$component.editable,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['acctExecutive'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['acctExecutive'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['acctExecutive'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+
+                <tr>
+                    <td class="text-nowrap">Bid Manager</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['bidMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['bidMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['bidMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['bidMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Deal Analyst</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['dealAnalyst'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['dealAnalyst'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['dealAnalyst'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['dealAnalyst'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Delivery Owner</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['deliveryOwner'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['deliveryOwner'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['deliveryOwner'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['deliveryOwner'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">HR Lead</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['hrLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['hrLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['hrLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['hrLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Legal/Contract Management Lead</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['legalContractMgmtLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['legalContractMgmtLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['legalContractMgmtLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['legalContractMgmtLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Opportunity Consultant</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['opptyConsultant'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['opptyConsultant'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['opptyConsultant'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['opptyConsultant'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Proposal Manager</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['proposalMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['proposalMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['proposalMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['proposalMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Pursuit Engagement Manager</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['pursuitEngagementMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['pursuitEngagementMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['pursuitEngagementMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['pursuitEngagementMgr'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Sales Executive</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['salesExecutive'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['salesExecutive'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['salesExecutive'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['salesExecutive'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Solution Consultant</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['solnConsultant'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['solnConsultant'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['solnConsultant'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['solnConsultant'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Solution Lead</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['solnLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['solnLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['solnLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['solnLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Strategic Pursuit Lead</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['strategicPursuitLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['strategicPursuitLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['strategicPursuitLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['strategicPursuitLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">T&T Leader</td>
+                    <td><sd-peoplepicker params="{users: data['coreTeam']['primary']['tntLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['tntLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['tntLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['coreTeam'][name]['tntLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="bg-primary">
+                    <th class="text-nowrap text-center" style="width: 250px">Pursuit Extended Team</th>
+                    <th class="text-nowrap text-center">Primary (Global)</th>
+                    <!--ko with:leadRegion -->
+                    <th class="text-nowrap text-center" data-bind="text:title"></th>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <th class="text-nowrap text-center" data-bind="text:title"></th>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <th class="text-nowrap text-center" data-bind="text:title"></th>
+                    <!--/ko-->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-text-nowrap">
+                        Deal Intake
+                        <!-- ko if: $component.editable() -->
+                        <span class="popover-options">
+                            <a href="#" class="popover-content" title="You may enter multiple names for this function.">
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                            </a>
+                        </span>
+                        <!--/ko-->
+                    </td>
+                    <td><sd-peoplepicker params="{users: data['extendTeam']['primary']['dealIntake'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['dealIntake'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['dealIntake'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['dealIntake'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">Due Diligence Leader</td>
+                    <td><sd-peoplepicker params="{users: data['extendTeam']['primary']['dueDiligenceLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['dueDiligenceLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['dueDiligenceLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['dueDiligenceLead'],editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">
+                        Other Internal Business Partners
+                        <!-- ko if: $component.editable() -->
+                        <span class="popover-options">
+                            <a href="#" class="popover-content" title="You may enter multiple names for this function.">
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                            </a>
+                        </span>
+                        <!--/ko-->
+                    </td>
+                    <td><sd-peoplepicker params="{users: data['extendTeam']['primary']['otherIntlBizPartner'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['otherIntlBizPartner'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['otherIntlBizPartner'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['otherIntlBizPartner'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">
+                        Practice Architects
+                        <!-- ko if: $component.editable() -->
+                        <span class="popover-options">
+                            <a href="#" class="popover-content" title="You may enter multiple names for this function.">
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                            </a>
+                        </span>
+                        <!--/ko-->
+                    </td>
+                    <td><sd-peoplepicker params="{users: data['extendTeam']['primary']['practiceArch'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['practiceArch'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['practiceArch'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['practiceArch'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+                <tr>
+                    <td class="text-nowrap">
+                        Proposal Support
+                        <!-- ko if: $component.editable() -->
+                        <span class="popover-options">
+                            <a href="#" class="popover-content" title="You may enter multiple names for this function.">
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                            </a>
+                        </span>
+                        <!--/ko-->
+                    </td>
+                    <td><sd-peoplepicker params="{users: data['extendTeam']['primary']['proposalSupport'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--ko with:leadRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['proposalSupport'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:secondRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['proposalSupport'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                    <!--ko with:thirdRegion -->
+                    <td><sd-peoplepicker params="{users: $component.data['extendTeam'][name]['proposalSupport'], multiple: true,editable:$component.editable}"></sd-peoplepicker></td>
+                    <!--/ko-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

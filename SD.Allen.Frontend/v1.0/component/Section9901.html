@@ -1,0 +1,51 @@
+﻿<sd-toplink-home></sd-toplink-home>
+<div class="row">
+    <div class="col-lg-9">
+        <div class="page-header">
+            <h2>My Opportunities</h2>
+        </div>
+    </div>
+    <div class="col-lg-3 vertical-align-bottom">
+        <span><a href="/teams/ESSolutionDesign-Staging/SitePages/SectionLoader.aspx?sid=0201" class="btn btn-primary btn-sm active" role="button">New Opportunity</a></span>
+        <span><a href="/teams/ESSolutionDesign-Staging/SitePages/AllOppty.aspx" role="button" class="btn btn-primary btn-sm active">All Opportunities</a></span>
+    </div>
+</div>
+<ol class="breadcrumb">
+    <li><a href="#">Solution Source</a></li>
+    <li class="active">My Opportunities</li>
+</ol>
+<div>
+    <table id="table_sorting_paging" class="table-bordered table-striped table-hover table-condensed dataTable">
+        <thead>
+            <tr>
+                <th rowspan="2">Opportunity ID</th>
+                <th rowspan="2">Opportunity Name</th>
+                <th rowspan="2">Client Name</th>
+                <th rowspan="2">Deal Status</th>
+                <th rowspan="2" align="center">Sales Stage</th>
+                <th></th>
+                <th rowspan="1" colspan="1">Status Check</th>
+                <th></th>
+                <th rowspan="2" align="center">Option</th>
+            </tr>
+            <tr>
+                <th align="center">Content</th>
+                <th align="center">Action</th>
+                <th align="center">Approval</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:opptyCollection">
+            <tr>
+                <td><a data-bind="attr:{href:window.sd.rootUrl + '/SitePages/SDContents.aspx?opptyID=' + OpptyID}"><label data-bind="text:OpptyID"></label></a></td>
+                <td data-bind="text:OpptyName"></td>
+                <td data-bind="text:ClientName"></td>
+                <td data-bind="text:DealStatus"></td>
+                <td data-bind="text:SalesStage"></td>
+                <td data-bind="text:StatusCheck"></td>
+                <td></td>
+                <td></td>
+                <td><i class="glyphicon glyphicon-asterisk"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

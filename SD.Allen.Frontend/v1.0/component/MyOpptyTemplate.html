@@ -1,0 +1,60 @@
+﻿<sd-toplink-home></sd-toplink-home>
+
+<!--<div class="panel panel-primary">-->
+    <div class="list-group">
+        
+        <div class="list-group-item active row">
+            <div class="col-lg-9">
+                <h3>My Opportunities</h3>
+            </div>
+            <div class="col-lg-3">
+                <div class="btn-group pull-right" role="group">
+                    <a class="btn btn-default btn-tip" href="SDSectionLoader.aspx?sid=0201" title="Create a new opportunity">
+                        <img src="img/newOppty32.png" />
+                    </a>
+                    <a class="btn btn-default btn-tip" href="SDAllOppty.aspx" title="View all open opportunities">
+                        <img src="img/AllOppty32.png" />
+                    </a>
+                    <a class="btn btn-default btn-tip" href="SDMyOppty.aspx" title="View my opportunities">
+                        <img src="img/myOppty32.png" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--</div>-->
+
+<div id="sd-oppty-list" class="panel-primary" style="margin-left:0; margin-top:50px; height:100%;min-height:600px;min-width:1280px">
+    <table id="table_sorting_paging" class="table-bordered table-striped table-hover table-condensed dataTable">
+        <thead>
+            <tr>
+                <th rowspan="2">Opportunity ID</th>
+                <th rowspan="2">Opportunity Name</th>
+                <th rowspan="2">Client Name</th>
+                <th rowspan="2">Deal Status</th>
+                <th rowspan="2" align="center">Sales Stage</th>                
+                <th rowspan="1" colspan="3" align="center">Status Check</th>                
+                <th rowspan="2" align="center">Option</th>
+            </tr>
+            <tr>
+                <th align="center">Content</th>
+                <th align="center">Action</th>
+                <th align="center">Approval</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:opptyList">
+            <tr>
+                <td class="text-nowrap"><a data-bind="attr: {href: $component.urlPrefix+opptyId}, text: opptyId"></a></td>
+                <td data-bind="text:opptyName"></td>
+                <td data-bind="text:clientName"></td>
+                <td data-bind="text:dealStatus"></td>
+                <td data-bind="text:salesStage"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><i class="glyphicon glyphicon-asterisk"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

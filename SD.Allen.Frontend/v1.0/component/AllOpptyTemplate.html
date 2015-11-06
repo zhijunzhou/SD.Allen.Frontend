@@ -1,0 +1,68 @@
+﻿<sd-toplink-home></sd-toplink-home>
+<div class="list-group">
+    <div class="list-group-item active row">
+        <div class="col-lg-9">
+            <h3>All Open Opportunities</h3>
+        </div>
+        <div class="col-lg-3">
+            <div class="btn-group pull-right" role="group">
+                <a class="btn btn-default btn-tip" href="SDSectionLoader.aspx?sid=0201" title="Create a new opportunity">
+                    <img src="img/newOppty32.png" />
+                </a>
+                <a class="btn btn-default btn-tip" href="SDAllOppty.aspx" title="View all open opportunities">
+                    <img src="img/AllOppty32.png" />
+                </a>
+                <a class="btn btn-default btn-tip" href="SDMyOppty.aspx" title="View my opportunities">
+                    <img src="img/myOppty32.png" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="sd-oppty-list" class="panel-primary" style="margin-left:0; margin-top:50px; height:100%;min-height:600px;min-width:1280px">
+    <table id="table_sorting_paging" class="table-bordered table-striped table-hover table-condensed dataTable">
+        <thead>
+            <tr>
+                <th>Opportunity ID</th>
+                <th class="text-nowrap">Opportunity Name</th>
+                <th class="text-nowrap">Client Name</th>
+                <th class="text-nowrap">Bid Manager</th>
+                <th class="text-nowrap">Solution Lead</th>
+                <th class="text-nowrap">Option Available</th>
+            </tr>            
+        </thead>
+        <tbody data-bind="foreach:opptyList">
+            <tr>
+                <td class="text-nowrap">
+                    <!-- ko if: isMine -->
+                    <a data-bind="attr: {href: $component.urlPrefix+opptyId}, text: opptyId"></a>
+                    <!-- /ko -->
+                    <!-- ko ifnot: isMine -->
+                    <span data-bind="text:opptyId"></span>
+                    <!-- /ko -->
+                </td>
+                <td data-bind="text:opptyName"></td>
+                <td data-bind="text:clientName"></td>
+                <!-- ko if: contact -->
+                <td>
+                    <!-- ko if: contact.coreTeam.primary.bidMgr -->
+                    <a data-bind="text:contact.coreTeam.primary.bidMgr.title,attr:{href:'mailto:'+contact.coreTeam.primary.bidMgr.email,title:''+contact.coreTeam.primary.bidMgr.email}"></a>
+                    <!-- /ko -->
+                </td>
+                <td>
+                    <!-- ko if: contact.coreTeam.primary.solnLead -->
+                    <a data-bind="text:contact.coreTeam.primary.solnLead.title,attr:{href:'mailto:'+contact.coreTeam.primary.solnLead.email,title:''+contact.coreTeam.primary.solnLead.email}"></a>
+                    <!--/ko-->
+                </td>
+                <!--/ko-->
+                <!-- ko ifnot:contact -->
+                <td></td>
+                <td></td>
+                <!--/ko-->
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

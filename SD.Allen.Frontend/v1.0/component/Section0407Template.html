@@ -1,0 +1,223 @@
+﻿<!-- ko with:section.data -->
+
+<div class="accordion" id="accordion1">
+    <div class="accordion-group">
+        <div id="c1" class="panel-body">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="bg-success sd-info">
+                            <label>
+                                Identify the costing approaches/strategies for the in-scope offerings.This is not applicable for projects.
+                            </label>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Offering <!-- pull in content from Scope section --> </th>
+                                    <th>CMO/TMO Approach if Applicable</th>
+                                    <th>HPE Targeted Approach</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:content">
+                                <!-- ko if: $component.editable()-->
+                                <tr>
+                                    <td data-bind="text:offering"></td>
+                                    <td><input type="text" class="form-control" data-bind="value:xmoApproach" /></td>
+                                    <td><input type="text" class="form-control" data-bind="value:cmpyTarget" /></td>
+                                </tr>
+                                <!--/ko-->
+                                <!-- ko ifnot: $component.editable() -->
+                                <tr>
+                                    <td data-bind="text:offering"></td>
+                                    <td data-bind="text:xmoApproach"></td>
+                                    <td data-bind="text:cmpyTarget"></td>
+                                </tr>
+                                <!--/ko-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                        <!-- /ko -->
+
+
+<!--Remove as requirement for Sprint 1 but change title and retain for Sprint 2
+<p>
+    <a href="#c2" data-toggle="collapse"><label class="lead text-left">Summary Deal—Total Deal Savings Walk/Productivity
+</label></a>
+</p>
+<div id="c2" class="collapse">
+    <div class="row">
+        <div class="col-lg-8"><label class="control-label">Attach/Embed file</label></div>
+        <div class="col-lg-2">
+            <a href="#">
+                <span class="glyphicon glyphicon-paperclip"></span> Add Excel content
+            </a>
+        </div>
+        <div class="col-lg-2">
+            <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <textarea class="form-control" rows="20"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">&nbsp;</div>
+        <div class="col-lg-6">
+            <a href="#" class="btn btn-info btn-sm">
+                Save & Continue <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<p>
+    <a href="#c3" data-toggle="collapse"><label class="lead text-left">Total Deal Summary FTE Counts by Offering, Country, Quarter</label></a>
+</p>
+<div id="c3" class="collapse">
+    <div class="row">
+        <div class="col-lg-8"><a class="control-label">Link to CMT Consolidator</a></div>
+        <div class="col-lg-2">
+            <a href="#">
+                <span class="glyphicon glyphicon-paperclip"></span> Add Excel content
+            </a>
+        </div>
+        <div class="col-lg-2">
+            <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label">Attach/Embed file.</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <textarea class="form-control" rows="20"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">&nbsp;</div>
+        <div class="col-lg-6">
+            <a href="#" class="btn btn-info btn-sm">
+                Save & Continue <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<p>
+    <a href="#c4" data-toggle="collapse"><label class="lead text-left">Total Deal Summary FTE Counts by T&T, Steady State, Country</label></a>
+</p>
+<div id="c4" class="collapse">
+    <div class="row">
+        <div class="col-lg-8"><a class="control-label">Link to CMT Consolidator</a></div>
+        <div class="col-lg-2">
+            <a href="#">
+                <span class="glyphicon glyphicon-paperclip"></span> Add Excel content
+            </a>
+        </div>
+        <div class="col-lg-2">
+            <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label">Attach/Embed file.</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <textarea class="form-control" rows="20"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">&nbsp;</div>
+        <div class="col-lg-6">
+            <a href="#" class="btn btn-info btn-sm">
+                Save & Continue <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<p>
+    <a href="#c5" data-toggle="collapse"><label class="lead text-left">Total Deal FTE Summary Counts by New Hire, Client Transition, HPE Existing, Contractor by Country</label></a>
+</p>
+<div id="c5" class="collapse">
+    <div class="row">
+        <div class="col-lg-8"><a class="control-label">Link to CMT Consolidator</a></div>
+        <div class="col-lg-2">
+            <a href="#">
+                <span class="glyphicon glyphicon-paperclip"></span> Add Excel content
+            </a>
+        </div>
+        <div class="col-lg-2">
+            <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label">Attach/Embed file.</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <textarea class="form-control" rows="20"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">&nbsp;</div>
+        <div class="col-lg-6">
+            <a href="#" class="btn btn-info btn-sm">
+                Save & Continue <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<p>
+    <a href="#c6" data-toggle="collapse"><label class="lead text-left">Total Deal Costs by Service, FTEs, Year</label></a>
+</p>
+<div id="c6" class="collapse">
+    <div class="row">
+        <div class="col-lg-8"><a class="control-label">Link to CMT Consolidator</a></div>
+        <div class="col-lg-2">
+            <a href="#">
+                <span class="glyphicon glyphicon-paperclip"></span> Add Excel content
+            </a>
+        </div>
+        <div class="col-lg-2">
+            <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="control-label">Attach/Embed file.</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <textarea class="form-control" rows="20"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">&nbsp;</div>
+        <div class="col-lg-6">
+            <a href="#" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-ok"></span> Save
+            </a>
+        </div>
+    </div>
+</div>
+    -->

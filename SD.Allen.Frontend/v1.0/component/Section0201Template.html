@@ -1,0 +1,725 @@
+﻿<!-- ko with: data -->
+<sd-errorpage></sd-errorpage>
+<!-- ko if:$component.editable() -->
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3">
+        <label class="control-label text-nowrap">Opportunity ID</label>
+        <small><span class="glyphicon glyphicon-asterisk" style="color:#f83b3b;"></span></small>
+    </div>
+    <div class="col-lg-8 col-md-7">
+        <!--ko ifnot:$component.isNewOppty() == true -->
+        <input type="text" class="form-control" id="opptyID" data-bind="value: opptyID " readonly />
+        <!--/ko-->
+        <!--ko if:$component.isNewOppty() == true -->
+        <input type="text" class="form-control" id="input-opptyID" data-bind="value: $component.inputOpptyId" />
+        <span id="helpBlock" class="help-block bg-warning" data-bind="visible: !$component.validId()">Input a valid opportunity id according to the format:OPP-0123456789/OPE-0123456789.</span>
+        <!--/ko-->
+        <!--ko if:$component.validId() == true -->
+        <span id="grip-result-info" class="help-block bg-warning" data-bind="visible: !$component.existedInSystem() && !$component.existedInSalesForce() ">Cannot find information in GRIP with given opportunity id.</span>
+        <span id="system-result-info" class="help-block bg-warning" data-bind="visible: $component.existedInSystem()">The opportunity <label data-bind="text:opptyID"></label> is already existed in system!</span>
+        <!--/ko-->
+    </div>
+    <!--ko ifnot:true -->
+    <div class="col-lg-1 col-md-7">
+        <button class="btn btn-primary text-info" type="button" data-bind="click: $component.loadGrip">Load Grip</button>
+    </div>
+    <!--/ko-->
+</div>
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3"><label class="control-label text-nowrap">Opportunity Name</label></div>
+    <div class="col-lg-8 col-md-7">
+        <input type="text" class="form-control" data-bind="value: opptyName" />
+    </div>
+</div>
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-2">
+        <label class="control-label text-nowrap">Sales Stage</label><small><span class="glyphicon glyphicon-asterisk" style="color:#f83b3b;"></span></small>
+    </div>
+    <div class="col-lg-2 col-md-2">
+        <select class="form-control sd-auto-width" data-bind="value: salesStage">
+            <option value="01">01 - Understand the Client</option>
+            <option value="02">02 - Validate Opportunity</option>
+            <option value="03">03 - Qualify Opportunity</option>
+            <option value="04">04 - Develop &amp; Propose Solution</option>
+            <option value="05">05 - Negotiate &amp; Close</option>
+            <option value="06">06 - Won &amp; Deploy</option>
+        </select>
+    </div>
+    <div class="col-lg-2 col-md-2 sd-auto-width">
+        <div class="text-right">
+            <label class="control-label text-nowrap">Opportunity Type</label><small><i class="glyphicon glyphicon-asterisk" style="color:#f83b3b;"></i></small>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2">
+        <select title="Opportunity Type" class="form-control sd-auto-width" data-bind="value: opptyType">
+            <option value="New Business">New Business</option>
+            <option value="UpSell">Up Sell</option>
+            <option value="Renewal">Renewal</option>
+            <optgroup label="Other">
+                <option value="Add-On">Add-On</option>
+                <option value="CrossSell / UpSell">Cross Sell / Up Sell</option>
+                <option value="Defend">Defend</option>
+                <option value="Indefinite Delivery/Quantity">Indefinite Delivery/Quantity</option>
+                <option value="N/A">N/A</option>
+                <option value="Parent">Parent</option>
+                <option value="Project">Project</option>
+                <option value="Renegotiation">Renegotiation</option>
+                <option value="Resell">Resell</option>
+                <option value="Run Rate">Run Rate</option>
+                <option value="Scope Change">Scope Change</option>
+                <option value="Term Contract">Term Contract</option>
+                <option value="Upsell">Upsell</option>
+                <option value="VolumeGrowth">VolumeGrowth</option>
+                <option value="WinBack">Win Back</option>
+            </optgroup>
+        </select>
+    </div>
+    <div class="col-lg-1 col-md-1 sd-auto-width"><label class="control-label text-nowrap">Opportunity Status</label></div>
+    <div class="col-lg-1 col-md-1">
+        <select title="Deal Status" class="form-control sd-auto-width" id="selDealStatus" data-bind="value: dealStatus">
+            <option value="Open">Open</option>
+            <option value="Won">Won</option>
+            <option value="Lost">Lost</option>
+            <option value="No Opportunity">No Opportunity</option>
+            <option value="Not Awarded">Not Awarded</option>
+            <option value="Client Cancelled">Client Cancelled</option>
+            <option value="HPE Cancelled">HPE Cancelled</option>
+        </select>
+    </div>
+</div>
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3">
+        <label class="control-label text-nowrap">Client Name</label>
+        <small><span class="glyphicon glyphicon-asterisk" style="color:#f83b3b;"></span></small>
+    </div>
+    <div class="col-lg-8 col-md-7">
+        <!--<sd-inputtext params="{content:clientName,editable:$component.editable()}"></sd-inputtext>-->
+        <input type="text" class="form-control" data-bind="value: clientName" />
+    </div>
+</div>
+<div class="row form-horizontal hidden">
+    <div class="col-lg-2 col-md-3">
+        <label class="control-label text-nowrap">Opportunity TCV</label>
+    </div>
+    <div class="col-lg-3 col-md-9">
+        <input type="number" class="form-control text-right" data-bind="value: opptyTcv">
+    </div>
+    <div class="col-lg-1 col-md-3">
+    </div>
+    <div class="col-lg-1 col-md-3">
+        <label class="control-label text-nowrap">Opportunity FYR</label>
+    </div>
+    <div class="col-lg-3 col-md-9">
+        <input type="number" class="form-control text-right" data-bind="value: opptyFyr">
+    </div>
+</div>
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3">
+        <label class="control-label text-nowrap">Opportunity TCV</label>
+    </div>
+    <div class="col-lg-3 col-md-9">
+        <input type="number" class="form-control text-right inputUSD" data-bind="value: opptyTcv"/>
+    </div>
+    <div class="col-lg-1 col-md-3">
+    </div>
+    <div class="col-lg-1 col-md-3">
+        <label class="control-label text-nowrap">Opportunity FYR</label>
+    </div>
+    <div class="col-lg-3 col-md-9">
+        <input type="number" class="form-control text-right inputUSD" data-bind="value: opptyFyr" />
+    </div>
+</div>
+
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3"><label class="control-label text-nowrap">Involved GBUs</label></div>
+    <div class="col-lg-10 col-md-9">
+        <div class="form-inline row">
+            <div class="col-lg-2">
+                <div>
+                    <input type="checkbox" data-bind="enable: $component.editable(), checked: involvedGbu.apps().inScope" />
+                    APPS
+                </div>
+            </div>
+            <!-- ko with: involvedGbu.apps -->
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">TCV </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: tcv" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">FYR </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: fyr" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="form-inline row">
+            <div class="col-lg-2">
+                <div>
+                    <input type="checkbox" data-bind="enable: $component.editable(), checked: involvedGbu.bps().inScope" />
+                    BPS
+                </div>
+            </div>
+            <!-- ko with: involvedGbu.bps -->
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">TCV </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: tcv" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">FYR </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: fyr" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="form-inline row">
+            <div class="col-lg-2">
+                <div>
+                    <input type="checkbox" data-bind="enable: $component.editable(), checked: involvedGbu.ess().inScope" />
+                    Enterprise Security Practice
+                </div>
+            </div>
+            <!-- ko with: involvedGbu.ess -->
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">TCV </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: tcv" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">FYR </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: fyr" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="form-inline row">
+            <div class="col-lg-2">
+                <div>
+                    <input type="checkbox" data-bind="enable: $component.editable(), checked: involvedGbu.ito().inScope" />
+                    ITO
+                </div>
+            </div>
+            <!-- ko with: involvedGbu.ito -->
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">TCV </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: tcv" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">FYR </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: fyr" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="form-inline row">
+            <div class="col-lg-2">
+                <div>
+                    <input type="checkbox" data-bind="enable: $component.editable(), checked: involvedGbu.hpeOther().inScope" />
+                    Other HPE
+                </div>
+            </div>
+            <!-- ko with: involvedGbu.hpeOther -->
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">TCV </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: tcv" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">FYR </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: fyr" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="form-inline row">
+            <div class="col-lg-2">
+                <div>
+                    <input type="checkbox" data-bind="enable: $component.editable(), checked: involvedGbu.hpi().inScope" />
+                    HP Inc.
+                </div>
+            </div>
+            <!-- ko with: involvedGbu.hpi -->
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">TCV </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: tcv" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <div class="form-group col-lg-5" data-bind="visible:inScope">
+                <div class="input-group sd-opptydata-butcvfyr">
+                    <span class="input-group-addon">FYR </span>
+                    <input type="number" class="form-control text-right inputUSD" data-bind="value: fyr" />
+                    <span class="input-group-addon"> US</span>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3"><label class="control-label text-nowrap">Contract Term</label></div>
+    <div class="col-lg-2 col-md-3">
+        <div class="input-group">
+            <!--<sd-inputtext params="{type:'number',content:contractTerm,editable:$component.editable()}"></sd-inputtext>-->
+            <input type="number" min="0" class="form-control text-right" data-bind="value: contractTerm">
+            <!-- ko if:$component.editable() -->
+            <span class="input-group-addon" id="basic-addon2"> Months</span>
+            <!-- /ko-->
+            <!-- ko if: !$component.editable() -->
+            Months
+            <!--/ko-->
+        </div>
+    </div>
+
+    <div class="col-lg-1 col-md-2 sd-auto-width"><label class="control-label text-nowrap">Contract Sign Date</label></div>
+    <div class="col-lg-2 col-md-2">
+        <div class="input-group">
+            <sd-datetimepicker params="{dateTime: contractSignDate,editable:$component.editable()}" />
+        </div>
+    </div>
+    <div class="col-lg-1 col-md-2 sd-auto-width"><label class="control-label text-nowrap">Contract Start Date</label></div>
+    <div class="col-lg-2 col-md-2">
+        <div class="input-group">
+            <sd-datetimepicker params="{dateTime: contractStartDate,editable:$component.editable()}" />
+        </div>
+    </div>
+</div>
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3"><label class="control-label text-nowrap">Pursuit Classification</label>
+        <small><span class="glyphicon glyphicon-asterisk" style="color:#f83b3b;"></span></small>
+    </div>
+    <div class="col-lg-1 col-md-1">
+        <select title="Lead Business Unit" class="form-control sd-auto-width" data-bind="value: pursuitClassfication">
+            <option value="NA">N/A</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+    </div>
+    <div class="col-lg-2 col-md-3"><label class="control-label text-nowrap">Solution Governance Track</label></div>
+    <div class="col-lg-1 col-md-1">
+        <select title="Lead Business Unit" class="form-control sd-auto-width" data-bind="value: solnGovTrack">
+            <option value="Focused">Focused</option>
+            <option value="Fast">Fast</option>
+            <option value="Account">Account</option>
+            <option value="Not Applicable">Not Applicable</option>
+        </select>
+    </div>
+</div>
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3"><label class="control-label text-nowrap">Lead HPE Sub-Region</label></div>
+    <div class="col-lg-10 col-md-9">
+        <select id="sd-leadCntry" title="Lead HPE Sub-Region" class="form-control sd-auto-width" data-bind="value: leadCntry">
+            <option value="NA" label="N/A">N/A</option>
+            <optgroup label="AMS">
+                <option value="AR" label="Argentina">Argentina</option>
+                <option value="BR" label="Brazil">Brazil</option>
+                <option value="CA" label="Canada">Canada</option>
+                <option value="CL" label="Chile">Chile</option>
+                <option value="CO" label="Colombia">Colombia</option>
+                <option value="CR" label="Costa Rica">Costa Rica</option>
+                <option value="MX" label="Mexico">Mexico</option>
+                <option value="OtherAMS" label="Other AMS">Other AMS</option>
+                <option value="PA" label="Panama">Panama</option>
+                <option value="PE" label="Peru">Peru</option>
+                <option value="US" label="United States">United States</option>
+            </optgroup>
+            <optgroup label="APJ">
+                <option value="AU" label="Australia">Australia</option>
+                <option value="CN" label="China">China</option>
+                <option value="HK" label="Hong Kong">Hong Kong</option>
+                <option value="IN" label="India">India</option>
+                <option value="ID" label="Indonesia">Indonesia</option>
+                <option value="JP" label="Japan">Japan</option>
+                <option value="KR" label="Korea">Korea</option>
+                <option value="MY" label="Malaysia">Malaysia</option>
+                <option value="NZ" label="New Zealand">New Zealand</option>
+                <option value="OtherAPJ" label="Other APJ">Other APJ</option>
+                <option value="PH" label="Philippines">Philippines</option>
+                <option value="SG" label="Singapore">Singapore</option>
+                <option value="TW" label="Taiwan">Taiwan</option>
+                <option value="TH" label="Thailand">Thailand</option>
+                <option value="VN" label="Vietnam">Vietnam</option>
+            </optgroup>
+            <optgroup label="EMEA">
+                <option value="AT" label="Austria">Austria</option>
+                <option value="BE" label="Belgium">Belgium</option>
+                <option value="BG" label="Bulgaria">Bulgaria</option>
+                <option value="CZ" label="Czech Republic">Czech Republic</option>
+                <option value="DK" label="Denmark">Denmark</option>
+                <option value="EG" label="Egypt">Egypt</option>
+                <option value="FI" label="Finland">Finland</option>
+                <option value="FR" label="France">France</option>
+                <option value="DE" label="Germany">Germany</option>
+                <option value="GR" label="Greece">Greece</option>
+                <option value="HU" label="Hungary">Hungary</option>
+                <option value="IE" label="Ireland">Ireland</option>
+                <option value="IL" label="Israel">Israel</option>
+                <option value="IT" label="Italy">Italy</option>
+                <option value="LU" label="Luxembourg">Luxembourg</option>
+                <option value="NL" label="Netherlands">Netherlands</option>
+                <option value="NO" label="Norway">Norway</option>
+                <option value="OtherEMEA" label="Other EMEA">Other EMEA</option>
+                <option value="PL" label="Poland">Poland</option>
+                <option value="PT" label="Portugal">Portugal</option>
+                <option value="RO" label="Romania">Romania</option>
+                <option value="RU" label="Russia">Russia</option>
+                <option value="SA" label="Saudi Arabia">Saudi Arabia</option>
+                <option value="ZA" label="South Africa">South Africa</option>
+                <option value="ES" label="Spain">Spain</option>
+                <option value="SE" label="Sweden">Sweden</option>
+                <option value="CH" label="Switzerland">Switzerland</option>
+                <option value="TR" label="Turkey">Turkey</option>
+                <option value="AE" label="UAE">UAE</option>
+                <option value="GB" label="United Kingdom">United Kingdom</option>
+            </optgroup>
+        </select>
+    </div>
+</div>
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3">
+        <label class="control-label text-nowrap">Region</label>
+        <small><span class="glyphicon glyphicon-asterisk" style="color:#f83b3b;"></span></small>
+    </div>
+    <div class="col-lg-10 col-md-9">
+        <div>
+            <input type="checkbox" id="amsCheckbox" data-bind="checked:region.ams().inScope, disable:leadRegion()=='ams'&& leadCntry()!=='NA'" />
+            AMS
+        </div>
+        <div>
+            <input type="checkbox" id="apjCheckbox" data-bind="checked:region.apj().inScope, disable:leadRegion()=='apj'&& leadCntry()!=='NA'" />
+            APJ
+        </div>
+        <div>
+            <input type="checkbox" id="emeaCheckbox" data-bind="checked:region.emea().inScope, disable:leadRegion()=='emea' && leadCntry()!=='NA'" />
+            EMEA
+        </div>
+    </div>
+</div>
+
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3"><label class="control-label text-nowrap">Client Country</label></div>
+    <div class="col-lg-10 col-md-9">
+        <select title="Client Country" id="sd-clientCntry" class="form-control sd-auto-width" data-bind="value: clientCntry">
+            <option value="NA">N/A</option>
+            <optgroup label="AMS">
+                <option value="AR" label="Argentina">Argentina</option>
+                <option value="BR" label="Brazil">Brazil</option>
+                <option value="CA" label="Canada">Canada</option>
+                <option value="CL" label="Chile">Chile</option>
+                <option value="CO" label="Colombia">Colombia</option>
+                <option value="CR" label="Costa Rica">Costa Rica</option>
+                <option value="MX" label="Mexico">Mexico</option>
+                <option value="OtherAMS" label="Other AMS">Other AMS</option>
+                <option value="PA" label="Panama">Panama</option>
+                <option value="PE" label="Peru">Peru</option>
+                <option value="US" label="United States">United States</option>
+            </optgroup>
+            <optgroup label="APJ">
+                <option value="AU" label="Australia">Australia</option>
+                <option value="CN" label="China">China</option>
+                <option value="HK" label="Hong Kong">Hong Kong</option>
+                <option value="IN" label="India">India</option>
+                <option value="ID" label="Indonesia">Indonesia</option>
+                <option value="JP" label="Japan">Japan</option>
+                <option value="KR" label="Korea">Korea</option>
+                <option value="MY" label="Malaysia">Malaysia</option>
+                <option value="NZ" label="New Zealand">New Zealand</option>
+                <option value="OtherAPJ" label="Other APJ">Other APJ</option>
+                <option value="PH" label="Philippines">Philippines</option>
+                <option value="SG" label="Singapore">Singapore</option>
+                <option value="TW" label="Taiwan">Taiwan</option>
+                <option value="TH" label="Thailand">Thailand</option>
+                <option value="VN" label="Vietnam">Vietnam</option>
+            </optgroup>
+            <optgroup label="EMEA">
+                <option value="AT" label="Austria">Austria</option>
+                <option value="BE" label="Belgium">Belgium</option>
+                <option value="BG" label="Bulgaria">Bulgaria</option>
+                <option value="CZ" label="Czech Republic">Czech Republic</option>
+                <option value="DK" label="Denmark">Denmark</option>
+                <option value="EG" label="Egypt">Egypt</option>
+                <option value="FI" label="Finland">Finland</option>
+                <option value="FR" label="France">France</option>
+                <option value="DE" label="Germany">Germany</option>
+                <option value="GR" label="Greece">Greece</option>
+                <option value="HU" label="Hungary">Hungary</option>
+                <option value="IE" label="Ireland">Ireland</option>
+                <option value="IL" label="Israel">Israel</option>
+                <option value="IT" label="Italy">Italy</option>
+                <option value="LU" label="Luxembourg">Luxembourg</option>
+                <option value="NL" label="Netherlands">Netherlands</option>
+                <option value="NO" label="Norway">Norway</option>
+                <option value="OtherEMEA" label="Other EMEA">Other EMEA</option>
+                <option value="PL" label="Poland">Poland</option>
+                <option value="PT" label="Portugal">Portugal</option>
+                <option value="RO" label="Romania">Romania</option>
+                <option value="RU" label="Russia">Russia</option>
+                <option value="SA" label="Saudi Arabia">Saudi Arabia</option>
+                <option value="ZA" label="South Africa">South Africa</option>
+                <option value="ES" label="Spain">Spain</option>
+                <option value="SE" label="Sweden">Sweden</option>
+                <option value="CH" label="Switzerland">Switzerland</option>
+                <option value="TR" label="Turkey">Turkey</option>
+                <option value="AE" label="UAE">UAE</option>
+                <option value="GB" label="United Kingdom">United Kingdom</option>
+            </optgroup>
+        </select>
+    </div>
+</div>
+
+<div class="row form-horizontal">
+    <div class="col-lg-2 col-md-3"><label class="control-label text-nowrap">Link to Pursuit SharePoint</label></div>
+    <div class="col-lg-10 col-md-7">
+        <div class="row">
+            <div class="col-lg-6">
+                <sd-inputtext params="{content:pursuitWeb.link,editable:$component.editable(),hint:'Type the Web address e.g. http://www.contoso.com'}"></sd-inputtext>
+                <!--<input type="text" class="form-control" data-bind="value: pursuitWeb.link" />-->
+            </div>
+            <div class="col-lg-3">
+                <div class="sd-opptydata-linktitle">
+                    <sd-inputtext params="{content:pursuitWeb.title,editable:$component.editable(),hint:'e.g. Contoso Homepage'}"></sd-inputtext>
+                </div>
+                <!--<input type="text" class="form-control" data-bind="value: pursuitWeb.title" />-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko ifnot:$component.editable() -->
+<div class="row form-horizontal">
+    <div class="col-lg-12 table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <td><b>Opportunity ID</b></td>
+                <td colspan="3" data-bind="text:opptyID"></td>
+            </tr>
+            <tr>
+                <td><b>Opportunity Name</b></td>
+                <td colspan="3" data-bind="text:opptyName"></td>
+            </tr>
+            <tr>
+                <td><b>Sales Stage</b></td>
+                <td data-bind="text:$component.salesStageName()"></td>
+                <td>
+                    <b>Opportunity Type:</b><span data-bind="text:opptyType"></span>
+                </td>                
+                <td>
+                    <b>Opportunity Status:</b><span data-bind="text:dealStatus"></span>
+                </td>                
+            </tr>
+            <tr>
+                <td><b>Client Name</b></td>
+                <td colspan="3" data-bind="text:clientName"></td>
+            </tr>
+            <tr>
+                <td><b>Opportunity TCV</b></td>
+                <!--<td><sd-component-dollarformatter params="{dollarValue:opptyTcv}"></sd-component-dollarformatter>-->
+                    </td>
+                <td><b>Opportunity FYR </b></td>
+                <!--<td><sd-component-dollarformatter params="{dollarValue:opptyFyr}"></sd-component-dollarformatter></td>-->
+            </tr>
+            <tr>
+                <td><b>Involved GBUs</b></td>
+                <td colspan="3">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th></th>
+                            <th>TCV</th>
+                            <th>FYR</th>
+                        </tr>
+                        <!--<tr>
+                            <td width="20%">APPS</td>
+                            <td width="40%"><sd-component-dollarformatter params="{dollarValue:involvedGbu.apps().tcv}"></sd-component-dollarformatter></td>
+                            <td width="40%"><sd-component-dollarformatter params="{dollarValue:involvedGbu.apps().fyr}"></sd-component-dollarformatter></td>
+                        </tr>
+                        <tr>
+                            <td>BPS</td>
+                            <td><sd-component-dollarformatter params="{dollarValue:involvedGbu.bps().tcv}"></sd-component-dollarformatter></td>
+                            <td><sd-component-dollarformatter params="{dollarValue:involvedGbu.bps().fyr}"></sd-component-dollarformatter></td>
+                        </tr>
+                        <tr>
+                            <td>Enterprise Security Practice</td>
+                            <td><sd-component-dollarformatter params="{dollarValue:involvedGbu.ess().tcv}"></sd-component-dollarformatter></td>
+                            <td><sd-component-dollarformatter params="{dollarValue:involvedGbu.ess().fyr}"></sd-component-dollarformatter></td>
+                        </tr>
+                        <tr>
+                            <td>ITO</td>
+                            <td><sd-component-dollarformatter params="{dollarValue:involvedGbu.ito().tcv}"></sd-component-dollarformatter></td>
+                            <td><sd-component-dollarformatter params="{dollarValue:involvedGbu.ito().fyr}"></sd-component-dollarformatter></td>
+                        </tr>
+                        <tr>
+                            <td>Other HPE</td>
+                            <td><sd-component-dollarformatter params="{dollarValue:involvedGbu.hpeOther().tcv}"></sd-component-dollarformatter></td>
+                            <td><sd-component-dollarformatter params="{dollarValue:involvedGbu.hpeOther().fyr}"></sd-component-dollarformatter></td>
+                        </tr>
+                        <tr>
+                            <td>HP Inc.</td>
+                            <td><sd-component-dollarformatter params="{dollarValue:involvedGbu.hpi().tcv}"></sd-component-dollarformatter></td></td>
+                            <td><sd-component-dollarformatter params="{dollarValue:involvedGbu.hpi().fyr}"></sd-component-dollarformatter></td></td>
+                        </tr>-->
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Contract Term</b></td>
+                <td data-bind="text:contractTerm"></td>
+                <td>
+                    <b>Contract Sign Date:</b>
+                    <span>
+                        <!-- ko if:contractSignDate() != null -->
+                        <sd-datetimepicker params="{dateTime: contractSignDate,editable:$component.editable()}"></sd-datetimepicker>
+                        <!--/ko-->
+                     </span>
+                </td>                
+                <td>
+                    <b>Contract Start Date: </b>
+                    <span>
+                        <!-- ko if:contractStartDate() != null -->
+                        <sd-datetimepicker params="{dateTime: contractStartDate,editable:$component.editable()}"></sd-datetimepicker>
+                        <!-- /ko-->
+                    </span>
+                </td>                
+            </tr>
+            <tr>
+                <td><b>Pursuit Classification</b></td>
+                <td data-bind="text:pursuitClassfication"></td>
+                <td>
+                    <b>Solution Governance Track: </b>
+                    <span data-bind="text:solnGovTrack"></span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>Lead HPE Country</b></td>
+                <td colspan="3" data-bind="text:$component.leadCntryName()"></td>
+            </tr>
+            <tr>
+                <td><b>Region</b></td>
+                <td colspan="3">
+                    <!-- ko if:region.ams().inScope()-->
+                    AMS
+                    <!--/ko-->
+                    <!-- ko if:region.apj().inScope()-->
+                    APJ
+                    <!--/ko-->
+                    <!-- ko if:region.emea().inScope()-->
+                    EMEA
+                    <!--/ko-->
+                </td>
+            </tr>
+            <tr>
+                <td><b>Client Country</b></td>
+                <td colspan="3" data-bind="text:$component.clientCntryName()"></td>
+            </tr>
+            <tr>
+                <td><b>Link to Pursuit SharePoint</b></td>
+                <td colspan="2" data-bind="text:pursuitWeb.link"></td>
+                <td colspan="1" data-bind="text:pursuitWeb.title"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+
+<div class="hidden">
+    <select id="sd-Cntry" class="form-control sd-auto-width">
+        <option value="NA" label="N/A">N/A</option>
+        <optgroup label="AMS">
+            <option value="AR" label="Argentina">Argentina</option>
+            <option value="BR" label="Brazil">Brazil</option>
+            <option value="CA" label="Canada">Canada</option>
+            <option value="CL" label="Chile">Chile</option>
+            <option value="CO" label="Colombia">Colombia</option>
+            <option value="CR" label="Costa Rica">Costa Rica</option>
+            <option value="MX" label="Mexico">Mexico</option>
+            <option value="OtherAMS" label="Other AMS">Other AMS</option>
+            <option value="PA" label="Panama">Panama</option>
+            <option value="PE" label="Peru">Peru</option>
+            <option value="US" label="United States">United States</option>
+        </optgroup>
+        <optgroup label="APJ">
+            <option value="AU" label="Australia">Australia</option>
+            <option value="CN" label="China">China</option>
+            <option value="HK" label="Hong Kong">Hong Kong</option>
+            <option value="IN" label="India">India</option>
+            <option value="ID" label="Indonesia">Indonesia</option>
+            <option value="JP" label="Japan">Japan</option>
+            <option value="KR" label="Korea">Korea</option>
+            <option value="MY" label="Malaysia">Malaysia</option>
+            <option value="NZ" label="New Zealand">New Zealand</option>
+            <option value="OtherAPJ" label="Other APJ">Other APJ</option>
+            <option value="PH" label="Philippines">Philippines</option>
+            <option value="SG" label="Singapore">Singapore</option>
+            <option value="TW" label="Taiwan">Taiwan</option>
+            <option value="TH" label="Thailand">Thailand</option>
+            <option value="VN" label="Vietnam">Vietnam</option>
+        </optgroup>
+        <optgroup label="EMEA">
+            <option value="AT" label="Austria">Austria</option>
+            <option value="BE" label="Belgium">Belgium</option>
+            <option value="BG" label="Bulgaria">Bulgaria</option>
+            <option value="CZ" label="Czech Republic">Czech Republic</option>
+            <option value="DK" label="Denmark">Denmark</option>
+            <option value="EG" label="Egypt">Egypt</option>
+            <option value="FI" label="Finland">Finland</option>
+            <option value="FR" label="France">France</option>
+            <option value="DE" label="Germany">Germany</option>
+            <option value="GR" label="Greece">Greece</option>
+            <option value="HU" label="Hungary">Hungary</option>
+            <option value="IE" label="Ireland">Ireland</option>
+            <option value="IL" label="Israel">Israel</option>
+            <option value="IT" label="Italy">Italy</option>
+            <option value="LU" label="Luxembourg">Luxembourg</option>
+            <option value="NL" label="Netherlands">Netherlands</option>
+            <option value="NO" label="Norway">Norway</option>
+            <option value="OtherEMEA" label="Other EMEA">Other EMEA</option>
+            <option value="PL" label="Poland">Poland</option>
+            <option value="PT" label="Portugal">Portugal</option>
+            <option value="RO" label="Romania">Romania</option>
+            <option value="RU" label="Russia">Russia</option>
+            <option value="SA" label="Saudi Arabia">Saudi Arabia</option>
+            <option value="ZA" label="South Africa">South Africa</option>
+            <option value="ES" label="Spain">Spain</option>
+            <option value="SE" label="Sweden">Sweden</option>
+            <option value="CH" label="Switzerland">Switzerland</option>
+            <option value="TR" label="Turkey">Turkey</option>
+            <option value="AE" label="UAE">UAE</option>
+            <option value="GB" label="United Kingdom">United Kingdom</option>
+        </optgroup>
+    </select>
+    <select id="sd-SalesStage" class="form-control sd-auto-width">
+        <option value="01" label="Understand the Client">01 - Understand the Client</option>
+        <option value="02" label="Validate Opportunity">02 - Validate Opportunity</option>
+        <option value="03" label="Qualify Opportunity">03 - Qualify Opportunity</option>
+        <option value="04" label=" Develop & Propose Solution">04 - Develop &amp; Propose Solution</option>
+        <option value="05" label="Negotiate & Close">05 - Negotiate &amp; Close</option>
+        <option value="06" label="Won & Deploy">06 - Won &amp; Deploy</option>
+    </select>
+</div>
