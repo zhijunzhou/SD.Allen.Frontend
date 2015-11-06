@@ -236,10 +236,10 @@ h1, .h1, h2, .h2, h3, .h3 {
     background-color:#f2dede;
     border-color:#eed3d7;
 }
-.collapse ul {
+/*.collapse ul {
     line-height:30px;
     font-size:16px;
-}
+}*/
 .accordion-body {
     border:1px solid #d9edf7;
     border-top:0;
@@ -250,21 +250,23 @@ h1, .h1, h2, .h2, h3, .h3 {
 .sd-small {
     font-size:50%;
 }
-.sd-required{
-
-}
 .glyphicon-asterisk {
     color:#ff0000;
     font-size:60%;
     font-weight:lighter;
 }
 .sd-comment {
-    word-wrap:break-word;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
 }
 .sd-button-group {
-    position:fixed;
-    right:100px;
-    transform:translateX(-75%);
+    position: fixed;
+    right: 100px;
+    -moz-transform: translateX(-75%);
+    -ms-transform: translateX(-75%);
+    -o-transform: translateX(-75%);
+    -webkit-transform: translateX(-75%);
+    transform: translateX(-75%);
 }
 .close {
     cursor:pointer;

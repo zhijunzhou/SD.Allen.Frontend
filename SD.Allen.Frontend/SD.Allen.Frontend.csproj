@@ -146,9 +146,13 @@
     <Content Include="v1.0\css\jquery.numbox-1.2.0.css" />
     <Content Include="v1.0\css\normalize.css" />
     <Content Include="v1.0\css\sd-shared.css" />
-    <Content Include="v1.0\css\sd-shared.min.css" />
+    <Content Include="v1.0\css\sd-shared.min.css">
+      <DependentUpon>sd-shared.css</DependentUpon>
+    </Content>
     <Content Include="v1.0\css\sd.css" />
-    <Content Include="v1.0\css\sd.min.css" />
+    <Content Include="v1.0\css\sd.min.css">
+      <DependentUpon>sd.css</DependentUpon>
+    </Content>
     <Content Include="v1.0\css\select2.css" />
     <Content Include="v1.0\css\select2.min.css" />
     <Content Include="v1.0\js\bootstrap-datetimepicker.min.js" />

@@ -1,5 +1,24 @@
 [
   {
+    "outputFileName": "v1.0/css/sd.css",
+    "inputFiles": [
+      "v1.0/css/bootstrap.css",
+      "v1.0/css/jasny-bootstrap.css",
+      "v1.0/css/bootstrap-theme.css",
+      "v1.0/css/bootstrap-datetimepicker.css",
+      "v1.0/css/select2.css",
+      "v1.0/css/jquery-ui.css",
+      "v1.0/css/jquery.autocomplete.css",
+      "v1.0/css/jquery.dataTables.css",
+      "v1.0/css/jquery.dataTables_themeroller.css",
+      "v1.0/css/jquery.magnific-popup.css",
+      "v1.0/css/dataTables.tableTools.css",
+      "v1.0/css/normalize.css",
+      "v1.0/css/sd-shared.css",
+      "v1.0/css/jquery.numbox-1.2.0.css"
+    ]
+  },
+  {
     "outputFileName": "v1.0/js/sd-3rdpartylib.js",
     "inputFiles": [
       "v1.0/js/domReady.js",
@@ -76,12 +95,12 @@
       "v1.0/css/sd-shared.css"
     ]
   },
-  {
-    "outputFileName": "v1.0/css/sd-css.css",
-    "inputFiles": [
-      "v1.0/css/sd-css.css"
-    ]
-  },
+  //{
+  //  "outputFileName": "v1.0/css/sd-css.css",
+  //  "inputFiles": [
+  //    "v1.0/css/sd-css.css"
+  //  ]
+  //},
   {
     "outputFileName": "v1.0/css/sd.css",
     "inputFiles": [
