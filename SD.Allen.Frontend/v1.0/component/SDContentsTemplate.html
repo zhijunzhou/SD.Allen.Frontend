@@ -1,5 +1,5 @@
-<div class="row" style="background:url('bg_sd.jpg');height:1013px;">
-    <div class="sd-toplink" style="margin:0;height:70px;background-color:#5B4767;">
+<div class="row" id="sd-section-container" style="background:url('bg_sd.jpg');height:1013px;">
+    <div id="sd-toplink">
         <div class="col-lg-2" style="padding:15px 10px;">
             <h1 style="color:#ffffff;">Solution Design</h1>
         </div>
@@ -26,27 +26,64 @@
             <img src="logo.png" />
         </div>
     </div>
-    <div class="sd-section-content" style="margin:50px 120px 0 120px;">
+    <div id="sd-section-content">
         <ul class="nav nav-pills">
             <li>
-                <div>
+                <div class="section">
                     <!-- ko if: opptyID() != "" -->
-                    <a data-bind="attr:{href:sdLoaderUrl+'?sid=0201&OpptyID=' + opptyID()}" style="color:#ffffff;">Opportunity Overview</a>
+                    <a data-bind="attr:{href:sdLoaderUrl+'?sid=0201&OpptyID=' + opptyID()}">Opportunity Overview</a>
                     <!-- /ko -->
                 </div>
             </li>
             <li>
-                <div>
-                    <a style="color:#ffffff;" data-toggle="collapse" href="#sd-section3">
+                <div class="section">
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">
                         Business and Solution Context
                     </a>
+                    <ul class="dropdown-menu">
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=0301&OpptyID=' + opptyID()}">Client Overview and Decision Factors</a></li>
+                        <li role="separator" class="divider"></li>                        
+                        <li><a>HPE Win Strategy</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=030201&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Sales Approach</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=030202&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Competitors</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=030203&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Message Map/Value Proposition</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=030204&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Pricing Approach</a></li>
+                    </ul>
                 </div>
             </li>
             <li>
-                <div>
-                    <a style="color:#ffffff;" data-toggle="collapse" href="#sd-section4">
-                        Solution Overview
+                <div class="section">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Solution Overview                        
                     </a>
+                    <ul class="dropdown-menu">
+                        <li><a>Scope</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040101&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>All Offerings</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040102&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Key Scope Items </a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=0402&OpptyID=' + opptyID()}">Current State Architecture</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a>Solution Approach</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040301&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Summary</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040302&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Outsourcing CMO/TMO/FMO</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040303&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>HR Solution</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040304&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>HPE Internal Challenges and Constraints</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040305&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Design Parameters</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040306&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Deployment Strategy</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040307&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Additional Information</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=0404&OpptyID=' + opptyID()}">Innovative Aspects of the Solution</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a>Delivery Strategies</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040501&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Delivery Location Targets</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040505&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>In-Scope Services Delivery Responsibility</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040506&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Client-Retained Services Delivery Responsibility</a></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040503&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>ESM Tooling and Automation Approach</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=0406&OpptyID=' + opptyID()}">Key Client Constraints</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=0407&OpptyID=' + opptyID()}">Summary Costing &amp; FTE Reports-Costing Approach</a></li>
+                    </ul>
                 </div>
             </li>
             <li>
@@ -61,7 +98,7 @@
             </li>
             <li>
                 <div>
-                 End-to-End<br /> T&T<br /> Solution
+                    End-to-End<br /> T&T<br /> Solution
                 </div>
             </li>
             <li>
@@ -72,149 +109,6 @@
             <li>
                 <div>
                     Reference Documents
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="sd-section-menulist" style="margin:0 120px;">
-        <ul class="nav nav-pills">
-            <li>
-                <div style="">                    
-                    
-                </div>
-            </li>
-            <li>
-                <div style="height:160px;min-width:160px;">
-                    <ul class="collapse" id="sd-section3">
-                        <li>
-                            <a data-bind="attr:{href:sdLoaderUrl+'?sid=0301&OpptyID=' + opptyID()}">Client Overview and Decision Factors</a>
-                        </li>
-                        <li>
-                            <a href="#">HPE Win Strategy</a>
-                            <ul>
-                                <li>
-                                    <a data-bind="attr:{href:sdLoaderUrl+'?sid=030201&OpptyID=' +opptyID()}">Sales Approach</a>
-                                </li>
-                                <li>
-                                    <a data-bind="attr:{href:sdLoaderUrl+'?sid=030202&OpptyID=' +opptyID()}">Competitors</a>
-                                </li>
-                                <li>
-                                    <a data-bind="attr:{href:sdLoaderUrl+'?sid=030203&OpptyID=' +opptyID()}">Message Map/Value Proposition</a>
-                                </li>
-                                <li>
-                                    <a data-bind="attr:{href:sdLoaderUrl+'?sid=030204&OpptyID=' +opptyID()}">Pricing Approach</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div style="height:160px;min-width:160px;">
-                    <ul class="collapse nav nav-list" id="sd-section4">
-                            <li>
-                                <a href="#">Scope</a>
-                                <ul>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040101&OpptyID=' +opptyID()}">All Offerings</a>
-                                    </li>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040102&OpptyID=' +opptyID()}">Key Scope Items</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a data-bind="attr:{href:sdLoaderUrl+'?sid=0402&OpptyID=' + opptyID()}">Current State Architecture</a>
-                            </li>
-                            <li>
-                                <a href="#">Solution Approach</a>
-                                <ul>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040301&OpptyID=' +opptyID()}">Summary</a>
-                                    </li>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040302&OpptyID=' +opptyID()}">Outsourcing CMO/TMO/FMO</a>
-                                    </li>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040303&OpptyID=' +opptyID()}">HR Solution</a>
-                                    </li>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040304&OpptyID=' +opptyID()}">HPE Internal Challenges and Constraints</a>
-                                    </li>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040305&OpptyID=' +opptyID()}">Design Parameters</a>
-                                    </li>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040306&OpptyID=' +opptyID()}">Deployment Strategy</a>
-                                    </li>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040307&OpptyID=' +opptyID()}">Additional Information</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a data-bind="attr:{href:sdLoaderUrl+'?sid=0404&OpptyID=' + opptyID()}">Innovative Aspects of the Solution</a>
-                            </li>
-                            <li>
-                                <a href="#">Delivery Strategies</a>
-                                <ul>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040501&OpptyID=' +opptyID()}">Delivery Location Targets</a>
-                                    </li>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040505&OpptyID=' +opptyID()}">In-Scope Services Delivery Responsibility</a>
-                                    </li>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040506&OpptyID=' +opptyID()}">Client-Retained Services Delivery Responsibility</a>
-                                    </li>
-                                    <li>
-                                        <a data-bind="attr:{href:sdLoaderUrl+'?sid=040503&OpptyID=' +opptyID()}">ESM Tooling and Automation Approach</a>
-                                    </li>
-
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a data-bind="attr:{href:sdLoaderUrl+'?sid=0406&OpptyID=' + opptyID()}">Key Client Constraints</a>
-                            </li>
-                            <li>
-                                <a data-bind="attr:{href:sdLoaderUrl+'?sid=0407&OpptyID=' + opptyID()}">Summary Costing &amp; FTE Reports-Costing Approach</a>
-                            </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div style="height:160px;width:160px;padding-top:20px;">
-                    <ul class="collapse nav nav-list" id="sd-section5">
-                        <li>
-                            <label class="tree-toggler navbar-header">Header 1</label>
-                            <ul class="nav nav-list tree">
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#">Link</a></li>
-                                <li><a href="#">Link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div style="height:160px;width:160px;">
-                </div>
-            </li>
-            <li>
-                <div style="height:160px;width:160px;">
-                </div>
-            </li>
-            <li>
-                <div style="height:160px;width:160px;">
-                </div>
-            </li>
-            <li>
-                <div style="height:160px;width:160px;">
                 </div>
             </li>
         </ul>

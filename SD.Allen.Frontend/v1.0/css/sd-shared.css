@@ -304,6 +304,9 @@ h1, .h1, h2, .h2, h3, .h3 {
 .sd-opptydata-linktitle{
     width:353px;
 }
+#sd-section-content {
+    margin:50px 120px 0 120px;
+}
 #sd-section-content ul li div {
     height: 160px;
     width: 160px;
@@ -320,7 +323,46 @@ h1, .h1, h2, .h2, h3, .h3 {
     min-height:160px;
     min-width:160px;
 }
+#sd-section-container {
+    background:url('bg_sd.jpg');height:1013px;
+}
+#sd-toplink {
+    margin:0;
+    height:70px;
+    background-color:#5B4767;
+}
+.section a {
+    color:#fff;
+}
+    .section a:link {
+        text-decoration: none !important;
+    }
 
+    .section a:hover {
+        text-decoration: none !important;
+        cursor: pointer;
+        background-color: none;
+    }
+
+.dropdown-menu {
+    background-color: #425563;
+    border-bottom: 5px solid #FF8D6D;
+}
+
+.dropdown-toggle:active, .open .dropdown-toggle {
+    background-color:transparent;
+    color: #000 !important;
+}
+
+.dropdown-menu li a {
+    color: #fff;
+}
+
+.section a:visited {
+    color: #fff;
+    text-decoration: none;
+    background-color: none;
+}
 
 
 
