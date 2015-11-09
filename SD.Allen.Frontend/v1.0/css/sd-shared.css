@@ -63,6 +63,7 @@ you can delete it after you understand how to use shared folder.
 .ms-pub-contentLayout {
     padding-top: 0;
 }
+
 .ms-rtestate-field p {
     margin: 0;
 }
@@ -71,9 +72,11 @@ you can delete it after you understand how to use shared folder.
 #DeltaSuiteLinks {
     display: none;
 }
+
 #ms-help {
     display: none;
 }
+
 .page-header {
     margin: 0;
 }
@@ -82,16 +85,20 @@ h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 2px;
     margin-bottom: 2px;
 }
+
 .navbar {
     min-height: 30px;
 }
+
 .form-control {
     height: 28px;
     padding: 2px 4px;
 }
+
 .list-group-item {
     padding: 2px 15px;
 }
+
 .no-margin {
     margin: 0;
 }
@@ -168,25 +175,28 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 .sd-fake-textarea {
     border: 1px solid #ccc;
-    border-radius:5px;
-    min-height:35px;
+    border-radius: 5px;
+    min-height: 35px;
     width: 100%;
     overflow: visible;
     background-color: #ffffff;
-    padding:12px;
+    padding: 12px;
 }
 
 .sd-info {
-    padding:14px !important;
-    border-radius:3px;
+    padding: 14px !important;
+    border-radius: 3px;
 }
+
 .mce-btn button {
-    min-width:3em !important;
+    min-width: 3em !important;
 }
+
 .sd-input-required {
-    color:#ff0000;
-    font-size:x-large;
+    color: #ff0000;
+    font-size: x-large;
 }
+
 .popover {
     position: absolute;
     top: 30px;
@@ -194,7 +204,7 @@ h1, .h1, h2, .h2, h3, .h3 {
     z-index: 65535;
     display: none;
     max-width: 600px;
-    min-width:150px;
+    min-width: 150px;
     padding: 1px;
     text-align: left;
     white-space: normal;
@@ -213,52 +223,60 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 .attachment-popover {
-     max-width: 600px;
+    max-width: 600px;
 }
 
 .ui-autocomplete {
     max-height: 400px;
     overflow-y: scroll;
     overflow-x: hidden;
-}    
+}
+
 .sd-search {
-    background-color: rgba( 255,255,255,1) !important; 
+    background-color: rgba( 255,255,255,1) !important;
 }
+
 .alert {
-    color:#c09853;
-    padding:8px 35px 8px 14px;
-    text-shadow:0 1px 0 rgba(255,255,255,0.5);
-    border:1px solid #fbeed5;
-    border-radius:4px;
+    color: #c09853;
+    padding: 8px 35px 8px 14px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    border: 1px solid #fbeed5;
+    border-radius: 4px;
 }
+
 .alert-error {
-    color:#b94a48;
-    background-color:#f2dede;
-    border-color:#eed3d7;
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
 }
 /*.collapse ul {
     line-height:30px;
     font-size:16px;
 }*/
 .accordion-body {
-    border:1px solid #d9edf7;
-    border-top:0;
+    border: 1px solid #d9edf7;
+    border-top: 0;
 }
+
 .mce-container {
-    z-index:100;
+    z-index: 100;
 }
+
 .sd-small {
-    font-size:50%;
+    font-size: 50%;
 }
+
 .glyphicon-asterisk {
-    color:#ff0000;
-    font-size:60%;
-    font-weight:lighter;
+    color: #ff0000;
+    font-size: 60%;
+    font-weight: lighter;
 }
+
 .sd-comment {
     -ms-word-wrap: break-word;
     word-wrap: break-word;
 }
+
 .sd-button-group {
     position: fixed;
     right: 100px;
@@ -268,46 +286,58 @@ h1, .h1, h2, .h2, h3, .h3 {
     -webkit-transform: translateX(-75%);
     transform: translateX(-75%);
 }
+
 .close {
-    cursor:pointer;
-    cursor:hand;
-}
-.ms-core-suiteLink-a :hover {
-    color:gray;
-    text-decoration:underline;
-}
-.ms-core-suiteLink-a {
-    font-size:14px;
-}
-.sd-head-text {
-    font-weight:bolder;
-}
-.sd-head-separate {
-    font-size:14px;
-}
-#suiteBar {
-    z-index:100;
-}
-.sd-toplink-help {
-    line-height:50px;
-}
-.sd-toplink-help-a {
-   color:#777;
-}
-.sd-toplink-help-a:focus,.sd-toplink-help-a:hover,.sd-toplink-help-a:active {
-   text-decoration:none;
+    cursor: pointer;
+    cursor: hand;
 }
 
+.ms-core-suiteLink-a :hover {
+    color: gray;
+    text-decoration: underline;
+}
+
+.ms-core-suiteLink-a {
+    font-size: 14px;
+}
+
+.sd-head-text {
+    font-weight: bolder;
+}
+
+.sd-head-separate {
+    font-size: 14px;
+}
+
+#suiteBar {
+    z-index: 100;
+}
+
+.sd-toplink-help {
+    line-height: 50px;
+}
+
+.sd-toplink-help-a {
+    color: #777;
+}
+
+    .sd-toplink-help-a:focus, .sd-toplink-help-a:hover, .sd-toplink-help-a:active {
+        text-decoration: none;
+    }
+
 .sd-opptydata-butcvfyr {
-    width:57.85%;
+    width: 57.85%;
 }
-.sd-opptydata-linktitle{
-    width:353px;
+
+.sd-opptydata-linktitle {
+    width: 353px;
 }
+
 #sd-section-content {
-    margin:50px 120px 0 120px;
+    margin: 50px 120px 0 120px;
 }
-#sd-section-content ul li div {
+
+.section {
     height: 160px;
     width: 160px;
     background-color: #32B9B2;
@@ -319,21 +349,39 @@ h1, .h1, h2, .h2, h3, .h3 {
     vertical-align: middle;
     text-align: center;
 }
+
+.outlink {
+    height: 160px;
+    width: 160px;
+    background-color: #D98685;
+    border-bottom: 8px solid #FF906D;
+    border-top: 8px solid #FF906D;
+    color: #ffffff;
+    font-size: 20px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
 #sd-section-menulist ul li div {
-    min-height:160px;
-    min-width:160px;
+    min-height: 160px;
+    min-width: 160px;
 }
-#sd-section-container {
-    background:url('bg_sd.jpg');height:1013px;
+
+#sd-home-container a {
+    color: #fff;
 }
+
 #sd-toplink {
-    margin:0;
-    height:70px;
-    background-color:#5B4767;
+    margin: 0;
+    height: 70px;
+    background-color: #5B4767;
 }
+
 .section a {
-    color:#fff;
+    color: #fff;
 }
+
     .section a:link {
         text-decoration: none !important;
     }
@@ -344,26 +392,58 @@ h1, .h1, h2, .h2, h3, .h3 {
         background-color: none;
     }
 
-.dropdown-menu {
-    background-color: #425563;
+    .section a:visited {
+        color: #fff;
+        text-decoration: none;
+        background-color: none;
+    }
+
+.outlink a {
+    color: #fff;
+}
+
+    .outlink a:link {
+        text-decoration: none !important;
+    }
+
+    .outlink a:hover {
+        text-decoration: none !important;
+        cursor: pointer;
+        background-color: none;
+    }
+
+    .outlink a:visited {
+        color: #fff;
+        text-decoration: none;
+        background-color: none;
+    }
+
+.sd-dropdown-menu {
+    /*background-color: #425563;*/
+    background-color:rgba(66,85,99,0.5);
     border-bottom: 5px solid #FF8D6D;
 }
 
+.ss-dropdown-menu {
+    /*background-color: #425563;*/
+    background-color:rgba(66,85,99,0.5);
+    border-bottom: 5px solid #2AD2C9;
+}
+
 .dropdown-toggle:active, .open .dropdown-toggle {
-    background-color:transparent;
+    background-color: transparent;
     color: #000 !important;
+}
+
+.ss-dropdown-menu>li>a:focus, .ss-dropdown-menu>li>a:hover {
+    color: #262626 !important;
+}
+
+.home-nav>li>a:focus, .home-nav>li>a:hover {
+    background-color:#c6c9ca;
 }
 
 .dropdown-menu li a {
     color: #fff;
 }
-
-.section a:visited {
-    color: #fff;
-    text-decoration: none;
-    background-color: none;
-}
-
-
-
 

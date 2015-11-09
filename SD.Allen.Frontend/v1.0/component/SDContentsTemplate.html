@@ -1,28 +1,31 @@
-<div class="row" id="sd-section-container" style="background:url('bg_sd.jpg');height:1013px;">
+<div class="row" id="sd-section-container" style="background:url('bg_sd.jpg');height:1000px;background-size:100% cover;">
     <div id="sd-toplink">
-        <div class="col-lg-2" style="padding:15px 10px;">
+        <div class="col-xs-12 col-md-6 col-lg-2 sd-auto-width" style="padding:15px 10px;">
             <h1 style="color:#ffffff;">Solution Design</h1>
         </div>
-        <div class="col-lg-8" style="padding:30px 10px;">
+        <div class="col-xs-1 col-md-2 col-lg-7 sd-auto-width" style="padding:30px 10px;">
             <ul class="nav nav-pills">
                 <li>
-                    <a class="active" href="AppHome.aspx">Home</a>
+                    <a class="active" href="AppHome.aspx">The Solution Source</a>
                 </li>
                 <li>
-                    <a class="">Help &amp; Reference</a>
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Help &amp; Reference</a>
+                    <ul class="dropdown-menu sd-dropdown-menu">
+                        <li><a href="FAQ.aspx" target="_blank">FAQ</a></li>
+                        <li><a href="Support%20Contacts.aspx" target="_blank">Support Contacts</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a class="" href="SDMyOppty.aspx">My Opportunity<i class="glyphicon glyphicon-user"></i></a>
-                </li>
-                <li>
-                    <a class="" href="SDAllOppty.aspx">All Open Opportunity<i class="glyphicon glyphicon-list"></i></a>
-                </li>
-                <li>
-                    <a class="" href="SDSectionLoader.aspx?sid=0201">New Opportunity<i class="glyphicon glyphicon-edit"></i></a>
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Opportunities</a>
+                    <ul class="dropdown-menu sd-dropdown-menu">
+                        <li><a href="SDSectionLoader.aspx?sid=0201" target="_blank">Create a new opportunity</a></li>
+                        <li><a href="SDMyOppty.aspx" target="_blank">My opportunities</a></li>
+                        <li><a href="SDAllOppty.aspx" target="_blank">All open opportunities</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
-        <div class="col-lg-2 pull-right">
+        <div class="col-xs-2 col-md-1 col-lg-2 pull-right">
             <img src="logo.png" />
         </div>
     </div>
@@ -40,7 +43,7 @@
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">
                         Business and Solution Context
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu sd-dropdown-menu">
                         <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=0301&OpptyID=' + opptyID()}">Client Overview and Decision Factors</a></li>
                         <li role="separator" class="divider"></li>                        
                         <li><a>HPE Win Strategy</a></li>
@@ -56,7 +59,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         Solution Overview                        
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu sd-dropdown-menu">
                         <li><a>Scope</a></li>
                         <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040101&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>All Offerings</a></li>
                         <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040102&OpptyID=' + opptyID()}"><i class="glyphicon glyphicon-menu-right"></i>Key Scope Items </a></li>
@@ -87,27 +90,27 @@
                 </div>
             </li>
             <li>
-                <div>
+                <div class="section">
                     Offering Design
                 </div>
             </li>
             <li>
-                <div>
+                <div class="section">
                     Integrated Technical Architecture
                 </div>
             </li>
             <li>
-                <div>
+                <div class="section">
                     End-to-End<br /> T&T<br /> Solution
                 </div>
             </li>
             <li>
-                <div>
+                <div class="section">
                     Critical Risks, Assumptions and Mitigations
                 </div>
             </li>
             <li>
-                <div>
+                <div class="section">
                     Reference Documents
                 </div>
             </li>
