@@ -162,7 +162,7 @@
                 'component/CountrySelector',
                 'component/ReviewAndExtract',
                 'component/AttachmentManager',
-                //'component/DollarFormatter',
+                'component/DollarFormatter',
                 'component/Section0201',
                 'component/Section0202',
                 'component/Section0301',

@@ -323,9 +323,13 @@ define('component/QuestionArea', function (require) {
 
                 if (params !== undefined) {
                     if (params.content != undefined && params.content != null) {
-                        if (params.content.length > 0) {
+                        if (typeof params.content === 'function') {
                             self.content = params.content;
-                            self.isStartEdit(true); //if the content length >0, we can have a preview the content
+                            //var temp = JSON.stringify(ko.toJS(self.content));
+                            if(params.content != undefined)
+                                self.isStartEdit(true);
+                        } else {
+                            self.content = ko.observable(params.content);
                         }
                     }
                     if (params.editable !== undefined) {

@@ -59,6 +59,7 @@
       "v1.0/component/CountrySelector.js",
       "v1.0/component/ReviewAndExtract.js",
       "v1.0/component/AttachmentManager.js",
+      "v1.0/component/DollarFormatter.js",
       "v1.0/component/Section0201.js",
       "v1.0/component/Section0202.js",
       "v1.0/component/Section0301.js",

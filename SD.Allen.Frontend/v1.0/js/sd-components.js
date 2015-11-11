@@ -1935,9 +1935,13 @@ define('component/QuestionArea', function (require) {
 
                 if (params !== undefined) {
                     if (params.content != undefined && params.content != null) {
-                        if (params.content.length > 0) {
+                        if (typeof params.content === 'function') {
                             self.content = params.content;
-                            self.isStartEdit(true); //if the content length >0, we can have a preview the content
+                            //var temp = JSON.stringify(ko.toJS(self.content));
+                            if(params.content != undefined)
+                                self.isStartEdit(true);
+                        } else {
+                            self.content = ko.observable(params.content);
                         }
                     }
                     if (params.editable !== undefined) {
@@ -2899,6 +2903,68 @@ define('component/AttachmentManager', function (require) {
 
     return {
         name: ["AttachmentManager", "sd-component-attachmentmanager"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+});
+define('component/DollarFormatter', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        jasnybs = require('jasnybs'),
+        templateHtml = require("text!./DollarFormatterTemplate.html"),
+        vm = {};
+
+    function getFormattedDollar(dollarValue) {
+        var dollarStr = dollarValue.toString();
+        var formatted = "";
+        var l = dollarStr.length;
+        var count = 0;
+        for (var i = l; i > 0; --i) {
+            count = count + 1;
+            formatted = dollarStr.charAt(i - 1) + formatted;
+            if (count % 3 === 0 && count < l) {
+                formatted = "," + formatted;
+            }
+        }
+        formatted = "$" + formatted;
+        console.log(formatted);
+        vm.formattedDollar(formatted);
+    }
+
+    function createViewModel(params, componentInfo) {
+        var dollarFormatterViewModel = function (params) {
+            var self = this;
+            self.dollarValue = params.dollarValue;
+            self.formattedDollar = ko.observable("$0");
+
+            //define functions;
+            self.getFormattedDollar = function (dollarValue) {
+                var dollarStr = dollarValue.toString();
+                var formatted = "";
+                var l = dollarStr.length;
+                var count = 0;
+                for (var i = l-1; i >= 0; --i) {
+                    count = count + 1;
+                    formatted = dollarStr.charAt(i) + formatted;
+                    if (count % 3 === 0 && count < l) {
+                        formatted = "," + formatted;
+                    };
+                }
+                formatted = "$" + formatted;
+                self.formattedDollar(formatted);
+            }
+
+            //define subscribes;
+            self.dollarValue.subscribe(self.getFormattedDollar);
+        };
+        return new dollarFormatterViewModel(params);
+    }
+
+    return {
+        name: ["DollarFormatter", "sd-component-dollarformatter"],
         template: templateHtml,
         viewModel: {
             createViewModel: createViewModel
