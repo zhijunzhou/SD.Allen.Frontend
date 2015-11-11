@@ -1934,11 +1934,10 @@ define('component/QuestionArea', function (require) {
 
 
                 if (params !== undefined) {
-                    if (params.content != undefined) {
-                        if (typeof params.content === 'function') {
+                    if (params.content != undefined && params.content != null) {
+                        if (params.content.length > 0) {
                             self.content = params.content;
-                        } else {
-                            self.content = ko.observable(params.content);
+                            self.isStartEdit(true); //if the content length >0, we can have a preview the content
                         }
                     }
                     if (params.editable !== undefined) {
@@ -2920,7 +2919,7 @@ define('component/Section0201', function (require) {
         inputText = require('./SDInputText'),
         numBox = require('numBox'),
         requestAPI = require('model/RequestAPI'),
-        //dollarFormatter = require('./DollarFormatter'),
+        dollarFormatter = require('./DollarFormatter'),
         vm = {},
         sectionLoaderViewModel = {};
 
@@ -3142,8 +3141,14 @@ define('component/Section0201', function (require) {
         }
         if (region == 'na') {
             vm.data.leadRegion('NA');
+            if (sectionLoaderViewModel.document() !== null && sectionLoaderViewModel.document() !== undefined) {
+                sectionLoaderViewModel.document().opptyOverview.opptyData.data.leadRegion = 'NA';
+            }
         } else {
             vm.data.leadRegion(region);
+            if (sectionLoaderViewModel.document() !== null && sectionLoaderViewModel.document() !== undefined) {
+                sectionLoaderViewModel.document().opptyOverview.opptyData.data.leadRegion = region;
+            }
         }
     }
 
@@ -3197,6 +3202,12 @@ define('component/Section0201', function (require) {
                     vm.data.involvedGbu.hpi().fyr(0);
                 }
                 break;
+        }
+    }
+
+    function updateGlabalDocument(inScope, region) {
+        if (!vm.isNewOppty()) {
+            sectionLoaderViewModel.document().opptyOverview.opptyData.data.region[region].inScope = inScope;
         }
     }
 
@@ -3457,6 +3468,7 @@ define('component/Section0201', function (require) {
             }
         };
 
+        //define subscribes;
         data.leadCntry.subscribe(updateLeadRegion);
         data.leadRegion.subscribe(updateRegion);
         data.pursuitClassfication.subscribe(function (newValue) {
@@ -3487,6 +3499,11 @@ define('component/Section0201', function (require) {
         data.involvedGbu.ess().inScope.subscribe(function (inScope) { updateInvolvedGbu(inScope, "ess") });
         data.involvedGbu.hpeOther().inScope.subscribe(function (inScope) { updateInvolvedGbu(inScope, "hpeOther") });
         data.involvedGbu.hpi().inScope.subscribe(function (inScope) { updateInvolvedGbu(inScope, "hpi") });
+
+        data.region.apj().inScope.subscribe(function (inScope) { updateGlabalDocument(inScope, "apj") });
+        data.region.ams().inScope.subscribe(function (inScope) { updateGlabalDocument(inScope, "ams") });
+        data.region.emea().inScope.subscribe(function (inScope) { updateGlabalDocument(inScope, "emea") });
+
         return data;
     }
 	
@@ -3684,7 +3701,7 @@ define('component/Section0201', function (require) {
 		viewModel: {
 			createViewModel: createViewModel
 		},
-		subComponents: [dateTimePicker, inputText]
+		subComponents: [dateTimePicker, inputText, dollarFormatter]
 	};
 });
 
@@ -3698,8 +3715,8 @@ define('component/Section0201', function (require) {
 
 /*global define, alert, location*/
 define('component/Section0202', function (require) {
-	"use strict";
-	var $ = require("jquery"),
+    "use strict";
+    var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
         peoplePicker = require('./PeoplePicker'),
@@ -3710,292 +3727,327 @@ define('component/Section0202', function (require) {
         vm = {},
 		sectionLoaderViewModel = {};
 
-	function onViewModelPreLoad() {
-		$(".popover-options a").popover({ html: true });
-		$('.popover-show').popover('hide');
-	}
+    function onViewModelPreLoad() {
+        $(".popover-options a").popover({ html: true });
+        $('.popover-show').popover('hide');
+    }
 
-	function contact(contact) {
-		this.title = contact.title;
-		this.name = contact.name;
-		this.email = contact.email;
-		this.sipAddress = contact.sipAddress;
-		this.type = contact.type;
-	}
-	function mappingResult(data, isEmpty) {
-		this.data = data;
-		this.isEmpty = isEmpty;
-	}
-	function listenCustomEvent() {
-		$(window).off("opptySaving");
-		$(window).on("opptySaving", updateContact);
-	}
+    function contact(contact) {
+        this.title = contact.title;
+        this.name = contact.name;
+        this.email = contact.email;
+        this.sipAddress = contact.sipAddress;
+        this.type = contact.type;
+    }
+    function mappingResult(data, isEmpty) {
+        this.data = data;
+        this.isEmpty = isEmpty;
+    }
+    function listenCustomEvent() {
+        $(window).off("opptySaving");
+        $(window).on("opptySaving", updateContact);
+    }
 
-	function onViewModelPreLoad() {
-		listenCustomEvent();
-	}
-	function onViewModelLoaded() {
-		vm.section.opptyID = sectionLoaderViewModel.opptyID();
-		if (vm.editable()) {
-			getContact();
-		} else {
-		    var data = sectionLoaderViewModel.document();
-		    var opptyOverview = data.opptyOverview;
-		    if (opptyOverview != null && opptyOverview.contact != null) {
-		        doDataBinding(data);
-		    }
-		}
-	}
+    function onViewModelPreLoad() {
+        listenCustomEvent();
+    }
+    function onViewModelLoaded() {
+        vm.section.opptyID = sectionLoaderViewModel.opptyID();
+        if (vm.editable()) {
+            getContact();
+        } else {
+            var data = sectionLoaderViewModel.document();
+            var opptyOverview = data.opptyOverview;
+            if (opptyOverview != null && opptyOverview.contact != null) {
+                doDataBinding(data);
+            } 
+        }
+    }
 
-	function region(name, title) {
-		this.name = name;
-		this.title = title;
-	}
+    function region(name, title) {
+        this.name = name;
+        this.title = title;
+    }
 
-	function getContact() {
-		if (vm.section.opptyID === "") {
+    function getContact() {
+        if (vm.section.opptyID === "") {
 
-		} else {
-			requestAPI.getSectionByIDAndSectionNameAsync(vm.section.opptyID, vm.section.name).done(function (oppty, xhr) {
-				if (oppty.status != undefined && oppty.status == 404) {
-					requestAPI.errorOppty('404');
-				}
-				else {
-					var opptyOverview = oppty.data.opptyOverview;
-					if (opptyOverview != null && opptyOverview.contact != null) {
-						vm.section.eTag = xhr.getResponseHeader('ETag');
-						doDataBinding(oppty.data);
-					} else {
-						computeRegionOrder(oppty.data);
-					}
-				}
-			});
-		}
-	}
+        } else {
+            requestAPI.getSectionByIDAndSectionNameAsync(vm.section.opptyID, vm.section.name).done(function (oppty, xhr) {
+                if (oppty.status != undefined && oppty.status == 404) {
+                    requestAPI.errorOppty('404');
+                }
+                else {
+                    var opptyOverview = oppty.data.opptyOverview;
+                    if (opptyOverview != null && opptyOverview.contact != null) {
+                        vm.section.eTag = xhr.getResponseHeader('ETag');
+                        doDataBinding(oppty.data);
+                    } else {
+                        vm.pageInited(true);
+                        computeRegionOrder();
+                    }
+                }
+            });
+        }
+    }
 
-	function doDataBinding(data) {
-		computeRegionOrder(data);
-		var contact = data.opptyOverview.contact.data;
-		var coreTeam = contact.coreTeam;
-		for (var role in coreTeam) {
-			for (var region in coreTeam[role]) {
-				if (coreTeam[role][region] != null) {
-					vm.data.coreTeam[role][region](coreTeam[role][region]);
-				}
-			}
-		}
-		var extendTeam = contact.extendTeam;
-		for (var role in extendTeam) {
-			for (var region in extendTeam[role]) {
-				if (region == "dueDiligenceLead") {
-					if (extendTeam[role][region] != null) {
-						vm.data.extendTeam[role][region](extendTeam[role][region]);
-					}
-				} else {
-					if (extendTeam[role][region] != null) {
-						vm.data.extendTeam[role][region](extendTeam[role][region]);
-					}
-				}
-			}
-		}
-	}
+    function doDataBinding(data) {
+        computeRegionOrder();
+        var contact = data.opptyOverview.contact.data;
+        var coreTeam = contact.coreTeam;
+        for (var role in coreTeam) {
+            for (var region in coreTeam[role]) {
+                if (coreTeam[role][region] != null) {
+                    vm.data.coreTeam[role][region](coreTeam[role][region]);
+                }
+            }
+        }
+        var extendTeam = contact.extendTeam;
+        for (var role in extendTeam) {
+            for (var region in extendTeam[role]) {
+                if (region == "dueDiligenceLead") {
+                    if (extendTeam[role][region] != null) {
+                        vm.data.extendTeam[role][region](extendTeam[role][region]);
+                    }
+                } else {
+                    if (extendTeam[role][region] != null) {
+                        vm.data.extendTeam[role][region](extendTeam[role][region]);
+                    }
+                }
+            }
+        }
+        vm.pageInited(true);
+    }
 
-	function computeRegionOrder(data) {
-		var oppty = data.opptyOverview.opptyData.data;
-		var involvedRegion = oppty.region;
-		var index = 1;
-		if (oppty.leadRegion !== "NA") {
-		    vm.leadRegion(new region(oppty.leadRegion, oppty.leadRegion.toUpperCase()));
-		    for (var re in involvedRegion) {
-		        if (re == vm.leadRegion().name) {
-		            continue;
-		        }
-		        if (re != vm.leadRegion().name && involvedRegion[re].inScope) {
-		            index = index + 1;
-		            if (index == 2) {
-		                vm.secondRegion(new region(re, re.toUpperCase()));
-		            }
-		            if (index == 3) {
-		                vm.thirdRegion(new region(re, re.toUpperCase()));
-		            }
-		        }
-		    }
-		} else {
-		    for (var re in involvedRegion) {
-		        if (involvedRegion[re].inScope) {
-		            index = index + 1;
-		            if (index == 2) {
-		                vm.leadRegion(new region(re, re.toUpperCase()));
-		            }
-		            if (index == 3) {
-		                vm.secondRegion(new region(re, re.toUpperCase()));
-		            }
-		            if (index == 4) {
-		                vm.thirdRegion(new region(re, re.toUpperCase()));
-		            }
-		        }
-		    }
-		}
-	}
-    
-	function updateContact(event, argu) {
-		var sid = argu.sid();
-		if (sid !== '0202') {
-			return;
-		}
-		var mappingResult = doDataMapping();
-		if (!mappingResult.isEmpty) {
-		    $(window).triggerHandler("submitableChanged", true);
-			requestAPI.updateSection(vm.section.opptyID, vm.section.name, mappingResult.data, vm.section.eTag).done(function (data, textStatus, jqXHR) {
-			    if (jqXHR != undefined) vm.section.eTag = jqXHR.getResponseHeader('ETag');
-				requestAPI.errorUpdateSection(data, sid, vm.section.opptyID);
-			});
-		} else {
-		    alert("Fill in one contact at least!");
-		    $(window).triggerHandler("submitableChanged", false);
-		}
-	}
+    function computeRegionOrder() {
+        //var oppty = data.opptyOverview.opptyData.data;
+        var tempOppty = sectionLoaderViewModel.document().opptyOverview.opptyData.data;
+        var involvedRegion = tempOppty.region;
+        var index = 1;
+        if (tempOppty.leadRegion !== "NA") {
+            vm.leadRegion(new region(tempOppty.leadRegion, tempOppty.leadRegion.toUpperCase()));
+            for (var re in involvedRegion) {
+                if (re == vm.leadRegion().name) {
+                    continue;
+                }
+                if (re != vm.leadRegion().name && involvedRegion[re].inScope) {
+                    index = index + 1;
+                    if (index == 2) {
+                        vm.secondRegion(new region(re, re.toUpperCase()));
+                    }
+                    if (index == 3) {
+                        vm.thirdRegion(new region(re, re.toUpperCase()));
+                    }
+                }
+            }
+        } else {
+            for (var re in involvedRegion) {
+                if (involvedRegion[re].inScope) {
+                    index = index + 1;
+                    if (index == 2) {
+                        vm.leadRegion(new region(re, re.toUpperCase()));
+                    }
+                    if (index == 3) {
+                        vm.secondRegion(new region(re, re.toUpperCase()));
+                    }
+                    if (index == 4) {
+                        vm.thirdRegion(new region(re, re.toUpperCase()));
+                    }
+                }
+            }
+        }
+    }
 
-	function doDataMapping() {
-		var emptyContact = true;
-		var contacts = ko.toJS(vm.data);
-		var coreTeam = contacts.coreTeam;
-		for (var role in coreTeam) {
-			for (var region in coreTeam[role]) {
-				if (coreTeam[role][region] != undefined && coreTeam[role][region].length != 0 && coreTeam[role][region][0] != undefined) {
-					emptyContact = false;
-					var c = new contact(coreTeam[role][region][0]);
-					contacts.coreTeam[role][region] = c;
-				} else {
-					contacts.coreTeam[role][region] = null;
-				}
-			}
-		}
-		var extendTeam = contacts.extendTeam;
-		for (var role in extendTeam) {
-			for (var region in extendTeam[role]) {
-				if (region == "dueDiligenceLead") {
-					if (extendTeam[role][region] != undefined && extendTeam[role][region].length != 0 && extendTeam[role][region][0] != undefined) {
-						emptyContact = false;
-						var c = new contact(extendTeam[role][region][0]);
-						contacts.extendTeam[role][region] = c;
-					} else {
-						contacts.extendTeam[role][region] = null;
-					}
-				} else {
-					if (extendTeam[role][region].length > 0) {
-						emptyContact = false;
-						contacts.extendTeam[role][region] = extendTeam[role][region];
-					}
-				}
-			}
-		}
-		return new mappingResult(contacts, emptyContact);
-	}
+    function updateContact(event, argu) {
+        var sid = argu.sid();
+        if (sid !== '0202') {
+            return;
+        }
+        if (!vm.pageInited()) {
+            console.log("page has not been inited !");
+            return;
+        }
 
-	function createViewModel(params, componentInfo) {
-		sectionLoaderViewModel = params.viewModel;
-		onViewModelPreLoad();
-		var contactViewModel = function (params) {
-			var self = this;
-			self.section = {
-				opptyID: "",
-				eTag: "",
-				name: "contacts"
-			};
-			self.editable = ko.observable(sectionLoaderViewModel.editable());
-			self.data = {
-				coreTeam: {
-					primary: {
-						acctExecutive: ko.observable(),
-						bidMgr: ko.observable(),
-						dealAnalyst: ko.observable(),
-						deliveryOwner: ko.observable(),
-						hrLead: ko.observable(),
-						legalContractMgmtLead: ko.observable(),
-						opptyConsultant: ko.observable(),
-						proposalMgr: ko.observable(),
-						pursuitEngagementMgr: ko.observable(),
-						salesExecutive: ko.observable(),
-						solnConsultant: ko.observable(),
-						solnLead: ko.observable(),
-						strategicPursuitLead: ko.observable(),
-						tntLead: ko.observable()
-					}, ams: {
-						acctExecutive: ko.observable(),
-						bidMgr: ko.observable(),
-						dealAnalyst: ko.observable(),
-						deliveryOwner: ko.observable(),
-						hrLead: ko.observable(),
-						legalContractMgmtLead: ko.observable(),
-						opptyConsultant: ko.observable(),
-						proposalMgr: ko.observable(),
-						pursuitEngagementMgr: ko.observable(),
-						salesExecutive: ko.observable(),
-						solnConsultant: ko.observable(),
-						solnLead: ko.observable(),
-						strategicPursuitLead: ko.observable(),
-						tntLead: ko.observable()
-					}, apj: {
-						acctExecutive: ko.observable(),
-						bidMgr: ko.observable(),
-						dealAnalyst: ko.observable(),
-						deliveryOwner: ko.observable(),
-						hrLead: ko.observable(),
-						legalContractMgmtLead: ko.observable(),
-						opptyConsultant: ko.observable(),
-						proposalMgr: ko.observable(),
-						pursuitEngagementMgr: ko.observable(),
-						salesExecutive: ko.observable(),
-						solnConsultant: ko.observable(),
-						solnLead: ko.observable(),
-						strategicPursuitLead: ko.observable(),
-						tntLead: ko.observable()
-					}, emea: {
-						acctExecutive: ko.observable(),
-						bidMgr: ko.observable(),
-						dealAnalyst: ko.observable(),
-						deliveryOwner: ko.observable(),
-						hrLead: ko.observable(),
-						legalContractMgmtLead: ko.observable(),
-						opptyConsultant: ko.observable(),
-						proposalMgr: ko.observable(),
-						pursuitEngagementMgr: ko.observable(),
-						salesExecutive: ko.observable(),
-						solnConsultant: ko.observable(),
-						solnLead: ko.observable(),
-						strategicPursuitLead: ko.observable(),
-						tntLead: ko.observable()
-					}
-				}, extendTeam: {
-					primary: {
-						dealIntake: ko.observableArray(),
-						dueDiligenceLead: ko.observable(),
-						otherIntlBizPartner: ko.observableArray(),
-						practiceArch: ko.observableArray(),
-						proposalSupport: ko.observableArray()
-					}, ams: {
-						dealIntake: ko.observableArray(),
-						dueDiligenceLead: ko.observable(),
-						otherIntlBizPartner: ko.observableArray(),
-						practiceArch: ko.observableArray(),
-						proposalSupport: ko.observableArray()
-					}, apj: {
-						dealIntake: ko.observableArray(),
-						dueDiligenceLead: ko.observable(),
-						otherIntlBizPartner: ko.observableArray(),
-						practiceArch: ko.observableArray(),
-						proposalSupport: ko.observableArray()
-					}, emea: {
-						dealIntake: ko.observableArray(),
-						dueDiligenceLead: ko.observable(),
-						otherIntlBizPartner: ko.observableArray(),
-						practiceArch: ko.observableArray(),
-						proposalSupport: ko.observableArray()
-					}
-				}
-			}
-			self.roleCollection = [
+        var saveFunc = function () {
+            if (($(".sp-peoplepicker-waitImg:visible").length > 0)) {
+                setTimeout(saveFunc, 500);
+            } else {
+                var mappingResult = doDataMapping();
+                //if (!vm.peoplePickerInited()) {
+                //    console.log("peoplePicker has not been inited !");
+                //    return;
+                //}
+                if (!mappingResult.isEmpty) {
+                    $(window).triggerHandler("submitableChanged", true);
+                    requestAPI.updateSection(vm.section.opptyID, vm.section.name, mappingResult.data, vm.section.eTag).done(function (data, textStatus, jqXHR) {
+                        if (jqXHR != undefined) vm.section.eTag = jqXHR.getResponseHeader('ETag');
+                        requestAPI.errorUpdateSection(data, sid, vm.section.opptyID);
+                    });
+                } else {
+                    $(window).triggerHandler("submitableChanged", false);
+                    alert("Fill in one contact at least!");
+                }
+            }
+        }
+        setTimeout(saveFunc, 500);
+    }
+
+    function doDataMapping() {
+        var emptyContact = true;
+        var contacts = ko.toJS(vm.data);
+        var coreTeam = contacts.coreTeam;
+        for (var role in coreTeam) {
+            for (var region in coreTeam[role]) {
+                if (coreTeam[role][region] != undefined && coreTeam[role][region].length != 0 && coreTeam[role][region][0] != undefined) {
+                    emptyContact = false;
+                    var c = new contact(coreTeam[role][region][0]);
+                    contacts.coreTeam[role][region] = c;
+                } else {
+                    if (contacts.coreTeam[role][region] === undefined) {
+                        contacts.coreTeam[role][region] = null;
+                    } else {
+                        if (coreTeam[role][region] !== null && coreTeam[role][region].length === 0) {
+                            contacts.coreTeam[role][region] = null;
+                        } else {
+                            emptyContact = false;
+                        }
+                    }
+                }
+            }
+        }
+        var extendTeam = contacts.extendTeam;
+        for (var role in extendTeam) {
+            for (var region in extendTeam[role]) {
+                if (region == "dueDiligenceLead") {
+                    if (extendTeam[role][region] != undefined && extendTeam[role][region].length != 0 && extendTeam[role][region][0] != undefined) {
+                        emptyContact = false;
+                        var c = new contact(extendTeam[role][region][0]);
+                        contacts.extendTeam[role][region] = c;
+                    } else {
+                        if (contacts.extendTeam[role][region] === undefined) {
+                            contacts.extendTeam[role][region] = null;
+                        } else {
+                            if (extendTeam[role][region] !== null && extendTeam[role][region].length === 0) {
+                                contacts.extendTeam[role][region] = null;
+                            } else {
+                                emptyContact = false;
+                            }
+                        }
+                    }
+                } else {
+                    if (extendTeam[role][region].length > 0) {
+                        emptyContact = false;
+                        contacts.extendTeam[role][region] = extendTeam[role][region];
+                    }
+                }
+            }
+        }
+        return new mappingResult(contacts, emptyContact);
+    }
+
+    function createViewModel(params, componentInfo) {
+        sectionLoaderViewModel = params.viewModel;
+        onViewModelPreLoad();
+        var contactViewModel = function (params) {
+            var self = this;
+            self.section = {
+                opptyID: "",
+                eTag: "",
+                name: "contacts"
+            };
+            self.editable = ko.observable(sectionLoaderViewModel.editable());
+            self.data = {
+                coreTeam: {
+                    primary: {
+                        acctExecutive: ko.observable(),
+                        bidMgr: ko.observable(),
+                        dealAnalyst: ko.observable(),
+                        deliveryOwner: ko.observable(),
+                        hrLead: ko.observable(),
+                        legalContractMgmtLead: ko.observable(),
+                        opptyConsultant: ko.observable(),
+                        proposalMgr: ko.observable(),
+                        pursuitEngagementMgr: ko.observable(),
+                        salesExecutive: ko.observable(),
+                        solnConsultant: ko.observable(),
+                        solnLead: ko.observable(),
+                        strategicPursuitLead: ko.observable(),
+                        tntLead: ko.observable()
+                    }, ams: {
+                        acctExecutive: ko.observable(),
+                        bidMgr: ko.observable(),
+                        dealAnalyst: ko.observable(),
+                        deliveryOwner: ko.observable(),
+                        hrLead: ko.observable(),
+                        legalContractMgmtLead: ko.observable(),
+                        opptyConsultant: ko.observable(),
+                        proposalMgr: ko.observable(),
+                        pursuitEngagementMgr: ko.observable(),
+                        salesExecutive: ko.observable(),
+                        solnConsultant: ko.observable(),
+                        solnLead: ko.observable(),
+                        strategicPursuitLead: ko.observable(),
+                        tntLead: ko.observable()
+                    }, apj: {
+                        acctExecutive: ko.observable(),
+                        bidMgr: ko.observable(),
+                        dealAnalyst: ko.observable(),
+                        deliveryOwner: ko.observable(),
+                        hrLead: ko.observable(),
+                        legalContractMgmtLead: ko.observable(),
+                        opptyConsultant: ko.observable(),
+                        proposalMgr: ko.observable(),
+                        pursuitEngagementMgr: ko.observable(),
+                        salesExecutive: ko.observable(),
+                        solnConsultant: ko.observable(),
+                        solnLead: ko.observable(),
+                        strategicPursuitLead: ko.observable(),
+                        tntLead: ko.observable()
+                    }, emea: {
+                        acctExecutive: ko.observable(),
+                        bidMgr: ko.observable(),
+                        dealAnalyst: ko.observable(),
+                        deliveryOwner: ko.observable(),
+                        hrLead: ko.observable(),
+                        legalContractMgmtLead: ko.observable(),
+                        opptyConsultant: ko.observable(),
+                        proposalMgr: ko.observable(),
+                        pursuitEngagementMgr: ko.observable(),
+                        salesExecutive: ko.observable(),
+                        solnConsultant: ko.observable(),
+                        solnLead: ko.observable(),
+                        strategicPursuitLead: ko.observable(),
+                        tntLead: ko.observable()
+                    }
+                }, extendTeam: {
+                    primary: {
+                        dealIntake: ko.observableArray(),
+                        dueDiligenceLead: ko.observable(),
+                        otherIntlBizPartner: ko.observableArray(),
+                        practiceArch: ko.observableArray(),
+                        proposalSupport: ko.observableArray()
+                    }, ams: {
+                        dealIntake: ko.observableArray(),
+                        dueDiligenceLead: ko.observable(),
+                        otherIntlBizPartner: ko.observableArray(),
+                        practiceArch: ko.observableArray(),
+                        proposalSupport: ko.observableArray()
+                    }, apj: {
+                        dealIntake: ko.observableArray(),
+                        dueDiligenceLead: ko.observable(),
+                        otherIntlBizPartner: ko.observableArray(),
+                        practiceArch: ko.observableArray(),
+                        proposalSupport: ko.observableArray()
+                    }, emea: {
+                        dealIntake: ko.observableArray(),
+                        dueDiligenceLead: ko.observable(),
+                        otherIntlBizPartner: ko.observableArray(),
+                        practiceArch: ko.observableArray(),
+                        proposalSupport: ko.observableArray()
+                    }
+                }
+            }
+            self.roleCollection = [
                 "Account Executive",
                 "Bid Manager",
                 "Deal Analyst",
@@ -4010,39 +4062,43 @@ define('component/Section0202', function (require) {
                 "Solution Lead",
                 "Strategic Pursuit Lead",
                 "T&T Leader"
-			];
+            ];
 
-			self.extendRoleCollection = [
+            self.extendRoleCollection = [
                 "Deal Intake (multiple rows/names)",
                 "Due Diligence Leader",
                 "Other Internal Business Partners (multiple rows/names)",
                 "Practice Architects (multiple rows/names)",
                 "Proposal Support (multiple rows/names)"
-			];
+            ];
 
-			self.involvedRegion = ko.observableArray();
-			self.leadRegion = ko.observable();
-			self.secondRegion = ko.observable();
-			self.thirdRegion = ko.observable();
+            self.involvedRegion = ko.observableArray();
+            self.leadRegion = ko.observable();
+            self.secondRegion = ko.observable();
+            self.thirdRegion = ko.observable();
 
-			self.opptyItem = ko.observable();
-			self.save = function save(viewModel) {
-				$(window).trigger("opptySaving", self);
-			};
-		};
-		vm = new contactViewModel(params);
-		onViewModelLoaded();
-		return vm;
-	}
+            self.opptyItem = ko.observable();
 
-	return {
-		name: ["Section0202", "sd-section-0202"],
-		template: templateHtml,
-		viewModel: {
-			createViewModel: createViewModel
-		},
-		subComponents: [peoplePicker]
-	};
+            self.pageInited = ko.observable(false);
+            self.peoplePickerInited = ko.observable(true);
+
+            self.save = function save(viewModel) {
+                $(window).trigger("opptySaving", self);
+            };
+        };
+        vm = new contactViewModel(params);
+        onViewModelLoaded();
+        return vm;
+    }
+
+    return {
+        name: ["Section0202", "sd-section-0202"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        },
+        subComponents: [peoplePicker]
+    };
 
 });
 /*global define, alert, console, location*/

@@ -1,251 +1,259 @@
-﻿
-<div id="sd-section-canvas">
-    <nav id="sd-section-nav" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation" style="top: 126px">
-        <a class="navmenu-brand visible-md visible-lg" data-bind="attr:{href:sdContentUrl+'?OpptyID=' + opptyID()}">Solution Design</a>
-        <ul class="nav navmenu-nav">
-            <li class="active">
-                <a href="#" data-bind="click: changeSection.bind($data, '0201')">Opportunity Overview</a>
-            </li>
-            <!--ko if: opptyID() != ""-->
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Business and Solution Context <b class="caret"></b></a>
-                <ul class="dropdown-menu navmenu-nav">
-                    <li><a href="#" data-bind="click: changeSection.bind($data, '0301')">Client Overview and Decision Factors</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle">HPE Win Strategy</a>
-                        <ul class="navmenu-nav">
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '030201')">Sales Approach</a></li>
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '030202')">Competitors</a></li>
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '030203')">Message Map/Value Proposition</a></li>
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '030204')">Pricing Approach</a></li>
+﻿<div class="nav navbar-fixed-top">
+    <div id="sd-toplink">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-2 sd-auto-width" style="padding:15px 10px;">
+                <h1 style="color:#ffffff;">Solution Design</h1>
+            </div>
+            <div class="col-xs-1 col-md-2 col-lg-7 sd-auto-width" style="padding:30px 10px;">
+                <ul class="nav nav-pills top-nav">
+                    <li>
+                        <a class="active" href="AppHome.aspx">The Solution Source</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Help &amp; Reference</a>
+                        <ul class="dropdown-menu sd-dropdown-menu">
+                            <li><a href="FAQ.aspx" target="_blank">FAQ</a></li>
+                            <li><a href="Support%20Contacts.aspx" target="_blank">Support Contacts</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Opportunities</a>
+                        <ul class="dropdown-menu sd-dropdown-menu">
+                            <li><a href="SDSectionLoader.aspx?sid=0201" target="_blank">Create a new opportunity</a></li>
+                            <li><a href="SDMyOppty.aspx" target="_blank">My opportunities</a></li>
+                            <li><a href="SDAllOppty.aspx" target="_blank">All open opportunities</a></li>
                         </ul>
                     </li>
                 </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Solution Overview <b class="caret"></b></a>
-                <ul class="dropdown-menu navmenu-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle">Scope</a>
-                        <ul class="navmenu-nav">
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040101')">All Offerings</a></li>
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040102')">Key Scope Items </a></li>
-                        </ul>
-                    </li>
-                    <!-- ko if: pursuitClassfication() == 'C' || pursuitClassfication() == 'D' -->
-                    <li><a href="#" data-bind="click: changeSection.bind($data, '0402')">Current State Architecture</a></li>
-                    <!--/ko -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle">Solution Approach</a>
-                        <ul class="navmenu-nav">
-
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040301')">Summary</a></li>
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040302')">Outsourcing CMO/TMO/FMO</a></li>
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040303')">HR Solution</a></li>
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040304')">HPE Internal Challenges and Constraints</a></li>
-
-                            <!-- ko if:involvedGbu() == 'apps' && appsInscope() == true -->
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040305')">Design Parameters</a></li>
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040306')">Deployment Strategy</a></li>
-                            <!-- /ko -->
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040307')">Additional Information</a></li>
-
-                        </ul>
-                    </li>
-
-                    <li><a href="#" data-bind="click: changeSection.bind($data, '0404')">Innovative Aspects of the Solution</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle">Delivery Strategies</a>
-                        <ul class="navmenu-nav">
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040501')">Delivery Location Targets</a></li>
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040505')">In-Scope Services Delivery Responsibility</a></li>
-                            <!-- ko if: pursuitClassfication() == 'C' || pursuitClassfication() == 'D' -->
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040506')">Client-Retained Services Delivery Responsibility</a></li>
-                            <!--/ko -->
-                            <li><a href="#" data-bind="click: changeSection.bind($data, '040503')">ESM Tooling and Automation Approach</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" data-bind="click: changeSection.bind($data, '0406')">Key Client Constraints</a></li>
-                    <!-- ko if: pursuitClassfication() == 'C' || pursuitClassfication() == 'D' -->
-                    <li><a href="#" data-bind="click: changeSection.bind($data, '0407')">Summary Costing &amp; FTE Reports-Costing Approach</a></li>
-                    <!--/ko -->
-                </ul>
-            </li>
-
-            <!--/ko -->
-        </ul>
-    </nav>
-    <div class="navbar navbar-default navbar-fixed-top panel panel-primary" style="top: 30px">
-        <div class="list-group">
-            <div class="list-group-item active row inline form-horizontal form-inline">
-                <div class="col-xs-3 col-md-3 sd-auto-width">
-                    <a id="sd-section-navbtn" class="btn btn-default btn-tip" data-toggle="offcanvas" data-target="#sd-section-nav" data-canvas="#sd-section-canvas" data-placement="left" href="#" title="Navigate between each sections">
-                        <img src="img/Browse32.png" />
-                    </a>
-                    <span class="btn-group" role="group">
-                        <!--ko if: sid() === '0201'-->
-                        <a class="btn btn-default btn-tip disabled" href="#" title="Save and go to previous section">
-                            <img src="img/previous32.png" />
-                        </a>
-                        <!--/ko-->
-                        <!--ko ifnot: sid() === '0201'-->
-                        <a class="btn btn-default btn-tip" href="#" title="Save and go to previous section" data-bind="click: saveAndPrevious">
-                            <img src="img/previous32.png" />
-                        </a>
-                        <!--/ko-->
-                        <a class="btn btn-default btn-tip" data-bind="click: save" href="#" title="Save current section">
-                            <img src="img/saveOppty32.png" />
-                        </a>
-                        <!--ko if: opptyID() === ""-->
-                        <a class="btn btn-default btn-tip disabled" href="#" title="Save and go to next section" style="margin-right: 10px;">
-                            <img src="img/next32.png" />
-                        </a>
-                        <!--/ko-->
-                        <!--ko ifnot: opptyID() === ""-->
-                        <a class="btn btn-default btn-tip" href="#" title="Save and go to next section" data-bind="click: saveAndNext" style="margin-right: 10px;">
-                            <img src="img/next32.png" />
-                        </a>
-                        <!--/ko-->
-                    </span>
-                </div>
-
-                <div class="col-xs-6 col-md-6 vertical-align-middle center">
-                    <h3 data-bind="text: title"></h3>
-                </div>
-
-                <div class="col-lg-2 pull-right sd-auto-width">
-                    <span style="">
-                        <a class="btn btn-default btn-tip" href="SDMyOppty.aspx" title="View my Opportunities" style="margin-right: 5px;">
-                            <img src="img/myOppty32.png" />
-                        </a>
-                    </span>
-                    <!--ko if: opptyID() != ""-->
-                    <span style="">
-                        <a class="btn btn-default btn-tip" target="_blank" title="Review and Extract" data-bind="attr:{href:'SDReviewAndExtract.aspx?OpptyID='+opptyID()}" style="margin-right: 5px;">
-                            <img src="img/extract.png" />
-                        </a>
-                    </span>
-                    <!--ko if: sid() === '0201'-->
-                    <span style="">
-                        <a class="btn btn-default btn-tip" title="Pursuit Team Contacts" href="#" data-bind="click: changeSection.bind($data, '0202')" style="margin-right: 5px;">
-                            <img src="img/opptyContact32.png" />
-                        </a>
-                    </span>
-                    <!-- /ko -->
-                    <!-- /ko -->
-                    <!--ko if: sid() != '0201'-->
-                    <span style="">
-                        <a class="btn btn-default btn-tip" title="Pursuit Team Contacts" href="#" data-bind="click: changeSection.bind($data, '0202')" style="margin-right: 5px;">
-                            <img src="img/opptyContact32.png" />
-                        </a>
-                    </span>
-                    <!-- /ko -->
-                </div>
             </div>
-            <!--ko with:oppty-->
-            <div class="list-group-item list-group-item-info form-inline row">
-                <div class="form-group" style="padding: 0 15px">
-                    <div class="input-group">
-                        <label class="control-label">Opportunity Name: </label>
-                        <p class="form-control-static" data-bind="text:OpptyName"></p>
-                    </div>
-                </div>
-                <div class="form-group" style="padding: 0 15px">
-                    <div class="input-group">
-                        <label class="control-label">Client Name: </label>
-                        <p class="form-control-static" data-bind="text:ClientName()"></p>
-                    </div>
-                </div>
-            </div>
-            <!-- /ko -->
-        </div>
-    </div>
-    <div id="sd-section-detail" class="container-fluid sd-section-content" style="margin-left: 0; margin-top:100px; height:100%;min-height:600px;min-width:1280px">
-        <div class="row form-horizontal">
-            <div class="col-lg-12">
-                <div class="sd-update-message" style="height:20px;padding:5px;"></div>
+            <div class="col-xs-2 col-md-1 col-lg-2 pull-right logo">
+                <img src="logo.png" height="60" />
             </div>
         </div>
-        <!--ko if: sid() === '0201'-->
-        <sd-section-0201 params="{viewModel: $component}"></sd-section-0201>
-        <!--/ko-->
-        <!--ko if: sid() === '0202'-->
-        <sd-section-0202 params="{viewModel: $component}"></sd-section-0202>
-        <!--/ko-->
-        <!--ko if: sid() === '0301'-->
-        <sd-section-0301 params="{viewModel: $component}"></sd-section-0301>
-        <!--/ko-->
-        <!--ko if: sid() === '030201'-->
-        <sd-section-030201 params="{viewModel: $component}"></sd-section-030201>
-        <!--/ko-->
-        <!--ko if: sid() === '030202'-->
-        <sd-section-030202 params="{viewModel: $component}"></sd-section-030202>
-        <!--/ko-->
-        <!--ko if: sid() === '030203'-->
-        <sd-section-030203 params="{viewModel: $component}"></sd-section-030203>
-        <!--/ko-->
-        <!--ko if: sid() === '030204'-->
-        <sd-section-030204 params="{viewModel: $component}"></sd-section-030204>
-        <!--/ko-->
-        <!--ko if: sid() === '040101'-->
-        <sd-section-040101 params="{viewModel: $component}"></sd-section-040101>
-        <!--/ko-->
-        <!--ko if: sid() === '040102'-->
-        <sd-section-040102 params="{viewModel: $component}"></sd-section-040102>
-        <!--/ko-->
-        <!--ko if: sid() === '0402'-->
-        <sd-section-0402 params="{viewModel: $component}"></sd-section-0402>
-        <!--/ko-->
-        <!--ko if: sid() === '040301'-->
-        <sd-section-040301 params="{viewModel: $component}"></sd-section-040301>
-        <!--/ko-->
-        <!--ko if: sid() === '040302'-->
-        <sd-section-040302 params="{viewModel: $component}"></sd-section-040302>
-        <!--/ko-->
-        <!--ko if: sid() === '040303'-->
-        <sd-section-040303 params="{viewModel: $component}"></sd-section-040303>
-        <!--/ko-->
-        <!--ko if: sid() === '040304'-->
-        <sd-section-040304 params="{viewModel: $component}"></sd-section-040304>
-        <!--/ko-->
-        <!--ko if: sid() === '040305'-->
-        <sd-section-040305 params="{viewModel: $component}"></sd-section-040305>
-        <!--/ko-->
-        <!--ko if: sid() === '040306'-->
-        <sd-section-040306 params="{viewModel: $component}"></sd-section-040306>
-        <!--/ko-->
-        <!--ko if: sid() === '040307'-->
-        <sd-section-040307 params="{viewModel: $component}"></sd-section-040307>
-        <!--/ko-->
-        <!--ko if: sid() === '0404'-->
-        <sd-section-0404 params="{viewModel: $component}"></sd-section-0404>
-        <!--/ko-->
-        <!--ko if: sid() === '040501'-->
-        <sd-section-040501 params="{viewModel: $component}"></sd-section-040501>
-        <!--/ko-->
-        <!--ko if: sid() === '040502'-->
-        <sd-section-040502 params="{viewModel: $component}"></sd-section-040502>
-        <!--/ko-->
-        <!--ko if: sid() === '040503'-->
-        <sd-section-040503 params="{viewModel: $component}"></sd-section-040503>
-        <!--/ko-->
-        <!--ko if: sid() === '040504'-->
-        <sd-section-040504 params="{viewModel: $component}"></sd-section-040504>
-        <!--/ko-->
-        <!--ko if: sid() === '040505'-->
-        <sd-section-040505 params="{viewModel: $component}"></sd-section-040505>
-        <!--/ko-->
-        <!--ko if: sid() === '040506'-->
-        <sd-section-040506 params="{viewModel: $component}"></sd-section-040506>
-        <!--/ko-->
-        <!--ko if: sid() === '0406'-->
-        <sd-section-0406 params="{viewModel: $component}"></sd-section-0406>
-        <!--/ko-->
-        <!--ko if: sid() === '0407'-->
-        <sd-section-0407 params="{viewModel: $component}"></sd-section-0407>
-        <!--/ko-->
-
-
     </div>
 </div>
+<div class="nav navbar-fixed-top test-top" style="margin-top:70px;">
+    <div id="sd-nav-top">
+        <div class="row form-inline ">
+            <div class="col-xs-3 col-md-3 sd-auto-width vertical-align-middle">
+                <a id="sd-section-navbtn" class="btn" data-toggle="offcanvas" data-target="#sd-section-nav" data-
+                   canvas="#sd-section-canvas" data-placement="left" href="#" title="Navigate between each sections">
+                    <img src="img/Browse32.png" />
+                </a>
+                <span class="btn-group" role="group">
+                    <!--ko if: sid() === '0201'-->
+                    <a class="btn disabled" href="#" title="Save and go to previous section">
+                        <img src="img/previous32.png" />
+                    </a>
+                    <!--/ko-->
+                    <!--ko ifnot: sid() === '0201'-->
+                    <a class="btn" href="#" title="Save and go to previous section" data-bind="click: saveAndPrevious">
+                        <img src="img/previous32.png" />
+                    </a>
+                    <!--/ko-->
+                    <a class="btn" data-bind="click: save" href="#" title="Save current section">
+                        <img src="img/saveOppty32.png" />
+                    </a>
+                    <!--ko if: opptyID() === ""-->
+                    <a class="btn disabled" href="#" title="Save and go to next section" style="margin-right: 10px;">
+                        <img src="img/next32.png" />
+                    </a>
+                    <!--/ko-->
+                    <!--ko ifnot: opptyID() === ""-->
+                    <a class="btn" href="#" title="Save and go to next section" data-bind="click: saveAndNext" style="margin-right: 10px;">
+                        <img src="img/next32.png" />
+                    </a>
+                    <!--/ko-->
+                </span>
+            </div>
+            <div class="col-xs-6 col-md-6 vertical-align-middle center">
+                <h3 data-bind="text: title" style="color:#fff;"></h3>
+            </div>
+            <div class="col-lg-2 pull-right sd-auto-width">                
+                <!--ko if: opptyID() != ""-->
+                <span style="">
+                    <a class="btn" target="_blank" title="Review and Extract" data-bind="attr:{href:'SDReviewAndExtract.aspx?OpptyID='+opptyID()}" style="margin-right: 5px;">
+                        <img src="img/extract.png" />
+                    </a>
+                </span>
+                <!--ko if: sid() === '0201'-->
+                <span style="">
+                    <a class="btn" title="Pursuit Team Contacts" href="#" data-bind="click: changeSection.bind($data, '0202')"  style="margin-right: 5px;">
+                        <img src="img/opptyContact32.png" />
+                    </a>
+                </span>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!--ko if: sid() != '0201'-->
+                <span style="">
+                    <a class="btn" title="Pursuit Team Contacts" href="#" data-bind="click: changeSection.bind($data, '0202')" style="margin-right: 5px;">
+                        <img src="img/opptyContact32.png" />
+                    </a>
+                </span>
+                <!-- /ko -->
+            </div>
+        </div>        
+    </div>
+</div>
+<nav id="sd-section-nav" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation" style="top: 120px">
+    <a class="navmenu-brand visible-md visible-lg" data-bind="attr:{href:sdContentUrl+'?OpptyID=' + opptyID()}">Solution Design</a>
+    <ul class="nav navmenu-nav">
+        <li class="active">
+            <a href="#" data-bind="click: changeSection.bind($data, '0201')">Opportunity Overview</a>
+        </li>
+        <!--ko if: opptyID() != ""-->
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Business and Solution Context <b class="caret"></b></a>
+            <ul class="dropdown-menu navmenu-nav">
+                <li><a href="#" data-bind="click: changeSection.bind($data, '0301')">Client Overview and Decision Factors</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">HPE Win Strategy</a>
+                    <ul class="navmenu-nav">
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '030201')">Sales Approach</a></li>
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '030202')">Competitors</a></li>
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '030203')">Message Map/Value Proposition</a></li>
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '030204')">Pricing Approach</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Solution Overview <b class="caret"></b></a>
+            <ul class="dropdown-menu navmenu-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Scope</a>
+                    <ul class="navmenu-nav">
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040101')">All Offerings</a></li>
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040102')">Key Scope Items </a></li>
+                    </ul>
+                </li>
+                <!-- ko if: pursuitClassfication() == 'C' || pursuitClassfication() == 'D' -->
+                <li><a href="#" data-bind="click: changeSection.bind($data, '0402')">Current State Architecture</a></li>
+                <!--/ko -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Solution Approach</a>
+                    <ul class="navmenu-nav">
 
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040301')">Summary</a></li>
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040302')">Outsourcing CMO/TMO/FMO</a></li>
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040303')">HR Solution</a></li>
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040304')">HPE Internal Challenges and Constraints</a></li>
+
+                        <!-- ko if:involvedGbu() == 'apps' && appsInscope() == true -->
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040305')">Design Parameters</a></li>
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040306')">Deployment Strategy</a></li>
+                        <!-- /ko -->
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040307')">Additional Information</a></li>
+
+                    </ul>
+                </li>
+
+                <li><a href="#" data-bind="click: changeSection.bind($data, '0404')">Innovative Aspects of the Solution</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Delivery Strategies</a>
+                    <ul class="navmenu-nav">
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040501')">Delivery Location Targets</a></li>
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040505')">In-Scope Services Delivery Responsibility</a></li>
+                        <!-- ko if: pursuitClassfication() == 'C' || pursuitClassfication() == 'D' -->
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040506')">Client-Retained Services Delivery Responsibility</a></li>
+                        <!--/ko -->
+                        <li><a href="#" data-bind="click: changeSection.bind($data, '040503')">ESM Tooling and Automation Approach</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" data-bind="click: changeSection.bind($data, '0406')">Key Client Constraints</a></li>
+                <!-- ko if: pursuitClassfication() == 'C' || pursuitClassfication() == 'D' -->
+                <li><a href="#" data-bind="click: changeSection.bind($data, '0407')">Summary Costing &amp; FTE Reports-Costing Approach</a></li>
+                <!--/ko -->
+            </ul>
+        </li>
+
+        <!--/ko -->
+    </ul>
+</nav>
+<div id="sd-section-detail" class="container-fluid sd-section-content" style="margin-left: 0; margin-top:130px; height:100%;min-height:600px;min-width:1280px">
+    <div class="row form-horizontal">
+        <div class="col-lg-12">
+            <div class="sd-update-message" style="height:20px;padding:5px;"></div>
+        </div>
+    </div>
+    <!--ko if: sid() === '0201'-->
+    <sd-section-0201 params="{viewModel: $component}"></sd-section-0201>
+    <!--/ko-->
+    <!--ko if: sid() === '0202'-->
+    <sd-section-0202 params="{viewModel: $component}"></sd-section-0202>
+    <!--/ko-->
+    <!--ko if: sid() === '0301'-->
+    <sd-section-0301 params="{viewModel: $component}"></sd-section-0301>
+    <!--/ko-->
+    <!--ko if: sid() === '030201'-->
+    <sd-section-030201 params="{viewModel: $component}"></sd-section-030201>
+    <!--/ko-->
+    <!--ko if: sid() === '030202'-->
+    <sd-section-030202 params="{viewModel: $component}"></sd-section-030202>
+    <!--/ko-->
+    <!--ko if: sid() === '030203'-->
+    <sd-section-030203 params="{viewModel: $component}"></sd-section-030203>
+    <!--/ko-->
+    <!--ko if: sid() === '030204'-->
+    <sd-section-030204 params="{viewModel: $component}"></sd-section-030204>
+    <!--/ko-->
+    <!--ko if: sid() === '040101'-->
+    <sd-section-040101 params="{viewModel: $component}"></sd-section-040101>
+    <!--/ko-->
+    <!--ko if: sid() === '040102'-->
+    <sd-section-040102 params="{viewModel: $component}"></sd-section-040102>
+    <!--/ko-->
+    <!--ko if: sid() === '0402'-->
+    <sd-section-0402 params="{viewModel: $component}"></sd-section-0402>
+    <!--/ko-->
+    <!--ko if: sid() === '040301'-->
+    <sd-section-040301 params="{viewModel: $component}"></sd-section-040301>
+    <!--/ko-->
+    <!--ko if: sid() === '040302'-->
+    <sd-section-040302 params="{viewModel: $component}"></sd-section-040302>
+    <!--/ko-->
+    <!--ko if: sid() === '040303'-->
+    <sd-section-040303 params="{viewModel: $component}"></sd-section-040303>
+    <!--/ko-->
+    <!--ko if: sid() === '040304'-->
+    <sd-section-040304 params="{viewModel: $component}"></sd-section-040304>
+    <!--/ko-->
+    <!--ko if: sid() === '040305'-->
+    <sd-section-040305 params="{viewModel: $component}"></sd-section-040305>
+    <!--/ko-->
+    <!--ko if: sid() === '040306'-->
+    <sd-section-040306 params="{viewModel: $component}"></sd-section-040306>
+    <!--/ko-->
+    <!--ko if: sid() === '040307'-->
+    <sd-section-040307 params="{viewModel: $component}"></sd-section-040307>
+    <!--/ko-->
+    <!--ko if: sid() === '0404'-->
+    <sd-section-0404 params="{viewModel: $component}"></sd-section-0404>
+    <!--/ko-->
+    <!--ko if: sid() === '040501'-->
+    <sd-section-040501 params="{viewModel: $component}"></sd-section-040501>
+    <!--/ko-->
+    <!--ko if: sid() === '040502'-->
+    <sd-section-040502 params="{viewModel: $component}"></sd-section-040502>
+    <!--/ko-->
+    <!--ko if: sid() === '040503'-->
+    <sd-section-040503 params="{viewModel: $component}"></sd-section-040503>
+    <!--/ko-->
+    <!--ko if: sid() === '040504'-->
+    <sd-section-040504 params="{viewModel: $component}"></sd-section-040504>
+    <!--/ko-->
+    <!--ko if: sid() === '040505'-->
+    <sd-section-040505 params="{viewModel: $component}"></sd-section-040505>
+    <!--/ko-->
+    <!--ko if: sid() === '040506'-->
+    <sd-section-040506 params="{viewModel: $component}"></sd-section-040506>
+    <!--/ko-->
+    <!--ko if: sid() === '0406'-->
+    <sd-section-0406 params="{viewModel: $component}"></sd-section-0406>
+    <!--/ko-->
+    <!--ko if: sid() === '0407'-->
+    <sd-section-0407 params="{viewModel: $component}"></sd-section-0407>
+    <!--/ko-->
+
+
+</div>

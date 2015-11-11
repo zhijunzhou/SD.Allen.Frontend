@@ -2,7 +2,7 @@
 <!-- ko ifnot:inLoop() -->
 <div class="row" data-bind="event:{mouseover:msoverHandler,mouseout:msoutHandler,mouseup:msupHandler}">
     <div class="col-lg-12" data-bind="click:unfoldAnsw">
-        <blockquote>
+        <blockquote style="font-size:14px;font-weight:bolder;">
             <span data-bind="text:title"></span>&nbsp;&nbsp;
             <!-- ko if:viewExpand()-->
             <a><i class="glyphicon" data-bind="css:{'glyphicon-chevron-down':!isStartEdit(),'glyphicon-chevron-up':isStartEdit()}"></i></a>

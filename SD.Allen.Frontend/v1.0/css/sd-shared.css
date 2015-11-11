@@ -176,7 +176,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 .sd-fake-textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
-    min-height: 35px;
+    min-height: 105px;
     width: 100%;
     overflow: visible;
     background-color: #ffffff;
@@ -310,8 +310,14 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 #suiteBar {
-    z-index: 100;
+    display:none !important;
 }
+#page-footer {
+    display:none !important;
+}
+/*#ms-belltown-table {
+    display:none !important;
+}*/
 
 .sd-toplink-help {
     line-height: 50px;
@@ -334,7 +340,17 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 #sd-section-content {
-    margin: 50px 120px 0 120px;
+    /*display:table-cell;
+    vertical-align:middle;
+    text-align:center;*/
+    margin:0 auto;
+    width:1300px;
+    margin-top:100px;
+    height:175px;
+    /*border:1px solid #000;*/
+}
+#sd-section-nav {
+    margin:0 auto;
 }
 
 .section {
@@ -374,8 +390,17 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 #sd-toplink {
     margin: 0;
+    padding-left:10px;
     height: 70px;
     background-color: #5B4767;
+    /*background-color: rgba(255,141,109,1);*/
+}
+#sd-nav-top {
+    margin: 0;
+    padding:0;
+    padding-left:10px;
+    height: 50px;
+    background-color: #2AD2C9;
 }
 
 .section a {
@@ -420,18 +445,18 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 .sd-dropdown-menu {
     /*background-color: #425563;*/
-    background-color:rgba(66,85,99,0.5);
+    background-color:rgba(66,85,99,0.9);
     border-bottom: 5px solid #FF8D6D;
 }
 
 .ss-dropdown-menu {
     /*background-color: #425563;*/
-    background-color:rgba(66,85,99,0.5);
+    background-color:rgba(66,85,99,1);
     border-bottom: 5px solid #2AD2C9;
 }
 
 .dropdown-toggle:active, .open .dropdown-toggle {
-    background-color: transparent;
+    /*background-color: transparent;*/
     color: #000 !important;
 }
 
@@ -445,5 +470,14 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 .dropdown-menu li a {
     color: #fff;
+}
+.test-top {
+    z-index:100 !important;
+}
+.logo{
+    padding:5px 0;
+}
+.top-nav li a {
+    color:#fff;
 }
 

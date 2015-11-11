@@ -322,11 +322,10 @@ define('component/QuestionArea', function (require) {
 
 
                 if (params !== undefined) {
-                    if (params.content != undefined) {
-                        if (typeof params.content === 'function') {
+                    if (params.content != undefined && params.content != null) {
+                        if (params.content.length > 0) {
                             self.content = params.content;
-                        } else {
-                            self.content = ko.observable(params.content);
+                            self.isStartEdit(true); //if the content length >0, we can have a preview the content
                         }
                     }
                     if (params.editable !== undefined) {

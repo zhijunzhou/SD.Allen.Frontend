@@ -12,7 +12,7 @@ define('component/Section0201', function (require) {
         inputText = require('./SDInputText'),
         numBox = require('numBox'),
         requestAPI = require('model/RequestAPI'),
-        //dollarFormatter = require('./DollarFormatter'),
+        dollarFormatter = require('./DollarFormatter'),
         vm = {},
         sectionLoaderViewModel = {};
 
@@ -234,8 +234,14 @@ define('component/Section0201', function (require) {
         }
         if (region == 'na') {
             vm.data.leadRegion('NA');
+            if (sectionLoaderViewModel.document() !== null && sectionLoaderViewModel.document() !== undefined) {
+                sectionLoaderViewModel.document().opptyOverview.opptyData.data.leadRegion = 'NA';
+            }
         } else {
             vm.data.leadRegion(region);
+            if (sectionLoaderViewModel.document() !== null && sectionLoaderViewModel.document() !== undefined) {
+                sectionLoaderViewModel.document().opptyOverview.opptyData.data.leadRegion = region;
+            }
         }
     }
 
@@ -289,6 +295,12 @@ define('component/Section0201', function (require) {
                     vm.data.involvedGbu.hpi().fyr(0);
                 }
                 break;
+        }
+    }
+
+    function updateGlabalDocument(inScope, region) {
+        if (!vm.isNewOppty()) {
+            sectionLoaderViewModel.document().opptyOverview.opptyData.data.region[region].inScope = inScope;
         }
     }
 
@@ -549,6 +561,7 @@ define('component/Section0201', function (require) {
             }
         };
 
+        //define subscribes;
         data.leadCntry.subscribe(updateLeadRegion);
         data.leadRegion.subscribe(updateRegion);
         data.pursuitClassfication.subscribe(function (newValue) {
@@ -579,6 +592,11 @@ define('component/Section0201', function (require) {
         data.involvedGbu.ess().inScope.subscribe(function (inScope) { updateInvolvedGbu(inScope, "ess") });
         data.involvedGbu.hpeOther().inScope.subscribe(function (inScope) { updateInvolvedGbu(inScope, "hpeOther") });
         data.involvedGbu.hpi().inScope.subscribe(function (inScope) { updateInvolvedGbu(inScope, "hpi") });
+
+        data.region.apj().inScope.subscribe(function (inScope) { updateGlabalDocument(inScope, "apj") });
+        data.region.ams().inScope.subscribe(function (inScope) { updateGlabalDocument(inScope, "ams") });
+        data.region.emea().inScope.subscribe(function (inScope) { updateGlabalDocument(inScope, "emea") });
+
         return data;
     }
 	
@@ -776,7 +794,7 @@ define('component/Section0201', function (require) {
 		viewModel: {
 			createViewModel: createViewModel
 		},
-		subComponents: [dateTimePicker, inputText]
+		subComponents: [dateTimePicker, inputText, dollarFormatter]
 	};
 });
 
