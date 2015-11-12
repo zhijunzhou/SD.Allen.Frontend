@@ -163,7 +163,8 @@ define('component/Section0202', function (require) {
                 //    return;
                 //}
                 if (!mappingResult.isEmpty) {
-                    $(window).triggerHandler("submitableChanged", true);
+                    $(window).trigger("submitableChanged", { submitFlag: true, obj: mappingResult.data });
+
                     requestAPI.updateSection(vm.section.opptyID, vm.section.name, mappingResult.data, vm.section.eTag).done(function (data, textStatus, jqXHR) {
                         if (jqXHR != undefined) vm.section.eTag = jqXHR.getResponseHeader('ETag');
                         requestAPI.errorUpdateSection(data, sid, vm.section.opptyID);

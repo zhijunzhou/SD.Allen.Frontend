@@ -4,33 +4,6 @@ define('model/RequestAPI', function (require) {
     var $ = require("jquery"),
         appConfig = require('model/AppConfig');
 
-    //var navTitle = [
-    //    {sid:'0201', title:'Opportunity Overview'},
-    //    {sid:'0202',title:'Pursuit Team Contacts'},
-    //    {sid:'0301',title:'Client Overview and Decision Factors'},
-    //    {sid:'030201',title:'HPE Win Strategy > Sales Approach'},
-    //    {sid:'030202',title:'HPE Win Strategy > Competitors'},
-    //    {sid:'030203',title:'HPE Win Strategy > Message Map/Value Proposition'},
-    //    {sid:'030204',title:'HPE Win Strategy > Pricing Approach'},
-    //    {sid:'040101',title:'Scope > All Offerings'},
-    //    {sid:'040102',title:'Scope > Key Scope Items'},
-    //    {sid:'0402',title:'Current State Client Architecture'},
-    //    {sid:'040301',title:'Solution Approach > Summary'},
-    //    {sid:'040302',title:'Solution Approach > Outsourcing CMO/TMO/FMO'},
-    //    {sid:'040303',title:'Solution Approach > HR Solution'},
-    //    {sid:'040304',title:'Solution Approach > HPE Internal Challenges and Constraints'},
-    //    {sid:'040305',title:'Solution Approach > Design Parameters'},
-    //    {sid:'040306',title:'Solution Approach > Deployment Strategy'},
-    //    {sid:'040307',title:'Solution Approach > Additional Information'},
-    //    {sid:'0404',title:'Innovative Aspects of the Solution'},
-    //    {sid:'040501',title:'Delivery Strategies > Delivery Location Targets'},
-    //    {sid:'040505',title:'Delivery Strategies > In-Scope Services Delivery Responsibility'},
-    //    {sid:'040506',title:'Delivery Strategies > Client-Retained Services Delivery Responsibility'},
-    //    {sid:'040503',title:'Delivery Strategies > ESM Tooling and Automation Approach'},
-    //    {sid:'0406',title:'Key Client Constraints'},
-    //    {sid:'0407',title:'Summary Costing & FTE Reports—Costing Approach'}
-    //];
-
     function getSectionTitleBySid(navTitle,sid) {
         for (var i in navTitle) {
             if (navTitle[i].sid === sid) return navTitle[i].title;
@@ -38,47 +11,58 @@ define('model/RequestAPI', function (require) {
         return "Error Title";
     }
 
+    function getSectionNameBySid(navTitle, sid) {
+        for (var i in navTitle) {
+            if (navTitle[i].sid === sid) return navTitle[i].sectionName;
+        }
+        return "Error Section Name"
+    }
+
     //dynamic section switch
     function createSectionModel(pursuitClassfication, involvedGbu, appsInscope) {
         if (pursuitClassfication === undefined) pursuitClassfication == 'A';
         if (appsInscope === undefined || involvedGbu != 'apps') appsInscope = false;
         return [
-            new SectionNavigator('0201', 'Opportunity Overview', '', '0202'),
-            new SectionNavigator('0202', 'Pursuit Team Contacts', '0201', '0301'),
-            new SectionNavigator('0301', 'Client Overview and Decision Factors', '0202', '030201'),
-            new SectionNavigator('030201', 'HPE Win Strategy > Sales Approach', '0301', '030202'),
-            new SectionNavigator('030202', 'HPE Win Strategy > Competitors', '030201', '030203'),
-            new SectionNavigator('030203', 'HPE Win Strategy > Message Map/Value Proposition', '030202', '030204'),
-            new SectionNavigator('030204', 'HPE Win Strategy > Pricing Approach', '030203', '040101'),
-            new SectionNavigator('040101', 'Scope > All Offerings', '030204', '040102'),
-            new SectionNavigator('040102', 'Scope > Key Scope Items', '040101', (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040301' :  '0402'),
-            new SectionNavigator('0402', 'Current State Client Architecture', '040102', '040301'),
-            new SectionNavigator('040301', 'Solution Approach > Summary', (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040102' : '0402', '040302'),
-            new SectionNavigator('040302', 'Solution Approach > Outsourcing CMO/TMO/FMO', '040301', '040303'),
-            new SectionNavigator('040303', 'Solution Approach > HR Solution', '040302', '040304'),
-            new SectionNavigator('040304', 'Solution Approach > HPE Internal Challenges and Constraints', '040303', (involvedGbu == 'apps' && appsInscope) ? '040305' : '040307'),
-            new SectionNavigator('040305', 'Solution Approach > Design Parameters', '040304', '040306'),
-            new SectionNavigator('040306', 'Solution Approach > Deployment Strategy', '040305', '040307'),
-            new SectionNavigator('040307', 'Solution Approach > Additional Information', (involvedGbu == 'apps' && appsInscope) ? '040306' : '040304', '0404'),
-            new SectionNavigator('0404', 'Innovative Aspects of the Solution', '040307', '040501'),
-            new SectionNavigator('040501', 'Delivery Strategies > Delivery Location Targets', '0404', '040505'),
-            new SectionNavigator('040505', 'Delivery Strategies > In-Scope Services Delivery Responsibility', '040501', (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040503' : '040506'),
-            new SectionNavigator('040506', 'Delivery Strategies > Client-Retained Services Delivery Responsibility', '040505', '040503'),
-            new SectionNavigator('040503', 'Delivery Strategies > ESM Tooling and Automation Approach', (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040505' : '040506', '0406'),
-            //new SectionNavigator('040505', 'Delivery Strategies > Summary CMO/FMO Locations and Volumes', '040501', '040506'),
-            //new SectionNavigator('040504', 'Delivery Strategies > Key SLAs, SLOs and KPIs', '040503', '040505'),
-            new SectionNavigator('0406', 'Key Client Constraints', '040503', (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '0201' : '0407'),
-            new SectionNavigator('0407', 'Summary Costing & FTE Reports—Costing Approach', '0406', '0201')
+            new SectionNavigator('0201', 'Opportunity Overview', '', '0202', 'opportunity-data'),
+            new SectionNavigator('0202', 'Pursuit Team Contacts', '0201', '0301', 'contacts'),
+            new SectionNavigator('0301', 'Client Overview and Decision Factors', '0202', '030201', 'client-overview'),
+            new SectionNavigator('030201', 'HPE Win Strategy > Sales Approach', '0301', '030202', 'sales-approach'),
+            new SectionNavigator('030202', 'HPE Win Strategy > Competitors', '030201', '030203', 'competitors'),
+            new SectionNavigator('030203', 'HPE Win Strategy > Message Map/Value Proposition', '030202', '030204', 'map-value-propositions'),
+            new SectionNavigator('030204', 'HPE Win Strategy > Pricing Approach', '030203', '040101', 'pricing-approach'),
+            new SectionNavigator('040101', 'Scope > All Offerings', '030204', '040102','unknown'),
+            new SectionNavigator('040102', 'Scope > Key Scope Items', '040101',
+                (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040301' : '0402','unknown'),
+            new SectionNavigator('0402', 'Current State Client Architecture', '040102', '040301','unknown'),
+            new SectionNavigator('040301', 'Solution Approach > Summary',
+                (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040102' : '0402', '040302','unknown'),
+            new SectionNavigator('040302', 'Solution Approach > Outsourcing CMO/TMO/FMO', '040301', '040303','unknown'),
+            new SectionNavigator('040303', 'Solution Approach > HR Solution', '040302', '040304','unknown'),
+            new SectionNavigator('040304', 'Solution Approach > HPE Internal Challenges and Constraints', '040303',
+                (involvedGbu == 'apps' && appsInscope) ? '040305' : '040307','unknown'),
+            new SectionNavigator('040305', 'Solution Approach > Design Parameters', '040304', '040306','unknown'),
+            new SectionNavigator('040306', 'Solution Approach > Deployment Strategy', '040305', '040307','unknown'),
+            new SectionNavigator('040307', 'Solution Approach > Additional Information',
+                (involvedGbu == 'apps' && appsInscope) ? '040306' : '040304', '0404','unknown'),
+            new SectionNavigator('0404', 'Innovative Aspects of the Solution', '040307', '040501','unknown'),
+            new SectionNavigator('040501', 'Delivery Strategies > Delivery Location Targets', '0404', '040505','unknown'),
+            new SectionNavigator('040505', 'Delivery Strategies > In-Scope Services Delivery Responsibility', '040501',
+                (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040503' : '040506','unknown'),
+            new SectionNavigator('040506', 'Delivery Strategies > Client-Retained Services Delivery Responsibility', '040505', '040503','unknown'),
+            new SectionNavigator('040503', 'Delivery Strategies > ESM Tooling and Automation Approach',
+                (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040505' : '040506', '0406','unknown'),
+            new SectionNavigator('0406', 'Key Client Constraints', '040503',
+                (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '0201' : '0407','unknown'),
+            new SectionNavigator('0407', 'Summary Costing & FTE Reports—Costing Approach', '0406', '0201','unknown')
         ]
     }
 
-    function SectionNavigator(sid, title, prevSid, nextSid) {
-        return {
-            sid: sid,
-            title: title,
-            prevSid: prevSid,
-            nextSid: nextSid
-        }
+    function SectionNavigator(sid, title, prevSid, nextSid, sectionName) {
+        this.sid = sid;
+        this.title = title;
+        this.prevSid = prevSid;
+        this.nextSid = nextSid;
+        this.sectionName = sectionName;
     }
 
 
@@ -378,6 +362,7 @@ define('model/RequestAPI', function (require) {
             $.ajax({
                 url: appConfig.ApiStaging.Staging1 + '/api/documents/'+opptyID+'/sections/'+ sectionName,
                 method: 'POST',
+                async: false,
                 data: JSON.stringify(section),
                 contentType: 'application/json',
                 headers: {
@@ -461,6 +446,7 @@ define('model/RequestAPI', function (require) {
             errorOppty: errorOppty,
             getOpptyByIDSync:getOpptyByIDSync,
             errorUpdateSection: errorUpdateSection,
+            getSectionNameBySid:getSectionNameBySid,
             FixWorkspace: FixWorkspace
     }
 

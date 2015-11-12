@@ -89,32 +89,7 @@ define('component/Section0301', function (require) {
     }
 
     function onViewModelLoaded(viewModel) {
-        vm.section.opptyID = sectionLoaderViewModel.opptyID();
-        if (vm.section.opptyID === "") {
-            requestAPI.errorOppty('400');
-        } else {
-            requestAPI.getSectionByIDAndSectionNameAsync(vm.section.opptyID, vm.section.sectionName).done(function (oppty, xhr) {
-                //query system
-                if (oppty.status != undefined && oppty.status == 404) {
-                    requestAPI.errorOppty('404');
-                }
-                else {
-                    if (oppty.data.bizSoln != null) {
-                        var bizSoln = oppty.data.bizSoln;
-                        if (bizSoln != null && bizSoln.clientOverview != null) {
-                            var data = bizSoln.clientOverview.data;
-                            vm.section.eTag = xhr.getResponseHeader('ETag');
-                            unescapeData(data);
-                            vm.section.loaded(true);
-                            vm.selectedCnty(extractCntry($('#inWhatCountries').select2('data')));
-                        } else {
-                            //other processing
-                        }
-                    }
-                    return this.promise();
-                }
-            })
-        }        
+        
     }
 
     function extractCntry(codeArray) {
@@ -176,13 +151,9 @@ define('component/Section0301', function (require) {
     }
 
     function loadingSection() {
-        if (sectionLoaderViewModel.editable()) {
-            onViewModelLoaded(vm);
-        } else {
-            var doc = ko.toJS(sectionLoaderViewModel.document);
-            if (doc != undefined && doc.bizSoln != null && doc.bizSoln.clientOverview != null)
-                unescapeData(doc.bizSoln.clientOverview.data);
-        }
+        var doc = ko.toJS(sectionLoaderViewModel.document);
+        if (doc != undefined && doc.bizSoln != null && doc.bizSoln.clientOverview != null)
+            unescapeData(doc.bizSoln.clientOverview.data);         
     }
 
     function saveOppty(event, argu) {
@@ -191,10 +162,13 @@ define('component/Section0301', function (require) {
             return;
         }
         var newData = new ClientOverview(vm.data);
-        requestAPI.updateSection(vm.section.opptyID, vm.section.sectionName, newData, vm.section.eTag).done(function (data, textStatus, jqXHR) {
-            if (jqXHR != undefined)
-                vm.section.eTag = jqXHR.getResponseHeader('ETag');
-            requestAPI.errorUpdateSection(data, sid, vm.section.opptyID);
+        $(window).trigger("submitableChanged", {
+            submitFlag: true,
+            obj: newData,
+            opptyID: sectionLoaderViewModel.opptyID(),
+            eTag:sectionLoaderViewModel.eTag(),
+            sectionName: sectionLoaderViewModel.sectionName(),
+            sid:sid
         });
     }
 

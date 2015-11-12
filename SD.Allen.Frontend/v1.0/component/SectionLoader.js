@@ -37,6 +37,7 @@ define("component/SectionLoader", function (require) {
         appUtility = require('util/AppUtility'),
         timeInterval = 0,
         saveCompleted = true,
+        eTag = "",
         sectionModel = {},
         viewModel = {};
 
@@ -62,8 +63,14 @@ define("component/SectionLoader", function (require) {
             }
             saveCompleted = true;
         });
-        $(window).on('submitableChanged', function (e, submitFlag) {
-            saveCompleted = submitFlag;
+        $(window).on('submitableChanged', function (e, receiveData) {
+            saveCompleted = receiveData.submitFlag;
+            
+            requestAPI.updateSection(receiveData.opptyID, receiveData.sectionName, receiveData.obj, receiveData.eTag).done(function (data, textStatus, jqXHR) {
+                if (jqXHR != undefined)
+                    eTag = jqXHR.getResponseHeader('ETag');
+                requestAPI.errorUpdateSection(data, receiveData.sid, receiveData.opptyID);
+            });
         });
     }
 
@@ -94,7 +101,9 @@ define("component/SectionLoader", function (require) {
         if (viewModel.opptyID() === "") {
 
         } else {
-            requestAPI.getOpptyByIDSync(viewModel.opptyID()).done(function (oppty, xhr) {
+            viewModel.sectionNavigator(requestAPI.createSectionModel());
+            viewModel.sectionName(requestAPI.getSectionNameBySid(viewModel.sectionNavigator(), viewModel.sid()));
+            requestAPI.getSectionByIDAndSectionNameSync(viewModel.opptyID(), viewModel.sectionName()).done(function (oppty, xhr) {
                 //query system
                 if (oppty.status != undefined && oppty.status >= 400) {
                     requestAPI.errorOppty('404');
@@ -102,6 +111,7 @@ define("component/SectionLoader", function (require) {
                     if (oppty.data.opptyOverview != null && oppty.data.opptyOverview.opptyData != null) {
                         var data = oppty.data.opptyOverview.opptyData.data;
                         viewModel.document(oppty.data);
+                        viewModel.eTag(xhr.getResponseHeader('ETag'));
                         viewModel.oppty.ClientName(data.clientName);
                         viewModel.oppty.OpptyName(data.opptyName);
                         viewModel.pursuitClassfication(data.pursuitClassfication);
@@ -131,6 +141,8 @@ define("component/SectionLoader", function (require) {
             };
 
             self.document = ko.observable();// the entire document
+            self.eTag = ko.observable();
+            self.sectionName = ko.observable();
             self.sectionNavigator = ko.observable(requestAPI.createSectionModel('C', 'apps', true));//section navigator model
 
             self.opptyID = ko.observable();
@@ -166,6 +178,7 @@ define("component/SectionLoader", function (require) {
             self.save = function () {
                 beforeSave();
                 $(window).triggerHandler("opptySaving", self);
+                viewModel.eTag(eTag);
                 afterSave();
             }
             self.saveAndNext = function () {
@@ -173,14 +186,16 @@ define("component/SectionLoader", function (require) {
                 if (viewModel.sid() == '0201' || viewModel.sid() == '0202') {
                     $(window).triggerHandler("opptySaving", viewModel);
                     if (saveCompleted) {
-                        viewModel.sid('' + self.nextSid());
+                        viewModel.sid('' + self.nextSid());                        
                         $(window).triggerHandler("sectionChanged", viewModel);
                     }                    
                 } else {
                     $(window).triggerHandler("opptySaving", viewModel);
                     viewModel.sid('' + self.nextSid());
+                    viewModel.eTag(eTag);
                     $(window).triggerHandler("sectionChanged", viewModel);
                 }
+                
             }
             self.saveAndPrevious = function () {
                 beforeSave();
