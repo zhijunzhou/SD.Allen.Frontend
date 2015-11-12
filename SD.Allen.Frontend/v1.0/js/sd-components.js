@@ -1915,13 +1915,17 @@ define('component/QuestionArea', function (require) {
                 };
                 self.viewExpand = ko.observable(false);
                 self.isStartEdit = ko.observable(false);
+                self.editTimes = ko.observable(0);//default 0
 
                 self.msoverHandler = function () {                    
                     self.viewExpand(true);
                 }
 
                 self.unfoldAnsw = function () {//shou qi
-                    if (self.isStartEdit()) self.isStartEdit(!self.isStartEdit());
+                    if (self.isStartEdit()) {
+                        self.isStartEdit(!self.isStartEdit());
+                        self.editTimes(1);
+                    }
                 }
 
                 self.msoutHandler = function (e) {
@@ -1938,7 +1942,7 @@ define('component/QuestionArea', function (require) {
                         if (typeof params.content === 'function') {
                             self.content = params.content;
                             //var temp = JSON.stringify(ko.toJS(self.content));
-                            if(params.content != undefined)
+                            if(params.content() != undefined)
                                 self.isStartEdit(true);
                         } else {
                             self.content = ko.observable(params.content);

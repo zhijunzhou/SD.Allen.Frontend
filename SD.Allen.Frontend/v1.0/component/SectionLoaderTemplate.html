@@ -95,6 +95,13 @@
         </div>        
     </div>
 </div>
+<div class="nav navbar-fixed-top test-top" style="margin-top:120px;background-color:transparent;">
+    <div class="row form-horizontal">
+        <div class="col-lg-12 text-right">
+            <div class="sd-update-message" style="height:20px;padding:5px;"></div>
+        </div>
+    </div>
+</div>
 <nav id="sd-section-nav" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation" style="top: 120px">
     <a class="navmenu-brand visible-md visible-lg" data-bind="attr:{href:sdContentUrl+'?OpptyID=' + opptyID()}">Solution Design</a>
     <ul class="nav navmenu-nav">
@@ -170,12 +177,8 @@
         <!--/ko -->
     </ul>
 </nav>
+
 <div id="sd-section-detail" class="container-fluid sd-section-content" style="margin-left: 0; margin-top:130px; height:100%;min-height:600px;min-width:1280px">
-    <div class="row form-horizontal">
-        <div class="col-lg-12">
-            <div class="sd-update-message" style="height:20px;padding:5px;"></div>
-        </div>
-    </div>
     <!--ko if: sid() === '0201'-->
     <sd-section-0201 params="{viewModel: $component}"></sd-section-0201>
     <!--/ko-->
