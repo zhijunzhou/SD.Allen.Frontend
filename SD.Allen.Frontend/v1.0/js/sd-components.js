@@ -7616,12 +7616,13 @@ define("component/SectionLoader", function (require) {
         });
         $(window).on('submitableChanged', function (e, receiveData) {
             saveCompleted = receiveData.submitFlag;
-            
-            requestAPI.updateSection(receiveData.opptyID, receiveData.sectionName, receiveData.obj, receiveData.eTag).done(function (data, textStatus, jqXHR) {
-                if (jqXHR != undefined)
-                    eTag = jqXHR.getResponseHeader('ETag');
-                requestAPI.errorUpdateSection(data, receiveData.sid, receiveData.opptyID);
-            });
+            if (saveCompleted) {
+                requestAPI.updateSection(receiveData.opptyID, receiveData.sectionName, receiveData.obj, receiveData.eTag).done(function (data, textStatus, jqXHR) {
+                    if (jqXHR != undefined)
+                        eTag = jqXHR.getResponseHeader('ETag');
+                    requestAPI.errorUpdateSection(data, receiveData.sid, receiveData.opptyID);
+                });
+            }            
         });
     }
 
