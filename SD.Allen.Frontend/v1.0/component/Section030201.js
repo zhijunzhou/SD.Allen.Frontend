@@ -53,31 +53,7 @@ define('component/Section030201', function (require) {
 
 
     function onViewModelLoaded() {
-        vm.section.opptyID = sectionLoaderViewModel.opptyID();
-        if (vm.section.opptyID === "") {
-            requestAPI.errorOppty('400');
-        } else {
-            requestAPI.getSectionByIDAndSectionNameAsync(vm.section.opptyID, vm.section.sectionName).done(function (oppty, xhr) {
-                //query system
-                if (oppty.status != undefined && oppty.status == 404) {
-                    requestAPI.errorOppty('404');
-                }
-                else {
-                    if (oppty.data.bizSoln != null) {
-                        var bizSoln = oppty.data.bizSoln;
-                        if (bizSoln != null && bizSoln.winStrategy !=null  && bizSoln.winStrategy.salesApproach != null) {
-                            var data = bizSoln.winStrategy.salesApproach.data;
-                            vm.section.eTag = xhr.getResponseHeader('ETag');
-                            unescapeData(data);
-                            vm.section.loaded(true);
-                        } else {
-                            //other processing
-                        }
-                    }
-                    return this.promise();
-                }
-            });
-        }
+        
     }
 
     //before binding, we should unescape the original data from DB
@@ -98,12 +74,12 @@ define('component/Section030201', function (require) {
         sectionLoaderViewModel = params.viewModel;
         var salesApprViewModel = function (json) {
             var self = this;
-            self.section = {
-                opptyID: "",
-                eTag: "",
-                sectionName: "sales-approach",
-                loaded: ko.observable(false)
-            };
+            //self.section = {
+            //    opptyID: "",
+            //    eTag: "",
+            //    sectionName: "sales-approach",
+            //    loaded: ko.observable(false)
+            //};
             self.pursuitClassfication = ko.observable();
             self.editable = ko.observable(true);
             self.data = {
@@ -124,7 +100,7 @@ define('component/Section030201', function (require) {
             }
         }
         vm = new salesApprViewModel(params);
-        vm.section.opptyID = sectionLoaderViewModel.opptyID();
+        //vm.section.opptyID = sectionLoaderViewModel.opptyID();
         vm.pursuitClassfication = sectionLoaderViewModel.pursuitClassfication();
         vm.editable(sectionLoaderViewModel.editable());
         loadingSection();
@@ -132,13 +108,9 @@ define('component/Section030201', function (require) {
     }
 
     function loadingSection() {
-        if (sectionLoaderViewModel.editable()) {
-            onViewModelLoaded(vm);
-        } else {
-            var doc = ko.toJS(sectionLoaderViewModel.document);
-            if (doc != undefined && doc.bizSoln != null && doc.bizSoln.winStrategy != null && doc.bizSoln.winStrategy.salesApproach != null)
-                unescapeData(doc.bizSoln.winStrategy.salesApproach.data);
-        }
+        var doc = ko.toJS(sectionLoaderViewModel.document);
+        if (doc != undefined && doc.bizSoln != null && doc.bizSoln.winStrategy != null && doc.bizSoln.winStrategy.salesApproach != null)
+            unescapeData(doc.bizSoln.winStrategy.salesApproach.data);            
     }
 
     function saveOppty(event, argu) {
@@ -147,10 +119,13 @@ define('component/Section030201', function (require) {
             return;
         }
         var newData = new SalesApproach(vm.data);
-        requestAPI.updateSection(vm.section.opptyID, vm.section.sectionName, newData, vm.section.eTag).done(function (data, textStatus, jqXHR) {
-            if (jqXHR != undefined)
-                vm.section.eTag = jqXHR.getResponseHeader('ETag');
-            requestAPI.errorUpdateSection(data, sid, vm.section.opptyID);
+        $(window).trigger("submitableChanged", {
+            submitFlag: true,
+            obj: newData,
+            opptyID: argu.opptyID(),
+            eTag: argu.eTag(),
+            sectionName: argu.sectionName(),
+            sid: sid
         });
     }
 

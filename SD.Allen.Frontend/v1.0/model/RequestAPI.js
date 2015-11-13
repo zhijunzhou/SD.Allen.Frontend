@@ -362,7 +362,7 @@ define('model/RequestAPI', function (require) {
             $.ajax({
                 url: appConfig.ApiStaging.Staging1 + '/api/documents/'+opptyID+'/sections/'+ sectionName,
                 method: 'POST',
-                async: false,
+                //async: false,
                 data: JSON.stringify(section),
                 contentType: 'application/json',
                 headers: {

@@ -106,12 +106,12 @@ define('component/Section0301', function (require) {
 
         var clientOverViewModel = function () {
             var self = this;
-            self.section = {
-                opptyID: "",
-                eTag: "",
-                sectionName: "client-overview",
-                loaded: ko.observable(false)
-            };
+            //self.section = {
+            //    opptyID: "",
+            //    eTag: "",
+            //    sectionName: "client-overview",
+            //    loaded: ko.observable(false)
+            //};
             self.pursuitClassfication = ko.observable();
             self.editable = ko.observable(true);
             
@@ -143,7 +143,7 @@ define('component/Section0301', function (require) {
             }
         };
         vm = new clientOverViewModel(params);
-        vm.section.opptyID = sectionLoaderViewModel.opptyID();
+        //vm.section.opptyID = sectionLoaderViewModel.opptyID();
         vm.pursuitClassfication = sectionLoaderViewModel.pursuitClassfication();
         vm.editable(sectionLoaderViewModel.editable());
         loadingSection();
@@ -165,9 +165,9 @@ define('component/Section0301', function (require) {
         $(window).trigger("submitableChanged", {
             submitFlag: true,
             obj: newData,
-            opptyID: sectionLoaderViewModel.opptyID(),
-            eTag:sectionLoaderViewModel.eTag(),
-            sectionName: sectionLoaderViewModel.sectionName(),
+            opptyID: argu.opptyID(),
+            eTag: argu.eTag(),
+            sectionName: argu.sectionName(),
             sid:sid
         });
     }

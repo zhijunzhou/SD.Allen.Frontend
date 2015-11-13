@@ -946,7 +946,7 @@ define('model/RequestAPI', function (require) {
             $.ajax({
                 url: appConfig.ApiStaging.Staging1 + '/api/documents/'+opptyID+'/sections/'+ sectionName,
                 method: 'POST',
-                async: false,
+                //async: false,
                 data: JSON.stringify(section),
                 contentType: 'application/json',
                 headers: {
@@ -4266,12 +4266,12 @@ define('component/Section0301', function (require) {
 
         var clientOverViewModel = function () {
             var self = this;
-            self.section = {
-                opptyID: "",
-                eTag: "",
-                sectionName: "client-overview",
-                loaded: ko.observable(false)
-            };
+            //self.section = {
+            //    opptyID: "",
+            //    eTag: "",
+            //    sectionName: "client-overview",
+            //    loaded: ko.observable(false)
+            //};
             self.pursuitClassfication = ko.observable();
             self.editable = ko.observable(true);
             
@@ -4303,7 +4303,7 @@ define('component/Section0301', function (require) {
             }
         };
         vm = new clientOverViewModel(params);
-        vm.section.opptyID = sectionLoaderViewModel.opptyID();
+        //vm.section.opptyID = sectionLoaderViewModel.opptyID();
         vm.pursuitClassfication = sectionLoaderViewModel.pursuitClassfication();
         vm.editable(sectionLoaderViewModel.editable());
         loadingSection();
@@ -4325,9 +4325,9 @@ define('component/Section0301', function (require) {
         $(window).trigger("submitableChanged", {
             submitFlag: true,
             obj: newData,
-            opptyID: sectionLoaderViewModel.opptyID(),
-            eTag:sectionLoaderViewModel.eTag(),
-            sectionName: sectionLoaderViewModel.sectionName(),
+            opptyID: argu.opptyID(),
+            eTag: argu.eTag(),
+            sectionName: argu.sectionName(),
             sid:sid
         });
     }
@@ -4397,31 +4397,7 @@ define('component/Section030201', function (require) {
 
 
     function onViewModelLoaded() {
-        vm.section.opptyID = sectionLoaderViewModel.opptyID();
-        if (vm.section.opptyID === "") {
-            requestAPI.errorOppty('400');
-        } else {
-            requestAPI.getSectionByIDAndSectionNameAsync(vm.section.opptyID, vm.section.sectionName).done(function (oppty, xhr) {
-                //query system
-                if (oppty.status != undefined && oppty.status == 404) {
-                    requestAPI.errorOppty('404');
-                }
-                else {
-                    if (oppty.data.bizSoln != null) {
-                        var bizSoln = oppty.data.bizSoln;
-                        if (bizSoln != null && bizSoln.winStrategy !=null  && bizSoln.winStrategy.salesApproach != null) {
-                            var data = bizSoln.winStrategy.salesApproach.data;
-                            vm.section.eTag = xhr.getResponseHeader('ETag');
-                            unescapeData(data);
-                            vm.section.loaded(true);
-                        } else {
-                            //other processing
-                        }
-                    }
-                    return this.promise();
-                }
-            });
-        }
+        
     }
 
     //before binding, we should unescape the original data from DB
@@ -4442,12 +4418,12 @@ define('component/Section030201', function (require) {
         sectionLoaderViewModel = params.viewModel;
         var salesApprViewModel = function (json) {
             var self = this;
-            self.section = {
-                opptyID: "",
-                eTag: "",
-                sectionName: "sales-approach",
-                loaded: ko.observable(false)
-            };
+            //self.section = {
+            //    opptyID: "",
+            //    eTag: "",
+            //    sectionName: "sales-approach",
+            //    loaded: ko.observable(false)
+            //};
             self.pursuitClassfication = ko.observable();
             self.editable = ko.observable(true);
             self.data = {
@@ -4468,7 +4444,7 @@ define('component/Section030201', function (require) {
             }
         }
         vm = new salesApprViewModel(params);
-        vm.section.opptyID = sectionLoaderViewModel.opptyID();
+        //vm.section.opptyID = sectionLoaderViewModel.opptyID();
         vm.pursuitClassfication = sectionLoaderViewModel.pursuitClassfication();
         vm.editable(sectionLoaderViewModel.editable());
         loadingSection();
@@ -4476,13 +4452,9 @@ define('component/Section030201', function (require) {
     }
 
     function loadingSection() {
-        if (sectionLoaderViewModel.editable()) {
-            onViewModelLoaded(vm);
-        } else {
-            var doc = ko.toJS(sectionLoaderViewModel.document);
-            if (doc != undefined && doc.bizSoln != null && doc.bizSoln.winStrategy != null && doc.bizSoln.winStrategy.salesApproach != null)
-                unescapeData(doc.bizSoln.winStrategy.salesApproach.data);
-        }
+        var doc = ko.toJS(sectionLoaderViewModel.document);
+        if (doc != undefined && doc.bizSoln != null && doc.bizSoln.winStrategy != null && doc.bizSoln.winStrategy.salesApproach != null)
+            unescapeData(doc.bizSoln.winStrategy.salesApproach.data);            
     }
 
     function saveOppty(event, argu) {
@@ -4491,10 +4463,13 @@ define('component/Section030201', function (require) {
             return;
         }
         var newData = new SalesApproach(vm.data);
-        requestAPI.updateSection(vm.section.opptyID, vm.section.sectionName, newData, vm.section.eTag).done(function (data, textStatus, jqXHR) {
-            if (jqXHR != undefined)
-                vm.section.eTag = jqXHR.getResponseHeader('ETag');
-            requestAPI.errorUpdateSection(data, sid, vm.section.opptyID);
+        $(window).trigger("submitableChanged", {
+            submitFlag: true,
+            obj: newData,
+            opptyID: argu.opptyID(),
+            eTag: argu.eTag(),
+            sectionName: argu.sectionName(),
+            sid: sid
         });
     }
 
@@ -7679,29 +7654,34 @@ define("component/SectionLoader", function (require) {
         } else {
             viewModel.sectionNavigator(requestAPI.createSectionModel());
             viewModel.sectionName(requestAPI.getSectionNameBySid(viewModel.sectionNavigator(), viewModel.sid()));
-            requestAPI.getSectionByIDAndSectionNameSync(viewModel.opptyID(), viewModel.sectionName()).done(function (oppty, xhr) {
-                //query system
-                if (oppty.status != undefined && oppty.status >= 400) {
-                    requestAPI.errorOppty('404');
-                } else {
-                    if (oppty.data.opptyOverview != null && oppty.data.opptyOverview.opptyData != null) {
-                        var data = oppty.data.opptyOverview.opptyData.data;
-                        viewModel.document(oppty.data);
-                        viewModel.eTag(xhr.getResponseHeader('ETag'));
-                        viewModel.oppty.ClientName(data.clientName);
-                        viewModel.oppty.OpptyName(data.opptyName);
-                        viewModel.pursuitClassfication(data.pursuitClassfication);
-                        if (data.involvedGbu != null && data.involvedGbu.apps != null) {
-                            viewModel.involvedGbu('apps');
-                            viewModel.appsInscope(data.involvedGbu.apps.inScope);
-                        }
-                        sectionModel = requestAPI.createSectionModel(viewModel.pursuitClassfication(), viewModel.involvedGbu(), viewModel.appsInscope());
-                        viewModel.sectionNavigator(requestAPI.createSectionModel(viewModel.pursuitClassfication(), viewModel.involvedGbu(), viewModel.appsInscope()));
-                    }
-                }
-            });
+            retriveDocument(viewModel);
        }
     
+    }
+
+    function retriveDocument(viewModel) {
+        console.log(viewModel);
+        requestAPI.getSectionByIDAndSectionNameSync(viewModel.opptyID(), viewModel.sectionName()).done(function (oppty, xhr) {
+            //query system
+            if (oppty.status != undefined && oppty.status >= 400) {
+                requestAPI.errorOppty('404');
+            } else {
+                if (oppty.data.opptyOverview != null && oppty.data.opptyOverview.opptyData != null) {
+                    var data = oppty.data.opptyOverview.opptyData.data;
+                    viewModel.document(oppty.data);
+                    viewModel.eTag(xhr.getResponseHeader('ETag'));
+                    viewModel.oppty.ClientName(data.clientName);
+                    viewModel.oppty.OpptyName(data.opptyName);
+                    viewModel.pursuitClassfication(data.pursuitClassfication);
+                    if (data.involvedGbu != null && data.involvedGbu.apps != null) {
+                        viewModel.involvedGbu('apps');
+                        viewModel.appsInscope(data.involvedGbu.apps.inScope);
+                    }
+                    sectionModel = requestAPI.createSectionModel(viewModel.pursuitClassfication(), viewModel.involvedGbu(), viewModel.appsInscope());
+                    viewModel.sectionNavigator(requestAPI.createSectionModel(viewModel.pursuitClassfication(), viewModel.involvedGbu(), viewModel.appsInscope()));
+                }
+            }
+        });
     }
 
     function createViewModel(params, componentInfo) {
@@ -7753,9 +7733,10 @@ define("component/SectionLoader", function (require) {
             }
             self.save = function () {
                 beforeSave();
-                $(window).triggerHandler("opptySaving", self);
-                viewModel.eTag(eTag);
-                afterSave();
+                $(window).triggerHandler("opptySaving", self);                
+                //afterSave(viewModel.sid());
+                viewModel.sectionName(requestAPI.getSectionNameBySid(viewModel.sectionNavigator(), viewModel.sid()));
+                retriveDocument(viewModel);
             }
             self.saveAndNext = function () {
                 beforeSave();
@@ -7768,10 +7749,11 @@ define("component/SectionLoader", function (require) {
                 } else {
                     $(window).triggerHandler("opptySaving", viewModel);
                     viewModel.sid('' + self.nextSid());
-                    viewModel.eTag(eTag);
                     $(window).triggerHandler("sectionChanged", viewModel);
                 }
-                
+                //afterSave(viewModel.nextSid());
+                viewModel.sectionName(requestAPI.getSectionNameBySid(viewModel.sectionNavigator(), viewModel.sid()));
+                retriveDocument(viewModel);
             }
             self.saveAndPrevious = function () {
                 beforeSave();
@@ -7786,11 +7768,17 @@ define("component/SectionLoader", function (require) {
                     viewModel.sid('' + self.prevSid());
                     $(window).triggerHandler("sectionChanged", viewModel);
                 }
+                //afterSave(viewModel.prevSid());
+                viewModel.sectionName(requestAPI.getSectionNameBySid(viewModel.sectionNavigator(), viewModel.sid()));
+                retriveDocument(viewModel);
             }
             self.changeSection = function (sid) {
                 beforeSave();
                 $(window).triggerHandler("opptySaving", viewModel);
                 viewModel.sid(sid);
+                //afterSave(sid);
+                viewModel.sectionName(requestAPI.getSectionNameBySid(viewModel.sectionNavigator(), viewModel.sid()));
+                retriveDocument(viewModel);
                 $(window).triggerHandler("sectionChanged", viewModel);
             }
         },
@@ -7799,8 +7787,8 @@ define("component/SectionLoader", function (require) {
         return viewModel;
     }
 
-    function afterSave() {
-        saveCompleted = true;
+    function afterSave(sid) {
+        saveCompleted = true;        
     }
 
     function beforeSave() {
