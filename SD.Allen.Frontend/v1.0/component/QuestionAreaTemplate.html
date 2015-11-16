@@ -5,18 +5,17 @@
         <blockquote style="font-size:14px;font-weight:bolder;">
             <span data-bind="text:title"></span>&nbsp;&nbsp;
             <!-- ko if:viewExpand()-->
-            <a><i class="glyphicon" data-bind="css:{'glyphicon-chevron-down':!isStartEdit(),'glyphicon-chevron-up':isStartEdit()}"></i></a>
+            <a><i class="glyphicon" data-bind="css:{'glyphicon-chevron-down':msupHandler(),'glyphicon-chevron-up':!msupHandler()}"></i></a>
             <!-- /ko -->
         </blockquote>
     </div>
+    
     <div class="col-lg-12">
         <div class="sd-mce-container" data-bind="attr:{id: guid + '-container'}" style="margin-left:15px;"></div>
     </div>
-    <!-- ko if:isStartEdit() || (editTimes() == 0 && content != undefined && content() != "" && content() != "<p></p>") -->
-    <div class="col-lg-12 col-md-6 col-xs-6">
+    <div class="col-lg-12 col-md-6 col-xs-6" data-bind="css:{'hidden':!isStartEdit() || !answerVisible()}">
          <div data-bind="attr: {id: guid}, wysiwyg: content, wysiwygConfig: config" class="sd-fake-textarea" style="margin-left:15px;"></div>
     </div>
-    <!-- /ko -->
     <div class="col-lg-12 hidden">
         <input type="file" data-bind="attr: {id: guid+'-file'}, event: {change: attachmentSelected} ">
     </div>

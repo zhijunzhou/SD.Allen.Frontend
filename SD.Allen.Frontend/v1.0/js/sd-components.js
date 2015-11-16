@@ -1899,28 +1899,41 @@ define('component/QuestionArea', function (require) {
                 self.attachmentSelected = function (e) {
                     insertAttachment(self);
                 };
-                self.viewExpand = ko.observable(false);
-                self.isStartEdit = ko.observable(false);
-                self.editTimes = ko.observable(0);//default 0
+                self.viewExpand = ko.observable(false);//show or hide the icon
+                self.editTimes = ko.observable(0);//record if it was the first time to edit the question
+                self.answerVisible = ko.observable(true); //if the answer is visible
 
-                self.msoverHandler = function () {                    
+                self.isStartEdit = ko.computed(function () {
+                    if (self.editTimes() == 0) {
+                        if (params.content() == undefined || params.content() == "" || params.content() == "<p></p>") {
+                            return false;
+                        }
+                        return true;
+                    }
+                    return self.answerVisible();
+                });
+
+                self.unfoldAnsw = function () { //Unfold or fold the answer
+                    if (self.isStartEdit() == false) {
+                        self.answerVisible(true);
+                    } else {
+                        self.answerVisible(false);
+                    }
+                    self.editTimes(1);
+                }
+
+                self.msoverHandler = function () { //mouse enter the question                   
                     self.viewExpand(true);
                 }
 
-                self.unfoldAnsw = function () {//shou qi
-                    if (self.isStartEdit()) {
-                        self.isStartEdit(!self.isStartEdit());
-                        self.editTimes(1);
-                    }
-                }
-
-                self.msoutHandler = function (e) {
+                self.msoutHandler = function () { //mouse out the question
                     self.viewExpand(false);
                 }
 
-                self.msupHandler = function () {
-                    self.isStartEdit(true);
-                }
+                self.msupHandler = function () { //click the question component
+                    if (!self.isStartEdit() || !self.answerVisible()) return true;
+                    return false;
+                };
 
 
                 if (params !== undefined) {
@@ -1928,8 +1941,8 @@ define('component/QuestionArea', function (require) {
                         if (typeof params.content === 'function') {
                             self.content = params.content;
                             //var temp = JSON.stringify(ko.toJS(self.content));
-                            if(params.content() != undefined)
-                                self.isStartEdit(true);
+                            //if(params.content() != undefined)
+                            //    self.editTimes(1);
                         } else {
                             self.content = ko.observable(params.content);
                         }
@@ -7661,7 +7674,6 @@ define("component/SectionLoader", function (require) {
     }
 
     function retriveDocument(viewModel) {
-        console.log(viewModel);
         requestAPI.getSectionByIDAndSectionNameSync(viewModel.opptyID(), viewModel.sectionName()).done(function (oppty, xhr) {
             //query system
             if (oppty.status != undefined && oppty.status >= 400) {

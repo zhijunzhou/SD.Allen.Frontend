@@ -110,7 +110,6 @@ define("component/SectionLoader", function (require) {
     }
 
     function retriveDocument(viewModel) {
-        console.log(viewModel);
         requestAPI.getSectionByIDAndSectionNameSync(viewModel.opptyID(), viewModel.sectionName()).done(function (oppty, xhr) {
             //query system
             if (oppty.status != undefined && oppty.status >= 400) {
