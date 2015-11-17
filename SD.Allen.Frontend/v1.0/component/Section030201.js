@@ -16,30 +16,26 @@ define('component/Section030201', function (require) {
 
     //Construct object
     function SalesApproach(data) {
-        if (data != null) {
-            return {
-                salesStrategyDetail:escape(data.salesStrategyDetail()),
-                clientTransformationStrategyDetail:escape(data.clientTransformationStrategyDetail()),
-                dealBenefitDetail:escape(data.dealBenefitDetail()),
-                criticalSuccessFactorDetail:escape(data.criticalSuccessFactorDetail()),
-                dealEssentialDetail:escape(data.dealEssentialDetail()),
-                sumryRelationStrategyDetail:escape(data.sumryRelationStrategyDetail()),
-                specificSolnRqmtDetail:escape(data.specificSolnRqmtDetail()),
-                supporterDetractorDetail:escape(data.supporterDetractorDetail()),
-                bizPartnerDetail:escape(data.bizPartnerDetail())
-            };
+        if (data != undefined && data != null) {
+            this.salesStrategyDetail = setEscapeValue(data.salesStrategyDetail());
+            this.clientTransformationStrategyDetail = setEscapeValue(data.clientTransformationStrategyDetail());
+            this.dealBenefitDetail = setEscapeValue(data.dealBenefitDetail());
+            this.criticalSuccessFactorDetail = setEscapeValue(data.criticalSuccessFactorDetail());
+            this.dealEssentialDetail = setEscapeValue(data.dealEssentialDetail());
+            this.sumryRelationStrategyDetail = setEscapeValue(data.sumryRelationStrategyDetail());
+            this.specificSolnRqmtDetail = setEscapeValue(data.specificSolnRqmtDetail());
+            this.supporterDetractorDetail = setEscapeValue(data.supporterDetractorDetail());
+            this.bizPartnerDetail = setEscapeValue(data.bizPartnerDetail());
         }
-        return {
-            salesStrategyDetail: "",
-            clientTransformationStrategyDetail: "",
-            dealBenefitDetail: "",
-            criticalSuccessFactorDetail: "",
-            dealEssentialDetail: "",
-            sumryRelationStrategyDetail: "",
-            specificSolnRqmtDetail: "",
-            supporterDetractorDetail: "",
-            bizPartnerDetail: ""
-        };
+    }
+
+    function setEscapeValue(val) {
+        return val === undefined ? null : escape(val);
+    }
+
+    function getUnEscapeValue(val) {
+        if (val != undefined && val != null) return unescape(val);
+        return null;
     }
     
     function listenCustomEvent() {
@@ -51,22 +47,21 @@ define('component/Section030201', function (require) {
         listenCustomEvent();
     }
 
-
     function onViewModelLoaded() {
         
     }
 
     //before binding, we should unescape the original data from DB
     function unescapeData(data) {
-        vm.data.salesStrategyDetail(data.salesStrategyDetail != undefined ? unescape(data.salesStrategyDetail) : "");
-        vm.data.clientTransformationStrategyDetail(data.clientTransformationStrategyDetail != null ? unescape(data.clientTransformationStrategyDetail) : "");
-        vm.data.dealBenefitDetail(data.dealBenefitDetail != undefined ? unescape(data.dealBenefitDetail) : "");
-        vm.data.criticalSuccessFactorDetail(data.criticalSuccessFactorDetail != undefined ? unescape(data.criticalSuccessFactorDetail) : "");
-        vm.data.dealEssentialDetail(data.dealEssentialDetail != undefined ? unescape(data.dealEssentialDetail) : "");
-        vm.data.sumryRelationStrategyDetail(data.sumryRelationStrategyDetail != null ? unescape(data.sumryRelationStrategyDetail) : "");
-        vm.data.specificSolnRqmtDetail(data.specificSolnRqmtDetail != undefined ? unescape(data.specificSolnRqmtDetail) : "");
-        vm.data.supporterDetractorDetail(data.supporterDetractorDetail != undefined ? unescape(data.supporterDetractorDetail) : "");
-        vm.data.bizPartnerDetail(data.bizPartnerDetail != undefined ? unescape(data.bizPartnerDetail):"");
+        vm.data.salesStrategyDetail(getUnEscapeValue(data.salesStrategyDetail));
+        vm.data.clientTransformationStrategyDetail(getUnEscapeValue(data.clientTransformationStrategyDetail));
+        vm.data.dealBenefitDetail(getUnEscapeValue(data.dealBenefitDetail));
+        vm.data.criticalSuccessFactorDetail(getUnEscapeValue(data.criticalSuccessFactorDetail));
+        vm.data.dealEssentialDetail(getUnEscapeValue(data.dealEssentialDetail));
+        vm.data.sumryRelationStrategyDetail(getUnEscapeValue(data.sumryRelationStrategyDetail));
+        vm.data.specificSolnRqmtDetail(getUnEscapeValue(data.specificSolnRqmtDetail));
+        vm.data.supporterDetractorDetail(getUnEscapeValue(data.supporterDetractorDetail));
+        vm.data.bizPartnerDetail(getUnEscapeValue(data.bizPartnerDetail));
     }
 
     function createViewModel(params, componentInfo) {
@@ -119,14 +114,17 @@ define('component/Section030201', function (require) {
             return;
         }
         var newData = new SalesApproach(vm.data);
-        $(window).trigger("submitableChanged", {
-            submitFlag: true,
-            obj: newData,
-            opptyID: argu.opptyID(),
-            eTag: argu.eTag(),
-            sectionName: argu.sectionName(),
-            sid: sid
-        });
+        //compare their properties
+        if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
+            $(window).trigger("submitableChanged", {
+                submitFlag: true,
+                obj: newData,
+                opptyID: argu.opptyID(),
+                eTag: argu.eTag(),
+                sectionName: argu.sectionName(),
+                sid: sid
+            });
+        }
     }
 
 

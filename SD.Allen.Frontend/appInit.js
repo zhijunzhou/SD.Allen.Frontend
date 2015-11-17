@@ -135,10 +135,6 @@
                     deps: ['jquery'],
                     exports: 'numBox'
                 }
-                //'tableTools': {
-                //    deps: ['dataTables'],
-                //    exports:'tableTools'
-                //}
             }
         };
 

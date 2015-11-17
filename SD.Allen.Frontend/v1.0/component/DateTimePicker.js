@@ -30,7 +30,7 @@ define('component/DateTimePicker', function (require) {
                     if (event.date != null && !(event.date instanceof Date)) {
                         //value(event.date.toDate());
                         if (event.date)
-                            value(event.date.toISOString().format("yyyy-MM-ddTHH:mm:ss"));
+                            value(event.date.toISOString());
                         else
                             value('');
                     } else {
@@ -78,6 +78,24 @@ define('component/DateTimePicker', function (require) {
             return false;
         };
     }
+    };
+
+    function pad(number) {
+        if (number < 10) {
+            return '0' + number;
+        }
+        return number;
+    }
+
+    Date.prototype.toISOString = function () {
+        return this.getUTCFullYear() +
+          '-' + pad(this.getUTCMonth() + 1) +
+          '-' + pad(this.getUTCDate()) +
+          'T' + pad(this.getUTCHours()) +
+          ':' + pad(this.getUTCMinutes()) +
+          ':' + pad(this.getUTCSeconds()) +
+          //'.' + (this.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+          'Z';
     };
 
     function onViewModelPreLoad() { }

@@ -10,18 +10,13 @@ define('component/SDContents', function (require) {
         requestAPI = require('model/RequestAPI'),
         appConfig = require('model/AppConfig'),
         opptyModel = require('model/Oppty'),
-        TopLink = require("./TopLinkHome"),
+        TopLinkHome = require("./TopLinkHome"),
         OpptyID = require("./OpptyID"),
         vm = {};
-
-    function addSDLinkAfterAppHome() {
-        appUtility.addSDLinkAfterAppHome();
-    }
 
     function onViewModelPreLoad() {
         $('#s4-ribbonrow').hide();
         $('#s4-titlerow').hide();
-        addSDLinkAfterAppHome();
     }
 
     function onViewModelLoaded(viewModel) {

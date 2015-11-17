@@ -322,6 +322,86 @@ define('util/AppUtility', function (require) {
         $("#suiteBar").height(30);
     }
 
+    function compareJson(obj1, obj2) {
+        if ((obj1 && typeof obj1 === "object") && ((obj2 && typeof obj2 === "object"))) {
+            var count1 = propertyLength(obj1);
+            var count2 = propertyLength(obj2);
+            if (count1 == count2) {
+                for (var ob in obj1) {
+                    if (obj1.hasOwnProperty(ob) && obj2.hasOwnProperty(ob)) {
+
+                        if (obj1[ob] == null && obj2[ob] == null) { //extra compare
+                            continue;
+                        }
+
+                        if (obj1[ob].constructor == Array && obj2[ob].constructor == Array)//if property is an array
+                        {
+                            if (!compareArray(obj1[ob], obj2[ob])) {
+                                return false;
+                            };
+                        }
+                        else if (typeof obj1[ob] === "string" && typeof obj2[ob] === "string")//just property
+                        {
+                            if (obj1[ob] !== obj2[ob]) {
+                                return false;
+                            }
+                        }
+                        else if (typeof obj1[ob] === "object" && typeof obj2[ob] === "object")//property is an object
+                        {
+                            if (!compareJson(obj1[ob], obj2[ob])) {//if the project
+                                return false;
+                            };
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function propertyLength(obj) {
+        var count = 0;
+        if (obj && typeof obj === "object") {
+            for (var ooo in obj) {
+                if (obj.hasOwnProperty(ooo)) {
+                    count++;
+                }
+            }
+            return count;
+        } else {
+            throw new Error("argunment can not be null;");
+        }
+    }
+    
+    function compareArray(array1, array2) {
+        if ((array1 && typeof array1 === "object" && array1.constructor === Array) && (array2 && typeof array2 === "object" && array2.constructor === Array)) {
+            if (array1.length == array2.length) {
+                for (var i = 0; i < array1.length; i++) {
+                    var ggg = compareJson(array1[i], array2[i]);
+                    if (!ggg) {
+                        return false;
+                    }
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            throw new Error("argunment is  error ;");
+        }
+        return true;
+    }
+
     return {
         showWorkingOnItDialog: showWorkingOnItDialog,
         closeLastDialog: closeLastDialog,
@@ -339,7 +419,8 @@ define('util/AppUtility', function (require) {
         getCurrentUser: getCurrentUser,
         transformDateToISO8601: transformDateToISO8601,
         transformIOSDateToen: transformIOSDateToen,
-        addSDLinkAfterAppHome: addSDLinkAfterAppHome
+        addSDLinkAfterAppHome: addSDLinkAfterAppHome,
+        compareJson: compareJson
     };
 
 });
@@ -1040,7 +1121,6 @@ define('component/TopLink', function (require) {
     "use strict";
 
     var ko = require("knockout"),
-        bs = require("bootstrap"),
         templateHtml = require("text!./TopLinkTemplate.html");
     
     function createTopLinkViewModel(params, componentInfo) {
@@ -1203,6 +1283,24 @@ define('component/DateTimePicker', function (require) {
             return false;
         };
     }
+    };
+
+    function pad(number) {
+        if (number < 10) {
+            return '0' + number;
+        }
+        return number;
+    }
+
+    Date.prototype.toISOString = function () {
+        return this.getUTCFullYear() +
+          '-' + pad(this.getUTCMonth() + 1) +
+          '-' + pad(this.getUTCDate()) +
+          'T' + pad(this.getUTCHours()) +
+          ':' + pad(this.getUTCMinutes()) +
+          ':' + pad(this.getUTCSeconds()) +
+          //'.' + (this.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+          'Z';
     };
 
     function onViewModelPreLoad() { }
@@ -4190,64 +4288,53 @@ define('component/Section0301', function (require) {
         sectionLoaderViewModel = {};
 
     function ClientOverview(data) {
-        if (data != null) {
-            return {
-                clientRevenue : escape(data.clientRevenue()),
-                clientRevenueYear: data.clientRevenueYear(),
-                noBusinessUnits : data.noBusinessUnits(),
-                inWhatCountries : data.inWhatCountries(),
-                acctBizPlanImpactPointDetail : data.acctBizPlanImpactPointDetail(),
-                explainImpact : escape(data.explainImpact()),
-                priBizChlgDetail : escape(data.priBizChlgDetail()),
-                clientCompellingEventDetail : escape(data.clientCompellingEventDetail()),
-                curItStateDetail : escape(data.curItStateDetail()),
-                keyDifferentiation : escape(data.keyDifferentiation()),
-                buRelationDetail : escape(data.buRelationDetail()),
-                hpiRelationDetail : escape(data.hpiRelationDetail()),
-                clientFcnDetail : escape(data.clientFcnDetail()),
-                clientDecisionCriteriaDetail : escape(data.clientDecisionCriteriaDetail()),
-                clientProcApproach : data.clientProcApproach(),
-                accountDeliveryMgmtDetail : escape(data.accountDeliveryMgmtDetail())
-            };
-        }
-        return {
-            clientRevenue: "",
-            clientRevenueYear: "",
-            noBusinessUnits: 1,
-            inWhatCountries: [],
-            acctBizPlanImpactPointDetail: "Yes",
-            explainImpact: "",
-            priBizChlgDetail: "",
-            clientCompellingEventDetail: "",
-            curItStateDetail: "",
-            keyDifferentiation: "",
-            buRelationDetail: "",
-            hpiRelationDetail: "",
-            clientFcnDetail: "",
-            clientDecisionCriteriaDetail: "",
-            clientProcApproach: "",
-            accountDeliveryMgmtDetail: ""
+        if (data != undefined && data != null) {
+            this.clientRevenue = setEscapeValue(data.clientRevenue());
+            this.clientRevenueYear = data.clientRevenueYear();
+            this.noBusinessUnits = data.noBusinessUnits();
+            this.inWhatCountries = data.inWhatCountries();
+            this.acctBizPlanImpactPointDetail = data.acctBizPlanImpactPointDetail();
+            this.explainImpact = setEscapeValue(data.explainImpact());
+            this.priBizChlgDetail = setEscapeValue(data.priBizChlgDetail());
+            this.clientCompellingEventDetail = setEscapeValue(data.clientCompellingEventDetail());
+            this.curItStateDetail = setEscapeValue(data.curItStateDetail());
+            this.keyDifferentiation = setEscapeValue(data.keyDifferentiation());
+            this.buRelationDetail = setEscapeValue(data.buRelationDetail());
+            this.hpiRelationDetail = setEscapeValue(data.hpiRelationDetail());
+            this.clientFcnDetail = setEscapeValue(data.clientFcnDetail());
+            this.clientDecisionCriteriaDetail = setEscapeValue(data.clientDecisionCriteriaDetail());
+            this.clientProcApproach = data.clientProcApproach();
+            this.accountDeliveryMgmtDetail = setEscapeValue(data.accountDeliveryMgmtDetail());
+            this.clientEventDetail = null;//this field have been delete in frontend, but it still exist in backend
         }
     }
 
+    function setEscapeValue(val) {
+        return val === undefined ? null : escape(val);
+    }
+
+    function getUnEscapeValue(val) {
+        if (val != undefined && val != null) return unescape(val);
+        return null;
+    }
+
     function unescapeData(data) {       
-        //alert(new Date("Sep 9 2015").format("yyyy-MM-ddTHH:mm:ss"));
-        vm.data.clientRevenue (unescape( data.clientRevenue));
+        vm.data.clientRevenue (getUnEscapeValue( data.clientRevenue));
         vm.data.clientRevenueYear(data.clientRevenueYear == null ? "" : data.clientRevenueYear);
         vm.data.noBusinessUnits ( data.noBusinessUnits);
         vm.data.inWhatCountries ( data.inWhatCountries);
         vm.data.acctBizPlanImpactPointDetail ( data.acctBizPlanImpactPointDetail);
-        vm.data.explainImpact (unescape( data.explainImpact));
-        vm.data.priBizChlgDetail (unescape( data.priBizChlgDetail));
-        vm.data.clientCompellingEventDetail (unescape( data.clientCompellingEventDetail));
-        vm.data.curItStateDetail (unescape( data.curItStateDetail));
-        vm.data.keyDifferentiation (unescape( data.keyDifferentiation));
-        vm.data.buRelationDetail (unescape( data.buRelationDetail));
-        vm.data.hpiRelationDetail (unescape( data.hpiRelationDetail));
-        vm.data.clientFcnDetail (unescape( data.clientFcnDetail));
-        vm.data.clientDecisionCriteriaDetail (unescape( data.clientDecisionCriteriaDetail));
+        vm.data.explainImpact (getUnEscapeValue( data.explainImpact));
+        vm.data.priBizChlgDetail (getUnEscapeValue( data.priBizChlgDetail));
+        vm.data.clientCompellingEventDetail (getUnEscapeValue( data.clientCompellingEventDetail));
+        vm.data.curItStateDetail (getUnEscapeValue( data.curItStateDetail));
+        vm.data.keyDifferentiation (getUnEscapeValue( data.keyDifferentiation));
+        vm.data.buRelationDetail (getUnEscapeValue( data.buRelationDetail));
+        vm.data.hpiRelationDetail (getUnEscapeValue( data.hpiRelationDetail));
+        vm.data.clientFcnDetail (getUnEscapeValue( data.clientFcnDetail));
+        vm.data.clientDecisionCriteriaDetail (getUnEscapeValue( data.clientDecisionCriteriaDetail));
         vm.data.clientProcApproach ( data.clientProcApproach);
-        vm.data.accountDeliveryMgmtDetail(unescape(data.accountDeliveryMgmtDetail));
+        vm.data.accountDeliveryMgmtDetail(getUnEscapeValue(data.accountDeliveryMgmtDetail));
         //select2
         $('#inWhatCountries').val(data.inWhatCountries).trigger("change");
     }
@@ -4287,6 +4374,8 @@ define('component/Section0301', function (require) {
             //};
             self.pursuitClassfication = ko.observable();
             self.editable = ko.observable(true);
+
+            self.draftData = ko.observable();//prepare for comparision
             
             self.data = {
                 clientRevenue : ko.observable(),
@@ -4304,7 +4393,7 @@ define('component/Section0301', function (require) {
                 clientFcnDetail: ko.observable(),
                 clientDecisionCriteriaDetail : ko.observable(),
                 clientProcApproach : ko.observable(),
-                accountDeliveryMgmtDetail : ko.observable()  
+                accountDeliveryMgmtDetail: ko.observable()
             };
 
             //select2
@@ -4325,8 +4414,10 @@ define('component/Section0301', function (require) {
 
     function loadingSection() {
         var doc = ko.toJS(sectionLoaderViewModel.document);
-        if (doc != undefined && doc.bizSoln != null && doc.bizSoln.clientOverview != null)
+        if (doc != undefined && doc.bizSoln != null && doc.bizSoln.clientOverview != null) {
             unescapeData(doc.bizSoln.clientOverview.data);         
+            vm.draftData(doc.bizSoln.clientOverview.data);
+        }
     }
 
     function saveOppty(event, argu) {
@@ -4335,14 +4426,23 @@ define('component/Section0301', function (require) {
             return;
         }
         var newData = new ClientOverview(vm.data);
-        $(window).trigger("submitableChanged", {
-            submitFlag: true,
-            obj: newData,
-            opptyID: argu.opptyID(),
-            eTag: argu.eTag(),
-            sectionName: argu.sectionName(),
-            sid:sid
-        });
+        if (JSON.stringify(newData) === JSON.stringify(ko.toJS(vm.draftData))) {
+            alert("Nothing Changed!");
+        } else {
+            //compare their properties
+            if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
+                $(window).trigger("submitableChanged", {
+                    submitFlag: true,
+                    obj: newData,
+                    opptyID: argu.opptyID(),
+                    eTag: argu.eTag(),
+                    sectionName: argu.sectionName(),
+                    sid: sid
+                });
+            } else {
+                alert("Nothing Changed!");
+            }
+        }        
     }
 
     return {
@@ -4373,30 +4473,26 @@ define('component/Section030201', function (require) {
 
     //Construct object
     function SalesApproach(data) {
-        if (data != null) {
-            return {
-                salesStrategyDetail:escape(data.salesStrategyDetail()),
-                clientTransformationStrategyDetail:escape(data.clientTransformationStrategyDetail()),
-                dealBenefitDetail:escape(data.dealBenefitDetail()),
-                criticalSuccessFactorDetail:escape(data.criticalSuccessFactorDetail()),
-                dealEssentialDetail:escape(data.dealEssentialDetail()),
-                sumryRelationStrategyDetail:escape(data.sumryRelationStrategyDetail()),
-                specificSolnRqmtDetail:escape(data.specificSolnRqmtDetail()),
-                supporterDetractorDetail:escape(data.supporterDetractorDetail()),
-                bizPartnerDetail:escape(data.bizPartnerDetail())
-            };
+        if (data != undefined && data != null) {
+            this.salesStrategyDetail = setEscapeValue(data.salesStrategyDetail());
+            this.clientTransformationStrategyDetail = setEscapeValue(data.clientTransformationStrategyDetail());
+            this.dealBenefitDetail = setEscapeValue(data.dealBenefitDetail());
+            this.criticalSuccessFactorDetail = setEscapeValue(data.criticalSuccessFactorDetail());
+            this.dealEssentialDetail = setEscapeValue(data.dealEssentialDetail());
+            this.sumryRelationStrategyDetail = setEscapeValue(data.sumryRelationStrategyDetail());
+            this.specificSolnRqmtDetail = setEscapeValue(data.specificSolnRqmtDetail());
+            this.supporterDetractorDetail = setEscapeValue(data.supporterDetractorDetail());
+            this.bizPartnerDetail = setEscapeValue(data.bizPartnerDetail());
         }
-        return {
-            salesStrategyDetail: "",
-            clientTransformationStrategyDetail: "",
-            dealBenefitDetail: "",
-            criticalSuccessFactorDetail: "",
-            dealEssentialDetail: "",
-            sumryRelationStrategyDetail: "",
-            specificSolnRqmtDetail: "",
-            supporterDetractorDetail: "",
-            bizPartnerDetail: ""
-        };
+    }
+
+    function setEscapeValue(val) {
+        return val === undefined ? null : escape(val);
+    }
+
+    function getUnEscapeValue(val) {
+        if (val != undefined && val != null) return unescape(val);
+        return null;
     }
     
     function listenCustomEvent() {
@@ -4408,22 +4504,21 @@ define('component/Section030201', function (require) {
         listenCustomEvent();
     }
 
-
     function onViewModelLoaded() {
         
     }
 
     //before binding, we should unescape the original data from DB
     function unescapeData(data) {
-        vm.data.salesStrategyDetail(data.salesStrategyDetail != undefined ? unescape(data.salesStrategyDetail) : "");
-        vm.data.clientTransformationStrategyDetail(data.clientTransformationStrategyDetail != null ? unescape(data.clientTransformationStrategyDetail) : "");
-        vm.data.dealBenefitDetail(data.dealBenefitDetail != undefined ? unescape(data.dealBenefitDetail) : "");
-        vm.data.criticalSuccessFactorDetail(data.criticalSuccessFactorDetail != undefined ? unescape(data.criticalSuccessFactorDetail) : "");
-        vm.data.dealEssentialDetail(data.dealEssentialDetail != undefined ? unescape(data.dealEssentialDetail) : "");
-        vm.data.sumryRelationStrategyDetail(data.sumryRelationStrategyDetail != null ? unescape(data.sumryRelationStrategyDetail) : "");
-        vm.data.specificSolnRqmtDetail(data.specificSolnRqmtDetail != undefined ? unescape(data.specificSolnRqmtDetail) : "");
-        vm.data.supporterDetractorDetail(data.supporterDetractorDetail != undefined ? unescape(data.supporterDetractorDetail) : "");
-        vm.data.bizPartnerDetail(data.bizPartnerDetail != undefined ? unescape(data.bizPartnerDetail):"");
+        vm.data.salesStrategyDetail(getUnEscapeValue(data.salesStrategyDetail));
+        vm.data.clientTransformationStrategyDetail(getUnEscapeValue(data.clientTransformationStrategyDetail));
+        vm.data.dealBenefitDetail(getUnEscapeValue(data.dealBenefitDetail));
+        vm.data.criticalSuccessFactorDetail(getUnEscapeValue(data.criticalSuccessFactorDetail));
+        vm.data.dealEssentialDetail(getUnEscapeValue(data.dealEssentialDetail));
+        vm.data.sumryRelationStrategyDetail(getUnEscapeValue(data.sumryRelationStrategyDetail));
+        vm.data.specificSolnRqmtDetail(getUnEscapeValue(data.specificSolnRqmtDetail));
+        vm.data.supporterDetractorDetail(getUnEscapeValue(data.supporterDetractorDetail));
+        vm.data.bizPartnerDetail(getUnEscapeValue(data.bizPartnerDetail));
     }
 
     function createViewModel(params, componentInfo) {
@@ -4476,14 +4571,17 @@ define('component/Section030201', function (require) {
             return;
         }
         var newData = new SalesApproach(vm.data);
-        $(window).trigger("submitableChanged", {
-            submitFlag: true,
-            obj: newData,
-            opptyID: argu.opptyID(),
-            eTag: argu.eTag(),
-            sectionName: argu.sectionName(),
-            sid: sid
-        });
+        //compare their properties
+        if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
+            $(window).trigger("submitableChanged", {
+                submitFlag: true,
+                obj: newData,
+                opptyID: argu.opptyID(),
+                eTag: argu.eTag(),
+                sectionName: argu.sectionName(),
+                sid: sid
+            });
+        }
     }
 
 
@@ -7506,18 +7604,13 @@ define('component/SDContents', function (require) {
         requestAPI = require('model/RequestAPI'),
         appConfig = require('model/AppConfig'),
         opptyModel = require('model/Oppty'),
-        TopLink = require("./TopLinkHome"),
+        TopLinkHome = require("./TopLinkHome"),
         OpptyID = require("./OpptyID"),
         vm = {};
-
-    function addSDLinkAfterAppHome() {
-        appUtility.addSDLinkAfterAppHome();
-    }
 
     function onViewModelPreLoad() {
         $('#s4-ribbonrow').hide();
         $('#s4-titlerow').hide();
-        addSDLinkAfterAppHome();
     }
 
     function onViewModelLoaded(viewModel) {

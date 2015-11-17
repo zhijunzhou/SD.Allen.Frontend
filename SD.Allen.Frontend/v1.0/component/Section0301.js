@@ -17,64 +17,53 @@ define('component/Section0301', function (require) {
         sectionLoaderViewModel = {};
 
     function ClientOverview(data) {
-        if (data != null) {
-            return {
-                clientRevenue : escape(data.clientRevenue()),
-                clientRevenueYear: data.clientRevenueYear(),
-                noBusinessUnits : data.noBusinessUnits(),
-                inWhatCountries : data.inWhatCountries(),
-                acctBizPlanImpactPointDetail : data.acctBizPlanImpactPointDetail(),
-                explainImpact : escape(data.explainImpact()),
-                priBizChlgDetail : escape(data.priBizChlgDetail()),
-                clientCompellingEventDetail : escape(data.clientCompellingEventDetail()),
-                curItStateDetail : escape(data.curItStateDetail()),
-                keyDifferentiation : escape(data.keyDifferentiation()),
-                buRelationDetail : escape(data.buRelationDetail()),
-                hpiRelationDetail : escape(data.hpiRelationDetail()),
-                clientFcnDetail : escape(data.clientFcnDetail()),
-                clientDecisionCriteriaDetail : escape(data.clientDecisionCriteriaDetail()),
-                clientProcApproach : data.clientProcApproach(),
-                accountDeliveryMgmtDetail : escape(data.accountDeliveryMgmtDetail())
-            };
-        }
-        return {
-            clientRevenue: "",
-            clientRevenueYear: "",
-            noBusinessUnits: 1,
-            inWhatCountries: [],
-            acctBizPlanImpactPointDetail: "Yes",
-            explainImpact: "",
-            priBizChlgDetail: "",
-            clientCompellingEventDetail: "",
-            curItStateDetail: "",
-            keyDifferentiation: "",
-            buRelationDetail: "",
-            hpiRelationDetail: "",
-            clientFcnDetail: "",
-            clientDecisionCriteriaDetail: "",
-            clientProcApproach: "",
-            accountDeliveryMgmtDetail: ""
+        if (data != undefined && data != null) {
+            this.clientRevenue = setEscapeValue(data.clientRevenue());
+            this.clientRevenueYear = data.clientRevenueYear();
+            this.noBusinessUnits = data.noBusinessUnits();
+            this.inWhatCountries = data.inWhatCountries();
+            this.acctBizPlanImpactPointDetail = data.acctBizPlanImpactPointDetail();
+            this.explainImpact = setEscapeValue(data.explainImpact());
+            this.priBizChlgDetail = setEscapeValue(data.priBizChlgDetail());
+            this.clientCompellingEventDetail = setEscapeValue(data.clientCompellingEventDetail());
+            this.curItStateDetail = setEscapeValue(data.curItStateDetail());
+            this.keyDifferentiation = setEscapeValue(data.keyDifferentiation());
+            this.buRelationDetail = setEscapeValue(data.buRelationDetail());
+            this.hpiRelationDetail = setEscapeValue(data.hpiRelationDetail());
+            this.clientFcnDetail = setEscapeValue(data.clientFcnDetail());
+            this.clientDecisionCriteriaDetail = setEscapeValue(data.clientDecisionCriteriaDetail());
+            this.clientProcApproach = data.clientProcApproach();
+            this.accountDeliveryMgmtDetail = setEscapeValue(data.accountDeliveryMgmtDetail());
+            this.clientEventDetail = null;//this field have been delete in frontend, but it still exist in backend
         }
     }
 
+    function setEscapeValue(val) {
+        return val === undefined ? null : escape(val);
+    }
+
+    function getUnEscapeValue(val) {
+        if (val != undefined && val != null) return unescape(val);
+        return null;
+    }
+
     function unescapeData(data) {       
-        //alert(new Date("Sep 9 2015").format("yyyy-MM-ddTHH:mm:ss"));
-        vm.data.clientRevenue (unescape( data.clientRevenue));
+        vm.data.clientRevenue (getUnEscapeValue( data.clientRevenue));
         vm.data.clientRevenueYear(data.clientRevenueYear == null ? "" : data.clientRevenueYear);
         vm.data.noBusinessUnits ( data.noBusinessUnits);
         vm.data.inWhatCountries ( data.inWhatCountries);
         vm.data.acctBizPlanImpactPointDetail ( data.acctBizPlanImpactPointDetail);
-        vm.data.explainImpact (unescape( data.explainImpact));
-        vm.data.priBizChlgDetail (unescape( data.priBizChlgDetail));
-        vm.data.clientCompellingEventDetail (unescape( data.clientCompellingEventDetail));
-        vm.data.curItStateDetail (unescape( data.curItStateDetail));
-        vm.data.keyDifferentiation (unescape( data.keyDifferentiation));
-        vm.data.buRelationDetail (unescape( data.buRelationDetail));
-        vm.data.hpiRelationDetail (unescape( data.hpiRelationDetail));
-        vm.data.clientFcnDetail (unescape( data.clientFcnDetail));
-        vm.data.clientDecisionCriteriaDetail (unescape( data.clientDecisionCriteriaDetail));
+        vm.data.explainImpact (getUnEscapeValue( data.explainImpact));
+        vm.data.priBizChlgDetail (getUnEscapeValue( data.priBizChlgDetail));
+        vm.data.clientCompellingEventDetail (getUnEscapeValue( data.clientCompellingEventDetail));
+        vm.data.curItStateDetail (getUnEscapeValue( data.curItStateDetail));
+        vm.data.keyDifferentiation (getUnEscapeValue( data.keyDifferentiation));
+        vm.data.buRelationDetail (getUnEscapeValue( data.buRelationDetail));
+        vm.data.hpiRelationDetail (getUnEscapeValue( data.hpiRelationDetail));
+        vm.data.clientFcnDetail (getUnEscapeValue( data.clientFcnDetail));
+        vm.data.clientDecisionCriteriaDetail (getUnEscapeValue( data.clientDecisionCriteriaDetail));
         vm.data.clientProcApproach ( data.clientProcApproach);
-        vm.data.accountDeliveryMgmtDetail(unescape(data.accountDeliveryMgmtDetail));
+        vm.data.accountDeliveryMgmtDetail(getUnEscapeValue(data.accountDeliveryMgmtDetail));
         //select2
         $('#inWhatCountries').val(data.inWhatCountries).trigger("change");
     }
@@ -114,6 +103,8 @@ define('component/Section0301', function (require) {
             //};
             self.pursuitClassfication = ko.observable();
             self.editable = ko.observable(true);
+
+            self.draftData = ko.observable();//prepare for comparision
             
             self.data = {
                 clientRevenue : ko.observable(),
@@ -131,7 +122,7 @@ define('component/Section0301', function (require) {
                 clientFcnDetail: ko.observable(),
                 clientDecisionCriteriaDetail : ko.observable(),
                 clientProcApproach : ko.observable(),
-                accountDeliveryMgmtDetail : ko.observable()  
+                accountDeliveryMgmtDetail: ko.observable()
             };
 
             //select2
@@ -152,8 +143,10 @@ define('component/Section0301', function (require) {
 
     function loadingSection() {
         var doc = ko.toJS(sectionLoaderViewModel.document);
-        if (doc != undefined && doc.bizSoln != null && doc.bizSoln.clientOverview != null)
+        if (doc != undefined && doc.bizSoln != null && doc.bizSoln.clientOverview != null) {
             unescapeData(doc.bizSoln.clientOverview.data);         
+            vm.draftData(doc.bizSoln.clientOverview.data);
+        }
     }
 
     function saveOppty(event, argu) {
@@ -162,14 +155,23 @@ define('component/Section0301', function (require) {
             return;
         }
         var newData = new ClientOverview(vm.data);
-        $(window).trigger("submitableChanged", {
-            submitFlag: true,
-            obj: newData,
-            opptyID: argu.opptyID(),
-            eTag: argu.eTag(),
-            sectionName: argu.sectionName(),
-            sid:sid
-        });
+        if (JSON.stringify(newData) === JSON.stringify(ko.toJS(vm.draftData))) {
+            alert("Nothing Changed!");
+        } else {
+            //compare their properties
+            if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
+                $(window).trigger("submitableChanged", {
+                    submitFlag: true,
+                    obj: newData,
+                    opptyID: argu.opptyID(),
+                    eTag: argu.eTag(),
+                    sectionName: argu.sectionName(),
+                    sid: sid
+                });
+            } else {
+                alert("Nothing Changed!");
+            }
+        }        
     }
 
     return {
