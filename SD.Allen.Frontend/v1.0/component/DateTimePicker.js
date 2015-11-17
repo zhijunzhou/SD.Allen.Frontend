@@ -30,7 +30,7 @@ define('component/DateTimePicker', function (require) {
                     if (event.date != null && !(event.date instanceof Date)) {
                         //value(event.date.toDate());
                         if (event.date)
-                            value(event.date.toISOString());
+                            value(event.date.toISOString().format("yyyy-MM-ddTHH:mm:ss"));
                         else
                             value('');
                     } else {
