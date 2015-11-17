@@ -7,7 +7,7 @@ define('component/MyOppty', function (require) {
         dataTables = require('dataTables'),
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./MyOpptyTemplate.html"),
-        TopLink = require("./TopLinkHome"),
+        TopLink = require("./TopLink"),
         appConfig = require('model/AppConfig'),
         opptyModel = require('model/Oppty');
 

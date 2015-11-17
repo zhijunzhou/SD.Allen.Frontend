@@ -8,7 +8,7 @@ define("component/AllOppty", function (require) {
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./AllOpptyTemplate.html"),
         opptyModel = require('model/Oppty'),
-        TopLink = require("./TopLinkHome"),
+        TopLink = require("./TopLink"),
         appConfig = require('model/AppConfig'),
         viewModel = {};
 
