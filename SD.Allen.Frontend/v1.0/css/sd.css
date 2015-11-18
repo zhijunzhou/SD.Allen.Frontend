@@ -18193,7 +18193,10 @@ h1, .h1, h2, .h2, h3, .h3 {
 #sd-section-content .nav .open >a, #sd-section-content .nav .open > a:focus, #sd-section-content .nav .open > a:hover{
     background-color:transparent;
 }
-
+.sd-table thead tr {
+    background-color:rgb(91, 71, 103);
+    color:#fff;
+}
 
 
 
