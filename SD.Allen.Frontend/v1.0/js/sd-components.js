@@ -7664,6 +7664,7 @@ define("component/SectionLoader", function (require) {
         opptyModel = require('model/Oppty'),
         requestAPI = require('model/RequestAPI'),
         appConfig = require('model/AppConfig'),
+        TopLink = require("./TopLink"),
         templateHtml = require("text!./SectionLoaderTemplate.html"),
         section0201 = require('./Section0201'),
         section0202 = require('./Section0202'),
@@ -7938,7 +7939,8 @@ define("component/SectionLoader", function (require) {
             section040505,
             section040506,
             section0406,
-            section0407
+            section0407,
+            TopLink
         ]
     };
 });
