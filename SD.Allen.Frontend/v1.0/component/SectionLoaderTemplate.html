@@ -4,7 +4,7 @@
 <div class="nav navbar-fixed-top test-top" style="margin-top:79px;min-width:1300px;">
     <div id="sd-nav-top">
         <div class="row form-inline ">
-            <div class="col-lg-3 sd-auto-width">
+            <div class="col-lg-3 col-md-3 col-sm-3 sd-auto-width">
                 <a id="sd-section-navbtn" class="btn" data-toggle="offcanvas" data-target="#sd-section-nav" data-
                    canvas="#sd-section-canvas" data-placement="left" href="#" title="Navigate between each sections">
                     <img src="img/Browse32.png" />
@@ -35,15 +35,19 @@
                     <!--/ko-->
                 </span>
             </div>
-            <div class="col-lg-6 sd-auto-width" style="min-width:800px;color:#fff;">
-                <!--ko with:oppty-->
-                <small data-bind="text:$component.opptyID"></small> |
-                Opportunity Name: <small data-bind="text:OpptyName"></small> |
-                Client Name: <small data-bind="text:ClientName"></small>
-                <!--/ko-->
+            <div class="col-lg-6 col-md-6 col-sm-1 sd-auto-width" style="min-width:1000px;color:#fff;font-size:10px;overflow-x:hidden;">
+                <div>
+                    <!--ko with:oppty-->
+                    <small data-bind="text:$component.opptyID"></small>
+                    <small> | Opportunity Name  </small>
+                    <small data-bind="text:OpptyName"></small>
+                    <small> | Client Name </small>
+                    <small data-bind="text:ClientName"></small>
+                    <!--/ko-->
+                </div>
                 <h4 data-bind="text: title" style="color:#fff;"></h4>
             </div>
-            <div class="col-lg-2 pull-right sd-auto-width">
+            <div class="col-lg-2 col-md-2 col-sm-2 pull-right sd-auto-width">
                 <!--ko if: opptyID() != ""-->
                 <span style="">
                     <a class="btn" target="_blank" title="Review and Extract" data-bind="attr:{href:'SDReviewAndExtract.aspx?OpptyID='+opptyID()}" style="margin-right: 5px;">

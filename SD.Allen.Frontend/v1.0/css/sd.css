@@ -18151,13 +18151,13 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 .sd-dropdown-menu {
     /*background-color: #425563;*/
-    background-color:rgba(66,85,99,0.9);
+    background-color:rgba(66,85,99,0.8);
     border-bottom: 5px solid #FF8D6D;
 }
 
 .ss-dropdown-menu {
     /*background-color: #425563;*/
-    background-color:rgba(66,85,99,1);
+    background-color:rgba(66,85,99,0.8);
     border-bottom: 5px solid #2AD2C9;
 }
 
@@ -18186,6 +18186,9 @@ h1, .h1, h2, .h2, h3, .h3 {
 .top-nav li a {
     color:#fff;
 }
+.top-nav-home>li>a {
+    color:#000;
+}
 .top-nav li a:hover {
     color:#333;
 }
@@ -18193,10 +18196,20 @@ h1, .h1, h2, .h2, h3, .h3 {
 #sd-section-content .nav .open >a, #sd-section-content .nav .open > a:focus, #sd-section-content .nav .open > a:hover{
     background-color:transparent;
 }
-.sd-table thead tr {
-    background-color:rgb(91, 71, 103);
-    color:#fff;
+.sd-table thead tr th{
+    background-color:rgba(91, 71, 103,0.1);
+    border-bottom:3px solid rgb(91, 71, 103);
 }
+.sd-nav-top small {
+    font-size:12px;
+}
+/*.sd-top-title>h4, .sd-top-title>.input-group>small {
+    background-color:transparent;
+}
+.sd-top-title>.input-group>small {
+    font-size:11px;
+}*/
+
 
 
 
