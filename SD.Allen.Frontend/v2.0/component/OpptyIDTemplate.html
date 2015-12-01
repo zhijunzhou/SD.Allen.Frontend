@@ -1,0 +1,10 @@
+<div>
+    <!--ko if: editable()-->
+    <input type="text" style="width: 200px" data-bind="value: opptyID" />
+    <span class="glyphicon glyphicon-ok" aria-hidden="true" data-bind="click: save" style="cursor: pointer; cursor: hand; "></span>
+    <!--/ko-->
+    <!--ko ifnot: editable()-->
+    <span data-bind="text: opptyID"></span>
+    <span class="glyphicon glyphicon-edit" aria-hidden="true" data-bind="click: edit" style="cursor: pointer; cursor: hand; "></span>
+    <!--/ko-->
+</div>

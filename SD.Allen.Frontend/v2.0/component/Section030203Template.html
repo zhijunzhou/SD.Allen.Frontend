@@ -1,0 +1,83 @@
+﻿<!-- ko if:$component.editable() -->
+<div class="row">
+    <div class="col-lg-12">
+        <p class="bg-success sd-info">
+            <label>Work with the salesperson to complete the following table based on the client’s requirements. Be sure to highlight the transformational value and benefits.</label>
+            <div class="popover-options pull-right">
+                <a href="#" class="btn btn-default popover-show" title="Information" data-container="body"
+                   data-toggle="popover" data-placement="left"
+                   data-content='The Message Map should be completed collaboratively between key members of the pursuit team,including Sales, Account Management, Bid Management and Solutioning.
+                   refer to “<a href="https://ensv.hp.com/sales/processes-tools-support/processes/pursuit-marketing-resource-center/drive-awareness/" target="_blank">Position HP Enterprise Services to drive client awareness, consideration, and choice</a>” to learn more about how to create a message map'>
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                </a>
+            </div>
+        </p>
+    </div>    
+</div>
+<!-- /ko -->
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="2%"></th>
+                    <th width="2%"></th>
+                    <th width="20%">Client Business Outcomes</th>
+                    <th width="25%">Challenges Impacting Outcomes</th>
+                    <th width="25%">HPE Capabilities to Drive Outcomes</th>
+                    <th width="26%"> HPE Evidence</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:data.content">
+                <!-- ko if:$component.editable() -->
+                <tr>
+                    <td>
+                        <!-- ko if:$parent.data.content().length > 1 -->
+                        <a href="#" data-bind="click:$parent.remove"><span class="glyphicon glyphicon-minus-sign"></span></a>
+                        <!-- /ko -->
+                    </td>
+                    <td data-bind="text:($index() + 1)"></td>
+                    <td>    
+                        <textarea class="form-control sd-comment" rows="3" data-bind="value:clientBizDetail"></textarea> 
+                    </td>
+                    <td>
+                        <textarea class="form-control sd-comment" rows="3" data-bind="value:chlgImpactDetail"></textarea> 
+                    </td>
+                    <td>
+                        <textarea class="form-control sd-comment" rows="3" data-bind="value:capabilityDetail"></textarea> 
+                    </td>
+                    <td>
+                        <textarea class="form-control sd-comment" rows="3" data-bind="value:evidenceDetail"></textarea> 
+                    </td>
+                </tr>
+                <!-- /ko -->
+                <!-- ko if:!$component.editable() -->
+                <tr>
+                    <td></td>
+                    <td data-bind="text:($index() + 1)"></td>
+                    <td>
+                        <div class="sd-fake-textarea" data-bind="text:clientBizDetail"></div>
+                    </td>
+                    <td>
+                        <div class="sd-fake-textarea" data-bind="text:chlgImpactDetail"></div>
+                    </td>
+                    <td>
+                        <div class="sd-fake-textarea" data-bind="text:capabilityDetail"></div>
+                    </td>
+                    <td>
+                        <div class="sd-fake-textarea" data-bind="text:evidenceDetail"></div>
+                    </td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- ko if:$component.editable() -->
+<div class="row">
+    <div class="col-lg-12 pull-left">
+        <a class="btn btn-default btn-xs" href="#" data-bind="click:addRow"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+</div>
+<!-- /ko -->
+ 

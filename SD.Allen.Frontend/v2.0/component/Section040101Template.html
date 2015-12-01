@@ -1,0 +1,71 @@
+﻿<!-- ko with:section.data -->
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div id="c1" class="panel-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="control-label"> </label>
+                </div>
+                <div class="col-lg-12" id="sd-offering-content">
+                    <table class="table col-lg-12">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-1"></th>
+                                <th class="col-lg-2">Service Line<br /></th>
+                                <th class="col-lg-2">Offering<br /></th>
+                                <th class="col-lg-3">
+                                    Client Volumes/Metrics (not applicable for projects)
+                                    <a href="#" title="For example 100 FTEs, 1,000 mailboxes, 500 server images."><span class="glyphicon glyphicon-question-sign"></span></a>
+                                </th>
+                                <th class="col-lg-4">Non-Standard Components<br /><i class="text-danger small"> <label class="small"> Mandatory for ITO. Optional for Apps and BPS</label></i></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:content">
+                            <!-- ko if:$component.editable() -->
+                            <tr>
+                                <!--ko if: $data.serviceLine == '' -->
+                                <td><a href="#" data-bind="click:function(index) { $component.removeRow($index()) },visible:$component.editable()"><span class="glyphicon glyphicon-minus-sign"></span></a></td>
+                                <!--/ko-->
+                                <!--ko ifnot: $data.serviceLine == '' -->
+                                <td><a href="#" data-bind="click:function(index) { $component.removeRow($index()) },visible:$component.editable()"><span class="glyphicon glyphicon-minus-sign"></span></a></td>
+                                <!--/ko-->
+                                <!--ko if: $data.serviceLine == '' -->
+                                <td><input type="text" class="form-control" data-bind="value:serviceLine" placeholder="serviceLine required" /></td>
+                                <!--/ko-->
+                                <!--ko ifnot: $data.serviceLine == '' -->
+                                <td data-bind="text:serviceLine"></td>
+                                <!--/ko-->
+                                <!--ko if: $data.offering == '' -->
+                                <td><input type="text" class="form-control" data-bind="value:offering" placeholder="offering required" /></td>
+                                <!--/ko-->
+                                <!--ko ifnot: $data.offering == '' -->
+                                <td data-bind="text:offering"></td>
+                                <!--/ko-->
+                                <td><input type="text" class="form-control" data-bind="value:clientVolume" /></td>
+                                <td>
+                                    <textarea class="form-control sd-comment" rows="3" data-bind="textInput:nStdComponent"></textarea>
+                                </td>
+                            </tr>
+                            <!--/ko-->
+                            <!-- ko ifnot:$component.editable() -->
+                            <tr>
+                                <td></td>
+                                <td data-bind="text:serviceLine"></td>
+                                <td data-bind="text:offering"></td>
+                                <td data-bind="text:clientVolume"></td>
+                                <td data-bind="text:nStdComponent"></td>
+                            </tr>
+                            <!--/ko-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-left">
+                    <a class="btn btn-default btn-xs" href="#" data-bind="click:$component.addRow,visible:$component.editable()"><span class="glyphicon glyphicon-plus"></span></a>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
+<!-- /ko -->

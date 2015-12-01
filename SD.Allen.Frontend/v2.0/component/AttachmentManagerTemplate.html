@@ -1,0 +1,73 @@
+﻿<div class="col-lg-12">
+    <div>
+        <div class="row">
+            <div class="col-lg-8">
+            </div>
+            <!-- ko if: $component.editable()-->  
+            <div class="col-lg-2">
+                <p>
+                    <a href="#" type="button" data-bind="click:$component.fileUploader.chooseFile()">
+                        <span class="glyphicon glyphicon-paperclip"></span> Add attachment
+                    </a>
+                </p>
+                <p>
+                    <span class="text-warning attachment-uploaing-warning"></span>
+                </p>
+            </div>
+            <div class="col-lg-2 pull-right">
+                <p>
+                    <a href="#" type="button" class="popover-option" title="Attachments" data-title="Review Attachments" data-container="body" data-toggle="popover" data-placement="bottom">
+                        Review attachments (<span data-bind="text:fileList().length"></span>)
+                    </a>
+                </p>
+            </div>
+            <!--/ko-->
+            <div id="div-attachmentReview" class="hidden">
+                <div class="col-lg-12">
+                    <div class="row pull-right">
+                        <div class="col-lg-12">
+                            <a id="sd-popover-close" href="#" class="sd-popover-close">Close</a>&nbsp;
+                        </div>
+                    </div>
+                    <!--ko if:fileList().length>0 -->
+                    <div class="row">
+                        <div class="col-lg-12 pull-left">
+                            <ul data-bind='foreach:fileList' class="list-group pull-left">
+                                <li class="list-group-item list-unstyled"><span><img style="width: 16px; height: 16px; border: 0" data-bind="attr:{src:fileTag}" /></span>
+                                    <label data-bind='text:title' class="small"></label>
+                                    &nbsp;|&nbsp;<a class="small" title="Dowload a copy" data-bind="attr:{href:fileUrl}" target="_blank"><span class="glyphicon glyphicon-download"></span></a>
+                                    &nbsp;|&nbsp;<a href="#" class="sd-attachment" title="Remove the attachment" fileName="" data-bind="attr:{id:'sd-file-'+$index()}"><span class="glyphicon glyphicon-remove small" ></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/ko-->
+                    <!--ko if:fileList().length == 0 -->
+                    <div class="row">
+                        <span class="glyphicon glyphicon-info-sign"></span> Choose 'Add attachment' to upload files !
+                    </div>
+                    <!--/ko-->
+                </div>
+            </div>
+            <!-- ko ifnot: $component.editable()-->
+            <div class="col-lg-12">
+                <div class="row">
+                    <strong> All of the Attachments(<span data-bind="text:fileList().length"></span>)</strong>
+                </div>
+                <div class="row">
+                    <ul data-bind='foreach:fileList'>
+                        <li class="list-unstyled">
+                            <span><img style="width: 16px; height: 16px; border: 0" data-bind="attr:{src:fileTag}" /></span>
+                            <label data-bind='text:title' class="small"></label>
+                            &nbsp;|&nbsp;<a class="small" title="Dowload a copy" data-bind="attr:{href:fileUrl}" target="_blank"><span class="glyphicon glyphicon-download"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--/ko-->
+        </div>
+        <div class="col-lg-12 hidden">
+            <input type="file" data-bind="attr: {id: fileUploader.guid+'-file'}, event: {change:fileUploader.attachmentSelected} ">
+        </div>
+    </div>
+</div>

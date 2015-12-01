@@ -115,7 +115,7 @@ define('component/Section030201', function (require) {
         }
         var newData = new SalesApproach(vm.data);
         //compare their properties
-        if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
+        //if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
             $(window).trigger("submitableChanged", {
                 submitFlag: true,
                 obj: newData,
@@ -124,7 +124,7 @@ define('component/Section030201', function (require) {
                 sectionName: argu.sectionName(),
                 sid: sid
             });
-        }
+        //}
     }
 
 

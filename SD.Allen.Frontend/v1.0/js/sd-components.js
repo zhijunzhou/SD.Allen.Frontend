@@ -2649,7 +2649,7 @@ define('component/ReviewAndExtract', function (require) {
     var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
-        TopLink = require("./TopLinkHome"),
+        TopLink = require("./TopLink"),
         appConfig = require('model/AppConfig'),
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./ReviewAndExtractTemplate.html"),
@@ -2773,6 +2773,10 @@ define('component/ReviewAndExtract', function (require) {
                 var href = $(this).attr('href');                
                 requestAPI.FixWorkspace();
             });
+            self.scrollTop = function () {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                return false;
+            }
         };
         viewModel = new reviewAndExtractviewModel(params, componentInfo);
         onViewModelLoad(viewModel);
@@ -2811,7 +2815,8 @@ define('component/ReviewAndExtract', function (require) {
             section040505,
             section040506,
             section0406,
-            section0407
+            section0407,
+            TopLink
         ]
     };
 
@@ -4426,11 +4431,11 @@ define('component/Section0301', function (require) {
             return;
         }
         var newData = new ClientOverview(vm.data);
-        if (JSON.stringify(newData) === JSON.stringify(ko.toJS(vm.draftData))) {
-            alert("Nothing Changed!");
-        } else {
-            //compare their properties
-            if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
+        //if (JSON.stringify(newData) === JSON.stringify(ko.toJS(vm.draftData))) {
+        //    alert("Nothing Changed!");
+        //} else {
+        //    //compare their properties
+        //    if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
                 $(window).trigger("submitableChanged", {
                     submitFlag: true,
                     obj: newData,
@@ -4439,10 +4444,10 @@ define('component/Section0301', function (require) {
                     sectionName: argu.sectionName(),
                     sid: sid
                 });
-            } else {
-                alert("Nothing Changed!");
-            }
-        }        
+        //    } else {
+        //        alert("Nothing Changed!");
+        //    }
+        //}        
     }
 
     return {
@@ -4572,7 +4577,7 @@ define('component/Section030201', function (require) {
         }
         var newData = new SalesApproach(vm.data);
         //compare their properties
-        if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
+        //if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
             $(window).trigger("submitableChanged", {
                 submitFlag: true,
                 obj: newData,
@@ -4581,7 +4586,7 @@ define('component/Section030201', function (require) {
                 sectionName: argu.sectionName(),
                 sid: sid
             });
-        }
+        //}
     }
 
 
@@ -7768,7 +7773,7 @@ define("component/SectionLoader", function (require) {
     }
 
     function retriveDocument(viewModel) {
-        requestAPI.getSectionByIDAndSectionNameSync(viewModel.opptyID(), viewModel.sectionName()).done(function (oppty, xhr) {
+        requestAPI.getSectionByIDAndSectionNameAsync(viewModel.opptyID(), viewModel.sectionName()).done(function (oppty, xhr) {
             //query system
             if (oppty.status != undefined && oppty.status >= 400) {
                 requestAPI.errorOppty('404');
@@ -7835,6 +7840,11 @@ define("component/SectionLoader", function (require) {
                     }
                 }
             });
+
+            self.eTag.subscribe(function (newETag) {
+                viewModel.eTag(newETag);
+            });
+
             self.saveHome = function () {
                 //$('[name="sd-save-section"]').attr('sd-sid', '00').click();                
             }

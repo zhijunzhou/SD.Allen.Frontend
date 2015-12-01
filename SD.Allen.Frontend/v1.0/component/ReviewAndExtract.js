@@ -3,7 +3,7 @@
     var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
-        TopLink = require("./TopLinkHome"),
+        TopLink = require("./TopLink"),
         appConfig = require('model/AppConfig'),
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./ReviewAndExtractTemplate.html"),
@@ -127,6 +127,10 @@
                 var href = $(this).attr('href');                
                 requestAPI.FixWorkspace();
             });
+            self.scrollTop = function () {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                return false;
+            }
         };
         viewModel = new reviewAndExtractviewModel(params, componentInfo);
         onViewModelLoad(viewModel);
@@ -165,7 +169,8 @@
             section040505,
             section040506,
             section0406,
-            section0407
+            section0407,
+            TopLink
         ]
     };
 

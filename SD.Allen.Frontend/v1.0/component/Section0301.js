@@ -155,11 +155,11 @@ define('component/Section0301', function (require) {
             return;
         }
         var newData = new ClientOverview(vm.data);
-        if (JSON.stringify(newData) === JSON.stringify(ko.toJS(vm.draftData))) {
-            alert("Nothing Changed!");
-        } else {
-            //compare their properties
-            if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
+        //if (JSON.stringify(newData) === JSON.stringify(ko.toJS(vm.draftData))) {
+        //    alert("Nothing Changed!");
+        //} else {
+        //    //compare their properties
+        //    if (appUtility.compareJson(newData, ko.toJS(vm.draftData)) === false) {
                 $(window).trigger("submitableChanged", {
                     submitFlag: true,
                     obj: newData,
@@ -168,10 +168,10 @@ define('component/Section0301', function (require) {
                     sectionName: argu.sectionName(),
                     sid: sid
                 });
-            } else {
-                alert("Nothing Changed!");
-            }
-        }        
+        //    } else {
+        //        alert("Nothing Changed!");
+        //    }
+        //}        
     }
 
     return {

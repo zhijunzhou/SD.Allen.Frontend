@@ -1,8 +1,8 @@
 ﻿<div id="sd-section-canvas">
-    <nav id="sd-section-nav" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation" style="margin-top: 52px">
+    <nav id="sd-section-nav" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation" style="margin-top: 129px">
         <a class="navmenu-brand visible-md visible-lg" data-bind="attr:{href:sdContentUrl+'?OpptyID=' + opptyID()}">Solution Design</a>
         <ul class="nav navmenu-nav">
-            <li class="active"><a data-bind="attr:{href:'#'+sectionNavigator()[0].sid}">Opportunity Overview</a></li>
+            <li class="active"><a href="#top" data-bind="click:scrollTop">Opportunity Overview</a></li>
             <li>
                 <a href="#">Business and Solution Context</a>
                 <ul class="navmenu-nav">
@@ -67,29 +67,26 @@
     </nav>
 </div>
 
-<div class="navbar navbar-default navbar-fixed-top panel panel-primary">
-    <div class="list-group">
-        <div class="list-group-item active row">
-            <div class="col-xs-1 col-lg-1">
-                <a id="sd-section-navbtn" class="btn btn-default btn-tip" data-toggle="offcanvas" data-target="#sd-section-nav" data-canvas="#sd-section-detail" data-placement="left" data-bind="attr:{href:'#'+sectionNavigator()[0].sid}" title="Navigate between each sections">
+<div class="nav navbar-fixed-top" style="min-width:1300px;">
+    <sd-toplink></sd-toplink>
+</div>
+<div class="nav navbar-fixed-top test-top" style="margin-top:79px;">
+    <div id="sd-nav-top">
+        <div class="row form-inline ">
+            <div class="col-xs-1 col-md-1 sd-auto-width vertical-align-middle">
+                <a id="sd-section-navbtn" class="btn" data-toggle="offcanvas" data-target="#sd-section-nav" data-canvas="#sd-section-detail" data-placement="left" data-bind="attr:{href:'#'+sectionNavigator()[0].sid}" title="Navigate between each sections">
                     <img src="img/Browse32.png" />
                 </a>
             </div>
-            <div class="col-xs-3 col-lg-8">
-                <h3>Review And Extract</h3>
-            </div>
-            <div class="col-xs-1 col-lg-3">
-                <div class="btn-group pull-right" role="group">
-                    <a class="btn btn-default btn-tip" href="SDMyOppty.aspx" title="View my opportunities">
-                        <img src="img/myoppty32.png" />
-                    </a>
-                </div>
+            <div class="col-xs-11 col-md-11 sd-auto-width vertical-align-middle">
+                <h2 style="color:#ffffff;">
+                    Review And Extract
+                </h2>
             </div>
         </div>
     </div>
 </div>
-
-<div id="sd-section-detail" class="sd-section-content canvas-sliding container-fluid" style="margin-top:80px;">
+<div id="sd-section-detail" class="sd-section-content canvas-sliding container-fluid" style="margin-top:129px;">
     <div class="row form-horizontal">
         <div class="col-lg-12">
             <h3 class="pull-left" data-bind="text:sectionNavigator()[0].title,attr:{id:sectionNavigator()[0].sid}"></h3>
@@ -104,7 +101,7 @@
         </div>
     </div>
     <sd-section-0202 params="{viewModel: $component}"></sd-section-0202>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[2].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[2].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -113,7 +110,7 @@
         </div>
     </div>
     <sd-section-0301 params="{viewModel: $component}"></sd-section-0301>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[3].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[3].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -122,7 +119,7 @@
         </div>
     </div>
     <sd-section-030201 params="{viewModel: $component}"></sd-section-030201>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[4].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[4].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -133,7 +130,7 @@
         </div>
     </div>
     <sd-section-030202 params="{viewModel: $component}"></sd-section-030202>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[5].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[5].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -144,7 +141,7 @@
         </div>
     </div>
     <sd-section-030203 params="{viewModel: $component}"></sd-section-030203>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[6].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[6].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -155,7 +152,7 @@
         </div>
     </div>
     <sd-section-030204 params="{viewModel: $component}"></sd-section-030204>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[7].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[7].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -166,7 +163,7 @@
         </div>
     </div>
     <sd-section-040101 params="{viewModel: $component}"></sd-section-040101>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[8].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[8].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -178,7 +175,7 @@
     </div>
     <sd-section-040102 params="{viewModel: $component}"></sd-section-040102>
     <!-- ko if:pursuitClassfication() ==  'C' || pursuitClassfication() ==  'D'-->
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[9].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[9].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -190,7 +187,7 @@
     </div>
     <sd-section-0402 params="{viewModel: $component}"></sd-section-0402>
     <!--/ko-->
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[10].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[10].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -201,7 +198,7 @@
         </div>
     </div>
     <sd-section-040301 params="{viewModel: $component}"></sd-section-040301>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[11].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[11].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -212,7 +209,7 @@
         </div>
     </div>
     <sd-section-040302 params="{viewModel: $component}"></sd-section-040302>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[12].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[12].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -223,7 +220,7 @@
         </div>
     </div>
     <sd-section-040303 params="{viewModel: $component}"></sd-section-040303>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[13].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[13].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -235,7 +232,7 @@
     </div>
     <sd-section-040304 params="{viewModel: $component}"></sd-section-040304>
     <!-- ko if:involvedGbu() == 'apps' && appsInscope() == true -->
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[14].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[14].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -246,7 +243,7 @@
         </div>
     </div>
     <sd-section-040305 params="{viewModel: $component}"></sd-section-040305>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[15].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[15].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -258,7 +255,7 @@
     </div>
     <sd-section-040306 params="{viewModel: $component}"></sd-section-040306>
     <!--/ko-->
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[16].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[16].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -269,7 +266,7 @@
         </div>
     </div>
     <sd-section-040307 params="{viewModel: $component}"></sd-section-040307>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[17].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[17].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -280,7 +277,7 @@
         </div>
     </div>
     <sd-section-0404 params="{viewModel: $component}"></sd-section-0404>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[18].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[18].sid}"></div>
 
 
     <div class="row form-horizontal">
@@ -292,7 +289,7 @@
         </div>
     </div>
     <sd-section-040501 params="{viewModel: $component}"></sd-section-040501>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[19].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[19].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -304,7 +301,7 @@
     </div>
     <sd-section-040505 params="{viewModel: $component}"></sd-section-040505>
     <!-- ko if:pursuitClassfication() ==  'C' || pursuitClassfication() ==  'D'-->
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[20].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[20].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -316,7 +313,7 @@
     </div>
     <sd-section-040506 params="{viewModel: $component}"></sd-section-040506>
     <!--/ko-->
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[21].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[21].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -327,7 +324,7 @@
         </div>
     </div>
     <sd-section-040503 params="{viewModel: $component}"></sd-section-040503>
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[22].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[22].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">
@@ -339,7 +336,7 @@
     </div>
     <sd-section-0406 params="{viewModel: $component}"></sd-section-0406>
     <!-- ko if:pursuitClassfication() ==  'C' || pursuitClassfication() ==  'D'-->
-    <div class="row" style="height:30px;" data-bind="attr:{id:sectionNavigator()[23].sid}"></div>
+    <div class="row" style="height:75px" data-bind="attr:{id:sectionNavigator()[23].sid}"></div>
 
     <div class="row form-horizontal">
         <div class="col-lg-12">

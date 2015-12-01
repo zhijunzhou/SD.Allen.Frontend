@@ -1,0 +1,39 @@
+﻿<!-- ko with: data -->
+<sd-questionarea params="{title: 'Summarize the HPE Sales Strategy, especially those elements that should influence the solution.',
+                     content: salesStrategyDetail,editable:$component.editable}"></sd-questionarea>
+
+<sd-questionarea params="{title: 'What is the Client Transformation Strategy; e.g., how will HPE transform the client’s business over the life of the contract to achieve the business and technical outcomes expected by the client? ',
+                     content: clientTransformationStrategyDetail,editable:$component.editable}"></sd-questionarea>
+
+<!-- ko if: $component.pursuitClassfication() == 'C' || $component.pursuitClassfication() == 'D' -->
+<sd-questionarea params="{title: 'Why does HPE want to win the deal? What does HPE want to get out of it?',
+                     content: dealBenefitDetail,editable:$component.editable}"></sd-questionarea>
+<!-- /ko -->
+
+<sd-questionarea params="{title: 'What are the critical success factors for the solution, including the transformation approach? ',
+                     content: criticalSuccessFactorDetail,editable:$component.editable}"></sd-questionarea>
+
+<sd-questionarea params="{title: 'What has to happen to make this deal successful for the client and HPE?',
+                     content: dealEssentialDetail,editable:$component.editable}"></sd-questionarea>
+
+<!-- ko if: $component.pursuitClassfication() == 'C' || $component.pursuitClassfication() == 'D' -->
+<sd-questionarea params="{title: 'Summarize the Relationship Strategy, especially those elements that should influence the transformation plan and the solution.',
+                     content: sumryRelationStrategyDetail,editable:$component.editable}"></sd-questionarea>
+<!-- /ko -->
+
+<!-- ko if: $component.pursuitClassfication() == 'C' || $component.pursuitClassfication() == 'D' -->
+<sd-questionarea params="{title: 'Are there any specific solution requirements from anyone on the client relationship map?',
+                     content: specificSolnRqmtDetail,editable:$component.editable}"></sd-questionarea>
+<!-- /ko -->
+
+<!-- ko if: $component.pursuitClassfication() == 'C' || $component.pursuitClassfication() == 'D' -->
+<sd-questionarea params="{title: 'Who are the client supporters or detractors who could impact the solution strategy and decision? Which elements of the strategy or solution design could be positively or negatively impacted by each of these client representatives?',
+                     content: supporterDetractorDetail,editable:$component.editable}"></sd-questionarea>
+<!-- /ko -->
+
+<!-- ko if: $component.pursuitClassfication() == 'C' || $component.pursuitClassfication() == 'D' -->
+<sd-questionarea params="{title: 'What business partners are required to win the deal, and what is the plan for selecting and securing agreement of the partners? Or has selection already occurred? What is the plan for sales, solution and delivery engagement?',
+                     content: bizPartnerDetail,editable:$component.editable}"></sd-questionarea>
+<!-- /ko -->
+
+<!-- /ko -->

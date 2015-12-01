@@ -1,0 +1,46 @@
+<!-- ko with:section.data -->
+<div class="accordion" >
+    <div class="accordion-group">
+        <div class="panel-body">
+            <!-- ko if: $component.editable()-->
+            <p class="bg-success sd-info">
+                <label>Attach a diagram or picture of the HPE end-to-end solution and complete the following. </label>
+            </p>
+            <!--/ko-->
+            <sd-component-attachmentManager params="{viewModel:$component,editable:$component.editable}"></sd-component-attachmentManager>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-lg-12">&nbsp;</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label class="control-label"><em>Current Mode of Operations</em></label>
+                        </div>
+                        <div class="col-lg-4">
+                            <label><em>Transition Mode of Operations</em></label><br />
+                            <small><em>month xx - yy</em></small>
+                        </div>
+                        <div class="col-lg-4">
+                            <label><em>Future Mode of Operations</em></label><br />
+                            <small><em>month yy + 1 to zz</em></small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <sd-questionarea params="{title: '',content:cmoDetail,editable:$component.editable,inLoop:true}"></sd-questionarea>
+                        </div>
+                        <div class="col-lg-4">
+                            <sd-questionarea params="{title: '',content:tmoDetail,editable:$component.editable,inLoop:true}"></sd-questionarea>
+                        </div>
+                        <div class="col-lg-4">
+                            <sd-questionarea params="{title: '',content:fmoDetail,editable:$component.editable,inLoop:true}"></sd-questionarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

@@ -1,0 +1,64 @@
+﻿<style>
+    body.ms-backgroundImage {
+        background: none;
+        min-height: 768px;
+        background-size: 100% cover;
+    }
+</style>
+<sd-toplink></sd-toplink>
+<div class="nav navbar-fixed-top test-top" style="margin-top:79px;">
+    <div id="sd-nav-top">
+        <div class="row form-inline ">
+            <div class="col-xs-12 col-md-12 sd-auto-width vertical-align-middle">
+                <h2 style="color:#ffffff;">
+                    All Opportunities
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="sd-oppty-list" class="panel-primary" style="margin-left:0; margin-top:129px; height:100%;min-width:1300px">
+    <table id="table_sorting_paging" class="table-bordered table-striped table-hover table-condensed dataTable sd-table">
+        <thead>
+            <tr>
+                <th height="35">Opportunity ID</th>
+                <th class="text-nowrap">Opportunity Name</th>
+                <th class="text-nowrap">Client Name</th>
+                <th class="text-nowrap">Bid Manager</th>
+                <th class="text-nowrap">Solution Lead</th>
+                <th class="text-nowrap">Option Available</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:opptyList">
+            <tr>
+                <td class="text-nowrap">
+                    <!-- ko if: isMine -->
+                    <a data-bind="attr: {href: $component.urlPrefix+opptyId}, text: opptyId"></a>
+                    <!-- /ko -->
+                    <!-- ko ifnot: isMine -->
+                    <span data-bind="text:opptyId"></span>
+                    <!-- /ko -->
+                </td>
+                <td data-bind="text:opptyName"></td>
+                <td data-bind="text:clientName"></td>
+                <!-- ko if: contact -->
+                <td>
+                    <!-- ko if: contact.coreTeam.primary.bidMgr -->
+                    <a data-bind="text:contact.coreTeam.primary.bidMgr.title,attr:{href:'mailto:'+contact.coreTeam.primary.bidMgr.email,title:''+contact.coreTeam.primary.bidMgr.email}"></a>
+                    <!-- /ko -->
+                </td>
+                <td>
+                    <!-- ko if: contact.coreTeam.primary.solnLead -->
+                    <a data-bind="text:contact.coreTeam.primary.solnLead.title,attr:{href:'mailto:'+contact.coreTeam.primary.solnLead.email,title:''+contact.coreTeam.primary.solnLead.email}"></a>
+                    <!--/ko-->
+                </td>
+                <!--/ko-->
+                <!-- ko ifnot:contact -->
+                <td></td>
+                <td></td>
+                <!--/ko-->
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

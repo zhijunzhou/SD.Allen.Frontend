@@ -494,15 +494,11 @@ h1, .h1, h2, .h2, h3, .h3 {
     background-color:rgba(91, 71, 103,0.1);
     border-bottom:3px solid rgb(91, 71, 103);
 }
-.sd-nav-top small {
+.sd-oppty-info>div>small {
     font-size:12px;
+    color:#000;
 }
-/*.sd-top-title>h4, .sd-top-title>.input-group>small {
-    background-color:transparent;
-}
-.sd-top-title>.input-group>small {
-    font-size:11px;
-}*/
+
 
 
 

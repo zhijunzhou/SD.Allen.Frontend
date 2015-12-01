@@ -1,0 +1,61 @@
+﻿<!-- ko with:section.data -->
+<div class="accordion" id="accordion1">
+    <div class="accordion-group">
+        <div id="c1" class="panel-body">
+            <p class="bg-success sd-info">
+                <label>Use this table to document the planned approach for workload distribution. Be sure to highlight changes in workload distribution that support the Transformation Strategy and Plan. </label>
+            </p>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered col-lg-12">
+                                <thead>
+                                    <tr>
+                                        <th align="center" class="col-lg-2">In-Scope Offerings</th>
+                                        <th align="center" class="col-lg-2">Client Volumes/Metrics  (N/A for projects)</th>
+                                        <th align="center" class="col-lg-2">Targeted On-Shore Location &<br> Workload %&nbsp;&nbsp;<a href="#" title="Onshore Location is an HPE location that is not an approved Regional Data Center OR a client location."><span class="glyphicon glyphicon-question-sign"></span></a></th>
+                                        <th align="center" class="col-lg-2">Targeted RDC &<br> Workload % &nbsp;&nbsp;<a href="#" title="Approved HPE Regional Data Center (RDC)"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+                                        <th align="center" class="col-lg-2">Targeted GDC &<br> Workload %&nbsp;&nbsp;<a href="#" title="Approved HPE Global Data Center (GDC)"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+                                        <th align="center" class="col-lg-2">
+                                            Comments
+                                            <a href="#" class="popover-content" title="Include any comments required to explain the reasoning for the strategy. Any variations to HPE standard workload placement requirements must be explained.">
+                                                <span class="glyphicon glyphicon-info-sign"></span>
+                                            </a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:content">
+                                    <!-- ko if: $component.editable()-->
+                                    <tr>
+                                        <td data-bind="text:offering"></td>
+                                        <td data-bind="text:clientVolume"></td>
+                                        <td><input type="text" placeholder="" rows="3" class="form-control" data-bind="value:onShoreWorkLoad"></td>
+                                        <td><input type="text" placeholder="" rows="3" class="form-control" data-bind="value:rdcWorkload"></td>
+                                        <td><input type="text" placeholder="" rows="3" class="form-control" data-bind="value:gdcWorkload"></td>
+                                        <td><textarea class="form-control sd-comment" rows="3" data-bind="textInput:comment"></textarea></td>
+                                    </tr>
+                                    <!--/ko-->
+                                    <!-- ko ifnot: $component.editable()-->
+                                    <tr>
+                                        <td data-bind="text:offering"></td>
+                                        <td data-bind="text:clientVolume"></td>
+                                        <td data-bind="text:onShoreWorkLoad"></td>
+                                        <td data-bind="text:rdcWorkload"></td>
+                                        <td data-bind="text:gdcWorkload"></td>
+                                        <td data-bind="text:comment"></td>
+                                    </tr>
+                                    <!--/ko-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hidden">
+    <button name="sd-save-section" data-bind="click: $component.save">Save</button>
+</div>
+<!-- /ko -->

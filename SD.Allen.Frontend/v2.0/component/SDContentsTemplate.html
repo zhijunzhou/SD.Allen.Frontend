@@ -1,0 +1,71 @@
+<style>
+    body.ms-backgroundImage {
+        background: url('img/bg_sd.jpg');
+        min-height: 768px;
+        background-size: 100% cover;
+    }
+    .ms-pub-contentLayout {
+        background-color: transparent;
+    }
+</style>
+<sd-toplink></sd-toplink>
+<div id="sd-section-content">
+    <ul class="nav nav-pills">
+        <li>
+            <div class="section">
+                <!-- ko if: opptyID() != "" -->
+                <a data-bind="attr:{href:sdLoaderUrl+'?sid=0201&OpptyID=' + opptyID()}">Opportunity Overview</a>
+                <!-- /ko -->
+            </div>
+        </li>
+        <li>
+            <div class="section">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">
+                    Client<br /> Solution<br /> Strategy
+                </a>
+                <ul class="dropdown-menu sd-dropdown-menu">
+                    <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=0301&OpptyID=' + opptyID()}">Client and Business Context</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040101&OpptyID=' + opptyID()}">Solution Overview</a></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="section">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    Offering<br /> Design
+                </a>
+                <ul class="dropdown-menu sd-dropdown-menu">
+                    <li><a>Opportunity-Wide Summaries</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a>Offering Solution Designs and Costing</a></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="section">
+                Integrated<br /> Technical<br /> Architecture
+            </div>
+        </li>
+        <li>
+            <div class="section">
+                End-to-End<br /> T&T Solution
+            </div>
+        </li>
+        <li>
+            <div class="section">
+                Critical<br /> Risks,<br /> Assumptions<br /> and<br /> Mitigations
+            </div>
+        </li>
+        <li>
+            <div class="section">
+                Required<br /> Documents
+            </div>
+        </li>
+        <li>
+            <div class="section">
+                Handover to<br /> Delivery
+            </div>
+        </li>
+    </ul>
+</div>

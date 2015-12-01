@@ -111,7 +111,7 @@ define("component/SectionLoader", function (require) {
     }
 
     function retriveDocument(viewModel) {
-        requestAPI.getSectionByIDAndSectionNameSync(viewModel.opptyID(), viewModel.sectionName()).done(function (oppty, xhr) {
+        requestAPI.getSectionByIDAndSectionNameAsync(viewModel.opptyID(), viewModel.sectionName()).done(function (oppty, xhr) {
             //query system
             if (oppty.status != undefined && oppty.status >= 400) {
                 requestAPI.errorOppty('404');
@@ -178,6 +178,11 @@ define("component/SectionLoader", function (require) {
                     }
                 }
             });
+
+            self.eTag.subscribe(function (newETag) {
+                viewModel.eTag(newETag);
+            });
+
             self.saveHome = function () {
                 //$('[name="sd-save-section"]').attr('sd-sid', '00').click();                
             }

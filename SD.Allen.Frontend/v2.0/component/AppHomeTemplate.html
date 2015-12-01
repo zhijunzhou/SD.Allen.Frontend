@@ -1,0 +1,140 @@
+<style>
+    body.ms-backgroundImage {
+        background: url('img/bg_home.jpg') no-repeat center center;
+        min-height: 768px;
+        background-size: cover;
+    }
+    .ms-pub-contentLayout {
+        background-color: transparent;
+    }
+    #sd-toplink { 
+    background-image: url('img/logo_ss.png');
+    background-repeat: no-repeat;
+    background-position: 98% 50%; 
+}
+</style>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div id="sd-toplink" style="height:79px;background-color:#2ad2c9;">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12" style="padding:0 15px;">
+                    <h1 style="color:#000;">
+                        The Solution Source
+                    </h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" style="padding:0 15px;">
+                    <ul class="nav nav-pills top-nav-home">
+                        <li>
+                            <a class="active" href="#">Home</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Help &amp; Reference</a>
+                            <ul class="dropdown-menu ss-dropdown-menu">
+                                <li><a href="FAQ.aspx" target="_blank">FAQ</a></li>
+                                <li><a href="Support Contacts.aspx" target="_blank">Support Contacts</a></li>
+                                <li><a href="#" target="_blank">Reports</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Opportunities</a>
+                            <ul class="dropdown-menu ss-dropdown-menu">
+                                <li><a href="SDSectionLoader.aspx?sid=0201" target="_blank">Create a new opportunity</a></li>
+                                <li><a href="SDMyOppty.aspx" target="_blank">My opportunities</a></li>
+                                <li><a href="SDAllOppty.aspx" target="_blank">All open opportunities</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div id="sd-section-content">
+    <ul class="nav nav-pills">
+        <li>
+            <div class="outlink">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Solution<br />Design</a>
+                <ul class="dropdown-menu ss-dropdown-menu">
+                    <!-- ko foreach: opptyList-->
+                    <!-- ko if:$index() < 5 -->
+                    <li>
+                        <a target="_blank" data-bind="attr: {href: $component.urlPrefix+opptyId}, text: opptyId + ' ('+opptyName+')'">
+                        </a>
+                    </li>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <li role="separator" class="divider"></li>
+                    <li><a href="SDMyOppty.aspx" target="_blank">My Opportunities</a></li>
+                    <li><a href="SDAllOppty.aspx" target="_blank">All Opportunities</a></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="outlink">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Configuration&nbsp;&amp;<br />Costing</a>
+                <ul class="dropdown-menu ss-dropdown-menu">
+                    <li><a href="http://c9w19663.itcs.hpecorp.net/PMD/" target="_blank">PMD</a></li>
+                    <li><a href="http://prime21.sharepoint.hp.com/teams/Apps%20Solutioning/Tools/SDT/SitePages/Home.aspx" target="_blank">SDT-Estimation, Configuration</a></li>
+                    <li><a href="http://kc-enterprise.sharepoint.hp.com/sites/kc7/general%20information%20restricted%20content/forms/folder%20view.aspx" target="_blank">ITO CMT</a></li>
+                    <li><a href="http://ent262.sharepoint.hp.com/teams/GSIDSPTPortal/Shared Documents/Forms/AllItems.aspx?RootFolder=%2Fteams%2FGSIDSPTPortal%2FShared%20Documents%2FMaster%20Tool%20List&FolderCTID=0x01200046CEC4FC70ADD248AFA8B5FF8A4ED602&View=%7b6E9304BE-EE36-4A96-AD7B-441606EC85AE%7d" target="_blank">ITO Cost Models (Master Tool List)</a></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="outlink">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Pricing</a>
+                <ul class="dropdown-menu ss-dropdown-menu">
+                    <li><a href="http://ent71.sharepoint.hp.com/teams/E3T_1/public/home.aspx" target="_blank">E3T-Apps only</a></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="outlink">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">
+                    Solution<br />Guides,<br />SOW<br />Templates
+                </a>
+                <ul class="dropdown-menu ss-dropdown-menu">
+                    <li><a href="http://intranet.hp.com/enterpriseservices/ww/SolutioningSalesSupport/Pages/page.aspx?n=n&q=SolutionGuides" target="_blank">Solution Guide home page</a></li>
+                    <li><a href="http://kc-enterprise.sharepoint.hp.com/sites/kc12/default.aspx" target="_blank">kc12 SOW site</a></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="outlink">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Review &amp; Approvals</a>
+                <ul class="dropdown-menu ss-dropdown-menu">
+                    <li><a href="https://ent301.sharepoint.hp.com/teams/GlobalDealTracker/SitePages/Home.aspx" target="_blank">GDT</a></li>
+                    <li><a href="https://www.soda.svcs.hpe.com/soto/web/landingpage" target="_blank">SODA</a></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="outlink">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Pursuit<br /> Workflow</a>
+                <ul class="dropdown-menu ss-dropdown-menu">
+                    <li><a href="http://intranet.hp.com/enterpriseservices/ww/SolutioningSalesSupport/Pages/page.aspx?n=n&q=PEP" target="_blank">PEP</a></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="outlink">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Solution Development Methodology</a>
+                <ul class="dropdown-menu ss-dropdown-menu">
+                    <li><a href="http://intranet.hp.com/enterpriseservices/ww/SolutioningSalesSupport/Documents/Pursuit_Support_Model/PSM_L0_Master.swf" target="_blank">PSM</a></li>
+                    <li><a href="http://intranet.hp.com/enterpriseservices/ww/SolutioningSalesSupport/Pages/page.aspx?n=n&q=SalesSupportModel" target="_blank">SSM</a></li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="outlink">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">Knowledge Management</a>
+                <ul class="dropdown-menu ss-dropdown-menu">
+                    <li><a href="https://grspro.itcs.hp.com/ius/" target="_blank">GRS</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>

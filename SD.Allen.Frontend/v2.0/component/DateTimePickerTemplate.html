@@ -1,0 +1,6 @@
+﻿<!--ko if: editable()-->
+<input type="text" class="form-control" data-bind="attr: {id: guid}, dateTimePicker: dateTime, dateTimePickerOptions: dateTimePickerOptions" />
+<!--/ko-->
+<!--ko ifnot: editable()-->
+<span data-bind="text:formattext()"></span>
+<!--/ko-->

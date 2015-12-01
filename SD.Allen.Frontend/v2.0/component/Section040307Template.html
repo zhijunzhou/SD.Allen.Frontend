@@ -1,0 +1,26 @@
+<!-- ko with:section.data -->
+<div class="accordion" id="accordion1">
+    <div class="accordion-group">
+        <div id="c7" class="panel-body">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="row">
+                        <!-- ko if: $component.editable()-->
+                        <div class="col-lg-10">
+                            <label class="control-label">
+                                Insert any other graphics or free-form text to explain the solution overview.<br>
+                                If the strategies and approaches for Transition and Transformation have not been fully addressed in other sections, document them here.
+                            </label>
+                        </div>
+                        <!--/ko-->
+                        <div class="col-lg-12">
+                            <sd-component-attachmentManager params="{viewModel:$component,editable:$component.editable}"></sd-component-attachmentManager>
+                        </div>
+                    </div>
+                    <sd-questionarea params="{title:'', content:explainDetail,editable:$component.editable}"></sd-questionarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

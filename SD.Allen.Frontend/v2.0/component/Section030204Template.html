@@ -1,0 +1,72 @@
+﻿<!-- ko with: data -->
+<div class="row">
+    <div class="col-lg-12">
+        <p class="bg-success sd-info">
+            <label>This information may not be applicable for projects.</label>
+        </p>
+    </div>
+</div>
+
+<!-- ko if: $component.pursuitClassfication() == 'C' || $component.pursuitClassfication() == 'D' -->
+<!-- ko if:$component.editable() -->
+<div class="row form-horizontal">
+    <div class="col-lg-3 sd-auto-width"><label class="control-label">Did HPE submit yellow pad pricing?</label></div>
+    <div class="col-lg-1">
+        <select class="form-control sd-auto-width" data-bind="value: isYellowPadPrice">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+    </div>
+    <div data-bind="visible:isYellowPadPrice() == 1 " class="form-inline">
+        <div class="col-lg-1 text-right">
+            <label class="control-label">If yes, is it</label>
+        </div>
+        <div class="col-lg-3 sd-auto-width">
+            <div class="input-group form-horizontal">
+                <input type="number" class="form-control text-right" style="width:55px;" data-bind="textInput:yellowPadPricePercentage" />
+                <span class="input-group-addon">% </span>
+                <select class="selectpicker form-control" data-live-search="true" title="Higher or Lower" data-bind="value:$component.lowOrHigher">
+                    <option value="1">Higher</option>
+                    <option value="-1">Lower</option>
+                </select>
+            </div>            
+        </div>
+        <div class="col-lg-2">
+            <label class="control-label">than the client's base case?</label>
+        </div>
+    </div>    
+</div>
+<!-- /ko -->
+<!-- ko if:!$component.editable() -->
+<div class="row form-horizontal">
+    <div class="col-lg-12 form-inline">
+        <label class="control-label">Did HPE submit yellow pad pricing?</label><i><u class="control-label" data-bind="text:isYellowPadPrice() == 1 ? 'Yes' : 'No'"></u></i>
+        <!-- ko if:isYellowPadPrice() == 1 -->
+        <label class="control-label">If yes, is it &nbsp;</label><u class="control-label" data-bind="text:yellowPadPricePercentage() + '%'"></u>
+        <label class="control-label" data-bind="text:$component.lowOrHigher() == 1 ? 'Higher' : 'Lower'"></label>
+        <label class="control-label">than the client's base case?</label>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+    <!-- ko if: $component.pursuitClassfication() == 'C' || $component.pursuitClassfication() == 'D' -->
+    <sd-questionarea params="{title: 'What has the client said about their pricing expectations (for example, x% less than baseline?)',
+                     content: clientPriceExpectDetail,editable:$component.editable}"></sd-questionarea>
+
+    <sd-questionarea params="{title: 'What information has the client provided about expectations for specific quantitative outcomes beyond overall cost savings? Is there a plan for achieving critical savings milestones as a part of the pricing strategy?',
+                     content: clientPriceStrategyDetail,editable:$component.editable}"></sd-questionarea>
+    <!-- /ko -->
+
+    <sd-questionarea params="{title: 'What are HPE’s principle pricing strategies and approaches; e.g., do they align to or deviate from HPE standards and/or the client requirements?',
+                     content: cmpyPriceStrategyDetail,editable:$component.editable}"></sd-questionarea>
+
+    <!-- ko if: $component.pursuitClassfication() == 'C' || $component.pursuitClassfication() == 'D' -->
+    <sd-questionarea params="{title: 'What do we know about the competitor\'s pricing approaches?',
+                     content: competitorPriceStrategyDetail,editable:$component.editable}"></sd-questionarea>
+    <!-- /ko -->
+
+    <sd-questionarea params="{title: 'Describe any major financial issues or concerns related to the solution; e.g., T&T costs or approach, non-standard KPI requirements to meet cost requirements, SLA penalties, off-shore limitations',
+                     content: majorFinancialIssue,editable:$component.editable}"></sd-questionarea>
+
+    <!-- /ko -->

@@ -1,0 +1,59 @@
+
+<div class="accordion" id="accordion1">
+
+    <div class="accordion-group">
+
+        <div id="c4" class="panel-body">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="5%"></th>
+                                    <th width="30%"><label class="control-label"><em>Challenge/Constraint (check all that apply)</em></label></th>
+                                    <th width="60%"><label class="control-label"><em>Approach (document the solution approach for each Challenge/Constraint)</em></label></th>
+                                    <th width="5%"></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:cmpyChallenge">
+                                <!-- ko if: $component.editable()-->
+                                <tr>
+                                    <!--ko if:challenge() != 'Other' -->
+                                    <td><input type="checkbox" class="checkbox sd-sec-check-040303" data-bind="checked:checked,enable:$component.editable()" /></td>
+                                    <!-- /ko -->
+                                    <!--ko if:challenge() == 'Other' -->
+                                    <td><a href="#" data-bind="click:function(index) { $parent.removeRow($index()) },visible:$component.editable()"><span class="glyphicon glyphicon-minus-sign"></span></a></td>
+                                    <!-- /ko -->
+                                    <!--ko if:isOriginal -->
+                                    <td><span data-bind="text:challengeTitle"></span><!--ko if:hint != '' -->&nbsp;&nbsp;<a href="#" data-bind="attr:{title:hint}"><span class="glyphicon glyphicon-question-sign"></span></a><!-- /ko --></td>
+                                    <!-- /ko -->
+                                    <!--ko ifnot: isOriginal -->
+                                    <td>
+                                        <textarea class="form-control" rows="2" placeholder="Other" data-bind="enable:checked,textInput:challengeTitle"></textarea>
+                                    </td>
+                                    <!-- /ko -->
+                                    <td><textarea class="form-control" rows="2" data-bind="enable:checked,textInput:description"></textarea></td>
+                                </tr>
+                                <!-- /ko -->
+                                <!-- ko ifnot: $component.editable()-->
+                                <tr>
+                                    <td></td>
+                                    <td data-bind="text:challengeTitle"></td>
+                                    <td data-bind="text:description"></td>
+                                    <td></td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 text-left">
+                            <a class="btn btn-default btn-xs" href="#" data-bind="click:addRow,visible:$component.editable()"><span class="glyphicon glyphicon-plus"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

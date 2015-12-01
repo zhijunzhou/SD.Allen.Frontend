@@ -1,0 +1,56 @@
+﻿<!-- ko if:editable() -->
+<!-- ko ifnot:inLoop() -->
+<div class="row" data-bind="event:{mouseover:msoverHandler,mouseout:msoutHandler,mouseup:msupHandler}">
+    <!-- ko if: title() != ''-->
+    <div class="col-lg-12" data-bind="click:unfoldAnsw">
+        <blockquote style="font-size:16px;font-weight:bolder;border-left:4px solid #00b388;">            
+            <span data-bind="text:title" style="cursor:pointer;"></span>&nbsp;&nbsp;            
+            <a><i class="glyphicon" data-bind="css:{'glyphicon-chevron-down':msupHandler(),'glyphicon-chevron-up':!msupHandler()}"></i></a>
+        </blockquote>
+    </div>
+    <!-- /ko -->
+    <div class="col-lg-12">
+        <div class="sd-mce-container" data-bind="attr:{id: guid + '-container'}" style="margin-left:15px;"></div>
+    </div>
+    <!-- ko if: title() != ''-->
+    <div class="col-lg-12 col-md-6 col-xs-6" data-bind="css:{'hidden':!isStartEdit() || !answerVisible()}">
+        <div data-bind="attr: {id: guid}, wysiwyg: content, wysiwygConfig: config" class="sd-fake-textarea" style="margin-left:15px;"></div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: title() == ''-->
+    <div class="col-lg-12 col-md-6 col-xs-6">
+        <div data-bind="attr: {id: guid}, wysiwyg: content, wysiwygConfig: config" class="sd-fake-textarea" style="margin-left:15px;"></div>
+    </div>
+    <!-- /ko -->
+    <div class="col-lg-12 hidden">
+        <input type="file" data-bind="attr: {id: guid+'-file'}, event: {change: attachmentSelected} ">
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if:inLoop() -->
+<div class="row">
+    <div class="col-lg-12">
+        <span data-bind="text:title"></span>
+    </div>
+    <div class="col-lg-12">
+        <div class="sd-mce-container" data-bind="attr:{id: guid + '-container'}"></div>
+    </div>
+    <div class="col-lg-12 col-md-6 col-xs-6">
+        <div data-bind="attr: {id: guid}, wysiwyg: content, wysiwygConfig: config" class="sd-fake-textarea"></div>
+    </div>
+    <div class="col-lg-12 hidden">
+        <input type="file" data-bind="attr: {id: guid+'-file'}, event: {change: attachmentSelected} ">
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko ifnot:editable() -->
+<div class="row">
+    <div class="col-lg-12">
+        <strong><label class="control-label" data-bind="html: title"></label></strong>
+    </div>
+    <div class="col-lg-12">
+        <div data-bind="html:content" class="sd-fake-textarea"></div>
+    </div>
+</div>
+<!-- /ko -->
