@@ -26,7 +26,7 @@
                                     <td><a href="#" data-bind="click:function(index) { $parent.removeRow($index()) },visible:$component.editable()"><span class="glyphicon glyphicon-minus-sign"></span></a></td>
                                     <!-- /ko -->
                                     <!--ko if:isOriginal -->
-                                    <td><span data-bind="text:challengeTitle"></span><!--ko if:hint != '' -->&nbsp;&nbsp;<a href="#" data-bind="attr:{title:hint}"><span class="glyphicon glyphicon-question-sign"></span></a><!-- /ko --></td>
+                                    <td><span data-bind="text:challengeTitle"></span><!--ko if:hint != '' -->&nbsp;&nbsp;<a href="#" data-toggle="tooltip" data-placement="right" class="sd-section-help" data-bind="attr:{title:hint}"><span class="glyphicon glyphicon-question-sign"></span></a><!-- /ko --></td>
                                     <!-- /ko -->
                                     <!--ko ifnot: isOriginal -->
                                     <td>

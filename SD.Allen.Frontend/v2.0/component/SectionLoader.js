@@ -80,6 +80,7 @@ define("component/SectionLoader", function (require) {
                             }
                         } else {
                             updateViewModel(argu.viewModel);
+                            //history.pushState("string-data", "section-name", "?sid=" + saveingSid + "&OpptyID=" + argu.viewModel.opptyID() + "")
                         }                        
                     }
                     

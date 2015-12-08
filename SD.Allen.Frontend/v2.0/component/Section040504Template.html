@@ -3,7 +3,7 @@
         <div id="c1" class="panel-body">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="row">
+                    <div class="row hidden">
                         <div class="row">
                             <div class="col-lg-10">
                                 <label class="control-label">
@@ -77,8 +77,33 @@
                             </div>
                         </div>
                     </div>
-
-
+                </div>
+                <div class="col-lg-12">
+                    <table class="table col-lg-12">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-2">Service Line<br /></th>
+                                <th class="col-lg-2">Offering<br /></th>
+                                <th class="col-lg-4" align="center">
+                                    Solution Design Details Per Offering<br>
+                                    (FMO/TMO/CMO, Diagrams, Peer Review Content, other details)
+                                </th>
+                                <th class="col-lg-4">Offering Cost Model</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:content">
+                            <tr>
+                                <td data-bind="text:serviceLine"></td>
+                                <td data-bind="text:offering"></td>
+                                <td>
+                                    <sd-component-documents params="{viewModel:$component,docs:solutionDesignDetail}"></sd-component-documents>
+                                </td>
+                                <td>
+                                    <sd-component-documents params="{viewModel:$component,docs:offeringCostModel}"></sd-component-documents>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

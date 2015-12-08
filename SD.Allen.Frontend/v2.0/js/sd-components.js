@@ -630,34 +630,34 @@ define('model/RequestAPI', function (require) {
             new SectionNavigator('0201', 'Opportunity Overview', '', '0202', 'opportunity-data'),
             new SectionNavigator('0202', 'Pursuit Team Contacts', '0201', '0301', 'contacts'),
             new SectionNavigator('0301', 'Client Overview and Decision Factors', '0202', '030201', 'client-overview'),
-            new SectionNavigator('030201', 'HPE Win Strategy > Sales Approach', '0301', '030202', 'sales-approach'),
-            new SectionNavigator('030202', 'HPE Win Strategy > Competitors', '030201', '030203', 'competitors'),
-            new SectionNavigator('030203', 'HPE Win Strategy > Message Map/Value Proposition', '030202', '030204', 'map-value-propositions'),
-            new SectionNavigator('030204', 'HPE Win Strategy > Pricing Approach', '030203', '040101', 'pricing-approach'),
-            new SectionNavigator('040101', 'Scope > All Offerings', '030204', '040102', 'all-offerings'),
-            new SectionNavigator('040102', 'Scope > Key Scope Items', '040101',
+            new SectionNavigator('030201', 'Sales Approach', '0301', '030202', 'sales-approach'),
+            new SectionNavigator('030202', 'Competitors', '030201', '030203', 'competitors'),
+            new SectionNavigator('030203', 'Message Map/Value Proposition', '030202', '030204', 'map-value-propositions'),
+            new SectionNavigator('030204', 'Pricing Approach', '030203', '040101', 'pricing-approach'),
+            new SectionNavigator('040101', 'All Offerings', '030204', '040102', 'all-offerings'),
+            new SectionNavigator('040102', 'Key Scope Items', '040101',
                 (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040301' : '0402', 'key-scope-items'),
             new SectionNavigator('0402', 'Current State Client Architecture', '040102', '040301', 'client-architecture'),
-            new SectionNavigator('040301', 'Solution Approach > Summary',
+            new SectionNavigator('040301', 'Summary',
                 (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040102' : '0402', '040302', 'summary'),
-            new SectionNavigator('040302', 'Solution Approach > Outsourcing CMO/TMO/FMO', '040301', '040303', 'xmo'),
-            new SectionNavigator('040303', 'Solution Approach > HR Solution', '040302', '040304', 'hr-solutions'),
-            new SectionNavigator('040304', 'Solution Approach > HPE Internal Challenges and Constraints', '040303',
+            new SectionNavigator('040302', 'Outsourcing CMO/TMO/FMO', '040301', '040303', 'xmo'),
+            new SectionNavigator('040303', 'HR Solution', '040302', '040304', 'hr-solutions'),
+            new SectionNavigator('040304', 'HPE Internal Challenges and Constraints', '040303',
                 (involvedGbu == 'apps' && appsInscope) ? '040305' : '040307', 'company-challenges'),
-            new SectionNavigator('040305', 'Solution Approach > Design Parameters', '040304', '040306', 'design-params'),
-            new SectionNavigator('040306', 'Solution Approach > Deployment Strategy', '040305', '040307', 'deploy-strategy'),
-            new SectionNavigator('040307', 'Solution Approach > Additional Information',
+            new SectionNavigator('040305', 'Design Parameters', '040304', '040306', 'design-params'),
+            new SectionNavigator('040306', 'Deployment Strategy', '040305', '040307', 'deploy-strategy'),
+            new SectionNavigator('040307', 'Additional Information',
                 (involvedGbu == 'apps' && appsInscope) ? '040306' : '040304', '0404', 'additional-info'),
             new SectionNavigator('0404', 'Innovative Aspects of the Solution', '040307', '040501', 'innovative-aspects'),
             new SectionNavigator('040501', 'Delivery Strategies > Delivery Location Targets', '0404', '040505', 'location-targets'),
             new SectionNavigator('040505', 'Delivery Strategies > In-Scope Services Delivery Responsibility', '040501',
                 (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040503' : '040506', 'service-delivery-responsibilities'),
             new SectionNavigator('040506', 'Delivery Strategies > Client-Retained Services Delivery Responsibility', '040505', '040503', 'client-retained-responsibilities'),
-            new SectionNavigator('040503', 'Delivery Strategies > ESM Tooling and Automation Approach',
-                (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040505' : '040506', '0406', 'ems-tooling'),
+            new SectionNavigator('040503', 'Delivery Strategies > Service Management & Integration Approach',
+                (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040505' : '040506', '0406', 'service-management'),
             new SectionNavigator('0406', 'Key Client Constraints', '040503',
                 (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '0201' : '0407', 'key-client-constraints'),
-            new SectionNavigator('0407', 'Summary Costing & FTE Reports—Costing Approach', '0406', '0201', 'costing-reports')
+            new SectionNavigator('0407', 'Summary Costing Approach', '0406', '0201', 'costing-reports')
         ]
     }
 
@@ -684,112 +684,112 @@ define('model/RequestAPI', function (require) {
     }
 
     //file and folder operatetion
-        function uploadFile(libname,filename,file) {                
-            uploadFileSync(libname, filename, file);
-        }
+    function uploadFile(libname, filename, file) {
+        uploadFileSync(libname, filename, file);
+    }
 
-        //foldername : /OPP-10872923/1
-        function uploadtoSpecificFolder(libname, foldername, filename, file) {
-            var dfd = $.Deferred();
-            var reader = new FileReader();
-            reader.onloadend = function (evt) {
-                if (evt.target.readyState == FileReader.DONE) {
-                    var buffer = evt.target.result;
-                    var completeUrl = _spPageContextInfo.siteServerRelativeUrl
-                      + "/_api/web/getfolderbyserverrelativeurl('" + libname + foldername + "')/files"
-                      + "/add(overwrite=true,url='" + filename + "')";
+    //foldername : /OPP-10872923/1
+    function uploadtoSpecificFolder(libname, foldername, filename, file) {
+        var dfd = $.Deferred();
+        var reader = new FileReader();
+        reader.onloadend = function (evt) {
+            if (evt.target.readyState == FileReader.DONE) {
+                var buffer = evt.target.result;
+                var completeUrl = _spPageContextInfo.siteServerRelativeUrl
+                  + "/_api/web/getfolderbyserverrelativeurl('" + libname + foldername + "')/files"
+                  + "/add(overwrite=true,url='" + filename + "')";
 
-                    $.ajax({
-                        url: completeUrl,
-                        type: "POST",
-                        data: buffer,
-                        processData: false,
-                        headers: {
-                            "accept": "application/json;odata=verbose",
-                            "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-                        },
-                        success: function (data) {
-                            dfd.resolve(data);
-                        },
-                        complete: function (data) {
-                            dfd.resolve(data);
-                        },
-                        error: function (err) {
-                            dfd.resolve(err);
-                        }
-                    });
-                }
-            };
-            reader.readAsArrayBuffer(file);
-            return dfd.promise();
-        }
+                $.ajax({
+                    url: completeUrl,
+                    type: "POST",
+                    data: buffer,
+                    processData: false,
+                    headers: {
+                        "accept": "application/json;odata=verbose",
+                        "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                    },
+                    success: function (data) {
+                        dfd.resolve(data);
+                    },
+                    complete: function (data) {
+                        dfd.resolve(data);
+                    },
+                    error: function (err) {
+                        dfd.resolve(err);
+                    }
+                });
+            }
+        };
+        reader.readAsArrayBuffer(file);
+        return dfd.promise();
+    }
 
-        //Upload file synchronously
-        function uploadFileSync(libname, filename, file) {
-            var dfd = $.Deferred();
-            var reader = new FileReader();
-            reader.onloadend = function (evt) {
-                if (evt.target.readyState == FileReader.DONE) {
-                    var buffer = evt.target.result;
-                    var completeUrl = _spPageContextInfo.siteServerRelativeUrl
-                      + "/_api/web/lists/getByTitle('" + libname + "')"
-                      + "/RootFolder/Files/add(url='" + filename + "',overwrite='true')";
+    //Upload file synchronously
+    function uploadFileSync(libname, filename, file) {
+        var dfd = $.Deferred();
+        var reader = new FileReader();
+        reader.onloadend = function (evt) {
+            if (evt.target.readyState == FileReader.DONE) {
+                var buffer = evt.target.result;
+                var completeUrl = _spPageContextInfo.siteServerRelativeUrl
+                  + "/_api/web/lists/getByTitle('" + libname + "')"
+                  + "/RootFolder/Files/add(url='" + filename + "',overwrite='true')";
 
-                    $.ajax({
-                        url: completeUrl,
-                        type: "POST",
-                        data: buffer,
-                        processData: false,
-                        headers: {
-                            "accept": "application/json;odata=verbose",
-                            "X-RequestDigest": $("#__REQUESTDIGEST").val(),                        
-                        },
-                        success : function(data) {
-                            dfd.resolve(data);
-                        },
-                        complete: function (data) {
-                            dfd.resolve(data);
-                        },
-                        error: function (err) {
-                            dfd.resolve(err);
-                        }
-                    });
-                }
-            };
-            reader.readAsArrayBuffer(file);
-            return dfd.promise();
-        }
+                $.ajax({
+                    url: completeUrl,
+                    type: "POST",
+                    data: buffer,
+                    processData: false,
+                    headers: {
+                        "accept": "application/json;odata=verbose",
+                        "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                    },
+                    success: function (data) {
+                        dfd.resolve(data);
+                    },
+                    complete: function (data) {
+                        dfd.resolve(data);
+                    },
+                    error: function (err) {
+                        dfd.resolve(err);
+                    }
+                });
+            }
+        };
+        reader.readAsArrayBuffer(file);
+        return dfd.promise();
+    }
 
-        function createFolder(libname, opptyId, version) {
-            var dfd = $.Deferred();
-            var url = _spPageContextInfo.siteServerRelativeUrl
-            + "/_api/web/lists/getByTitle('" + libname + "')"
-            + "/RootFolder/Folders/add(url='" + opptyId + "')";
-            $.ajax({
-                "url": url,
-                "type": "POST",
-                "headers": {
-                    "accept": "application/json; odata=verbose",
-                    "content-type": "application/json; odata=verbose",
-                    "X-RequestDigest": $("#__REQUESTDIGEST").val()
-                },
-                success: function (data) {
-                    //dfd.resolve(data);
-                    createSubFolder(libname, opptyId, version);
-                },
-                complete: function (data) {
-                    dfd.resolve(data);
-                },
-                error: function (err) {
-                    dfd.resolve(err);
-                }
-            });
-        }    
-    
-        function createSubFolder(libname, opptyId, version) {
+    function createFolder(libname, opptyId, version) {
         var dfd = $.Deferred();
         var url = _spPageContextInfo.siteServerRelativeUrl
-            + "/_api/Web/Folders/add('"+libname+"/"+opptyId+"/"+version+"')";
+        + "/_api/web/lists/getByTitle('" + libname + "')"
+        + "/RootFolder/Folders/add(url='" + opptyId + "')";
+        $.ajax({
+            "url": url,
+            "type": "POST",
+            "headers": {
+                "accept": "application/json; odata=verbose",
+                "content-type": "application/json; odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            success: function (data) {
+                //dfd.resolve(data);
+                createSubFolder(libname, opptyId, version);
+            },
+            complete: function (data) {
+                dfd.resolve(data);
+            },
+            error: function (err) {
+                dfd.resolve(err);
+            }
+        });
+    }
+
+    function createSubFolder(libname, opptyId, version) {
+        var dfd = $.Deferred();
+        var url = _spPageContextInfo.siteServerRelativeUrl
+            + "/_api/Web/Folders/add('" + libname + "/" + opptyId + "/" + version + "')";
         $.ajax({
             "url": url,
             "type": "POST",
@@ -809,258 +809,263 @@ define('model/RequestAPI', function (require) {
             }
         });
     }
-    
-        function getAllAttachments(opptyId) {
-            var dfd = $.Deferred();
-            var ver = sp.app.config.ReleaseVersion;
-            var libname = sp.app.config.ListCollection.SSDocLib;
-            var url = _spPageContextInfo.siteServerRelativeUrl
-            + "/_api/web/getfolderbyserverrelativeurl('"+libname+"/"+opptyId+"/"+ver+"')/Files";
-            $.ajax({
-                url: url,
-                type: "get",
-                dataType: "JSON",
-                headers: {
-                    "accept": "application/JSON;odata=verbose",
-                    "content-type": "application/JSON;odata=verbose",
-                    "X-RequestDigest": $("#__REQUESTDIGEST").val()
-                },
-                success: function (data) {
-                    dfd.resolve(data);
-                },
-                error: function (err) {
-                    dfd.resolve(err);
-                }
-            });
-            return dfd.promise();
-        }
+
+    function getAllAttachments(opptyId) {
+        var dfd = $.Deferred();
+        var ver = sp.app.config.ReleaseVersion;
+        var libname = sp.app.config.ListCollection.SSDocLib;
+        var url = _spPageContextInfo.siteServerRelativeUrl
+        + "/_api/web/getfolderbyserverrelativeurl('" + libname + "/" + opptyId + "/" + ver + "')/Files";
+        $.ajax({
+            url: url,
+            type: "get",
+            dataType: "JSON",
+            headers: {
+                "accept": "application/JSON;odata=verbose",
+                "content-type": "application/JSON;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            success: function (data) {
+                dfd.resolve(data);
+            },
+            error: function (err) {
+                dfd.resolve(err);
+            }
+        });
+        return dfd.promise();
+    }
 
     //Oppty operation
-        function getAllOpptyAsync() {
-            var dfd = $.Deferred();
-            $.ajax({
-                url: sp.app.config.ApiStaging.Staging1 + '/api/documents',
-                method: 'GET',
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
-                }
-            }).done(function (data, status, xhr) {
-                dfd.resolve(data);
-            }).fail(function (xhr) {
+    function getAllOpptyAsync() {
+        var dfd = $.Deferred();
+        $.ajax({
+            url: sp.app.config.ApiStaging.Staging1 + '/api/documents',
+            method: 'GET',
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
+            }
+        }).done(function (data, status, xhr) {
+            dfd.resolve(data);
+        }).fail(function (xhr) {
+            dfd.resolve(xhr);
+        });
+        return dfd.promise();
+    }
+
+    function getMyOpptyAsyc() {
+        var dfd = $.Deferred();
+        $.ajax({
+            url: sp.app.config.ApiStaging.Staging1 + '/api/documents/my',
+            method: 'GET',
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
+            }
+        }).done(function (data, status, xhr) {
+            dfd.resolve(data);
+        }).fail(function (xhr) {
+            dfd.resolve(xhr);
+        });
+        return dfd.promise();
+    }
+
+    function createOpptyDocument(data) {
+        var dfd = $.Deferred();
+        $.ajax({
+            url: sp.app.config.ApiStaging.Staging1 + '/api/documents',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
+            }
+        }).done(function (data, status, xhr) {
+            dfd.resolve(data);
+        }).fail(function (xhr) {
+            dfd.resolve(xhr);
+        });
+        return dfd.promise();
+    }
+
+    function getOpptyByIDAsync(opptyID) {
+        var dfd = $.Deferred();
+        $.ajax({
+            url: sp.app.config.ApiStaging.Staging1 + '/api/documents/' + opptyID,
+            method: 'GET',
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
+            }
+        }).done(function (data, status, xhr) {
+            dfd.resolve(data, xhr);
+        }).fail(function (xhr) {
+            dfd.resolve(xhr);
+        });
+        return dfd.promise();
+    }
+
+    function getOpptyByIDSync(opptyID) {
+        var dfd = $.Deferred();
+        $.ajax({
+            url: sp.app.config.ApiStaging.Staging1 + '/api/documents/' + opptyID,
+            method: 'GET',
+            async: false,
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
+            }
+        }).done(function (data, status, xhr) {
+            dfd.resolve(data, xhr);
+        }).fail(function (xhr) {
+            dfd.resolve(xhr);
+        });
+        return dfd.promise();
+    }
+
+    function getSectionByIDAndSectionNameAsync(opptyID, sectionName) {
+        var dfd = $.Deferred();
+        $.ajax({
+            url: sp.app.config.ApiStaging.Staging1 + '/api/documents/' + opptyID + '/sections/' + sectionName,
+            method: 'GET',
+            contentType: 'application/json',
+            headers: {
+
+                'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
+            }
+        }).done(function (data, status, xhr) {
+            dfd.resolve(data, xhr);
+        }).fail(function (xhr) {
+            dfd.resolve(xhr);
+        });
+        return dfd.promise();
+    }
+
+    function getSectionByIDAndSectionNameSync(opptyID, sectionName) {
+        var dfd = $.Deferred();
+        $.ajax({
+            url: sp.app.config.ApiStaging.Staging1 + '/api/documents/' + opptyID + '/sections/' + sectionName,
+            method: 'GET',
+            async: false,
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
+            }
+        }).done(function (data, status, xhr) {
+            dfd.resolve(data, xhr);
+        }).fail(function (xhr) {
+            dfd.resolve(xhr);
+        });
+        return dfd.promise();
+    }
+
+    //section : update section data
+    function updateSection(opptyID, sectionName, section, eTag) {
+        var dfd = $.Deferred();
+        $.ajax({
+            url: sp.app.config.ApiStaging.Staging1 + '/api/documents/' + opptyID + '/sections/' + sectionName,
+            method: 'POST',
+            data: JSON.stringify(section),
+            contentType: 'application/json',
+            headers: {
+                'If-Match': eTag,
+                'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
+            },
+            success: function (data, textStatus, jqXHR) {
+                dfd.resolve(data, textStatus, jqXHR);
+            },
+            error: function (xhr) {
                 dfd.resolve(xhr);
-            });
-            return dfd.promise();
-        }
-
-        function getMyOpptyAsyc() {
-            var dfd = $.Deferred();
-            $.ajax({
-                url: sp.app.config.ApiStaging.Staging1 + '/api/documents/my',
-                method: 'GET',
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
-                }
-            }).done(function (data, status, xhr) {
-                dfd.resolve(data);
-            }).fail(function (xhr) {
-                dfd.resolve(xhr);
-            });
-            return dfd.promise();
-        }
-
-        function createOpptyDocument(data) {
-            var dfd = $.Deferred();
-            $.ajax({
-                url: sp.app.config.ApiStaging.Staging1 + '/api/documents',
-                method: 'POST',
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
-                }
-            }).done(function (data, status, xhr) {
-                dfd.resolve(data);
-            }).fail(function (xhr) {
-                dfd.resolve(xhr);
-            });            
-            return dfd.promise();
-        }
-
-        function getOpptyByIDAsync(opptyID) {
-            var dfd = $.Deferred();
-            $.ajax({
-                url: sp.app.config.ApiStaging.Staging1 + '/api/documents/' + opptyID,
-                method: 'GET',
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
-                }
-            }).done(function (data, status, xhr) {
-                dfd.resolve(data, xhr);
-            }).fail(function (xhr) {
-                dfd.resolve(xhr);
-            });
-            return dfd.promise();
-        }
-
-        function getOpptyByIDSync(opptyID) {
-            var dfd = $.Deferred();
-            $.ajax({
-                url: sp.app.config.ApiStaging.Staging1 + '/api/documents/' + opptyID,
-                method: 'GET',
-                async:false,
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
-                }
-            }).done(function (data, status, xhr) {
-                dfd.resolve(data, xhr);
-            }).fail(function (xhr) {
-                dfd.resolve(xhr);
-            });
-            return dfd.promise();
-        }
-
-        function getSectionByIDAndSectionNameAsync(opptyID, sectionName) {
-            var dfd = $.Deferred();
-            $.ajax({
-                url: sp.app.config.ApiStaging.Staging1 + '/api/documents/' + opptyID + '/sections/'+ sectionName,
-                method: 'GET',
-                contentType: 'application/json',
-                headers: {
-
-                    'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
-                }
-            }).done(function (data, status, xhr) {
-                dfd.resolve(data, xhr);
-            }).fail(function (xhr) {
-                dfd.resolve(xhr);
-            });
-            return dfd.promise();
-        }
-
-        function getSectionByIDAndSectionNameSync(opptyID, sectionName) {
-            var dfd = $.Deferred();
-            $.ajax({
-                url: sp.app.config.ApiStaging.Staging1 + '/api/documents/' + opptyID + '/sections/' + sectionName,
-                method: 'GET',
-                async: false,
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
-                }
-            }).done(function (data, status, xhr) {
-                dfd.resolve(data, xhr);
-            }).fail(function (xhr) {
-                dfd.resolve(xhr);
-            });
-            return dfd.promise();
-        }
-
-        //section : update section data
-        function updateSection(opptyID,sectionName,section,eTag) {
-            var dfd = $.Deferred();
-            $.ajax({
-                url: sp.app.config.ApiStaging.Staging1 + '/api/documents/'+opptyID+'/sections/'+ sectionName,
-                method: 'POST',
-                data: JSON.stringify(section),
-                contentType: 'application/json',
-                headers: {
-                    'If-Match': eTag,
-                    'Authorization': 'Basic ' + btoa(_hpUserName + ':K8gNpSnj3p')
-                }, 
-                success: function (data, textStatus, jqXHR) {
-                    dfd.resolve(data, textStatus, jqXHR);
-                },
-                error: function (xhr) {
-                    dfd.resolve(xhr);
-                }
-            });
-            return dfd.promise();
-        }
+            }
+        });
+        return dfd.promise();
+    }
 
     //error message processing
-        function errorOppty(code) {
-            switch (code) {
-                case '400': 
-                    alert("You don't have OpptyID in your url! You will redirect to My Opportunity Page!"); 
-                    window.location.href = sp.app.config.ENV.siteRelativeUrl + "/SitePages/SDMyOppty.aspx"; break;
-                case '404':
-                    alert("OpptyID is not avaiable! Please try another or navigator to home page!");
-                    window.location.href = sp.app.config.ENV.siteRelativeUrl + "/SitePages/SDMyOppty.aspx"; break;                
-                default: break;
-            }
+    function errorOppty(code) {
+        switch (code) {
+            case '400':
+                alert("You don't have OpptyID in your url! You will redirect to My Opportunity Page!");
+                window.location.href = sp.app.config.ENV.siteRelativeUrl + "/SitePages/SDMyOppty.aspx"; break;
+            case '404':
+                alert("OpptyID is not avaiable! Please try another or navigator to home page!");
+                window.location.href = sp.app.config.ENV.siteRelativeUrl + "/SitePages/SDMyOppty.aspx"; break;
+            default: break;
         }
+    }
 
-        function errorUpdateSection(data, sid, opptyID) {
-            var navTitle = createSectionModel(undefined, undefined, undefined);
-            var secName = sid != null ? getSectionTitleBySid(navTitle, sid) : "";
-            var updateMsg = "";
-            var error = 0;
-            if (data == undefined) {
-                error = 0;
-                updateMsg = "Update Section  Successfully!";//(" + secName + ")
-            } else if (data.status >= 400 && data.status < 500) {
-                error = data.status;
-                if (sid == null) {
+    function errorUpdateSection(data, sid, opptyID) {
+        var navTitle = createSectionModel(undefined, undefined, undefined);
+        var secName = sid != null ? getSectionTitleBySid(navTitle, sid) : "";
+        var updateMsg = "";
+        var error = 0;
+        if (data == undefined) {
+            error = 0;
+            updateMsg = "Update Section  Successfully!";//(" + secName + ")
+        } else if (data.status >= 400 && data.status < 500) {
+            error = data.status;
+            if (sid == null) {
+                if (data.status == 400) {
                     updateMsg = "Error: The length of the URL for this request exceeds the configured maxUrlLength value or object file too large .";
-                } else {
-                    var errorText = JSON.parse(data.responseText);
-                    updateMsg = "Error: " + error + " Section: " + secName + ", Message: " + errorText.Message;
                 }
-            } else if (data.status >= 500) {
-                error = data.status;
-                updateMsg = "Error occur in the server, please contact the server administrator!";
+                else {
+                    updateMsg = "Error code: " + data.status;
+                }
+            } else {
+                var errorText = JSON.parse(data.responseText);
+                updateMsg = "Error: " + error + " Section: " + secName + ", Message: " + errorText.Message;
             }
-            $(window).trigger("generateMsg", [secName, error, updateMsg]);
-            FixWorkspace();
+        } else if (data.status >= 500) {
+            error = data.status;
+            updateMsg = "Error occur in the server, please contact the server administrator!";
         }
+        $(window).trigger("generateMsg", [secName, error, updateMsg]);
+        FixWorkspace();
+    }
 
     //Unified handling save method
-        function unifiedSave(submitFlag, obj, argu) {
-            $(window).trigger("submitableChanged", {
-                submitFlag: submitFlag,
-                obj: obj,
-                viewModel:argu
-            });
-        }
+    function unifiedSave(submitFlag, obj, argu) {
+        $(window).trigger("submitableChanged", {
+            submitFlag: submitFlag,
+            obj: obj,
+            viewModel: argu
+        });
+    }
 
     //Fix the top banner was covered
-        function FixWorkspace() {
-            // if you are using a header that is affixed to the top (i.e. SharePoint Ribbon) put the ID or class here to change the workspace height accordingly.
-            var header = '#suiteBar';
-            var width = $(window).width();
-            var height;
-            if ($(header).length) {
-                height = $(window).height() - $(header).height();
-            } else {
-                height = $(window).height();
-            }
-            $('#s4-workspace').width(width).height(height);
+    function FixWorkspace() {
+        // if you are using a header that is affixed to the top (i.e. SharePoint Ribbon) put the ID or class here to change the workspace height accordingly.
+        var header = '#suiteBar';
+        var width = $(window).width();
+        var height;
+        if ($(header).length) {
+            height = $(window).height() - $(header).height();
+        } else {
+            height = $(window).height();
         }
+        $('#s4-workspace').width(width).height(height);
+    }
 
-        return {
-            createSectionModel: createSectionModel,
-            createFolder: createFolder,
-            uploadFile: uploadFile,
-            uploadtoSpecificFolder: uploadtoSpecificFolder,
-            createOpptyDocument: createOpptyDocument,
-            getAllAttachments:getAllAttachments,
-            getAllOpptyAsync: getAllOpptyAsync,
-            getMyOpptyAsyc:getMyOpptyAsyc,
-            getSectionByIDAndSectionNameAsync: getSectionByIDAndSectionNameAsync,
-            getSectionByIDAndSectionNameSync:getSectionByIDAndSectionNameSync,
-            getOpptyByIDAsync: getOpptyByIDAsync,
-            updateSection: updateSection,
-            errorOppty: errorOppty,
-            getOpptyByIDSync:getOpptyByIDSync,
-            errorUpdateSection: errorUpdateSection,
-            getSectionNameBySid: getSectionNameBySid,
-            getSectionTitleBySid:getSectionTitleBySid,
-            FixWorkspace: FixWorkspace,
-            unifiedSave: unifiedSave
+    return {
+        createSectionModel: createSectionModel,
+        createFolder: createFolder,
+        uploadFile: uploadFile,
+        uploadtoSpecificFolder: uploadtoSpecificFolder,
+        createOpptyDocument: createOpptyDocument,
+        getAllAttachments: getAllAttachments,
+        getAllOpptyAsync: getAllOpptyAsync,
+        getMyOpptyAsyc: getMyOpptyAsyc,
+        getSectionByIDAndSectionNameAsync: getSectionByIDAndSectionNameAsync,
+        getSectionByIDAndSectionNameSync: getSectionByIDAndSectionNameSync,
+        getOpptyByIDAsync: getOpptyByIDAsync,
+        updateSection: updateSection,
+        errorOppty: errorOppty,
+        getOpptyByIDSync: getOpptyByIDSync,
+        errorUpdateSection: errorUpdateSection,
+        getSectionNameBySid: getSectionNameBySid,
+        getSectionTitleBySid: getSectionTitleBySid,
+        FixWorkspace: FixWorkspace,
+        unifiedSave: unifiedSave
     }
 
 });
@@ -1758,10 +1763,17 @@ define('component/QuestionArea', function (require) {
     function insertAttachment(viewModel) {
         var file = viewModel.fileUploader.prop('files')[0],
             extension = extractFileExtenionName(file.name).toLowerCase();
+        sp.app.workingDialog.show("Uploading...");
         requestAPI.uploadtoSpecificFolder(sp.app.config.ListCollection.SSDocLib, "/" + viewModel.opptyID() + "/" + sp.app.config.ReleaseVersion, file.name, file).done(function (data) {
+            sp.app.workingDialog.hide("Uploading...");
             //insert hyperlink to content
-            if (data.status != undefined && data.status == 400) {
-                requestAPI.errorUpdateSection(data,null,null);
+            if (data.status != undefined && data.status > 300) {
+                requestAPI.errorUpdateSection(data, null, null);
+                sp.app.workingDialog.show("Upload attachment failed");
+                setTimeout(function () {
+                    sp.app.workingDialog.hide("Upload attachment failed");
+                }, 5000);
+                return;
             } else {
                 var fileUrl = nth_occurrence(data.d.ServerRelativeUrl, '/' + sp.app.config.ReleaseVersion + '/');
                 var fileHtml = '';
@@ -2698,7 +2710,7 @@ define('component/AttachmentManager', function (require) {
         jasnybs = require('jasnybs'),
         templateHtml = require("text!./AttachmentManagerTemplate.html"),
 		requestAPI = require('model/RequestAPI'),
-        
+
         appUtility = require('util/AppUtility'),
         vm = {};
 
@@ -2763,7 +2775,7 @@ define('component/AttachmentManager', function (require) {
                 showAttachment();
             }
         });
-        
+
         //$(document).off('[id^=sd-file-]', 'click');
         $(document).delegate('[id^=sd-file-]', 'click', function (e) {
             e.stopPropagation();
@@ -2845,7 +2857,7 @@ define('component/AttachmentManager', function (require) {
             var fileTag = computePicSrc(file.name);
             vm.attachment.push({ title: file.name, link: sp.app.config.ReleaseVersion + "/" + file.name });
             if (vm.attachmentLoaded) {
-            vm.fileList.push(new attachment(file.name, sp.app.config.ReleaseVersion + "/" + file.name, file.name, fileUrl, fileTag));
+                vm.fileList.push(new attachment(file.name, sp.app.config.ReleaseVersion + "/" + file.name, file.name, fileUrl, fileTag));
             }
             showAttachment();
         });
@@ -3780,7 +3792,11 @@ define('component/Section0202', function (require) {
 
     function computeRegionOrder() {
         //var oppty = data.opptyOverview.opptyData.data;
-        var tempOppty = sectionLoaderViewModel.document().opptyOverview.opptyData.data;
+        var data = sectionLoaderViewModel.document();
+        if (data === undefined) {
+            return;
+        }
+        var tempOppty = data.opptyOverview.opptyData.data;
         var involvedRegion = tempOppty.region;
         var index = 1;
         if (tempOppty.leadRegion !== "NA") {
@@ -4056,13 +4072,7 @@ define('component/Section0301', function (require) {
     "use strict";
     var $ = require("jquery"),
         ko = require("knockout"),
-        jasnybs = require('jasnybs'),
-        select2 = require('select2'),
-        dateTimePicker = require('./DateTimePicker'),
         questionArea = require("./QuestionArea"),
-        opptyModel = require('model/Oppty'),
-        appUtility = require('util/AppUtility'),
-        countrySelector = require('./CountrySelector'),
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./Section0301Template.html"),
         vm = {},
@@ -4070,11 +4080,7 @@ define('component/Section0301', function (require) {
 
     function ClientOverview(data) {
         if (data != undefined && data != null) {
-            this.clientRevenue = setEscapeValue(data.clientRevenue());
-            this.clientRevenueYear = data.clientRevenueYear();
-            this.noBusinessUnits = data.noBusinessUnits();
-            this.inWhatCountries = data.inWhatCountries();
-            this.acctBizPlanImpactPointDetail = data.acctBizPlanImpactPointDetail();
+            this.clientRevenue = setEscapeValue(data.clientRevenue());            
             this.explainImpact = setEscapeValue(data.explainImpact());
             this.priBizChlgDetail = setEscapeValue(data.priBizChlgDetail());
             this.clientCompellingEventDetail = setEscapeValue(data.clientCompellingEventDetail());
@@ -4086,7 +4092,6 @@ define('component/Section0301', function (require) {
             this.clientDecisionCriteriaDetail = setEscapeValue(data.clientDecisionCriteriaDetail());
             this.clientProcApproach = data.clientProcApproach();
             this.accountDeliveryMgmtDetail = setEscapeValue(data.accountDeliveryMgmtDetail());
-            this.clientEventDetail = null;//this field have been delete in frontend, but it still exist in backend
         }
     }
 
@@ -4101,10 +4106,6 @@ define('component/Section0301', function (require) {
 
     function unescapeData(data) {       
         vm.data.clientRevenue(getUnEscapeValue(data.clientRevenue));
-        vm.data.clientRevenueYear(data.clientRevenueYear == null ? "" : data.clientRevenueYear);
-        vm.data.noBusinessUnits(data.noBusinessUnits);
-        vm.data.inWhatCountries(data.inWhatCountries);
-        vm.data.acctBizPlanImpactPointDetail(data.acctBizPlanImpactPointDetail);
         vm.data.explainImpact(getUnEscapeValue(data.explainImpact));
         vm.data.priBizChlgDetail(getUnEscapeValue(data.priBizChlgDetail));
         vm.data.clientCompellingEventDetail(getUnEscapeValue(data.clientCompellingEventDetail));
@@ -4116,12 +4117,6 @@ define('component/Section0301', function (require) {
         vm.data.clientDecisionCriteriaDetail(getUnEscapeValue(data.clientDecisionCriteriaDetail));
         vm.data.clientProcApproach(data.clientProcApproach);
         vm.data.accountDeliveryMgmtDetail(getUnEscapeValue(data.accountDeliveryMgmtDetail));
-        //select2
-        
-        if (sectionLoaderViewModel != undefined && sectionLoaderViewModel.pursuitClassfication() != 'A' && sectionLoaderViewModel.pursuitClassfication() != 'B') {
-            $('#inWhatCountries').select2({ tags: true });
-            $('#inWhatCountries').val(data.inWhatCountries).trigger("change");
-        }            
     }
 
     function listenCustomEvent() {
@@ -4161,29 +4156,19 @@ define('component/Section0301', function (require) {
             self.draftData = ko.observable();//prepare for comparision
             
             self.data = {
-                clientRevenue : ko.observable(),
-                clientRevenueYear: ko.observable(),
-                noBusinessUnits: ko.observable(),
-                inWhatCountries : ko.observableArray(),        //countries are multiple value
-                acctBizPlanImpactPointDetail: ko.observable(),
-                explainImpact: ko.observable(),
-                priBizChlgDetail : ko.observable(),
-                clientCompellingEventDetail : ko.observable(),
-                curItStateDetail : ko.observable(),
-                keyDifferentiation : ko.observable(),
-                buRelationDetail: ko.observable(),
-                hpiRelationDetail: ko.observable(),
-                clientFcnDetail: ko.observable(),
-                clientDecisionCriteriaDetail : ko.observable(),
+                clientRevenue : ko.observable(""),
+                explainImpact: ko.observable(""),
+                priBizChlgDetail : ko.observable(""),
+                clientCompellingEventDetail : ko.observable(""),
+                curItStateDetail : ko.observable(""),
+                keyDifferentiation : ko.observable(""),
+                buRelationDetail: ko.observable(""),
+                hpiRelationDetail: ko.observable(""),
+                clientFcnDetail: ko.observable(""),
+                clientDecisionCriteriaDetail : ko.observable(""),
                 clientProcApproach : ko.observable(),
-                accountDeliveryMgmtDetail : ko.observable()  
-            };
-         
-            self.selectedCnty = ko.observable();
-
-            self.save = function () {
-                saveOppty();
-            }
+                accountDeliveryMgmtDetail : ko.observable("")  
+            };         
         };
         vm = new clientOverViewModel(params);        
         loadSection();
@@ -4236,20 +4221,15 @@ define('component/Section0301', function (require) {
         viewModel: {
             createViewModel: createViewModel
         },
-        subComponents: [questionArea, dateTimePicker, countrySelector]
+        subComponents: [questionArea]
     };
 
 });
-/*global define, alert, console, location*/
-
 define('component/Section030201', function (require) {
     "use strict";
     var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
-        appUtility = require('util/AppUtility'),
-        errorPage = require('./SDErrorPage'),
-        opptyModel = require('model/Oppty'),
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./Section030201Template.html"),
         vm = {},
@@ -4295,7 +4275,6 @@ define('component/Section030201', function (require) {
     function onViewModelLoaded() {
     }
 
-    //before binding, we should unescape the original data from DB
     function unescapeData(data) {
         vm.data.salesStrategyDetail(getUnEscapeValue(data.salesStrategyDetail));
         vm.data.clientTransformationStrategyDetail(getUnEscapeValue(data.clientTransformationStrategyDetail));
@@ -4316,21 +4295,16 @@ define('component/Section030201', function (require) {
             self.pursuitClassfication = ko.observable();
             self.editable = ko.observable(true);
             self.data = {
-                salesStrategyDetail : ko.observable(),
-                clientTransformationStrategyDetail : ko.observable(),
-                dealBenefitDetail : ko.observable(),
-                criticalSuccessFactorDetail : ko.observable(),
+                salesStrategyDetail : ko.observable(""),
+                clientTransformationStrategyDetail : ko.observable(""),
+                dealBenefitDetail : ko.observable(""),
+                criticalSuccessFactorDetail : ko.observable(""),
                 dealEssentialDetail : ko.observable(),
-                sumryRelationStrategyDetail : ko.observable(),
-                specificSolnRqmtDetail : ko.observable(),
-                supporterDetractorDetail : ko.observable(),
-                bizPartnerDetail : ko.observable()
+                sumryRelationStrategyDetail : ko.observable(""),
+                specificSolnRqmtDetail : ko.observable(""),
+                supporterDetractorDetail : ko.observable(""),
+                bizPartnerDetail : ko.observable("")
             };
-
-            //save data and error handling
-            self.save = function () {
-                saveOppty();
-            }
         }
         vm = new salesApprViewModel(params);
         loadSection();
@@ -4363,21 +4337,16 @@ define('component/Section030201', function (require) {
         template: templateHtml,        
         viewModel: {
             createViewModel: createViewModel            
-        },
-        subComponents: [errorPage]
+        }
     };
    
 });
 
-/*global define, alert, console, location*/
 define('component/Section030202', function (require) {
     "use strict";
     var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
-        appUtility = require('util/AppUtility'),
-        opptyModel = require('model/Oppty'),
-        inputText = require('./SDInputText'),
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./Section030202Template.html"),
         vm = {},
@@ -4393,6 +4362,8 @@ define('component/Section030202', function (require) {
     }
 
     function onViewModelPreLoad() {
+        $(".popover-options a").popover({ html: true });
+        $('.popover-show').popover('show');
         listenCustomEvent();
     }
 
@@ -4473,18 +4444,9 @@ define('component/Section030202', function (require) {
                 ]
             };
 
-            self.isInteger = ko.observable(true);
             //subscrbe
             self.data.competitorNum.subscribe(checkNum);
             
-            $(".popover-options a").popover({ html: true });
-            $('.popover-show').popover('show');
-
-            self.save = function () {
-                if(checkNum(self.data.competitorNum()))
-                    saveOppty();
-            }
-
         };
         vm = new competitorsViewModel(params);
         loadSection();
@@ -4494,12 +4456,11 @@ define('component/Section030202', function (require) {
     function checkNum(inputText) {
         var reg = /^\+?(0|[1-9]\d*)$/;
         if (reg.test(inputText)) {
-            //is integer
-            vm.isInteger(true); return true;
-        } else {
-            //not integer
-            vm.isInteger(false); return false;
+            return true;
         }
+        alert("Please enter a positive integer.");
+        vm.data.competitorNum(1);
+        return false;        
     }
 
     function loadSection(newViewModel) {
@@ -4519,13 +4480,14 @@ define('component/Section030202', function (require) {
         if (sid !== '030202') {
             return;
         } else {
-            var newData = ko.toJS(vm.data);
-            for (var i in newData.content) {
-                newData.content[i] = new KeyCompetitor(newData.content[i]);
+            if (checkNum(vm.data.competitorNum())) {
+                var newData = ko.toJS(vm.data);
+                for (var i in newData.content) {
+                    newData.content[i] = new KeyCompetitor(newData.content[i]);
+                }
+                requestAPI.unifiedSave(true, newData, argu);
             }
-            requestAPI.unifiedSave(true, newData, argu);
-        }
-        
+        }        
     }
 
     return {
@@ -4533,8 +4495,7 @@ define('component/Section030202', function (require) {
         template: templateHtml,        
         viewModel: {
             createViewModel: createViewModel            
-        },        
-        subComponents: [inputText]
+        }
     };
    
 });
@@ -4544,8 +4505,6 @@ define('component/Section030203', function (require) {
     var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
-        appUtility = require('util/AppUtility'),
-        opptyModel = require('model/Oppty'),
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./Section030203Template.html"),
         vm = {},
@@ -4574,7 +4533,6 @@ define('component/Section030203', function (require) {
         return null;
     }
        
-    //before binding, we should unescape the original data from DB
     function unescapeData(data) {
         if (data.content != null && data.content.length > 0) {
             for (var i in data.content) {
@@ -4599,7 +4557,6 @@ define('component/Section030203', function (require) {
     }
 
     function onViewModelPreLoad() {
-        //pop-up tooltip           
         $(".popover-options a").popover({ html: true });
         $('.popover-show').popover('hide');
         listenCustomEvent();
@@ -4622,11 +4579,7 @@ define('component/Section030203', function (require) {
             };
             self.remove = function () {
                 self.data.content.remove(this);
-            }           
-            
-            self.save = function () {
-                saveOppty();
-            }
+            }  
         };
         vm = new mapValPropViewModel(params);
         loadSection();
@@ -4654,8 +4607,7 @@ define('component/Section030203', function (require) {
                 newData.content[i] = new MapValProp(newData.content[i]);
             }
             requestAPI.unifiedSave(true, newData, argu);
-        }
-       
+        }       
     }
 
     return {
@@ -4668,16 +4620,12 @@ define('component/Section030203', function (require) {
    
 });
 
-/*global define, alert, console, location*/
-
 define('component/Section030204', function (require) {
     "use strict";
     var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
         requestAPI = require('model/RequestAPI'),
-        appUtility = require('util/AppUtility'),
-        opptyModel = require('model/Oppty'),
         templateHtml = require("text!./Section030204Template.html"),
         vm = {},
         sectionLoaderViewModel = {};
@@ -4730,7 +4678,6 @@ define('component/Section030204', function (require) {
     }
 
     function onViewModelPreLoad() {
-        //pop-up tooltip           
         $(".popover-options a").popover({ html: true });
         $('.popover-show').popover('hide');
         listenCustomEvent();
@@ -4749,19 +4696,23 @@ define('component/Section030204', function (require) {
             self.data = {
                 isYellowPadPrice : ko.observable(true),
                 yellowPadPricePercentage : ko.observable(0),
-                clientPriceExpectDetail : ko.observable(),
-                clientPriceStrategyDetail : ko.observable(),
-                cmpyPriceStrategyDetail : ko.observable(),
-                competitorPriceStrategyDetail : ko.observable(),
-                majorFinancialIssue : ko.observable()
+                clientPriceExpectDetail : ko.observable(""),
+                clientPriceStrategyDetail : ko.observable(""),
+                cmpyPriceStrategyDetail : ko.observable(""),
+                competitorPriceStrategyDetail : ko.observable(""),
+                majorFinancialIssue : ko.observable("")
             };
 
+            //subscribe
+            self.data.yellowPadPricePercentage.subscribe(function (newValue) {
+                if (isNaN(newValue)) {
+                    alert("Please input is decimal");
+                    self.data.yellowPadPricePercentage(0.0);
+                }
+                return;
+            });
             //low or higher
             self.lowOrHigher = ko.observable(1);
-
-            self.save = function () {
-                saveOppty();
-            }
         };
         vm = new pricingApproachViewModel(params);
         loadSection();
@@ -4779,12 +4730,21 @@ define('component/Section030204', function (require) {
             unescapeData(doc.bizSoln.winStrategy.pricingApproach.data);        
     }
 
+    function isDecimal(str) {
+        var reg = /^\d+\.\d+$/;
+        return reg.test(str);
+    }
+
     function saveOppty(event, argu) {
         var sid = argu.sid();
         if (sid !== '030204') {
             return;
         } else {
             var newData = new PricingApproach(vm.data);
+            if (isNaN(newData.yellowPadPricePercentage)) {
+                alert("Please input is decimal");
+                return;
+            }
             requestAPI.unifiedSave(true, newData, argu);
         }        
     }
@@ -5474,6 +5434,13 @@ define('component/Section040303', function (require) {
     	listenCustomEvent();
     }
 
+    function initHelpTooltip() {
+        var options = {
+            animation: true,
+        };
+        $('.sd-section-help').tooltip();
+    }
+
     function onViewModelLoaded() {
     	vm.section.opptyID = sectionLoaderViewModel.opptyID();
     	if (vm.editable()) {
@@ -5517,6 +5484,7 @@ define('component/Section040303', function (require) {
     			vm.hrSolutionContent.push(new hrSolnRow(content[i].hrIssue, content[i].hrIssueTitle, "",true, content[i].inScope, content[i].approach));
     		}
     	}
+    	initHelpTooltip();
     }
 
     function saveOppty(event, argu) {
@@ -5565,9 +5533,9 @@ define('component/Section040303', function (require) {
 
     function createOriginallHrsoln() {
         var hrSolnArray = [];
-        hrSolnArray.push(new hrSolnRow("ClientEmployee", "Client's Employees", "Issues or risks related to the client�s employees that could negatively or positively impact the HPE solution.", true, false, ''));
-        hrSolnArray.push(new hrSolnRow("ClientSubcontractor", "Client's Subcontractors", "Issues or risks related to the client�s subcontractors that could negatively or positively impact the HPE solution.", true, false, ''));
-        hrSolnArray.push(new hrSolnRow("ClientContractor", "Client's Third Party Contractors", "Issues or risks related to the client�s third parties that could negatively or positively impact the HPE solution.", true, false, ''));
+        hrSolnArray.push(new hrSolnRow("ClientEmployee", "Client's Employees", "Issues or risks related to the client's employees that could negatively or positively impact the HPE solution.", true, false, ''));
+        hrSolnArray.push(new hrSolnRow("ClientSubcontractor", "Client's Subcontractors", "Issues or risks related to the client's subcontractors that could negatively or positively impact the HPE solution.", true, false, ''));
+        hrSolnArray.push(new hrSolnRow("ClientContractor", "Client's Third Party Contractors", "Issues or risks related to the client's third parties that could negatively or positively impact the HPE solution.", true, false, ''));
         hrSolnArray.push(new hrSolnRow("HPEmployee", "Existing HPE Employees (Renewals only)", "HPE plans for existing account support employees that could negatively or positively impact the HPE solution.", true, false, ''));
         return hrSolnArray;
     }
@@ -5637,6 +5605,13 @@ define('component/Section040304', function (require) {
     	listenCustomEvent();
     }
 
+    function initHelpTooltip() {
+        var options = {
+            animation: true,
+        };
+        $('.sd-section-help').tooltip();
+    }
+
     function onViewModelLoaded() {
     	vm.section.opptyID = sectionLoaderViewModel.opptyID();
     	if (vm.editable()) {
@@ -5675,15 +5650,23 @@ define('component/Section040304', function (require) {
     function doDataBinding(data) {
     	vm.section.data.content(unescapeContent(data.solnOverview.solnApproach.cmpyChallenge.data.content));
     	var content = vm.section.data.content();
+
+    	if (content[1].challenge === "Trade") {
+    	    content.splice(1, 1);
+    	}
+
     	vm.cmpyChallenge(createOriginalChallenge());
     	for (var i in content) {
-    		if (i < vm.initChallengeCount) {
+    	    if (i < vm.initChallengeCount) {
     			vm.cmpyChallenge()[i].description(content[i].description);
     			vm.cmpyChallenge()[i].checked(content[i].inScope);
     		} else {
-    			vm.cmpyChallenge.push(new challengeRow(content[i].challenge, content[i].challengeTitle, "",true, content[i].inScope, content[i].description));
+    		    if (content[i].challenge === "Other") {
+    		        vm.cmpyChallenge.push(new challengeRow(content[i].challenge, content[i].challengeTitle, "", true, content[i].inScope, content[i].description));
+    		    }
     		}
     	}
+    	initHelpTooltip();
     }
 
     function saveOppty(event, argu) {
@@ -5724,8 +5707,8 @@ define('component/Section040304', function (require) {
 
     function createOriginalChallenge() {
         var challengeArr = [];
-        challengeArr.push(new challengeRow("Asset", "Asset ownership/refresh", "Issues or risks related to the client�s requirements for asset ownership that could negatively or positively impact the HPE solution; i.e., long refresh schedules could impact SLAs.",true, false, ''));
-        challengeArr.push(new challengeRow("Trade", "Global Trade requirements", "", true, false, ''));
+        challengeArr.push(new challengeRow("Asset", "Asset ownership/refresh", "Issues or risks related to the client's requirements for asset ownership that could negatively or positively impact the HPE solution; i.e., long refresh schedules could impact SLAs.",true, false, ''));
+       // challengeArr.push(new challengeRow("Trade", "Global Trade requirements", "", true, false, ''));
         challengeArr.push(new challengeRow("Initiative", "Internal initiatives that could impact deal", "Strategic initiative resource consumption, changes to delivery model, changes to offering or SLA standards", true, false, ''));
         challengeArr.push(new challengeRow("Knowledge", "Knowledge and supportability gaps", "Are special skill sets or training required? Will the solution require extended knowledge transfer with client resources? Is employee retention an issue?", true, false, ''));
         challengeArr.push(new challengeRow("Legal", "Legal issues related to solution", "Client commercial terms/requirements that could negatively impact or limit the solution, our costs or our ability to deliver.", true, false, ''));
@@ -6270,6 +6253,7 @@ define('component/Section040501', function (require) {
             }
             vm.pageInited(true);
         }
+        return data;
     }
 
     function compareWithAllOffering(allOffering, locationTarget) {
@@ -6405,29 +6389,29 @@ define('component/Section040503', function (require) {
 		sectionLoaderViewModel = {};
 
     function listenCustomEvent() {
-    	$(window).off("opptySaving");
-    	$(window).on("opptySaving", saveOppty);
-    	$(window).off("updateSection");
-    	$(window).on("updateSection", function (e, newViewModel) {
-    	    loadSection(newViewModel);
-    	});
+        $(window).off("opptySaving");
+        $(window).on("opptySaving", saveOppty);
+        $(window).off("updateSection");
+        $(window).on("updateSection", function (e, newViewModel) {
+            loadSection(newViewModel);
+        });
     }
 
     function onViewModelPreLoad() {
-    	listenCustomEvent();
+        listenCustomEvent();
     }
 
     function onViewModelLoaded() {
-    	vm.section.opptyID = sectionLoaderViewModel.opptyID();
-    	if (vm.editable()) {
-    	    //getEmsTooling();
-    	    loadSection();
-    	} else {
-    	    var data = sectionLoaderViewModel.document();
-    	    if (data !== undefined && data.solnOverview != null && data.solnOverview.deliveryStrategies != null && data.solnOverview.deliveryStrategies.emsTooling != null) {
-    	        doDataBinding(data);
-    	    }
-    	}
+        vm.section.opptyID = sectionLoaderViewModel.opptyID();
+        if (vm.editable()) {
+            //getsvcMgmt();
+            loadSection();
+        } else {
+            var data = sectionLoaderViewModel.document();
+            if (data !== undefined && data.solnOverview != null && data.solnOverview.deliveryStrategies != null && data.solnOverview.deliveryStrategies.svcMgmt != null) {
+                doDataBinding(data);
+            }
+        }
     }
 
     function loadSection(latestedSectionLoaderViewModel) {
@@ -6435,7 +6419,7 @@ define('component/Section040503', function (require) {
             sectionLoaderViewModel = latestedSectionLoaderViewModel;
         }
         var data = sectionLoaderViewModel.document();
-        if (data !== undefined && data.solnOverview != null && data.solnOverview.deliveryStrategies != null && data.solnOverview.deliveryStrategies.emsTooling != null) {
+        if (data !== undefined && data.solnOverview != null && data.solnOverview.deliveryStrategies != null && data.solnOverview.deliveryStrategies.svcMgmt != null) {
             doDataBinding(data);
         } else {
             // section is not existed
@@ -6443,10 +6427,12 @@ define('component/Section040503', function (require) {
     }
 
     function doDataBinding(data) {
-    	var emsTooling = unescapeContent(data.solnOverview.deliveryStrategies.emsTooling.data);
-    	vm.section.data.clientToolDetail(emsTooling.clientToolDetail);
-    	vm.section.data.cmpyServiceDetail(emsTooling.cmpyServiceDetail);
-    	vm.section.data.cmpyApproachDetail(emsTooling.cmpyApproachDetail);
+        var svcMgmt = unescapeContent(data.solnOverview.deliveryStrategies.svcMgmt.data);
+        vm.section.data.svcMeasureDetail(svcMgmt.svcMeasureDetail);
+        vm.section.data.supplierMgmtDetail(svcMgmt.supplierMgmtDetail);
+        vm.section.data.perfMeasureDetail(svcMgmt.perfMeasureDetail);
+        vm.section.data.catalogueStrategyDetail(svcMgmt.catalogueStrategyDetail);
+        vm.section.data.toolingStrategyDetail(svcMgmt.toolingStrategyDetail);
     }
 
     function saveOppty(event, argu) {
@@ -6459,39 +6445,41 @@ define('component/Section040503', function (require) {
     }
 
     function escapeContent(content) {
-    	for (var p in content) {
-    		content[p] = escape(content[p]);
-    	}
-    	return content;
+        for (var p in content) {
+            content[p] = escape(content[p]);
+        }
+        return content;
     }
 
     function unescapeContent(content) {
-    	for (var p in content) {
-    		content[p] = unescape(content[p]);
-    	}
-    	return content;
+        for (var p in content) {
+            content[p] = unescape(content[p]);
+        }
+        return content;
     }
 
     function createViewModel(params, componentInfo) {
-    	sectionLoaderViewModel = params.viewModel;
-    	onViewModelPreLoad();
-    	var emsToolingViewModel = function () {
-    		var self = this;
-    		self.section = {
-    			opptyID: "",
-    			eTag: "",
-    			name: "ems-tooling",
-    			data: {
-    				clientToolDetail: ko.observable(""),
-    				cmpyServiceDetail: ko.observable(""),
-    				cmpyApproachDetail: ko.observable("")
-    			}
-    		};
-    		self.editable = ko.observable(sectionLoaderViewModel.editable());
-    	};
-    	vm = new emsToolingViewModel(params);
-    	onViewModelLoaded();
-    	return vm;
+        sectionLoaderViewModel = params.viewModel;
+        onViewModelPreLoad();
+        var svcMgmtViewModel = function () {
+            var self = this;
+            self.section = {
+                opptyID: "",
+                eTag: "",
+                name: "service-management",
+                data: {
+                    svcMeasureDetail: ko.observable(""),
+                    supplierMgmtDetail: ko.observable(""),
+                    perfMeasureDetail: ko.observable(""),
+                    catalogueStrategyDetail: ko.observable(""),
+                    toolingStrategyDetail: ko.observable("")
+                }
+            };
+            self.editable = ko.observable(sectionLoaderViewModel.editable());
+        };
+        vm = new svcMgmtViewModel(params);
+        onViewModelLoaded();
+        return vm;
     }
 
     return {
@@ -6510,8 +6498,6 @@ define('component/Section040504', function (require) {
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
         templateHtml = require("text!./Section040504Template.html"),
-        appUtility = require('util/AppUtility'),
-        opptyModel = require('model/Oppty'),
         vm = {};
 
     function onViewModelPreLoad() { }
@@ -6893,7 +6879,14 @@ define('component/Section0406', function (require) {
     }
 
     function onViewModelPreLoad() {
-    	listenCustomEvent();
+        listenCustomEvent();
+    }
+
+    function initHelpTooltip() {
+        var options = {
+            animation: true,
+        };
+        $('.sd-section-help').tooltip();
     }
 
     function onViewModelLoaded() {
@@ -6935,6 +6928,7 @@ define('component/Section0406', function (require) {
     			vm.keyClientConstraint.push(new constraintRow(content[i].constraint, content[i].constraintTitle,"", true, content[i].inScope, content[i].description, content[i].mitigation));
     		}
     	}
+    	initHelpTooltip();
     }
 
     function saveOppty(event, argu) {
@@ -6985,20 +6979,19 @@ define('component/Section0406', function (require) {
         this.mitigation = ko.observable(mitigation);
     };
 
-
     function createOriginalConstraint() {
         var constraintArr = [];
         constraintArr.push(new constraintRow("ClientStandard", "Client-mandated standards and methods", "", true, false, '', ''));
         constraintArr.push(new constraintRow("ClientMandated", "Client-mandated products or tools", "",true, false, '', ''));
         constraintArr.push(new constraintRow("ClientUnionizedSupport", "Client-unionized support","If the client has a unionized labor force that will be impacted by their decision to use HPE services, how will this specifically impact the solution, the cost, delivery risks and commercial terms related to the solution?", true, false, '', ''));
         constraintArr.push(new constraintRow("Regulatory", "Data privacy and regulatory issues", "", true, false, '', ''));
-        constraintArr.push(new constraintRow("ExportImport", "Export / import compliance", "", true, false, '', ''));
-        constraintArr.push(new constraintRow("CMO", "HPE CMO responsibilities", "Export/import compliance (global trade): Is the client Is the client a government organization, or a commercial client, involved in any activity related to the following industries: Military/Defense, Aerospace, Nuclear (including nuclear energy), Chemical, Biotech/Pharma, or High Tech Manufacturing? Does the client have activities or locations in “embargoed” or “Sanctioned” countries [Link to Embargoed/Sanctioned Country List]? Does the proposed scope of work require HPE to package or distribute customer or third party software products?", true, false, '', ''));
+        constraintArr.push(new constraintRow("ExportImport", "Export / import compliance", "Export/import compliance (global trade): Is the client a government organization, or a commercial client, involved in any activity related to the following industries: Military/Defense, Aerospace, Nuclear (including nuclear energy), Chemical, Biotech/Pharma, or High Tech Manufacturing? Does the client have activities or locations in “embargoed” or “Sanctioned” countries [Link to Embargoed/Sanctioned Country List]? Does the proposed scope of work require HPE to package or distribute customer or third party software products?", true, false, '', ''));
+        constraintArr.push(new constraintRow("CMO", "HPE CMO responsibilities", "", true, false, '', ''));
         constraintArr.push(new constraintRow("Resource", "HPE or client resources", "", true, false, '', ''));
         constraintArr.push(new constraintRow("LoL", "Limits of Liability", "Describe any client requests for HPE non-standard limits of liability and how the technical solution and commercial terms will be used to mitigate  these risks.", true, false, '', ''));
         constraintArr.push(new constraintRow("OffshoreLocation", "No use of offshore locations", "", true, false, '', ''));
         constraintArr.push(new constraintRow("Timeline", "Timelines and critical dates", "Client-mandated timelines/durations and/or critical dates that HPE will be dependent upon as a part of the deployment of our services.", true, false, '', ''));
-        return constraintArr;
+        return constraintArr; 
     }
 
     function createViewModel(params, componentInfo) {
@@ -7257,8 +7250,8 @@ define('component/SDContents', function (require) {
         
         var sdContentViewModel = function () {
             var self = this;
-            self.opptyID = ko.observable();
-            self.opptyName = ko.observable();
+            self.opptyID = ko.observable("");
+            self.opptyName = ko.observable("...");
             self.sdLoaderUrl = sp.app.config.ENV.SectionLoaderUrl;
         };
         vm = new sdContentViewModel(params);
@@ -7358,6 +7351,7 @@ define("component/SectionLoader", function (require) {
                             }
                         } else {
                             updateViewModel(argu.viewModel);
+                            //history.pushState("string-data", "section-name", "?sid=" + saveingSid + "&OpptyID=" + argu.viewModel.opptyID() + "")
                         }                        
                     }
                     

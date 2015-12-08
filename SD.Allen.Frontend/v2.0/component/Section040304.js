@@ -22,6 +22,13 @@ define('component/Section040304', function (require) {
     	listenCustomEvent();
     }
 
+    function initHelpTooltip() {
+        var options = {
+            animation: true,
+        };
+        $('.sd-section-help').tooltip();
+    }
+
     function onViewModelLoaded() {
     	vm.section.opptyID = sectionLoaderViewModel.opptyID();
     	if (vm.editable()) {
@@ -60,15 +67,23 @@ define('component/Section040304', function (require) {
     function doDataBinding(data) {
     	vm.section.data.content(unescapeContent(data.solnOverview.solnApproach.cmpyChallenge.data.content));
     	var content = vm.section.data.content();
+
+    	if (content[1].challenge === "Trade") {
+    	    content.splice(1, 1);
+    	}
+
     	vm.cmpyChallenge(createOriginalChallenge());
     	for (var i in content) {
-    		if (i < vm.initChallengeCount) {
+    	    if (i < vm.initChallengeCount) {
     			vm.cmpyChallenge()[i].description(content[i].description);
     			vm.cmpyChallenge()[i].checked(content[i].inScope);
     		} else {
-    			vm.cmpyChallenge.push(new challengeRow(content[i].challenge, content[i].challengeTitle, "",true, content[i].inScope, content[i].description));
+    		    if (content[i].challenge === "Other") {
+    		        vm.cmpyChallenge.push(new challengeRow(content[i].challenge, content[i].challengeTitle, "", true, content[i].inScope, content[i].description));
+    		    }
     		}
     	}
+    	initHelpTooltip();
     }
 
     function saveOppty(event, argu) {
@@ -109,8 +124,8 @@ define('component/Section040304', function (require) {
 
     function createOriginalChallenge() {
         var challengeArr = [];
-        challengeArr.push(new challengeRow("Asset", "Asset ownership/refresh", "Issues or risks related to the client’s requirements for asset ownership that could negatively or positively impact the HPE solution; i.e., long refresh schedules could impact SLAs.",true, false, ''));
-        challengeArr.push(new challengeRow("Trade", "Global Trade requirements", "", true, false, ''));
+        challengeArr.push(new challengeRow("Asset", "Asset ownership/refresh", "Issues or risks related to the client's requirements for asset ownership that could negatively or positively impact the HPE solution; i.e., long refresh schedules could impact SLAs.",true, false, ''));
+       // challengeArr.push(new challengeRow("Trade", "Global Trade requirements", "", true, false, ''));
         challengeArr.push(new challengeRow("Initiative", "Internal initiatives that could impact deal", "Strategic initiative resource consumption, changes to delivery model, changes to offering or SLA standards", true, false, ''));
         challengeArr.push(new challengeRow("Knowledge", "Knowledge and supportability gaps", "Are special skill sets or training required? Will the solution require extended knowledge transfer with client resources? Is employee retention an issue?", true, false, ''));
         challengeArr.push(new challengeRow("Legal", "Legal issues related to solution", "Client commercial terms/requirements that could negatively impact or limit the solution, our costs or our ability to deliver.", true, false, ''));

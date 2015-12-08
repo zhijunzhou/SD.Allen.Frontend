@@ -19,7 +19,14 @@ define('component/Section0406', function (require) {
     }
 
     function onViewModelPreLoad() {
-    	listenCustomEvent();
+        listenCustomEvent();
+    }
+
+    function initHelpTooltip() {
+        var options = {
+            animation: true,
+        };
+        $('.sd-section-help').tooltip();
     }
 
     function onViewModelLoaded() {
@@ -61,6 +68,7 @@ define('component/Section0406', function (require) {
     			vm.keyClientConstraint.push(new constraintRow(content[i].constraint, content[i].constraintTitle,"", true, content[i].inScope, content[i].description, content[i].mitigation));
     		}
     	}
+    	initHelpTooltip();
     }
 
     function saveOppty(event, argu) {
@@ -111,20 +119,19 @@ define('component/Section0406', function (require) {
         this.mitigation = ko.observable(mitigation);
     };
 
-
     function createOriginalConstraint() {
         var constraintArr = [];
         constraintArr.push(new constraintRow("ClientStandard", "Client-mandated standards and methods", "", true, false, '', ''));
         constraintArr.push(new constraintRow("ClientMandated", "Client-mandated products or tools", "",true, false, '', ''));
         constraintArr.push(new constraintRow("ClientUnionizedSupport", "Client-unionized support","If the client has a unionized labor force that will be impacted by their decision to use HPE services, how will this specifically impact the solution, the cost, delivery risks and commercial terms related to the solution?", true, false, '', ''));
         constraintArr.push(new constraintRow("Regulatory", "Data privacy and regulatory issues", "", true, false, '', ''));
-        constraintArr.push(new constraintRow("ExportImport", "Export / import compliance", "", true, false, '', ''));
-        constraintArr.push(new constraintRow("CMO", "HPE CMO responsibilities", "Export/import compliance (global trade): Is the client Is the client a government organization, or a commercial client, involved in any activity related to the following industries: Military/Defense, Aerospace, Nuclear (including nuclear energy), Chemical, Biotech/Pharma, or High Tech Manufacturing? Does the client have activities or locations in “embargoed” or “Sanctioned” countries [Link to Embargoed/Sanctioned Country List]? Does the proposed scope of work require HPE to package or distribute customer or third party software products?", true, false, '', ''));
+        constraintArr.push(new constraintRow("ExportImport", "Export / import compliance", "Export/import compliance (global trade): Is the client a government organization, or a commercial client, involved in any activity related to the following industries: Military/Defense, Aerospace, Nuclear (including nuclear energy), Chemical, Biotech/Pharma, or High Tech Manufacturing? Does the client have activities or locations in “embargoed” or “Sanctioned” countries [Link to Embargoed/Sanctioned Country List]? Does the proposed scope of work require HPE to package or distribute customer or third party software products?", true, false, '', ''));
+        constraintArr.push(new constraintRow("CMO", "HPE CMO responsibilities", "", true, false, '', ''));
         constraintArr.push(new constraintRow("Resource", "HPE or client resources", "", true, false, '', ''));
         constraintArr.push(new constraintRow("LoL", "Limits of Liability", "Describe any client requests for HPE non-standard limits of liability and how the technical solution and commercial terms will be used to mitigate  these risks.", true, false, '', ''));
         constraintArr.push(new constraintRow("OffshoreLocation", "No use of offshore locations", "", true, false, '', ''));
         constraintArr.push(new constraintRow("Timeline", "Timelines and critical dates", "Client-mandated timelines/durations and/or critical dates that HPE will be dependent upon as a part of the deployment of our services.", true, false, '', ''));
-        return constraintArr;
+        return constraintArr; 
     }
 
     function createViewModel(params, componentInfo) {

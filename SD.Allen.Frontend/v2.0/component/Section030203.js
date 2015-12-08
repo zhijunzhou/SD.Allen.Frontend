@@ -3,8 +3,6 @@
     var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
-        appUtility = require('util/AppUtility'),
-        opptyModel = require('model/Oppty'),
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./Section030203Template.html"),
         vm = {},
@@ -33,7 +31,6 @@
         return null;
     }
        
-    //before binding, we should unescape the original data from DB
     function unescapeData(data) {
         if (data.content != null && data.content.length > 0) {
             for (var i in data.content) {
@@ -58,7 +55,6 @@
     }
 
     function onViewModelPreLoad() {
-        //pop-up tooltip           
         $(".popover-options a").popover({ html: true });
         $('.popover-show').popover('hide');
         listenCustomEvent();
@@ -81,11 +77,7 @@
             };
             self.remove = function () {
                 self.data.content.remove(this);
-            }           
-            
-            self.save = function () {
-                saveOppty();
-            }
+            }  
         };
         vm = new mapValPropViewModel(params);
         loadSection();
@@ -113,8 +105,7 @@
                 newData.content[i] = new MapValProp(newData.content[i]);
             }
             requestAPI.unifiedSave(true, newData, argu);
-        }
-       
+        }       
     }
 
     return {

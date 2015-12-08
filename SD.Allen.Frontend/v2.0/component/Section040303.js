@@ -22,6 +22,13 @@ define('component/Section040303', function (require) {
     	listenCustomEvent();
     }
 
+    function initHelpTooltip() {
+        var options = {
+            animation: true,
+        };
+        $('.sd-section-help').tooltip();
+    }
+
     function onViewModelLoaded() {
     	vm.section.opptyID = sectionLoaderViewModel.opptyID();
     	if (vm.editable()) {
@@ -65,6 +72,7 @@ define('component/Section040303', function (require) {
     			vm.hrSolutionContent.push(new hrSolnRow(content[i].hrIssue, content[i].hrIssueTitle, "",true, content[i].inScope, content[i].approach));
     		}
     	}
+    	initHelpTooltip();
     }
 
     function saveOppty(event, argu) {
@@ -113,9 +121,9 @@ define('component/Section040303', function (require) {
 
     function createOriginallHrsoln() {
         var hrSolnArray = [];
-        hrSolnArray.push(new hrSolnRow("ClientEmployee", "Client's Employees", "Issues or risks related to the client’s employees that could negatively or positively impact the HPE solution.", true, false, ''));
-        hrSolnArray.push(new hrSolnRow("ClientSubcontractor", "Client's Subcontractors", "Issues or risks related to the client’s subcontractors that could negatively or positively impact the HPE solution.", true, false, ''));
-        hrSolnArray.push(new hrSolnRow("ClientContractor", "Client's Third Party Contractors", "Issues or risks related to the client’s third parties that could negatively or positively impact the HPE solution.", true, false, ''));
+        hrSolnArray.push(new hrSolnRow("ClientEmployee", "Client's Employees", "Issues or risks related to the client's employees that could negatively or positively impact the HPE solution.", true, false, ''));
+        hrSolnArray.push(new hrSolnRow("ClientSubcontractor", "Client's Subcontractors", "Issues or risks related to the client's subcontractors that could negatively or positively impact the HPE solution.", true, false, ''));
+        hrSolnArray.push(new hrSolnRow("ClientContractor", "Client's Third Party Contractors", "Issues or risks related to the client's third parties that could negatively or positively impact the HPE solution.", true, false, ''));
         hrSolnArray.push(new hrSolnRow("HPEmployee", "Existing HPE Employees (Renewals only)", "HPE plans for existing account support employees that could negatively or positively impact the HPE solution.", true, false, ''));
         return hrSolnArray;
     }

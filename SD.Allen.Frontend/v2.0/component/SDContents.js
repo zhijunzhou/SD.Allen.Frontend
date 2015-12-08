@@ -41,8 +41,8 @@ define('component/SDContents', function (require) {
         
         var sdContentViewModel = function () {
             var self = this;
-            self.opptyID = ko.observable();
-            self.opptyName = ko.observable();
+            self.opptyID = ko.observable("");
+            self.opptyName = ko.observable("...");
             self.sdLoaderUrl = sp.app.config.ENV.SectionLoaderUrl;
         };
         vm = new sdContentViewModel(params);

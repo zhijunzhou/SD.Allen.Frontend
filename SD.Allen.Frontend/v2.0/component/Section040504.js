@@ -5,8 +5,6 @@ define('component/Section040504', function (require) {
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
         templateHtml = require("text!./Section040504Template.html"),
-        appUtility = require('util/AppUtility'),
-        opptyModel = require('model/Oppty'),
         vm = {};
 
     function onViewModelPreLoad() { }

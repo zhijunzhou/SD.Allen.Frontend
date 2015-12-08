@@ -127,7 +127,11 @@ define('component/Section0202', function (require) {
 
     function computeRegionOrder() {
         //var oppty = data.opptyOverview.opptyData.data;
-        var tempOppty = sectionLoaderViewModel.document().opptyOverview.opptyData.data;
+        var data = sectionLoaderViewModel.document();
+        if (data === undefined) {
+            return;
+        }
+        var tempOppty = data.opptyOverview.opptyData.data;
         var involvedRegion = tempOppty.region;
         var index = 1;
         if (tempOppty.leadRegion !== "NA") {

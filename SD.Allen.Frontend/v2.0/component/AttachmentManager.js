@@ -5,7 +5,7 @@
         jasnybs = require('jasnybs'),
         templateHtml = require("text!./AttachmentManagerTemplate.html"),
 		requestAPI = require('model/RequestAPI'),
-        
+
         appUtility = require('util/AppUtility'),
         vm = {};
 
@@ -70,7 +70,7 @@
                 showAttachment();
             }
         });
-        
+
         //$(document).off('[id^=sd-file-]', 'click');
         $(document).delegate('[id^=sd-file-]', 'click', function (e) {
             e.stopPropagation();
@@ -152,7 +152,7 @@
             var fileTag = computePicSrc(file.name);
             vm.attachment.push({ title: file.name, link: sp.app.config.ReleaseVersion + "/" + file.name });
             if (vm.attachmentLoaded) {
-            vm.fileList.push(new attachment(file.name, sp.app.config.ReleaseVersion + "/" + file.name, file.name, fileUrl, fileTag));
+                vm.fileList.push(new attachment(file.name, sp.app.config.ReleaseVersion + "/" + file.name, file.name, fileUrl, fileTag));
             }
             showAttachment();
         });

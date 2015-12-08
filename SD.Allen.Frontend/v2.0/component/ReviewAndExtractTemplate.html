@@ -4,12 +4,12 @@
         <ul class="nav navmenu-nav">
             <li class="active"><a data-bind="attr:{href:'#'+sectionNavigator()[0].sid}">Opportunity Overview</a></li>
             <li>
-                <a data-bind="attr:{href:'#'+sectionNavigator()[2].sid}">Business and Solution Context</a>
-                <ul class="navmenu-nav">
-                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[2].sid}">Client Overview and Decision Factors</a></li>
+                <a data-bind="attr:{href:'#'+sectionNavigator()[2].sid}">Client Solution Strategy</a>
+                <ul class="navmenu-nav">                    
                     <li class="dropdown">
-                        <a data-bind="attr:{href:'#'+sectionNavigator()[3].sid}">HPE Win Strategy</a>
+                        <a data-bind="attr:{href:'#'+sectionNavigator()[2].sid}">Client and Business Context</a>
                         <ul class="navmenu-nav">
+                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[2].sid}">Client Overview and Decision Factors</a></li>
                             <li><a data-bind="attr:{href:'#'+sectionNavigator()[3].sid}">Sales Approach</a></li>
                             <li><a data-bind="attr:{href:'#'+sectionNavigator()[4].sid}">Competitors</a></li>
                             <li><a data-bind="attr:{href:'#'+sectionNavigator()[5].sid}">Message Map/Value Proposition</a></li>
@@ -19,32 +19,22 @@
                 </ul>
             </li>
             <li>
-                <a data-bind="attr:{href:'#'+sectionNavigator()[6].sid}">Solution Overview</a>
+                <a data-bind="attr:{href:'#'+sectionNavigator()[7].sid}">Solution Overview</a>
                 <ul class="navmenu-nav">
-                    <li class="dropdown">
-                        <a href="#">Scope</a>
-                        <ul class="navmenu-nav">
-                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[7].sid}">All Offerings</a></li>
-                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[8].sid}">Key Scope Items</a></li>
-                        </ul>
-                    </li>
+                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[7].sid}">All Offerings</a></li>
+                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[8].sid}">Key Scope Items</a></li>       
                     <!-- ko if:pursuitClassfication() ==  'C' || pursuitClassfication() ==  'D'-->
                     <li><a data-bind="attr:{href:'#'+sectionNavigator()[9].sid}">Current State Architecture</a></li>
                     <!-- /ko -->
-                    <li>
-                        <a data-bind="attr:{href:'#'+sectionNavigator()[10].sid}">Solution Approach</a>
-                        <ul class="navmenu-nav">
-                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[10].sid}">Summary</a></li>
-                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[11].sid}">Outsourcing CMO/TMO/FMO</a></li>
-                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[12].sid}">HR Solution</a></li>
-                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[13].sid}">HPE Internal Challenges and Constraints</a></li>
-                            <!-- ko if:involvedGbu() == 'apps' && appsInscope() == true -->
-                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[14].sid}">Design Parameters</a></li>
-                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[15].sid}">Deployment Strategy</a></li>
-                            <!-- /ko -->
-                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[16].sid}">Additional Information</a></li>
-                        </ul>
-                    </li>
+                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[10].sid}">Summary</a></li>
+                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[11].sid}">Outsourcing CMO/TMO/FMO</a></li>
+                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[12].sid}">HR Solution</a></li>
+                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[13].sid}">HPE Internal Challenges and Constraints</a></li>
+                    <!-- ko if:involvedGbu() == 'apps' && appsInscope() == true -->
+                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[14].sid}">Design Parameters</a></li>
+                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[15].sid}">Deployment Strategy</a></li>
+                    <!-- /ko -->
+                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[16].sid}">Additional Information</a></li>        
                     <li><a data-bind="attr:{href:'#'+sectionNavigator()[17].sid}">Innovative Aspects of the Solution</a></li>
                     <li>
                         <a data-bind="attr:{href:'#'+sectionNavigator()[18].sid}">Delivery Strategies</a>
@@ -54,12 +44,12 @@
                             <!-- ko if: pursuitClassfication() == 'C' || pursuitClassfication() == 'D' -->
                             <li><a data-bind="attr:{href:'#'+sectionNavigator()[20].sid}">Client-Retained Services Delivery Responsibility</a></li>
                             <!-- /ko -->
-                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[21].sid}">ESM Tooling and Automation Approach</a></li>
+                            <li><a data-bind="attr:{href:'#'+sectionNavigator()[21].sid}">Service Management & Integration Approach</a></li>
                         </ul>
                     </li>
                     <li><a data-bind="attr:{href:'#'+sectionNavigator()[22].sid}">Key Client Constraints</a></li>
                     <!-- ko if: pursuitClassfication() == 'C' || pursuitClassfication() == 'D' -->
-                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[23].sid}">Summary Costing &amp; FTE Reports-Costing Approach</a></li>
+                    <li><a data-bind="attr:{href:'#'+sectionNavigator()[23].sid}">Summary Costing Approach</a></li>
                     <!-- /ko -->
                 </ul>
             </li>

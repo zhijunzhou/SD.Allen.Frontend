@@ -542,5 +542,28 @@ h1, .h1, h2, .h2, h3, .h3 {
 .navmenu-fixed-left, .navmenu-fixed-right, .navbar-offcanvas {
     z-index:1000;
 }
-
+.navbar-fixed-top {
+    border-width:0;
+}
+.ss-nav>li>a {
+    padding:0;
+}
+.sd-nav>li>a {
+    padding:0;
+}
+.ss-nav>li>a:hover {
+    box-shadow:0 -5px 15px #fff;
+}
+.sd-nav>li>a:hover {
+    box-shadow:0 -5px 15px #333;
+}
+.sd-section-help + .tooltip > .tooltip-inner {
+    background-color: rgb(195, 195, 195); 
+    color: #000; 
+    border: 1px solid #92c1be;
+    padding: 15px;
+    width:500px;
+    text-align:left;
+    font-size:13px;
+}
 

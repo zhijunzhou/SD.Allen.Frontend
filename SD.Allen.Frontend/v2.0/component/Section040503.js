@@ -10,29 +10,29 @@ define('component/Section040503', function (require) {
 		sectionLoaderViewModel = {};
 
     function listenCustomEvent() {
-    	$(window).off("opptySaving");
-    	$(window).on("opptySaving", saveOppty);
-    	$(window).off("updateSection");
-    	$(window).on("updateSection", function (e, newViewModel) {
-    	    loadSection(newViewModel);
-    	});
+        $(window).off("opptySaving");
+        $(window).on("opptySaving", saveOppty);
+        $(window).off("updateSection");
+        $(window).on("updateSection", function (e, newViewModel) {
+            loadSection(newViewModel);
+        });
     }
 
     function onViewModelPreLoad() {
-    	listenCustomEvent();
+        listenCustomEvent();
     }
 
     function onViewModelLoaded() {
-    	vm.section.opptyID = sectionLoaderViewModel.opptyID();
-    	if (vm.editable()) {
-    	    //getEmsTooling();
-    	    loadSection();
-    	} else {
-    	    var data = sectionLoaderViewModel.document();
-    	    if (data !== undefined && data.solnOverview != null && data.solnOverview.deliveryStrategies != null && data.solnOverview.deliveryStrategies.emsTooling != null) {
-    	        doDataBinding(data);
-    	    }
-    	}
+        vm.section.opptyID = sectionLoaderViewModel.opptyID();
+        if (vm.editable()) {
+            //getsvcMgmt();
+            loadSection();
+        } else {
+            var data = sectionLoaderViewModel.document();
+            if (data !== undefined && data.solnOverview != null && data.solnOverview.deliveryStrategies != null && data.solnOverview.deliveryStrategies.svcMgmt != null) {
+                doDataBinding(data);
+            }
+        }
     }
 
     function loadSection(latestedSectionLoaderViewModel) {
@@ -40,7 +40,7 @@ define('component/Section040503', function (require) {
             sectionLoaderViewModel = latestedSectionLoaderViewModel;
         }
         var data = sectionLoaderViewModel.document();
-        if (data !== undefined && data.solnOverview != null && data.solnOverview.deliveryStrategies != null && data.solnOverview.deliveryStrategies.emsTooling != null) {
+        if (data !== undefined && data.solnOverview != null && data.solnOverview.deliveryStrategies != null && data.solnOverview.deliveryStrategies.svcMgmt != null) {
             doDataBinding(data);
         } else {
             // section is not existed
@@ -48,10 +48,12 @@ define('component/Section040503', function (require) {
     }
 
     function doDataBinding(data) {
-    	var emsTooling = unescapeContent(data.solnOverview.deliveryStrategies.emsTooling.data);
-    	vm.section.data.clientToolDetail(emsTooling.clientToolDetail);
-    	vm.section.data.cmpyServiceDetail(emsTooling.cmpyServiceDetail);
-    	vm.section.data.cmpyApproachDetail(emsTooling.cmpyApproachDetail);
+        var svcMgmt = unescapeContent(data.solnOverview.deliveryStrategies.svcMgmt.data);
+        vm.section.data.svcMeasureDetail(svcMgmt.svcMeasureDetail);
+        vm.section.data.supplierMgmtDetail(svcMgmt.supplierMgmtDetail);
+        vm.section.data.perfMeasureDetail(svcMgmt.perfMeasureDetail);
+        vm.section.data.catalogueStrategyDetail(svcMgmt.catalogueStrategyDetail);
+        vm.section.data.toolingStrategyDetail(svcMgmt.toolingStrategyDetail);
     }
 
     function saveOppty(event, argu) {
@@ -64,39 +66,41 @@ define('component/Section040503', function (require) {
     }
 
     function escapeContent(content) {
-    	for (var p in content) {
-    		content[p] = escape(content[p]);
-    	}
-    	return content;
+        for (var p in content) {
+            content[p] = escape(content[p]);
+        }
+        return content;
     }
 
     function unescapeContent(content) {
-    	for (var p in content) {
-    		content[p] = unescape(content[p]);
-    	}
-    	return content;
+        for (var p in content) {
+            content[p] = unescape(content[p]);
+        }
+        return content;
     }
 
     function createViewModel(params, componentInfo) {
-    	sectionLoaderViewModel = params.viewModel;
-    	onViewModelPreLoad();
-    	var emsToolingViewModel = function () {
-    		var self = this;
-    		self.section = {
-    			opptyID: "",
-    			eTag: "",
-    			name: "ems-tooling",
-    			data: {
-    				clientToolDetail: ko.observable(""),
-    				cmpyServiceDetail: ko.observable(""),
-    				cmpyApproachDetail: ko.observable("")
-    			}
-    		};
-    		self.editable = ko.observable(sectionLoaderViewModel.editable());
-    	};
-    	vm = new emsToolingViewModel(params);
-    	onViewModelLoaded();
-    	return vm;
+        sectionLoaderViewModel = params.viewModel;
+        onViewModelPreLoad();
+        var svcMgmtViewModel = function () {
+            var self = this;
+            self.section = {
+                opptyID: "",
+                eTag: "",
+                name: "service-management",
+                data: {
+                    svcMeasureDetail: ko.observable(""),
+                    supplierMgmtDetail: ko.observable(""),
+                    perfMeasureDetail: ko.observable(""),
+                    catalogueStrategyDetail: ko.observable(""),
+                    toolingStrategyDetail: ko.observable("")
+                }
+            };
+            self.editable = ko.observable(sectionLoaderViewModel.editable());
+        };
+        vm = new svcMgmtViewModel(params);
+        onViewModelLoaded();
+        return vm;
     }
 
     return {

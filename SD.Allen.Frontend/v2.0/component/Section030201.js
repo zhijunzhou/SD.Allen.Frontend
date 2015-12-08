@@ -1,13 +1,8 @@
-﻿/*global define, alert, console, location*/
-
-define('component/Section030201', function (require) {
+﻿define('component/Section030201', function (require) {
     "use strict";
     var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
-        appUtility = require('util/AppUtility'),
-        errorPage = require('./SDErrorPage'),
-        opptyModel = require('model/Oppty'),
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./Section030201Template.html"),
         vm = {},
@@ -53,7 +48,6 @@ define('component/Section030201', function (require) {
     function onViewModelLoaded() {
     }
 
-    //before binding, we should unescape the original data from DB
     function unescapeData(data) {
         vm.data.salesStrategyDetail(getUnEscapeValue(data.salesStrategyDetail));
         vm.data.clientTransformationStrategyDetail(getUnEscapeValue(data.clientTransformationStrategyDetail));
@@ -74,21 +68,16 @@ define('component/Section030201', function (require) {
             self.pursuitClassfication = ko.observable();
             self.editable = ko.observable(true);
             self.data = {
-                salesStrategyDetail : ko.observable(),
-                clientTransformationStrategyDetail : ko.observable(),
-                dealBenefitDetail : ko.observable(),
-                criticalSuccessFactorDetail : ko.observable(),
+                salesStrategyDetail : ko.observable(""),
+                clientTransformationStrategyDetail : ko.observable(""),
+                dealBenefitDetail : ko.observable(""),
+                criticalSuccessFactorDetail : ko.observable(""),
                 dealEssentialDetail : ko.observable(),
-                sumryRelationStrategyDetail : ko.observable(),
-                specificSolnRqmtDetail : ko.observable(),
-                supporterDetractorDetail : ko.observable(),
-                bizPartnerDetail : ko.observable()
+                sumryRelationStrategyDetail : ko.observable(""),
+                specificSolnRqmtDetail : ko.observable(""),
+                supporterDetractorDetail : ko.observable(""),
+                bizPartnerDetail : ko.observable("")
             };
-
-            //save data and error handling
-            self.save = function () {
-                saveOppty();
-            }
         }
         vm = new salesApprViewModel(params);
         loadSection();
@@ -121,8 +110,7 @@ define('component/Section030201', function (require) {
         template: templateHtml,        
         viewModel: {
             createViewModel: createViewModel            
-        },
-        subComponents: [errorPage]
+        }
     };
    
 });

@@ -4,68 +4,80 @@
         min-height: 768px;
         background-size: 100% cover;
     }
+
     .ms-pub-contentLayout {
         background-color: transparent;
     }
 </style>
 <sd-toplink></sd-toplink>
-<div id="sd-section-content">
-    <ul class="nav nav-pills">
+<div class="nav navbar-fixed-top" style="top:173px;min-width:1300px;background-color:transparent;height:50px;text-shadow:10px 10px 20px #000;">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12 text-center">
+            <h3 style="color:#2ad2c9;font-weight:bolder;" data-bind="text:opptyID()+'  ('+opptyName()+')'"></h3>
+        </div>
+    </div>
+</div>
+<div id="sd-section-content" style="margin-top:208px;">
+    <ul class="nav nav-pills sd-nav">
         <li>
-            <div class="section">
-                <!-- ko if: opptyID() != "" -->
-                <a data-bind="attr:{href:sdLoaderUrl+'?sid=0201&OpptyID=' + opptyID()}">Opportunity Overview</a>
-                <!-- /ko -->
-            </div>
+            <!-- ko if: opptyID() != "" -->
+            <a data-bind="attr:{href:sdLoaderUrl+'?sid=0201&OpptyID=' + opptyID()}"><div class="section">Opportunity Overview</div></a>
+            <!-- /ko -->
         </li>
         <li>
-            <div class="section">
-                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">
-                    Client<br /> Solution<br /> Strategy
-                </a>
-                <ul class="dropdown-menu sd-dropdown-menu">
-                    <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=0301&OpptyID=' + opptyID()}">Client and Business Context</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040101&OpptyID=' + opptyID()}">Solution Overview</a></li>
-                </ul>
-            </div>
+            <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true" aria-selected="false">
+                <div class="section">Client<br /> Solution<br /> Strategy</div>
+            </a>
+            <ul class="dropdown-menu sd-dropdown-menu">
+                <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=0301&OpptyID=' + opptyID()}">Client and Business Context</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a data-bind="attr:{href:sdLoaderUrl+'?sid=040101&OpptyID=' + opptyID()}">Solution Overview</a></li>
+            </ul>
         </li>
         <li>
-            <div class="section">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    Offering<br /> Design
-                </a>
-                <ul class="dropdown-menu sd-dropdown-menu">
-                    <li><a>Opportunity-Wide Summaries</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a>Offering Solution Designs and Costing</a></li>
-                </ul>
-            </div>
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button">
+                <div class="section">Offering<br /> Design</div>
+            </a>
+            <ul class="dropdown-menu sd-dropdown-menu">
+                <li><a>Opportunity-Wide Summaries</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a>Offering Solution Designs and Costing</a></li>
+            </ul>
         </li>
         <li>
-            <div class="section">
-                Integrated<br /> Technical<br /> Architecture
-            </div>
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button">
+                <div class="section">
+                    Integrated<br /> Technical<br /> Architecture
+                </div>
+            </a>
         </li>
         <li>
-            <div class="section">
-                End-to-End<br /> T&T Solution
-            </div>
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button">
+                <div class="section">
+                    End-to-End<br /> T&T Solution
+                </div>
+            </a>
         </li>
         <li>
-            <div class="section">
-                Critical<br /> Risks,<br /> Assumptions<br /> and<br /> Mitigations
-            </div>
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button">
+                <div class="section">
+                    Critical<br /> Risks,<br /> Assumptions<br /> and<br /> Mitigations
+                </div>
+            </a>
         </li>
         <li>
-            <div class="section">
-                Required<br /> Documents
-            </div>
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button">
+                <div class="section">
+                    Required<br /> Documents
+                </div>
+            </a>
         </li>
         <li>
-            <div class="section">
-                Handover to<br /> Delivery
-            </div>
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button">
+                <div class="section">
+                    Handover to<br /> Delivery
+                </div>
+            </a>
         </li>
     </ul>
 </div>

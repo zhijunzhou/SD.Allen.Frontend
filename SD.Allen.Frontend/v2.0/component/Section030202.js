@@ -1,12 +1,8 @@
-﻿/*global define, alert, console, location*/
-define('component/Section030202', function (require) {
+﻿define('component/Section030202', function (require) {
     "use strict";
     var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
-        appUtility = require('util/AppUtility'),
-        opptyModel = require('model/Oppty'),
-        inputText = require('./SDInputText'),
         requestAPI = require('model/RequestAPI'),
         templateHtml = require("text!./Section030202Template.html"),
         vm = {},
@@ -22,6 +18,8 @@ define('component/Section030202', function (require) {
     }
 
     function onViewModelPreLoad() {
+        $(".popover-options a").popover({ html: true });
+        $('.popover-show').popover('show');
         listenCustomEvent();
     }
 
@@ -102,18 +100,9 @@ define('component/Section030202', function (require) {
                 ]
             };
 
-            self.isInteger = ko.observable(true);
             //subscrbe
             self.data.competitorNum.subscribe(checkNum);
             
-            $(".popover-options a").popover({ html: true });
-            $('.popover-show').popover('show');
-
-            self.save = function () {
-                if(checkNum(self.data.competitorNum()))
-                    saveOppty();
-            }
-
         };
         vm = new competitorsViewModel(params);
         loadSection();
@@ -123,12 +112,11 @@ define('component/Section030202', function (require) {
     function checkNum(inputText) {
         var reg = /^\+?(0|[1-9]\d*)$/;
         if (reg.test(inputText)) {
-            //is integer
-            vm.isInteger(true); return true;
-        } else {
-            //not integer
-            vm.isInteger(false); return false;
+            return true;
         }
+        alert("Please enter a positive integer.");
+        vm.data.competitorNum(1);
+        return false;        
     }
 
     function loadSection(newViewModel) {
@@ -148,13 +136,14 @@ define('component/Section030202', function (require) {
         if (sid !== '030202') {
             return;
         } else {
-            var newData = ko.toJS(vm.data);
-            for (var i in newData.content) {
-                newData.content[i] = new KeyCompetitor(newData.content[i]);
+            if (checkNum(vm.data.competitorNum())) {
+                var newData = ko.toJS(vm.data);
+                for (var i in newData.content) {
+                    newData.content[i] = new KeyCompetitor(newData.content[i]);
+                }
+                requestAPI.unifiedSave(true, newData, argu);
             }
-            requestAPI.unifiedSave(true, newData, argu);
-        }
-        
+        }        
     }
 
     return {
@@ -162,8 +151,7 @@ define('component/Section030202', function (require) {
         template: templateHtml,        
         viewModel: {
             createViewModel: createViewModel            
-        },        
-        subComponents: [inputText]
+        }
     };
    
 });

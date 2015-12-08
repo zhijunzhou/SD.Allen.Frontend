@@ -159,10 +159,17 @@ define('component/QuestionArea', function (require) {
     function insertAttachment(viewModel) {
         var file = viewModel.fileUploader.prop('files')[0],
             extension = extractFileExtenionName(file.name).toLowerCase();
+        sp.app.workingDialog.show("Uploading...");
         requestAPI.uploadtoSpecificFolder(sp.app.config.ListCollection.SSDocLib, "/" + viewModel.opptyID() + "/" + sp.app.config.ReleaseVersion, file.name, file).done(function (data) {
+            sp.app.workingDialog.hide("Uploading...");
             //insert hyperlink to content
-            if (data.status != undefined && data.status == 400) {
-                requestAPI.errorUpdateSection(data,null,null);
+            if (data.status != undefined && data.status > 300) {
+                requestAPI.errorUpdateSection(data, null, null);
+                sp.app.workingDialog.show("Upload attachment failed");
+                setTimeout(function () {
+                    sp.app.workingDialog.hide("Upload attachment failed");
+                }, 5000);
+                return;
             } else {
                 var fileUrl = nth_occurrence(data.d.ServerRelativeUrl, '/' + sp.app.config.ReleaseVersion + '/');
                 var fileHtml = '';

@@ -1,5 +1,4 @@
 ﻿<!-- ko with: data -->
-
 <div class="row form-horizontal">
     <div class="col-lg-6">
         <label class="control-label">How many total competitors are pursuing the opportunity?</label>
@@ -11,8 +10,8 @@
     <div class="col-lg-1">
         <input type="number" class="form-control text-right" min="1" data-bind="value:competitorNum" />
     </div>
-    <div class="col-lg-3" data-bind="if:!$component.isInteger()">
-        <div class="alert alert-error">Can only input is an integer! </div>
+    <div class="col-lg-3">
+        
     </div>
     <!-- /ko -->   
 
@@ -20,7 +19,7 @@
 <div class="row">
     <div class="col-lg-12">
         <label class="control-label">
-            Provide the following information for a maximum of 4 competitors.Be sure to identify their plans and approaches for transformation.
+            Provide the following information for a maximum of 4 competitors. Be sure to identify their plans and approaches for transformation.
         </label>
     </div>
     <div class="col-lg-12" data-bind="foreach:content">

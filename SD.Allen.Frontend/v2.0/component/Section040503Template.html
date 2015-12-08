@@ -5,14 +5,20 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
-                        <sd-questionarea params="{title:'What are the client-mandated and/or retained ESM tools, including those used by third parties?',
-                     content:clientToolDetail,editable:$component.editable}"></sd-questionarea>
+                        <sd-questionarea params="{title:'How are the in-scope services measured today; e.g., SLAs, business outcomes, by service, by component? How is the business impacted if there is no end-to-end (infrastructure and business) performance measurement?',
+                     content:svcMeasureDetail,editable:$component.editable}"></sd-questionarea>
 
-                        <sd-questionarea params="{title:'Which HPE service management services are included?',
-                     content:cmpyServiceDetail,editable:$component.editable}"></sd-questionarea>
+                        <sd-questionarea params="{title:'Is this a multi-supplier environment? Will HPE be expected to manage the other suppliers in any way?',
+                     content:supplierMgmtDetail,editable:$component.editable}"></sd-questionarea>
 
-                        <sd-questionarea params="{title:'What is the HPE approach for monitoring and management?',
-                     content:cmpyApproachDetail,editable:$component.editable}"></sd-questionarea>
+                        <sd-questionarea params="{title:'How are the different suppliers’ performance measured and monitored in the client’s environment today to ensure they deliver a joined up service with other providers; e.g., ‘cooperation agreements’ or shared service levels?',
+                     content:perfMeasureDetail,editable:$component.editable}"></sd-questionarea>
+
+                        <sd-questionarea params="{title:'What is the current catalogue strategy? What would the value to you be of having a single catalogue consolidated or aggregated across all service providers?',
+                     content:catalogueStrategyDetail,editable:$component.editable}"></sd-questionarea>
+
+                        <sd-questionarea params="{title:'What is your service management tooling strategy going forward?',
+                     content:toolingStrategyDetail,editable:$component.editable}"></sd-questionarea>
                     </div>
                 </div>
             </div>

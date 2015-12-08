@@ -57,6 +57,7 @@ define('component/Section040501', function (require) {
             }
             vm.pageInited(true);
         }
+        return data;
     }
 
     function compareWithAllOffering(allOffering, locationTarget) {

@@ -35,8 +35,8 @@ window.sp = {
                             'datetimepicker': 'js/bootstrap-datetimepicker.min', //datetimepicker control,  https://github.com/Eonasdan/bootstrap-datetimepicker
                             'moment': 'js/moment.min',
                             "komapping": "js/knockout.mapping-latest",
-                            "tinyMCE": "vendor/tinymce/tinymce.min",//tinyMCE
-                            "jQuery_tinyMCE": "vendor/tinymce/jquery.tinymce.min",//tinyMCE
+                            "tinyMCE": "../vendor/tinymce/tinymce.min",//tinyMCE
+                            "jQuery_tinyMCE": "../vendor/tinymce/jquery.tinymce.min",//tinyMCE
                             'ko_tinyMCE': 'js/wysiwyg',
                             "jquery-ui": "js/jquery-ui",
                             "ko_autocomplete": "js/knockout-jqAutocomplete",//https://github.com/rniemeyer/knockout-jqAutocomplete

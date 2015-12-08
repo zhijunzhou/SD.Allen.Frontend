@@ -1,13 +1,9 @@
-﻿/*global define, alert, console, location*/
-
-define('component/Section030204', function (require) {
+﻿define('component/Section030204', function (require) {
     "use strict";
     var $ = require("jquery"),
         ko = require("knockout"),
         jasnybs = require('jasnybs'),
         requestAPI = require('model/RequestAPI'),
-        appUtility = require('util/AppUtility'),
-        opptyModel = require('model/Oppty'),
         templateHtml = require("text!./Section030204Template.html"),
         vm = {},
         sectionLoaderViewModel = {};
@@ -60,7 +56,6 @@ define('component/Section030204', function (require) {
     }
 
     function onViewModelPreLoad() {
-        //pop-up tooltip           
         $(".popover-options a").popover({ html: true });
         $('.popover-show').popover('hide');
         listenCustomEvent();
@@ -79,19 +74,23 @@ define('component/Section030204', function (require) {
             self.data = {
                 isYellowPadPrice : ko.observable(true),
                 yellowPadPricePercentage : ko.observable(0),
-                clientPriceExpectDetail : ko.observable(),
-                clientPriceStrategyDetail : ko.observable(),
-                cmpyPriceStrategyDetail : ko.observable(),
-                competitorPriceStrategyDetail : ko.observable(),
-                majorFinancialIssue : ko.observable()
+                clientPriceExpectDetail : ko.observable(""),
+                clientPriceStrategyDetail : ko.observable(""),
+                cmpyPriceStrategyDetail : ko.observable(""),
+                competitorPriceStrategyDetail : ko.observable(""),
+                majorFinancialIssue : ko.observable("")
             };
 
+            //subscribe
+            self.data.yellowPadPricePercentage.subscribe(function (newValue) {
+                if (isNaN(newValue)) {
+                    alert("Please input is decimal");
+                    self.data.yellowPadPricePercentage(0.0);
+                }
+                return;
+            });
             //low or higher
             self.lowOrHigher = ko.observable(1);
-
-            self.save = function () {
-                saveOppty();
-            }
         };
         vm = new pricingApproachViewModel(params);
         loadSection();
@@ -109,12 +108,21 @@ define('component/Section030204', function (require) {
             unescapeData(doc.bizSoln.winStrategy.pricingApproach.data);        
     }
 
+    function isDecimal(str) {
+        var reg = /^\d+\.\d+$/;
+        return reg.test(str);
+    }
+
     function saveOppty(event, argu) {
         var sid = argu.sid();
         if (sid !== '030204') {
             return;
         } else {
             var newData = new PricingApproach(vm.data);
+            if (isNaN(newData.yellowPadPricePercentage)) {
+                alert("Please input is decimal");
+                return;
+            }
             requestAPI.unifiedSave(true, newData, argu);
         }        
     }
