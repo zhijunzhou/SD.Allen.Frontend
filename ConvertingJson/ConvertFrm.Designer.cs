@@ -1,4 +1,6 @@
-﻿namespace ConvertingJson
+﻿using System.Collections;
+
+namespace ConvertingJson
 {
     partial class ConvertFrm
     {
@@ -89,7 +91,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(390, 20);
             this.textBox2.TabIndex = 5;
-            this.textBox2.Text = "bizSoln.clientOverview.data";
+            this.textBox2.Text = "bizSoln.winStrategy.mapValProps.data";
             // 
             // textBox3
             // 
@@ -97,7 +99,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(390, 20);
             this.textBox3.TabIndex = 6;
-            this.textBox3.Text = "Client Solution Context";
+            this.textBox3.Text = "Map Values";
             // 
             // label3
             // 
@@ -123,9 +125,9 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(390, 20);
             this.textBox4.TabIndex = 9;
-            this.textBox4.Text = "clientOverview";
+            this.textBox4.Text = "mapValProps";
             // 
-            // Form1
+            // ConvertFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -140,7 +142,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "ConvertFrm";
             this.Text = "Parsing Json to Excel";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -162,6 +164,7 @@
         private string sectionName = "mapValProps";
         private string sectionTitle = "Map Value Propersiton";
         private int rowCount = 0;
+        private IList arrayRecord;
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;

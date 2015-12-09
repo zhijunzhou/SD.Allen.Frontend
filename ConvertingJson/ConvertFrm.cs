@@ -16,7 +16,6 @@ namespace ConvertingJson
 {
     public partial class ConvertFrm : Form
     {
-
         public ConvertFrm()
         {
             InitializeComponent();
@@ -28,33 +27,33 @@ namespace ConvertingJson
             sectionTitle = textBox3.Text;
             sectionName = textBox4.Text;
             rowCount = 3;
-            writeToExcel("");
+            arrayRecord = new List<Record>();
+            writeToExcel(textBox1.Text);
         }
-        
+
         private void writeToExcel(string path)
-        {            
+        {
             object misValue = System.Reflection.Missing.Value;
 
-            JObject o1 = JObject.Parse(File.ReadAllText(@"C:\Users\zhouzh\Desktop\oppty.json"));
-            //get 
-            JToken section = o1.SelectToken(sectionPath);           
             try
             {
+                JObject o1 = JObject.Parse(File.ReadAllText(path));
+                JToken section = o1.SelectToken(sectionPath);
+
                 initWorkBook();
 
                 processHeading();
-                ///
+
                 ///  Convert Core
-                /// 
                 convertCore(section);
 
                 applyFormula();
 
                 saveAndClose();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("Error");
+                Console.WriteLine("Error" + e.Message);
             }
         }
 
@@ -69,15 +68,58 @@ namespace ConvertingJson
                     var type = property.Value.Type;
                     if (type == JTokenType.Array)
                     {
-
+                        JArray array = (JArray)property.Value;
+                        if (array.Count() <= 0)
+                        {
+                            colValues[1] = property.Name.ToString();
+                            colValues[2] = property.Name.ToString();
+                            colValues[3] = property.Name.ToString();
+                            colValues[4] = property.Value.Type.ToString();
+                            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+                            rowCount++;
+                        }
+                        else
+                        {
+                            colValues[1] = "Object Array";
+                            colValues[2] = property.Name.ToString();
+                            colValues[3] = property.Name.ToString();
+                            colValues[4] = property.Value.Type.ToString();
+                            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+                            rowCount++;
+                            JToken obj0 = (JObject)array[0];                    
+                            // record object array
+                            arrayRecord.Add(new Record(rowCount - 1, obj0.Children().Count()));                                                     
+                            convertCore((JToken)array[0]);
+                        }
                     }
                     else if (type == JTokenType.Object)
                     {
-
+                        colValues[1] = "Object";
+                        colValues[2] = property.Name.ToString();
+                        colValues[3] = property.Name.ToString();
+                        colValues[4] = property.Value.Type.ToString();
+                        oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+                        rowCount++;
+                        arrayRecord.Add(new Record(rowCount - 1, property.Value.Children().Count()));
+                        convertCore(property.Value);
                     }
-                    else
+                    else if (type == JTokenType.Boolean)
                     {
-                        colValues[0] = "1.1";
+                        var val = (bool)property.Value;
+                        if (val) //dropdown 
+                        {
+                            colValues[4] = "Single Choice";
+                        }
+                        else
+                        {
+                            colValues[4] = "Multiple Choice";
+                        }
+                        colValues[2] = property.Name.ToString();
+                        colValues[3] = property.Name.ToString();
+                        oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+                        rowCount++;
+                    }
+                    else {
                         colValues[1] = property.Value.ToString();
                         colValues[2] = property.Name.ToString();
                         colValues[3] = property.Name.ToString();
@@ -85,7 +127,7 @@ namespace ConvertingJson
                         oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
                         rowCount++;
                     }
-
+                    colValues[0] = "1.1";
                 }
 
             }
@@ -111,10 +153,12 @@ namespace ConvertingJson
             oSheet.Cells[2, 1] = "1";
             oSheet.Cells[2, 2] = sectionTitle;
             oSheet.Cells[2, 3] = sectionName;
+            oSheet.Cells[2, 4] = sectionName;
         }
 
         private void applyFormula()
         {
+            Console.WriteLine(arrayRecord.Count);
             //Format A1:D1 as bold, vertical alignment = center.
             oSheet.get_Range("A1", "E1").Font.Bold = true;
             oSheet.get_Range("A1", "E1").VerticalAlignment =
@@ -122,7 +166,15 @@ namespace ConvertingJson
 
             //Fill cell with formula
             oRng = oSheet.get_Range("D3", "D" + (rowCount - 1));
-            oRng.Formula = "=$C$2 & \".\" & C3";
+            oRng.Formula = "=$D$2 & \".\" & C3";
+
+            //Fill array with formula
+            foreach (Record r in arrayRecord)
+            {               
+                oRng = oSheet.get_Range("D" + (r.startIndex + 1), "D" + (r.startIndex + r.step));
+                oRng.Formula = "=$D$"+r.startIndex+" & \".\" & C" + (r.startIndex + 1);
+            }
+            
 
             ////Fill D2:D6 with a formula(=RAND()*100000) and apply format.
             //oRng = oSheet.get_Range("D2", "D6");
@@ -177,5 +229,7 @@ namespace ConvertingJson
             }
         }
     }
+
+   
 
 }
