@@ -24,6 +24,7 @@ namespace ConvertingJson
         private void button1_Click(object sender, EventArgs e)
         {
             sectionPath = textBox2.Text;
+            fieldTitleFilepath = textBox5.Text;
             sectionTitle = textBox3.Text;
             sectionName = textBox4.Text;
             rowCount = 3;
@@ -37,15 +38,20 @@ namespace ConvertingJson
 
             try
             {
+                //section object
                 JObject o1 = JObject.Parse(File.ReadAllText(path));
                 JToken section = o1.SelectToken(sectionPath);
+
+                //field collection
+                JObject o2 = JObject.Parse(File.ReadAllText(fieldTitleFilepath));
+                JToken fieldCollection = o2.SelectToken(sectionPath);
 
                 initWorkBook();
 
                 processHeading();
 
                 ///  Convert Core
-                convertCore(section);
+                convertCore(section, fieldCollection);
 
                 applyFormula();
 
@@ -57,21 +63,24 @@ namespace ConvertingJson
             }
         }
 
-        private void convertCore(JToken section)
+        private void convertCore(JToken section, JToken fieldCollection)
         {
-            foreach (JToken child in section.Children())
+            for (int i = 0,j=0; i < section.Children().Count(); i++,j++)
             {
+                JToken child = section.Children().ElementAt(i);
+                JToken field = fieldCollection.Children().ElementAt(j);
                 string[] colValues = new string[5];
                 var property = child as JProperty;
+                var fieldProperty = field as JProperty;
                 if (property != null)
                 {
                     var type = property.Value.Type;
                     if (type == JTokenType.Array)
                     {
-                        JArray array = (JArray)property.Value;
+                        JArray array = (JArray)property.Value;                        
                         if (array.Count() <= 0)
                         {
-                            colValues[1] = property.Name.ToString();
+                            colValues[1] = fieldProperty.Value.ToString();
                             colValues[2] = property.Name.ToString();
                             colValues[3] = property.Name.ToString();
                             colValues[4] = property.Value.Type.ToString();
@@ -80,16 +89,17 @@ namespace ConvertingJson
                         }
                         else
                         {
+                            JArray fieldSubArray = (JArray)fieldProperty.Value;
                             colValues[1] = "Object Array";
                             colValues[2] = property.Name.ToString();
                             colValues[3] = property.Name.ToString();
                             colValues[4] = property.Value.Type.ToString();
                             oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
                             rowCount++;
-                            JToken obj0 = (JObject)array[0];                    
+                            JToken obj0 = (JObject)array[0];
                             // record object array
-                            arrayRecord.Add(new Record(rowCount - 1, obj0.Children().Count()));                                                     
-                            convertCore((JToken)array[0]);
+                            arrayRecord.Add(new Record(rowCount - 1, obj0.Children().Count()));
+                            convertCore((JToken)array[0], (JToken)fieldSubArray[0]);
                         }
                     }
                     else if (type == JTokenType.Object)
@@ -101,10 +111,11 @@ namespace ConvertingJson
                         oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
                         rowCount++;
                         arrayRecord.Add(new Record(rowCount - 1, property.Value.Children().Count()));
-                        convertCore(property.Value);
+                        convertCore(property.Value,fieldProperty.Value);
                     }
                     else if (type == JTokenType.Boolean)
                     {
+                        colValues[1] = fieldProperty.Value.ToString();
                         var val = (bool)property.Value;
                         if (val) //dropdown 
                         {
@@ -119,8 +130,9 @@ namespace ConvertingJson
                         oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
                         rowCount++;
                     }
-                    else {
-                        colValues[1] = property.Value.ToString();
+                    else
+                    {
+                        colValues[1] = fieldProperty.Value.ToString();
                         colValues[2] = property.Name.ToString();
                         colValues[3] = property.Name.ToString();
                         colValues[4] = property.Value.Type.ToString();
@@ -129,8 +141,79 @@ namespace ConvertingJson
                     }
                     colValues[0] = "1.1";
                 }
-
             }
+            //foreach (JToken child in section.Children())
+            //{
+            //    string[] colValues = new string[5];
+            //    var property = child as JProperty;
+            //    if (property != null)
+            //    {
+            //        var type = property.Value.Type;
+            //        if (type == JTokenType.Array)
+            //        {
+            //            JArray array = (JArray)property.Value;
+            //            if (array.Count() <= 0)
+            //            {
+            //                colValues[1] = property.Name.ToString();
+            //                colValues[2] = property.Name.ToString();
+            //                colValues[3] = property.Name.ToString();
+            //                colValues[4] = property.Value.Type.ToString();
+            //                oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+            //                rowCount++;
+            //            }
+            //            else
+            //            {
+            //                colValues[1] = "Object Array";
+            //                colValues[2] = property.Name.ToString();
+            //                colValues[3] = property.Name.ToString();
+            //                colValues[4] = property.Value.Type.ToString();
+            //                oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+            //                rowCount++;
+            //                JToken obj0 = (JObject)array[0];                    
+            //                // record object array
+            //                arrayRecord.Add(new Record(rowCount - 1, obj0.Children().Count()));                                                     
+            //                convertCore((JToken)array[0]);
+            //            }
+            //        }
+            //        else if (type == JTokenType.Object)
+            //        {
+            //            colValues[1] = "Object";
+            //            colValues[2] = property.Name.ToString();
+            //            colValues[3] = property.Name.ToString();
+            //            colValues[4] = property.Value.Type.ToString();
+            //            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+            //            rowCount++;
+            //            arrayRecord.Add(new Record(rowCount - 1, property.Value.Children().Count()));
+            //            convertCore(property.Value);
+            //        }
+            //        else if (type == JTokenType.Boolean)
+            //        {
+            //            var val = (bool)property.Value;
+            //            if (val) //dropdown 
+            //            {
+            //                colValues[4] = "Single Choice";
+            //            }
+            //            else
+            //            {
+            //                colValues[4] = "Multiple Choice";
+            //            }
+            //            colValues[2] = property.Name.ToString();
+            //            colValues[3] = property.Name.ToString();
+            //            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+            //            rowCount++;
+            //        }
+            //        else {
+            //            colValues[1] = property.Value.ToString();
+            //            colValues[2] = property.Name.ToString();
+            //            colValues[3] = property.Name.ToString();
+            //            colValues[4] = property.Value.Type.ToString();
+            //            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+            //            rowCount++;
+            //        }
+            //        colValues[0] = "1.1";
+            //    }
+
+            //}
         }
 
         private void initWorkBook()
