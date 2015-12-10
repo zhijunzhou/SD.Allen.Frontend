@@ -42,11 +42,14 @@ namespace ConvertingJson
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(201, 287);
+            this.button1.Location = new System.Drawing.Point(209, 401);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(192, 56);
             this.button1.TabIndex = 0;
@@ -73,7 +76,7 @@ namespace ConvertingJson
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(-2, 380);
+            this.progressBar1.Location = new System.Drawing.Point(9, 499);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(630, 23);
             this.progressBar1.TabIndex = 3;
@@ -89,7 +92,7 @@ namespace ConvertingJson
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(157, 150);
+            this.textBox2.Location = new System.Drawing.Point(157, 323);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(390, 20);
             this.textBox2.TabIndex = 5;
@@ -99,7 +102,7 @@ namespace ConvertingJson
             // 
             this.textBox3.Location = new System.Drawing.Point(157, 238);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(390, 20);
+            this.textBox3.Size = new System.Drawing.Size(274, 20);
             this.textBox3.TabIndex = 6;
             this.textBox3.Text = "Opportunity Overview";
             // 
@@ -125,7 +128,7 @@ namespace ConvertingJson
             // 
             this.textBox4.Location = new System.Drawing.Point(157, 195);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(390, 20);
+            this.textBox4.Size = new System.Drawing.Size(274, 20);
             this.textBox4.TabIndex = 9;
             this.textBox4.Text = "opptyData";
             // 
@@ -146,11 +149,28 @@ namespace ConvertingJson
             this.label5.TabIndex = 11;
             this.label5.Text = "Json Title File:";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(157, 150);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(390, 21);
+            this.comboBox1.TabIndex = 12;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "openFileDialog2";
+            // 
             // ConvertFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 403);
+            this.ClientSize = new System.Drawing.Size(651, 523);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
@@ -188,6 +208,8 @@ namespace ConvertingJson
         private int rowCount = 0;
         private IList arrayRecord;
 
+        private IList pathCollection;
+
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
@@ -196,6 +218,9 @@ namespace ConvertingJson
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }
 

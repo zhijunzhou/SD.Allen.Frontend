@@ -19,6 +19,35 @@ namespace ConvertingJson
         public ConvertFrm()
         {
             InitializeComponent();
+            initTokenPath();
+        }
+
+        private void initTokenPath()
+        {
+            int counter = 0;
+            string line = null;
+            StreamReader file = null;
+            try
+            {
+                file = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "path.txt");
+                while (file.ReadLine() != null)
+                {
+                    line = file.ReadLine();
+                    String[] rc =  line.Split('$');
+                    pathCollection.Add(new SectionPath(rc[0], rc[1], rc[2]));
+                    counter++;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory + "Configuration File not found!");
+            }
+            finally
+            {
+                if(file != null)
+                    file.Close();
+            }            
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,6 +82,8 @@ namespace ConvertingJson
                 ///  Convert Core
                 convertCore(section, fieldCollection);
 
+                applyBackgroud();
+
                 applyFormula();
 
                 saveAndClose();
@@ -60,6 +91,18 @@ namespace ConvertingJson
             catch (Exception e)
             {
                 Console.WriteLine("Error" + e.Message);
+            }
+        }
+
+        private void applyBackgroud()
+        {
+            oSheet.Range["A2:F2"].Interior.Color = Color.Yellow;
+            for (int i = 3; i < rowCount; i++)
+            {
+                if(i % 2 != 0)
+                {
+                    oSheet.Range["A"+i+":F" +i].Interior.Color = Color.LightBlue;
+                }
             }
         }
 
@@ -142,78 +185,7 @@ namespace ConvertingJson
                     colValues[0] = "1.1";
                 }
             }
-            //foreach (JToken child in section.Children())
-            //{
-            //    string[] colValues = new string[5];
-            //    var property = child as JProperty;
-            //    if (property != null)
-            //    {
-            //        var type = property.Value.Type;
-            //        if (type == JTokenType.Array)
-            //        {
-            //            JArray array = (JArray)property.Value;
-            //            if (array.Count() <= 0)
-            //            {
-            //                colValues[1] = property.Name.ToString();
-            //                colValues[2] = property.Name.ToString();
-            //                colValues[3] = property.Name.ToString();
-            //                colValues[4] = property.Value.Type.ToString();
-            //                oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
-            //                rowCount++;
-            //            }
-            //            else
-            //            {
-            //                colValues[1] = "Object Array";
-            //                colValues[2] = property.Name.ToString();
-            //                colValues[3] = property.Name.ToString();
-            //                colValues[4] = property.Value.Type.ToString();
-            //                oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
-            //                rowCount++;
-            //                JToken obj0 = (JObject)array[0];                    
-            //                // record object array
-            //                arrayRecord.Add(new Record(rowCount - 1, obj0.Children().Count()));                                                     
-            //                convertCore((JToken)array[0]);
-            //            }
-            //        }
-            //        else if (type == JTokenType.Object)
-            //        {
-            //            colValues[1] = "Object";
-            //            colValues[2] = property.Name.ToString();
-            //            colValues[3] = property.Name.ToString();
-            //            colValues[4] = property.Value.Type.ToString();
-            //            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
-            //            rowCount++;
-            //            arrayRecord.Add(new Record(rowCount - 1, property.Value.Children().Count()));
-            //            convertCore(property.Value);
-            //        }
-            //        else if (type == JTokenType.Boolean)
-            //        {
-            //            var val = (bool)property.Value;
-            //            if (val) //dropdown 
-            //            {
-            //                colValues[4] = "Single Choice";
-            //            }
-            //            else
-            //            {
-            //                colValues[4] = "Multiple Choice";
-            //            }
-            //            colValues[2] = property.Name.ToString();
-            //            colValues[3] = property.Name.ToString();
-            //            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
-            //            rowCount++;
-            //        }
-            //        else {
-            //            colValues[1] = property.Value.ToString();
-            //            colValues[2] = property.Name.ToString();
-            //            colValues[3] = property.Name.ToString();
-            //            colValues[4] = property.Value.Type.ToString();
-            //            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
-            //            rowCount++;
-            //        }
-            //        colValues[0] = "1.1";
-            //    }
-
-            //}
+            
         }
 
         private void initWorkBook()
@@ -253,11 +225,10 @@ namespace ConvertingJson
 
             //Fill array with formula
             foreach (Record r in arrayRecord)
-            {               
-                oRng = oSheet.get_Range("D" + (r.startIndex + 1), "D" + (r.startIndex + r.step));
-                oRng.Formula = "=$D$"+r.startIndex+" & \".\" & C" + (r.startIndex + 1);
-            }
-            
+            {
+                fillFormula(r);
+                applyIndent(r);
+            }            
 
             ////Fill D2:D6 with a formula(=RAND()*100000) and apply format.
             //oRng = oSheet.get_Range("D2", "D6");
@@ -267,6 +238,17 @@ namespace ConvertingJson
             //AutoFit columns A:D.
             oRng = oSheet.get_Range("A1", "D1");
             oRng.EntireColumn.AutoFit();
+        }
+
+        private void applyIndent(Record r)
+        {
+            oSheet.get_Range("B" + (r.startIndex + 1), "B" + (r.startIndex + r.step)).IndentLevel = 2;
+        }
+
+        private void fillFormula(Record r)
+        {
+            oRng = oSheet.get_Range("D" + (r.startIndex + 1), "D" + (r.startIndex + r.step));
+            oRng.Formula = "=$D$" + r.startIndex + " & \".\" & C" + (r.startIndex + 1);
         }
 
         private void saveAndClose()
