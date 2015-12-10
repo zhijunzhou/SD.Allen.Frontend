@@ -1,64 +1,88 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Office.Interop.Excel;
+using System.Reflection;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace ConvertingJson
 {
     public partial class ConvertFrm : Form
     {
         public ConvertFrm()
-        {
+        {            
             InitializeComponent();
             initTokenPath();
+            initProgressBar();
+        }
+
+        private void initProgressBar()
+        {
+            progressBar1.Visible = false;            
+            progressBar1.Minimum = 1;
+            progressBar1.Value = 1;
+            progressBar1.Step = 1;
         }
 
         private void initTokenPath()
         {
-            int counter = 0;
             string line = null;
-            StreamReader file = null;
+            StreamReader reader = null;
             try
             {
-                file = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "path.txt");
-                while (file.ReadLine() != null)
+                reader = File.OpenText("path.txt");
+                while ((line = reader.ReadLine()) != null)
                 {
-                    line = file.ReadLine();
-                    String[] rc =  line.Split('$');
-                    pathCollection.Add(new SectionPath(rc[0], rc[1], rc[2]));
-                    counter++;
+                    String[] rc = line.Split('$');
+                    pathCollection.Add(new SectionPath(rc[0], rc[1], rc[2]));                    
                 }
+                comboBox1.DataSource = pathCollection;
+                comboBox1.DisplayMember = "fullpath";
             }
             catch (Exception)
             {
-                MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory + "Configuration File not found!");
+                MessageBox.Show("Configuration File not found!");
             }
             finally
             {
-                if(file != null)
-                    file.Close();
+                if(reader != null)
+                    reader.Close();
             }            
             
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            sectionPath = textBox2.Text;
+            // set visible
+            progressBar1.Visible = true;
+
+            // component assignment
+            SectionPath sp = (SectionPath)comboBox1.SelectedItem;
+            sectionPath = sp.fullpath;
             fieldTitleFilepath = textBox5.Text;
             sectionTitle = textBox3.Text;
             sectionName = textBox4.Text;
+            // row count
             rowCount = 3;
-            arrayRecord = new List<Record>();
+
+            // caculate total time
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+
+            // Convert json to excel            
             writeToExcel(textBox1.Text);
+
+            watch.Stop();
+            TimeSpan ts = watch.Elapsed;
+            // Format and display the TimeSpan value.
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            label6.Text = "Total time: " + elapsedTime;
         }
 
         private void writeToExcel(string path)
@@ -88,7 +112,15 @@ namespace ConvertingJson
 
                 saveAndClose();
             }
-            catch (Exception e)
+            catch (FileNotFoundException e)
+            {
+                MessageBox.Show("Error" + e.Message);
+            }
+            catch(ArgumentException e)
+            {
+                MessageBox.Show("Error" + e.Message);
+            }
+            catch(COMException e)
             {
                 Console.WriteLine("Error" + e.Message);
             }
@@ -108,8 +140,10 @@ namespace ConvertingJson
 
         private void convertCore(JToken section, JToken fieldCollection)
         {
+            progressBar1.Maximum = section.Children().Count();
             for (int i = 0,j=0; i < section.Children().Count(); i++,j++)
             {
+                progressBar1.PerformStep();
                 JToken child = section.Children().ElementAt(i);
                 JToken field = fieldCollection.Children().ElementAt(j);
                 string[] colValues = new string[5];
@@ -191,7 +225,7 @@ namespace ConvertingJson
         private void initWorkBook()
         {
             oxl = new Microsoft.Office.Interop.Excel.Application();
-            oxl.Visible = true;
+            oxl.Visible = false;
             owb = oxl.Workbooks.Add("");
             oSheet = owb.ActiveSheet;
         }
@@ -253,7 +287,7 @@ namespace ConvertingJson
 
         private void saveAndClose()
         {
-            //oxl.Visible = false;
+            oxl.Visible = true;
             oxl.UserControl = false;
             owb.SaveAs("c:\\test\\test505.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
         false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
@@ -290,6 +324,57 @@ namespace ConvertingJson
                         Console.WriteLine(property.Name + ":" + property.Value);
                     }
 
+                }
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SectionPath sp = (SectionPath)comboBox1.SelectedItem;
+            textBox4.Text = sp.sectionName;
+            textBox3.Text = sp.sectionTitle;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = "C:\\";
+            openFileDialog1.Filter = "json files (*.json)|*.json";
+            openFileDialog1.FilterIndex = 2;
+            //openFileDialog1.RestoreDirectory = true;
+
+            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    textBox1.Text = openFileDialog1.FileName;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            openFileDialog2 = new OpenFileDialog();
+            openFileDialog2.InitialDirectory = "C:\\";
+            openFileDialog2.Filter = "json files (*.json)|*.json";
+            openFileDialog2.FilterIndex = 2;
+            openFileDialog2.RestoreDirectory = true;
+
+            if (openFileDialog2.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    textBox5.Text = openFileDialog2.FileName;
+                }
+                catch (Exception)
+                {
+
+                    throw;
                 }
             }
         }

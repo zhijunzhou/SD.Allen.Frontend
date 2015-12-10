@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace ConvertingJson
 {
@@ -35,7 +36,6 @@ namespace ConvertingJson
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,11 +45,14 @@ namespace ConvertingJson
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(209, 401);
+            this.button1.Location = new System.Drawing.Point(192, 332);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(192, 56);
             this.button1.TabIndex = 0;
@@ -61,7 +64,7 @@ namespace ConvertingJson
             // 
             this.textBox1.Location = new System.Drawing.Point(157, 62);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(390, 20);
+            this.textBox1.Size = new System.Drawing.Size(337, 20);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "C:\\Users\\zhouzh\\Desktop\\Oppty.json";
             // 
@@ -76,7 +79,7 @@ namespace ConvertingJson
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(9, 499);
+            this.progressBar1.Location = new System.Drawing.Point(-7, 445);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(630, 23);
             this.progressBar1.TabIndex = 3;
@@ -89,14 +92,6 @@ namespace ConvertingJson
             this.label2.Size = new System.Drawing.Size(71, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Section Path:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(157, 323);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(390, 20);
-            this.textBox2.TabIndex = 5;
-            this.textBox2.Text = "opptyOverview.opptyData.data";
             // 
             // textBox3
             // 
@@ -136,7 +131,7 @@ namespace ConvertingJson
             // 
             this.textBox5.Location = new System.Drawing.Point(157, 109);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(390, 20);
+            this.textBox5.Size = new System.Drawing.Size(337, 20);
             this.textBox5.TabIndex = 10;
             this.textBox5.Text = "C:\\Users\\zhouzh\\Desktop\\Copy.json";
             // 
@@ -156,6 +151,7 @@ namespace ConvertingJson
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(390, 21);
             this.comboBox1.TabIndex = 12;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // openFileDialog1
             // 
@@ -165,11 +161,43 @@ namespace ConvertingJson
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(486, 60);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(61, 23);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "choose..";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(486, 107);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(61, 23);
+            this.button3.TabIndex = 14;
+            this.button3.Text = "choose..";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(437, 375);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(75, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "waiting to start";
+            // 
             // ConvertFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 523);
+            this.ClientSize = new System.Drawing.Size(620, 467);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox5);
@@ -177,7 +205,6 @@ namespace ConvertingJson
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
@@ -206,12 +233,10 @@ namespace ConvertingJson
         private string sectionName = "mapValProps";
         private string sectionTitle = "Map Value Propersiton";
         private int rowCount = 0;
-        private IList arrayRecord;
-
-        private IList pathCollection;
+        private IList arrayRecord = new List<Record>();
+        private IList pathCollection = new List<SectionPath>();
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -221,6 +246,9 @@ namespace ConvertingJson
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label6;
     }
 }
 

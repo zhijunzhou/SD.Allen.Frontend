@@ -32,6 +32,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>Excel_128px_1121167_easyicon.net.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -117,6 +121,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Excel_128px_1121167_easyicon.net.ico" />
     <Content Include="path.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
