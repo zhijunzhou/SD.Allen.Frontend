@@ -1,0 +1,301 @@
+{
+  "ntnTransitTransformSoln": {
+    "transitStrategyApproach": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "attachment": [
+          {
+            "title": "",
+            "link": ""
+          }
+        ],
+        "strategyApproachArr": [
+          {
+            "strategyApproachName": "",
+            "strategyApproachDescription": "",
+            "topAssumptions": [ ],
+            "topRisks": [ ],
+            "topDeliverables": [ ],
+            "topMilestones": [ ]
+          }
+        ]
+      }
+    },
+    "transformStrategyApproach": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "attachment": [
+          {
+            "title": "",
+            "link": ""
+          }
+        ],
+        "strategyApproachArr": [
+          {
+            "strategyApproachName": "",
+            "strategyApproachDescription": "",
+            "topAssumptions": [ ],
+            "topRisks": [ ],
+            "topDeliverables": [ ],
+            "topMilestones": [ ]
+          }
+        ]
+      }
+    },
+    "clientBenefits": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "clientBizOutcomes": "",
+            "transitTransformProj": "",
+            "clientBenefits": ""
+          }
+        ]
+      }
+    },
+    "dueDiligenceSum": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "dueDiligenceFindingsImpacts": [
+          {
+            "inScope": true,
+            "finding": "",
+            "impact": ""
+          }
+        ],
+        "openIssuesRisks": [
+          {
+            "inScope": true,
+            "finding": "",
+            "impact": ""
+          }
+        ],
+        "openAssumptionActions": [
+          {
+            "inScope": true,
+            "finding": "",
+            "impact": ""
+          }
+        ],
+        "outStandingData": [
+          {
+            "inScope": true,
+            "finding": "",
+            "impact": ""
+          }
+        ]
+      }
+    },
+    "keyProjTimelines": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "highlevelTimelines": [
+          {
+            "title": "",
+            "link": ""
+          }
+        ],
+        "offeringspecificTimelines": [
+          {
+            "title": "",
+            "link": ""
+          }
+        ],
+        "clientInFlightProjTimelines": [
+          {
+            "title": "",
+            "link": ""
+          }
+        ],
+        "otherRelevantTimelines": [
+          {
+            "title": "",
+            "link": ""
+          }
+        ]
+      }
+    },
+    "keyProjInterDependencies": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "project": "",
+            "keyDependencies": "",
+            "requiredAct": ""
+          }
+        ]
+      }
+    },
+    "govStructMgmtChange": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "acctOrgChart": [
+          {
+            "title": "",
+            "link": ""
+          }
+        ],
+        "programTeamStruct": [
+          {
+            "title": "",
+            "link": ""
+          }
+        ],
+        "projStructByOffering": [
+          {
+            "title": "",
+            "link": ""
+          }
+        ],
+        "mocActivitiesTransitionPhase": "",
+        "mocActivitiesTransformPhase": "",
+        "clientObligProcDetail": "",
+        "contractRoleRespChangeImpact": "",
+        "cmpyAcctGovClient": "",
+        "offeringSolnDesignCostModel": ""
+      }
+    }
+  },
+  "assumptRiskMitigatnOverview": {
+    "keyAssumptions": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "offeringFuncArea": "",
+            "assumption": "",
+            "planToClose": ""
+          }
+        ]
+      }
+    },
+    "keyDeliveryRisks": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "offeringFuncArea": "",
+            "riskDescription": "",
+            "mitigationPlan": "",
+            "status": true
+          }
+        ]
+      }
+    },
+    "keyNonDeliveryRisks": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "offeringFuncArea": "",
+            "riskDescription": "",
+            "mitigationPlan": "",
+            "status": true
+          }
+        ]
+      }
+    }
+  },
+
+  "requiredDoc": {
+    "requiredDocData": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "slaSloDoc": [
+              {
+                "title": "",
+                "link": ""
+              }
+            ],
+            "sowDoc": [
+              {
+                "title": "",
+                "link": ""
+              }
+            ],
+            "dairGuard": [
+              {
+                "title": "",
+                "link": ""
+              }
+            ],
+            "dueDiligenceReport": [
+              {
+                "title": "",
+                "link": ""
+              }
+            ],
+            "ttPlan": [
+              {
+                "title": "",
+                "link": ""
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+
+  "handoverToDelivery": {
+    "changeSummary": {
+      "data": {
+        "content": [
+          {
+            "changeIdName": "",
+            "changeDescription": "",
+            "changeCreateDate": "2015-11-09T07:11:49.628Z",
+            "decisionCloseDate": "2015-11-09T07:11:49.628Z"
+          }
+        ]
+      }
+    },
+    "changeLog": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "designDecisions": {
+          "changeIdName": "",
+          "changeCreateDate": "2015-11-09T07:11:49.628Z",
+          "changeDescription": "",
+          "changeAlternatives": "",
+          "interExterDescision": true,
+          "decisionDetail": "",
+          "issueStmt": "",
+          "assumptPreCondition": "",
+          "depndActRequired": "",
+          "relatedDecisionChanges": "",
+          "depndCompletion": "",
+          "depndCompletionDate": "2015-11-09T07:11:49.628Z",
+          "decisionCloseDate": "2015-11-09T07:11:49.628Z"
+        }
+      }
+    },
+    "glossary": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": {
+          "termAcronym": "",
+          "meaningUsedIn": "",
+          "sectionWhereUsed": [ ]
+        }
+      }
+    }
+  }
+}

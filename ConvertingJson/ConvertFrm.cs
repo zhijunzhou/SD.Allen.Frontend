@@ -57,38 +57,46 @@ namespace ConvertingJson
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // set visible
-            progressBar1.Visible = true;
+            try
+            {
+                // set visible
+                progressBar1.Visible = true;
+                progressBar1.Value = 1;
 
-            // component assignment
-            SectionPath sp = (SectionPath)comboBox1.SelectedItem;
-            sectionPath = sp.fullpath;
-            fieldTitleFilepath = textBox5.Text;
-            sectionTitle = textBox3.Text;
-            sectionName = textBox4.Text;
-            // row count
-            rowCount = 3;
+                // component assignment
+                SectionPath sp = (SectionPath)comboBox1.SelectedItem;
+                sectionPath = sp.fullpath;
+                fieldTitleFilepath = textBox5.Text;
+                sectionTitle = textBox3.Text;
+                sectionName = textBox4.Text;
+                // row count
+                rowCount = 3;
 
-            // caculate total time
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
+                // caculate total time
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
 
-            // Convert json to excel            
-            writeToExcel(textBox1.Text);
+                // Convert json to excel            
+                writeToExcel(textBox1.Text);
 
-            watch.Stop();
-            TimeSpan ts = watch.Elapsed;
-            // Format and display the TimeSpan value.
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                ts.Hours, ts.Minutes, ts.Seconds,
-                ts.Milliseconds / 10);
-            label6.Text = "Total time: " + elapsedTime;
+                watch.Stop();
+                TimeSpan ts = watch.Elapsed;
+                // Format and display the TimeSpan value.
+                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                    ts.Hours, ts.Minutes, ts.Seconds,
+                    ts.Milliseconds / 10);
+                label6.Text = "Total time: " + elapsedTime;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void writeToExcel(string path)
         {
-            object misValue = System.Reflection.Missing.Value;
-
+            object misValue = System.Reflection.Missing.Value;            
             try
             {
                 //section object
@@ -140,12 +148,13 @@ namespace ConvertingJson
 
         private void convertCore(JToken section, JToken fieldCollection)
         {
+            oxl.Visible = true;
             progressBar1.Maximum = section.Children().Count();
-            for (int i = 0,j=0; i < section.Children().Count(); i++,j++)
+            for (int i = 0; i < section.Children().Count(); i++)
             {
                 progressBar1.PerformStep();
                 JToken child = section.Children().ElementAt(i);
-                JToken field = fieldCollection.Children().ElementAt(j);
+                JToken field = fieldCollection.Children().ElementAt(i);
                 string[] colValues = new string[5];
                 var property = child as JProperty;
                 var fieldProperty = field as JProperty;
@@ -187,8 +196,10 @@ namespace ConvertingJson
                         colValues[4] = property.Value.Type.ToString();
                         oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
                         rowCount++;
-                        arrayRecord.Add(new Record(rowCount - 1, property.Value.Children().Count()));
-                        convertCore(property.Value,fieldProperty.Value);
+
+                        convertCore(property.Value, fieldProperty.Value);
+                        arrayRecord.Add(new Record(rowCount - 1, calcPropertyCount(property.Value)));
+
                     }
                     else if (type == JTokenType.Boolean)
                     {
@@ -220,6 +231,15 @@ namespace ConvertingJson
                 }
             }
             
+        }
+
+        private int calcPropertyCount(JToken token)
+        {
+            for (int i = 0; i < token.Children().Count();i ++)
+            {
+                calcPropertyCount(token.Children().ElementAt(i));
+            }
+            return 0;     
         }
 
         private void initWorkBook()
@@ -257,6 +277,9 @@ namespace ConvertingJson
             oRng = oSheet.get_Range("D3", "D" + (rowCount - 1));
             oRng.Formula = "=$D$2 & \".\" & C3";
 
+            oSheet.Columns[2].ColumnWidth = 50;
+            oSheet.get_Range("B1", "B" + rowCount).Cells.WrapText = true;
+
             //Fill array with formula
             foreach (Record r in arrayRecord)
             {
@@ -270,8 +293,10 @@ namespace ConvertingJson
             //oRng.NumberFormat = "$0.00";
 
             //AutoFit columns A:D.
-            oRng = oSheet.get_Range("A1", "D1");
+            oRng = oSheet.get_Range("C1", "E1");
             oRng.EntireColumn.AutoFit();
+            
+            oSheet.get_Range("C3", "E" + rowCount).Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter; ;
         }
 
         private void applyIndent(Record r)
