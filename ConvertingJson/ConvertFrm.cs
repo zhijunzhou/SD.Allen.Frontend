@@ -91,6 +91,12 @@ namespace ConvertingJson
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                rowCount = 0;                
+                if (arrayRecord != null)
+                    arrayRecord.Clear();
+            }
             
         }
 
@@ -184,22 +190,31 @@ namespace ConvertingJson
                             rowCount++;
                             JToken obj0 = (JObject)array[0];
                             // record object array
-                            arrayRecord.Add(new Record(rowCount - 1, obj0.Children().Count()));
+                            arrayRecord.Add(new Record(0,rowCount - 1, obj0.Children().Count()));
                             convertCore((JToken)array[0], (JToken)fieldSubArray[0]);
                         }
                     }
                     else if (type == JTokenType.Object)
                     {
+                        //reset the property
+                        propertiesCount = 0;
+
                         colValues[1] = "Object";
                         colValues[2] = property.Name.ToString();
                         colValues[3] = property.Name.ToString();
                         colValues[4] = property.Value.Type.ToString();
                         oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+                        int count = calcPropertyCount(property.Value, 0);
+                        if(count > 0)
+                        {
+                            Console.WriteLine(rowCount + "(" + count + ")");
+                            arrayRecord.Add(new Record(0,rowCount, count));
+                        }else
+                        {
+                            arrayRecord.Add(new Record(1, rowCount, propertiesCount));
+                        }                        
                         rowCount++;
-
                         convertCore(property.Value, fieldProperty.Value);
-                        arrayRecord.Add(new Record(rowCount - 1, calcPropertyCount(property.Value)));
-
                     }
                     else if (type == JTokenType.Boolean)
                     {
@@ -233,13 +248,32 @@ namespace ConvertingJson
             
         }
 
-        private int calcPropertyCount(JToken token)
+        private int calcPropertyCount(JToken token, int count)
         {
             for (int i = 0; i < token.Children().Count();i ++)
             {
-                calcPropertyCount(token.Children().ElementAt(i));
+                var  property = token.Children().ElementAt(i) as JProperty;
+                if(property != null)
+                {
+                    if(property.Value.Type == JTokenType.Object)
+                    {
+                        ++propertiesCount;
+                        calcPropertyCount(property.Value, count + 1);
+                    }
+                    else if(property.Value.Type == JTokenType.Array)
+                    {
+                        ++propertiesCount;
+                        JArray array = (JArray)property.Value;
+                        calcPropertyCount(array[0], count + 1);
+                    }
+                    else
+                    {
+                        ++propertiesCount;
+                        ++count;
+                    }
+                }                
             }
-            return 0;     
+            return count;
         }
 
         private void initWorkBook()
@@ -280,11 +314,24 @@ namespace ConvertingJson
             oSheet.Columns[2].ColumnWidth = 50;
             oSheet.get_Range("B1", "B" + rowCount).Cells.WrapText = true;
 
+            Record special;
             //Fill array with formula
-            foreach (Record r in arrayRecord)
+            for(var i = 0;i < arrayRecord.Count;i++)
             {
+                Record r = (Record)arrayRecord[i];
                 fillFormula(r);
                 applyIndent(r);
+                // only re-Fill whose's depth equal to 1
+                if (r.depth == 1) {
+                    special = r;                    
+                    oSheet.get_Range("B" + (special.startIndex + 1), "B" + (special.startIndex + special.step)).IndentLevel = 1;
+                    for (var j = i + 1; j < arrayRecord.Count; j++)
+                    {
+                        Record rx = (Record)arrayRecord[j];
+                        if (rx.startIndex > special.startIndex + special.step) break;
+                        oSheet.get_Range("D" + rx.startIndex).Formula = "=D" + special.startIndex + " & \".\" & C" + rx.startIndex;                        
+                    }                    
+                }
             }            
 
             ////Fill D2:D6 with a formula(=RAND()*100000) and apply format.
@@ -301,7 +348,10 @@ namespace ConvertingJson
 
         private void applyIndent(Record r)
         {
-            oSheet.get_Range("B" + (r.startIndex + 1), "B" + (r.startIndex + r.step)).IndentLevel = 2;
+            if(r.depth == 0)
+            {
+                oSheet.get_Range("B" + (r.startIndex + 1), "B" + (r.startIndex + r.step)).IndentLevel = 2;
+            }  
         }
 
         private void fillFormula(Record r)

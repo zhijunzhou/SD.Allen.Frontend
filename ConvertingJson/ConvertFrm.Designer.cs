@@ -233,6 +233,7 @@ namespace ConvertingJson
         private string sectionName = "mapValProps";
         private string sectionTitle = "Map Value Propersiton";
         private int rowCount = 0;
+        private int propertiesCount = 0;
         private IList arrayRecord = new List<Record>();
         private IList pathCollection = new List<SectionPath>();
 
