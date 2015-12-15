@@ -38,10 +38,11 @@ namespace ConvertingJson
                 while ((line = reader.ReadLine()) != null)
                 {
                     String[] rc = line.Split('$');
-                    pathCollection.Add(new SectionPath(rc[0], rc[1], rc[2]));                    
+                    pathCollection.Add(new SectionPath(rc[0], rc[1], rc[2]));
+                    sectionCount++;                  
                 }
-                comboBox1.DataSource = pathCollection;
-                comboBox1.DisplayMember = "fullpath";
+                cb_sectionPath.DataSource = pathCollection;
+                cb_sectionPath.DisplayMember = "fullpath";
             }
             catch (Exception)
             {
@@ -55,29 +56,20 @@ namespace ConvertingJson
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void parseControl()
         {
             try
             {
-                // set visible
-                progressBar1.Visible = true;
-                progressBar1.Value = 1;
-
                 // component assignment
-                SectionPath sp = (SectionPath)comboBox1.SelectedItem;
+                SectionPath sp = (SectionPath)cb_sectionPath.SelectedItem;
                 sectionPath = sp.fullpath;
-                fieldTitleFilepath = textBox5.Text;
-                sectionTitle = textBox3.Text;
-                sectionName = textBox4.Text;
-                // row count
-                rowCount = 4;
-
+                sectionTitle = tb_sectionTitle.Text;
+                sectionName = tb_sectionName.Text;
                 // caculate total time
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
-
                 // Convert json to excel            
-                writeToExcel(textBox1.Text);
+                writeToExcel("Json\\" + fb_sourcefile.Text, "Json\\" + fb_titleSource.Text);
 
                 watch.Stop();
                 TimeSpan ts = watch.Elapsed;
@@ -93,24 +85,32 @@ namespace ConvertingJson
             }
             finally
             {
-                rowCount = 0;                
+                rowCount = 0;
                 if (arrayRecord != null)
                     arrayRecord.Clear();
             }
-            
         }
 
-        private void writeToExcel(string path)
+        private void button1_Click(object sender, EventArgs e)
+        {            
+            progressBar1.Visible = true;
+            progressBar1.Value = 1;
+            rowCount = 4;
+
+            parseControl();
+        }
+
+        private void writeToExcel(string path1, string path2)
         {
             object misValue = System.Reflection.Missing.Value;            
             try
             {
                 //section object
-                JObject o1 = JObject.Parse(File.ReadAllText(path));
+                JObject o1 = JObject.Parse(File.ReadAllText(path1));
                 JToken section = o1.SelectToken(sectionPath);
 
                 //field collection
-                JObject o2 = JObject.Parse(File.ReadAllText(fieldTitleFilepath));
+                JObject o2 = JObject.Parse(File.ReadAllText(path2));
                 JToken fieldCollection = o2.SelectToken(sectionPath);
 
                 initWorkBook();
@@ -128,7 +128,11 @@ namespace ConvertingJson
             }
             catch (FileNotFoundException e)
             {
-                MessageBox.Show("Error" + e.Message);
+                MessageBox.Show("File Not Found:" + e.Message);
+            }
+            catch (NullReferenceException e)
+            {
+                MessageBox.Show("Maybe Error Json file <-> Json Path :" + e.Message);
             }
             catch(ArgumentException e)
             {
@@ -137,6 +141,10 @@ namespace ConvertingJson
             catch(COMException e)
             {
                 Console.WriteLine("Error" + e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error:" + e.Message);
             }
         }
 
@@ -153,16 +161,39 @@ namespace ConvertingJson
             }
         }
 
+        private void addRow(String col1,String col2, String col3, String col4)
+        {
+            string[] colValues = new string[5];
+            colValues[0] = tb_sectionNo.Text;
+            colValues[1] = col1;
+            colValues[2] = col2;
+            colValues[3] = col3;
+            colValues[4] = col4;
+            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+            rowCount++;
+        }
+
+        private void excelProcessVisible()
+        {
+            if (chk_isShowAlway.CheckState == CheckState.Checked)
+            {
+                oxl.Visible = true;
+            }
+            else
+            {
+                oxl.Visible = false;
+            }
+        }
+
         private void convertCore(JToken section, JToken fieldCollection)
         {
-            oxl.Visible = true;
+            excelProcessVisible();
             progressBar1.Maximum = section.Children().Count();
             for (int i = 0; i < section.Children().Count(); i++)
             {
                 progressBar1.PerformStep();
                 JToken child = section.Children().ElementAt(i);
                 JToken field = fieldCollection.Children().ElementAt(i);
-                string[] colValues = new string[5];
                 var property = child as JProperty;
                 var fieldProperty = field as JProperty;
                 if (property != null)
@@ -172,23 +203,15 @@ namespace ConvertingJson
                     {
                         JArray array = (JArray)property.Value;                        
                         if (array.Count() <= 0)
-                        {
-                            colValues[1] = fieldProperty.Value.ToString();
-                            colValues[2] = property.Name.ToString();
-                            colValues[3] = property.Name.ToString();
-                            colValues[4] = property.Value.Type.ToString();
-                            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
-                            rowCount++;
+                        {                            
+                            addRow(fieldProperty.Value.ToString(), property.Name.ToString(),
+                                property.Name.ToString(), property.Value.Type.ToString());
                         }
                         else
                         {
-                            JArray fieldSubArray = (JArray)fieldProperty.Value;
-                            colValues[1] = "Object Array";
-                            colValues[2] = property.Name.ToString();
-                            colValues[3] = property.Name.ToString();
-                            colValues[4] = property.Value.Type.ToString();
-                            oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
-                            rowCount++;
+                            JArray fieldSubArray = (JArray)fieldProperty.Value;                            
+                            addRow("Object Array", property.Name.ToString(),
+                               property.Name.ToString(), property.Value.Type.ToString());
                             JToken obj0 = (JObject)array[0];
                             // record object array
                             arrayRecord.Add(new Record(0,rowCount - 1, obj0.Children().Count()));
@@ -198,52 +221,41 @@ namespace ConvertingJson
                     else if (type == JTokenType.Object)
                     {
                         //reset the property
-                        propertiesCount = 0;
-
-                        colValues[1] = "Object";
-                        colValues[2] = property.Name.ToString();
-                        colValues[3] = property.Name.ToString();
-                        colValues[4] = property.Value.Type.ToString();
-                        oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
+                        propertiesCount = 0;                        
+                        addRow("Object", property.Name.ToString(),
+                               property.Name.ToString(), property.Value.Type.ToString());
                         int count = calcPropertyCount(property.Value, 0);
                         if(count > 0)
                         {
-                            Console.WriteLine(rowCount + "(" + count + ")");
-                            arrayRecord.Add(new Record(0,rowCount, count));
+                            //Console.WriteLine(rowCount + "(" + count + ")");
+                            arrayRecord.Add(new Record(0,rowCount - 1, count));
                         }else
                         {
-                            arrayRecord.Add(new Record(1, rowCount, propertiesCount));
-                        }                        
-                        rowCount++;
+                            arrayRecord.Add(new Record(1, rowCount - 1, propertiesCount));
+                        }   
                         convertCore(property.Value, fieldProperty.Value);
                     }
                     else if (type == JTokenType.Boolean)
                     {
-                        colValues[1] = fieldProperty.Value.ToString();
+                        var col1 = fieldProperty.Value.ToString();
+                        var col4 = "";
                         var val = (bool)property.Value;
                         if (val) //dropdown 
                         {
-                            colValues[4] = "Single Choice";
+                            col4 = "Single Choice";
                         }
                         else
                         {
-                            colValues[4] = "Multiple Choice";
+                            col4 = "Multiple Choice";
                         }
-                        colValues[2] = property.Name.ToString();
-                        colValues[3] = property.Name.ToString();
-                        oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
-                        rowCount++;
+                        addRow(col1, property.Name.ToString(),
+                               property.Name.ToString(), col4);                        
                     }
                     else
-                    {
-                        colValues[1] = fieldProperty.Value.ToString();
-                        colValues[2] = property.Name.ToString();
-                        colValues[3] = property.Name.ToString();
-                        colValues[4] = property.Value.Type.ToString();
-                        oSheet.get_Range("A" + rowCount, "E" + rowCount).Value2 = colValues;
-                        rowCount++;
+                    {                        
+                        addRow(fieldProperty.Value.ToString(), property.Name.ToString(),
+                                property.Name.ToString(), property.Value.Type.ToString());
                     }
-                    colValues[0] = "1.1";
                 }
             }
             
@@ -344,9 +356,10 @@ namespace ConvertingJson
 
             //AutoFit columns A:D.
             oRng = oSheet.get_Range("C1", "E1");
-            oRng.EntireColumn.AutoFit();
-            
-            oSheet.get_Range("C3", "E" + rowCount).Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter; ;
+            oRng.EntireColumn.AutoFit();            
+
+            oSheet.get_Range("C3", "E" + rowCount).Cells.VerticalAlignment = 
+                Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter; ;
         }
 
         private void applyIndent(Record r)
@@ -354,7 +367,7 @@ namespace ConvertingJson
             if(r.depth == 0)
             {
                 oSheet.get_Range("B" + (r.startIndex + 1), "B" + (r.startIndex + r.step)).IndentLevel = 2;
-            }  
+            }            
         }
 
         private void fillFormula(Record r)
@@ -408,9 +421,9 @@ namespace ConvertingJson
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SectionPath sp = (SectionPath)comboBox1.SelectedItem;
-            textBox4.Text = sp.sectionName;
-            textBox3.Text = sp.sectionTitle;
+            SectionPath sp = (SectionPath)cb_sectionPath.SelectedItem;
+            tb_sectionName.Text = sp.sectionName;
+            tb_sectionTitle.Text = sp.sectionTitle;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -425,7 +438,7 @@ namespace ConvertingJson
             {
                 try
                 {
-                    textBox1.Text = openFileDialog1.FileName;
+                    fb_sourcefile.Text = openFileDialog1.FileName;
                 }
                 catch (Exception)
                 {
@@ -447,13 +460,29 @@ namespace ConvertingJson
             {
                 try
                 {
-                    textBox5.Text = openFileDialog2.FileName;
+                    fb_titleSource.Text = openFileDialog2.FileName;
                 }
                 catch (Exception)
                 {
 
                     throw;
                 }
+            }
+        }
+
+        private void isBatchParse_CheckedChanged(object sender, EventArgs e)
+        {
+            if(isBatchParse.CheckState == CheckState.Checked)
+            {
+                num_Start.Enabled = true;
+                num_End.Enabled = true;
+                num_Start.Minimum = 1;
+                num_End.Maximum = sectionCount;
+            }
+            else
+            {
+                num_Start.Enabled = false;
+                num_End.Enabled = false;
             }
         }
     }

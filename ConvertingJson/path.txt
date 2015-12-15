@@ -6,3 +6,10 @@ bizSoln.winStrategy.competitors.data$competitors$Competitors
 bizSoln.winStrategy.mapValProps.data$mapValProps$Map/Values Propositions
 bizSoln.winStrategy.pricingApproach.data$pricingApproach$Pricing Approach
 solnOverview.solnApproach.hrSoln.data$hrSoln$HR Solution
+ntnTransitTransformSoln.transitStrategyApproach.data$transitStrategyApproach$Transition Strategy and Approach
+ntnTransitTransformSoln.transformStrategyApproach.data$transformStrategyApproach$Transformation Strategy and Approach
+ntnTransitTransformSoln.clientBenefits.data$clientBenefits$T&T Client Benefits
+ntnTransitTransformSoln.dueDiligenceSum.data$dueDiligenceSum$Due Diligence Summary
+ntnTransitTransformSoln.keyProjTimelines.data$keyProjTimelines$Key T&T Projects and Timelines
+ntnTransitTransformSoln.keyProjInterDependencies.data$keyProjInterDependencies$Key T&T Project Interdependencies
+ntnTransitTransformSoln.govStructMgmtChange.data$govStructMgmtChange$Governance Structure and Management of Change
