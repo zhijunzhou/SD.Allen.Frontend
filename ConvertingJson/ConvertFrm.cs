@@ -70,7 +70,7 @@ namespace ConvertingJson
                 sectionTitle = textBox3.Text;
                 sectionName = textBox4.Text;
                 // row count
-                rowCount = 3;
+                rowCount = 4;
 
                 // caculate total time
                 Stopwatch watch = new Stopwatch();
@@ -142,8 +142,9 @@ namespace ConvertingJson
 
         private void applyBackgroud()
         {
-            oSheet.Range["A2:F2"].Interior.Color = Color.Yellow;
-            for (int i = 3; i < rowCount; i++)
+            oSheet.Range["A2:F2"].Interior.Color = Color.DarkSeaGreen;
+            oSheet.Range["A3:F3"].Interior.Color = Color.Yellow;
+            for (int i = 4; i < rowCount; i++)
             {
                 if(i % 2 != 0)
                 {
@@ -294,22 +295,29 @@ namespace ConvertingJson
             oSheet.Cells[1, 5] = "Field Type";
 
             oSheet.Cells[2, 1] = "1";
-            oSheet.Cells[2, 2] = sectionTitle;
-            oSheet.Cells[2, 3] = sectionName;
-            oSheet.Cells[2, 4] = sectionName;
+            oSheet.Cells[2, 2] = "Enter the Chapter's Title here";
+            oSheet.Cells[2, 3] = "sectionName";
+            oSheet.Cells[2, 4] = "sectionName";
+
+            oSheet.Cells[3, 1] = "1.1";
+            oSheet.Cells[3, 2] = sectionTitle;
+            oSheet.Cells[3, 3] = sectionName;
+            oSheet.Cells[3, 4] = sectionName;
         }
 
         private void applyFormula()
         {
-            Console.WriteLine(arrayRecord.Count);
+            // fill the section title
+            oRng = oSheet.get_Range("D3", "D" + (rowCount - 1));
+            oRng.Formula = "=D2 & \".\" & C3";
             //Format A1:D1 as bold, vertical alignment = center.
             oSheet.get_Range("A1", "E1").Font.Bold = true;
             oSheet.get_Range("A1", "E1").VerticalAlignment =
                 Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
-            //Fill cell with formula
-            oRng = oSheet.get_Range("D3", "D" + (rowCount - 1));
-            oRng.Formula = "=$D$2 & \".\" & C3";
+            //Fill the section content with formula
+            oRng = oSheet.get_Range("D4", "D" + (rowCount - 1));
+            oRng.Formula = "=$D$3 & \".\" & C4";
 
             oSheet.Columns[2].ColumnWidth = 50;
             oSheet.get_Range("B1", "B" + rowCount).Cells.WrapText = true;
@@ -332,12 +340,7 @@ namespace ConvertingJson
                         oSheet.get_Range("D" + rx.startIndex).Formula = "=D" + special.startIndex + " & \".\" & C" + rx.startIndex;                        
                     }                    
                 }
-            }            
-
-            ////Fill D2:D6 with a formula(=RAND()*100000) and apply format.
-            //oRng = oSheet.get_Range("D2", "D6");
-            //oRng.Formula = "=RAND()*100000";
-            //oRng.NumberFormat = "$0.00";
+            } 
 
             //AutoFit columns A:D.
             oRng = oSheet.get_Range("C1", "E1");
