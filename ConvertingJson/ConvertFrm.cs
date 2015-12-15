@@ -1,11 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Reflection;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -470,20 +468,10 @@ namespace ConvertingJson
             }
         }
 
-        private void isBatchParse_CheckedChanged(object sender, EventArgs e)
+        private void btn_showAdv_Click(object sender, EventArgs e)
         {
-            if(isBatchParse.CheckState == CheckState.Checked)
-            {
-                num_Start.Enabled = true;
-                num_End.Enabled = true;
-                num_Start.Minimum = 1;
-                num_End.Maximum = sectionCount;
-            }
-            else
-            {
-                num_Start.Enabled = false;
-                num_End.Enabled = false;
-            }
+            frm_adv = new BatchParseFrm(pathCollection,"Json\\" + fb_sourcefile.Text, "Json\\" + fb_titleSource.Text);
+            frm_adv.Show();
         }
     }
 

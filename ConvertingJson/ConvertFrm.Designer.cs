@@ -56,7 +56,7 @@ namespace ConvertingJson
             this.label4 = new System.Windows.Forms.Label();
             this.num_Start = new System.Windows.Forms.NumericUpDown();
             this.num_End = new System.Windows.Forms.NumericUpDown();
-            this.isBatchParse = new System.Windows.Forms.CheckBox();
+            this.btn_showAdv = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.num_Start)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_End)).BeginInit();
             this.SuspendLayout();
@@ -293,29 +293,27 @@ namespace ConvertingJson
             0,
             0});
             // 
-            // isBatchParse
+            // btn_showAdv
             // 
-            this.isBatchParse.AutoSize = true;
-            this.isBatchParse.Enabled = false;
-            this.isBatchParse.Location = new System.Drawing.Point(468, 154);
-            this.isBatchParse.Name = "isBatchParse";
-            this.isBatchParse.Size = new System.Drawing.Size(78, 17);
-            this.isBatchParse.TabIndex = 19;
-            this.isBatchParse.Text = "Choose[i, j]";
-            this.isBatchParse.UseVisualStyleBackColor = true;
-            this.isBatchParse.CheckedChanged += new System.EventHandler(this.isBatchParse_CheckedChanged);
+            this.btn_showAdv.Location = new System.Drawing.Point(464, 148);
+            this.btn_showAdv.Name = "btn_showAdv";
+            this.btn_showAdv.Size = new System.Drawing.Size(83, 23);
+            this.btn_showAdv.TabIndex = 25;
+            this.btn_showAdv.Text = "Advanced>>";
+            this.btn_showAdv.UseVisualStyleBackColor = true;
+            this.btn_showAdv.Click += new System.EventHandler(this.btn_showAdv_Click);
             // 
             // ConvertFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 467);
+            this.Controls.Add(this.btn_showAdv);
             this.Controls.Add(this.num_End);
             this.Controls.Add(this.num_Start);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.isBatchParse);
             this.Controls.Add(this.chk_isShowAlway);
             this.Controls.Add(this.tb_sectionNo);
             this.Controls.Add(this.lb_sectionNo);
@@ -363,6 +361,7 @@ namespace ConvertingJson
         private int propertiesCount = 0;
         private IList arrayRecord = new List<Record>();
         private IList pathCollection = new List<SectionPath>();
+        private BatchParseFrm frm_adv = null;
 
         private System.Windows.Forms.Label lb_sectionPath;
         private System.Windows.Forms.TextBox tb_sectionTitle;
@@ -385,7 +384,7 @@ namespace ConvertingJson
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown num_Start;
         private System.Windows.Forms.NumericUpDown num_End;
-        private System.Windows.Forms.CheckBox isBatchParse;
+        private System.Windows.Forms.Button btn_showAdv;
     }
 }
 
