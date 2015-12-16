@@ -1,8 +1,8 @@
-﻿define('component/Section0801', function (require) {
+﻿define('component/Section0802', function (require) {
     "use strict";
     var $ = require("jquery"),
         ko = require("knockout"),
-        templateHtml = require("text!./Section0801Template.html"),
+        templateHtml = require("text!./Section0802Template.html"),
         requestAPI = require('model/RequestAPI'),
         vm = {},
         sectionLoaderViewModel = {};
@@ -16,15 +16,17 @@
         return null;
     }
 
-    function KeyAssumption(data) {
+    function KeyDeliveryRisks(data) {
         if (data != null) {
             this.offeringFuncArea = ko.observable(data.offeringFuncArea);
-            this.assumption = ko.observable(data.assumption);
-            this.planToClose = ko.observable(data.planToClose);
+            this.riskDescription = ko.observable(data.riskDescription);
+            this.mitigationPlan = ko.observable(data.mitigationPlan);
+            this.status = ko.observable(data.status);
         } else {
             this.offeringFuncArea = ko.observable("");
-            this.assumption = ko.observable("");
-            this.planToClose = ko.observable("");
+            this.riskDescription = ko.observable("");
+            this.mitigationPlan = ko.observable("");
+            this.status = ko.observable("Red");
         }
     }
 
@@ -32,11 +34,12 @@
         if (data.content != null && data.content.length > 0) {
             for (var i in data.content) {
                 data.content[i].offeringFuncArea = getUnEscapeValue(data.content[i].offeringFuncArea);
-                data.content[i].assumption = getUnEscapeValue(data.content[i].assumption);
-                data.content[i].planToClose = getUnEscapeValue(data.content[i].planToClose);
+                data.content[i].riskDescription = getUnEscapeValue(data.content[i].riskDescription);
+                data.content[i].mitigationPlan = getUnEscapeValue(data.content[i].mitigationPlan);
+                data.content[i].status = getUnEscapeValue(data.content[i].status);
             }
         } else {
-            data.content.push(new KeyAssumption(null));
+            data.content.push(new KeyDeliveryRisks(null));
         }
         vm.data.content(data.content);
     }
@@ -57,20 +60,20 @@
     function createViewModel(params, componentInfo) {
         onViewModelPreLoad();
         sectionLoaderViewModel = params.viewModel;
-        var keyAssumptionViewModel = function () {
+        var keyDeliveryRisksViewModel = function () {
             var self = this;
             self.editable = ko.observable(true);
             self.data = {
-                content: ko.observableArray([new KeyAssumption(null)])
+                content: ko.observableArray([new KeyDeliveryRisks(null)])
             }
             self.addRow = function () {
-                self.data.content.push(new KeyAssumption(null));
+                self.data.content.push(new KeyDeliveryRisks(null));
             };
             self.remove = function () {
                 self.data.content.remove(this);
             }
         };
-        vm = new keyAssumptionViewModel(params);
+        vm = new keyDeliveryRisksViewModel(params);
         loadSection();
         return vm;
     }
@@ -82,32 +85,33 @@
         vm.editable(sectionLoaderViewModel.editable());
         // retrieve TODO
         var data = JSON.parse(window.localStorage.getItem(sectionLoaderViewModel.opptyID()));
-        if (data != undefined && data.keyAssumptions != undefined && data.keyAssumptions.content != undefined)
-            unescapeData(data.keyAssumptions);
+        if (data != undefined && data.keyDeliveryRisks != undefined && data.keyDeliveryRisks.content != undefined)
+            unescapeData(data.keyDeliveryRisks);
     }
 
     function saveOppty(event, argu) {
         var sid = argu.sid();
-        if (sid !== '0801') {
+        if (sid !== '0802') {
             return;
         } else {
-            var sectionName = "keyAssumptions";
+            var sectionName = "keyDeliveryRisks";
             var newData = ko.toJS(vm.data);
-            var content = { "keyAssumptions": newData };
+            var content = { "keyDeliveryRisks": newData };
             // save TODO
-            // window.localStorage.setItem(sectionLoaderViewModel.opptyID(), JSON.stringify(content));
+            //window.localStorage.setItem(sectionLoaderViewModel.opptyID(), JSON.stringify(content));
             var data = JSON.parse(localStorage.getItem(sectionLoaderViewModel.opptyID()));
-            if (data != undefined) {
+            if (data != undefined) { 
                 data[sectionName] = newData;
             } else {
                 data = content;
             }
             window.localStorage.setItem(sectionLoaderViewModel.opptyID(), JSON.stringify(data));
+            
         }
     }
 
     return {
-        name: ["Section0801", "sd-section-0801"],
+        name: ["Section0802", "sd-section-0802"],
         template: templateHtml,
         viewModel: {
             createViewModel: createViewModel

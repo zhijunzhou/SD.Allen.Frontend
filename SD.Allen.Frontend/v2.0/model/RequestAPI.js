@@ -52,7 +52,17 @@ define('model/RequestAPI', function (require) {
                 (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040505' : '040506', '0406', 'service-management'),
             new SectionNavigator('0406', 'Key Client Constraints', '040503',
                 (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '0201' : '0407', 'key-client-constraints'),
-            new SectionNavigator('0407', 'Summary Costing Approach', '0406', '0201', 'costing-reports')
+            new SectionNavigator('0407', 'Summary Costing Approach', '0406', '0801', 'costing-reports'),
+            new SectionNavigator('0801', 'Key Assumptions', '0407', '0802', 'key-assumptions'),
+            new SectionNavigator('0802', 'Key Delivery Risks', '0801', '0803', 'key-delivery-risks'),
+            new SectionNavigator('0803', 'Key Non-Delivery Risks', '0802', '0201', 'key-non-delivery-risks'),
+            new SectionNavigator('0701', 'Transition Strategy and Approach', '0407', '0702', 'transit-strategy-approach'),
+            new SectionNavigator('0702', 'Transformation Strategy and Approach', '0701', '0703', 'transform-strategy-pproach'),
+            new SectionNavigator('0703', 'T&T Client Benefits', '0702', '0704', 'client-benefits'),
+            new SectionNavigator('0704', 'Due Diligence Summary', '0703', '0705', 'due-diligence-sum'),
+            new SectionNavigator('0705', 'Key T&T Projects and Timelines', '0704', '0706', 'key-proj-timelines'),
+            new SectionNavigator('0706', 'Key T&T Project Interdependencies', '0705', '0707', 'inter-dependencies'),
+            new SectionNavigator('0707', 'Governance Structure and Management of Change', '0706', '0201', 'gov-struct-mgmt-change'),
         ]
     }
 

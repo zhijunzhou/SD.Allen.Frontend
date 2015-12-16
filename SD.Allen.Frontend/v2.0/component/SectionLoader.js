@@ -32,6 +32,18 @@ define("component/SectionLoader", function (require) {
         section040506 = require('./Section040506'),
         section0406 = require('./Section0406'),
         section0407 = require('./Section0407'),
+
+        section0701 = require('./Section0701'),
+        section0702 = require('./Section0702'),
+        section0703 = require('./Section0703'),
+        section0704 = require('./Section0704'),
+        section0705 = require('./Section0705'),
+        section0706 = require('./Section0706'),
+        section0707 = require('./Section0707'),
+
+        section0801 = require('./Section0801'),
+        section0802 = require('./Section0802'),
+        section0803 = require('./Section0803'),
         appUtility = require('util/AppUtility'),
         saveCompleted = true,
         saveingSid = "",
@@ -41,7 +53,7 @@ define("component/SectionLoader", function (require) {
 
     function listenCustomEvent() {
         $(window).on('generateMsg', function (e, secName, error, updateMsg) {
-            $('.sd-update-message').text(updateMsg);            
+            $('.sd-update-message').text(updateMsg);
             if (error == 0) {
                 $('.sd-update-message').addClass('text-success');
                 setTimeout(function () {
@@ -80,10 +92,10 @@ define("component/SectionLoader", function (require) {
                             }
                         } else {
                             updateViewModel(argu.viewModel);
-                            //history.pushState("string-data", "section-name", "?sid=" + saveingSid + "&OpptyID=" + argu.viewModel.opptyID() + "")
-                        }                        
+                            history.pushState("string-data", "section-name", "?sid=" + saveingSid + "&OpptyID=" + argu.viewModel.opptyID() + "")
+                        }
                     }
-                    
+
                 });
             }
         });
@@ -112,14 +124,14 @@ define("component/SectionLoader", function (require) {
         if (viewModel.opptyID() === "") {
             if (sid == '') {
                 requestAPI.errorOppty('404');
-            } else if(sid == '0201'){   
+            } else if (sid == '0201') {
                 //create oppty
             } else {
                 viewModel.sectionNavigator(requestAPI.createSectionModel());
             }
         } else {
             viewModel.sectionNavigator(requestAPI.createSectionModel());
-        }           
+        }
         $('body').show();
     }
 
@@ -148,15 +160,24 @@ define("component/SectionLoader", function (require) {
                         $(window).trigger('updateSection', viewModel);
                     }
                 }
-                
+
             });
-        }        
+        }
+    }
+
+    function isNewSection(sid) {
+        var newSections = ["0701","0702","0703","0704","0705","0706","0707","0801","0802","0803"]
+        for (var i in newSections) {
+            if (sid == newSections[i])
+                return true;
+        }
+        return false;
     }
 
     function createViewModel(params, componentInfo) {
         onViewModelPreLoad();
         sectionModel = requestAPI.createSectionModel('C', 'apps', true);
-        var sectionViewModel = function (){
+        var sectionViewModel = function () {
             var self = this;
             self.oppty = {
                 OpptyName: ko.observable(""),
@@ -185,14 +206,16 @@ define("component/SectionLoader", function (require) {
             self.prevSid = ko.observable();
             self.nextSid = ko.observable();
 
-            self.sid.subscribe(function (newSid){
+            self.sid.subscribe(function (newSid) {
                 for (var i in self.sectionNavigator()) {
                     if (self.sectionNavigator()[i].sid === self.sid()) {
                         self.title(self.sectionNavigator()[i].title);
                         self.sectionName(self.sectionNavigator()[i].sectionName);
                         self.prevSid(self.sectionNavigator()[i].prevSid);
                         self.nextSid(self.sectionNavigator()[i].nextSid);
-                        retriveDocument(viewModel);
+                        if (!isNewSection(newSid)) {
+                            retriveDocument(viewModel);
+                        }                        
                         return;
                     }
                 }
@@ -211,8 +234,10 @@ define("component/SectionLoader", function (require) {
             });
 
             self.saveHome = function () {
-                            
+
             }
+
+            
             self.save = function () {
                 beforeSave();
                 $(window).triggerHandler("opptySaving", self);
@@ -224,7 +249,9 @@ define("component/SectionLoader", function (require) {
                     if (saveCompleted) {
                         saveingSid = self.nextSid();
                         $(window).triggerHandler("sectionChanged", viewModel);
-                    }                    
+                    }
+                } else if (isNewSection(viewModel.sid())) {
+                    viewModel.sid(self.nextSid());
                 } else {
                     $(window).triggerHandler("opptySaving", viewModel);
                     saveingSid = self.nextSid();
@@ -238,7 +265,9 @@ define("component/SectionLoader", function (require) {
                         saveingSid = self.prevSid();
                         $(window).triggerHandler("sectionChanged", viewModel);
                     }
-                } else {
+                } else if(isNewSection(viewModel.sid())) {
+                    viewModel.sid(self.prevSid());
+                } else{
                     $(window).triggerHandler("opptySaving", viewModel);
                     saveingSid = self.prevSid();
                 }
@@ -300,6 +329,18 @@ define("component/SectionLoader", function (require) {
             section040506,
             section0406,
             section0407,
+
+            section0701,
+            section0702,
+            section0703,
+            section0704,
+            section0705,
+            section0706,
+            section0707,
+
+            section0801,
+            section0802,
+            section0803,
             TopLink
         ]
     };

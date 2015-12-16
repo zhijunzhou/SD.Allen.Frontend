@@ -83,6 +83,17 @@
       "v2.0/component/Section040506.js",
       "v2.0/component/Section0406.js",
       "v2.0/component/Section0407.js",
+
+      "v2.0/component/section0701.js",
+      "v2.0/component/section0702.js",
+      "v2.0/component/section0703.js",
+      "v2.0/component/section0704.js",
+      "v2.0/component/section0705.js",
+      "v2.0/component/section0706.js",
+      "v2.0/component/section0707.js",
+      "v2.0/component/section0801.js",
+      "v2.0/component/section0802.js",       
+      "v2.0/component/section0803.js",                   
       "v2.0/component/SDContents.js",
       "v2.0/component/SectionLoader.js"
     ]

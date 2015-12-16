@@ -657,7 +657,17 @@ define('model/RequestAPI', function (require) {
                 (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '040505' : '040506', '0406', 'service-management'),
             new SectionNavigator('0406', 'Key Client Constraints', '040503',
                 (pursuitClassfication == 'A' || pursuitClassfication == 'B') ? '0201' : '0407', 'key-client-constraints'),
-            new SectionNavigator('0407', 'Summary Costing Approach', '0406', '0201', 'costing-reports')
+            new SectionNavigator('0407', 'Summary Costing Approach', '0406', '0801', 'costing-reports'),
+            new SectionNavigator('0801', 'Key Assumptions', '0407', '0802', 'key-assumptions'),
+            new SectionNavigator('0802', 'Key Delivery Risks', '0801', '0803', 'key-delivery-risks'),
+            new SectionNavigator('0803', 'Key Non-Delivery Risks', '0802', '0201', 'key-non-delivery-risks'),
+            new SectionNavigator('0701', 'Transition Strategy and Approach', '0407', '0702', 'transit-strategy-approach'),
+            new SectionNavigator('0702', 'Transformation Strategy and Approach', '0701', '0703', 'transform-strategy-pproach'),
+            new SectionNavigator('0703', 'T&T Client Benefits', '0702', '0704', 'client-benefits'),
+            new SectionNavigator('0704', 'Due Diligence Summary', '0703', '0705', 'due-diligence-sum'),
+            new SectionNavigator('0705', 'Key T&T Projects and Timelines', '0704', '0706', 'key-proj-timelines'),
+            new SectionNavigator('0706', 'Key T&T Project Interdependencies', '0705', '0707', 'inter-dependencies'),
+            new SectionNavigator('0707', 'Governance Structure and Management of Change', '0706', '0201', 'gov-struct-mgmt-change'),
         ]
     }
 
@@ -7207,6 +7217,544 @@ define('component/Section0407', function (require) {
     };
 
 });
+define('component/Section0701', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        jasnybs = require('jasnybs'),
+        templateHtml = require("text!./Section0701Template.html"),
+        vm = {};
+
+    function onViewModelPreLoad() { }
+
+    function createViewModel(params, componentInfo) {
+        
+
+        return vm;
+    }
+
+    return {
+        name: ["Section0701", "sd-section-0701"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+
+});
+define('component/Section0702', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        jasnybs = require('jasnybs'),
+        templateHtml = require("text!./Section0702Template.html"),
+        vm = {};
+
+    function onViewModelPreLoad() { }
+
+    function createViewModel(params, componentInfo) {
+
+
+        return vm;
+    }
+
+    return {
+        name: ["Section0702", "sd-section-0702"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+
+});
+define('component/Section0703', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        jasnybs = require('jasnybs'),
+        templateHtml = require("text!./Section0703Template.html"),
+        vm = {};
+
+    function onViewModelPreLoad() { }
+
+    function createViewModel(params, componentInfo) {
+
+
+        return vm;
+    }
+
+    return {
+        name: ["Section0703", "sd-section-0703"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+
+});
+define('component/Section0704', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        jasnybs = require('jasnybs'),
+        templateHtml = require("text!./Section0704Template.html"),
+        vm = {};
+
+    function onViewModelPreLoad() { }
+
+    function createViewModel(params, componentInfo) {
+
+
+        return vm;
+    }
+
+    return {
+        name: ["Section0704", "sd-section-0704"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+
+});
+define('component/Section0705', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        jasnybs = require('jasnybs'),
+        templateHtml = require("text!./Section0705Template.html"),
+        vm = {};
+
+    function onViewModelPreLoad() { }
+
+    function createViewModel(params, componentInfo) {
+
+
+        return vm;
+    }
+
+    return {
+        name: ["Section0705", "sd-section-0705"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+
+});
+define('component/Section0706', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        jasnybs = require('jasnybs'),
+        templateHtml = require("text!./Section0706Template.html"),
+        vm = {};
+
+    function onViewModelPreLoad() { }
+
+    function createViewModel(params, componentInfo) {
+
+
+        return vm;
+    }
+
+    return {
+        name: ["Section0706", "sd-section-0706"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+
+});
+define('component/Section0707', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        jasnybs = require('jasnybs'),
+        templateHtml = require("text!./Section0707Template.html"),
+        vm = {};
+
+    function onViewModelPreLoad() { }
+
+    function createViewModel(params, componentInfo) {
+
+        var goverStuctMgtViewModel = function () {
+            var self = this;
+            self.editable = ko.observable(true);
+        }
+
+        return vm;
+    }
+
+    return {
+        name: ["Section0707", "sd-section-0707"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+
+});
+define('component/Section0801', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        templateHtml = require("text!./Section0801Template.html"),
+        requestAPI = require('model/RequestAPI'),
+        vm = {},
+        sectionLoaderViewModel = {};
+
+    function setEscapeValue(val) {
+        return (val === undefined || val === null) ? null : escape(val);
+    }
+
+    function getUnEscapeValue(val) {
+        if (val != undefined && val != null) return unescape(val);
+        return null;
+    }
+
+    function KeyAssumption(data) {
+        if (data != null) {
+            this.offeringFuncArea = ko.observable(data.offeringFuncArea);
+            this.assumption = ko.observable(data.assumption);
+            this.planToClose = ko.observable(data.planToClose);
+        } else {
+            this.offeringFuncArea = ko.observable("");
+            this.assumption = ko.observable("");
+            this.planToClose = ko.observable("");
+        }
+    }
+
+    function unescapeData(data) {
+        if (data.content != null && data.content.length > 0) {
+            for (var i in data.content) {
+                data.content[i].offeringFuncArea = getUnEscapeValue(data.content[i].offeringFuncArea);
+                data.content[i].assumption = getUnEscapeValue(data.content[i].assumption);
+                data.content[i].planToClose = getUnEscapeValue(data.content[i].planToClose);
+            }
+        } else {
+            data.content.push(new KeyAssumption(null));
+        }
+        vm.data.content(data.content);
+    }
+
+    function listenCustomEvent() {
+        $(window).off("opptySaving");
+        $(window).on("opptySaving", saveOppty);
+        $(window).off("updateSection");
+        $(window).on("updateSection", function (e, newViewModel) {
+            loadSection(newViewModel);
+        });
+    }
+
+    function onViewModelPreLoad() {
+        listenCustomEvent();
+    }
+
+    function createViewModel(params, componentInfo) {
+        onViewModelPreLoad();
+        sectionLoaderViewModel = params.viewModel;
+        var keyAssumptionViewModel = function () {
+            var self = this;
+            self.editable = ko.observable(true);
+            self.data = {
+                content: ko.observableArray([new KeyAssumption(null)])
+            }
+            self.addRow = function () {
+                self.data.content.push(new KeyAssumption(null));
+            };
+            self.remove = function () {
+                self.data.content.remove(this);
+            }
+        };
+        vm = new keyAssumptionViewModel(params);
+        loadSection();
+        return vm;
+    }
+
+    function loadSection(newViewModel) {
+        if (newViewModel) {
+            sectionLoaderViewModel = newViewModel;
+        }
+        vm.editable(sectionLoaderViewModel.editable());
+        // retrieve TODO
+        var data = JSON.parse(window.localStorage.getItem(sectionLoaderViewModel.opptyID()));
+        if (data != undefined && data.keyAssumptions != undefined && data.keyAssumptions.content != undefined)
+            unescapeData(data.keyAssumptions);
+    }
+
+    function saveOppty(event, argu) {
+        var sid = argu.sid();
+        if (sid !== '0801') {
+            return;
+        } else {
+            var sectionName = "keyAssumptions";
+            var newData = ko.toJS(vm.data);
+            var content = { "keyAssumptions": newData };
+            // save TODO
+            // window.localStorage.setItem(sectionLoaderViewModel.opptyID(), JSON.stringify(content));
+            var data = JSON.parse(localStorage.getItem(sectionLoaderViewModel.opptyID()));
+            if (data != undefined) {
+                data[sectionName] = newData;
+            } else {
+                data = content;
+            }
+            window.localStorage.setItem(sectionLoaderViewModel.opptyID(), JSON.stringify(data));
+        }
+    }
+
+    return {
+        name: ["Section0801", "sd-section-0801"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+
+});
+define('component/Section0802', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        templateHtml = require("text!./Section0802Template.html"),
+        requestAPI = require('model/RequestAPI'),
+        vm = {},
+        sectionLoaderViewModel = {};
+
+    function setEscapeValue(val) {
+        return (val === undefined || val === null) ? null : escape(val);
+    }
+
+    function getUnEscapeValue(val) {
+        if (val != undefined && val != null) return unescape(val);
+        return null;
+    }
+
+    function KeyDeliveryRisks(data) {
+        if (data != null) {
+            this.offeringFuncArea = ko.observable(data.offeringFuncArea);
+            this.riskDescription = ko.observable(data.riskDescription);
+            this.mitigationPlan = ko.observable(data.mitigationPlan);
+            this.status = ko.observable(data.status);
+        } else {
+            this.offeringFuncArea = ko.observable("");
+            this.riskDescription = ko.observable("");
+            this.mitigationPlan = ko.observable("");
+            this.status = ko.observable("Red");
+        }
+    }
+
+    function unescapeData(data) {
+        if (data.content != null && data.content.length > 0) {
+            for (var i in data.content) {
+                data.content[i].offeringFuncArea = getUnEscapeValue(data.content[i].offeringFuncArea);
+                data.content[i].riskDescription = getUnEscapeValue(data.content[i].riskDescription);
+                data.content[i].mitigationPlan = getUnEscapeValue(data.content[i].mitigationPlan);
+                data.content[i].status = getUnEscapeValue(data.content[i].status);
+            }
+        } else {
+            data.content.push(new KeyDeliveryRisks(null));
+        }
+        vm.data.content(data.content);
+    }
+
+    function listenCustomEvent() {
+        $(window).off("opptySaving");
+        $(window).on("opptySaving", saveOppty);
+        $(window).off("updateSection");
+        $(window).on("updateSection", function (e, newViewModel) {
+            loadSection(newViewModel);
+        });
+    }
+
+    function onViewModelPreLoad() {
+        listenCustomEvent();
+    }
+
+    function createViewModel(params, componentInfo) {
+        onViewModelPreLoad();
+        sectionLoaderViewModel = params.viewModel;
+        var keyDeliveryRisksViewModel = function () {
+            var self = this;
+            self.editable = ko.observable(true);
+            self.data = {
+                content: ko.observableArray([new KeyDeliveryRisks(null)])
+            }
+            self.addRow = function () {
+                self.data.content.push(new KeyDeliveryRisks(null));
+            };
+            self.remove = function () {
+                self.data.content.remove(this);
+            }
+        };
+        vm = new keyDeliveryRisksViewModel(params);
+        loadSection();
+        return vm;
+    }
+
+    function loadSection(newViewModel) {
+        if (newViewModel) {
+            sectionLoaderViewModel = newViewModel;
+        }
+        vm.editable(sectionLoaderViewModel.editable());
+        // retrieve TODO
+        var data = JSON.parse(window.localStorage.getItem(sectionLoaderViewModel.opptyID()));
+        if (data != undefined && data.keyDeliveryRisks != undefined && data.keyDeliveryRisks.content != undefined)
+            unescapeData(data.keyDeliveryRisks);
+    }
+
+    function saveOppty(event, argu) {
+        var sid = argu.sid();
+        if (sid !== '0802') {
+            return;
+        } else {
+            var sectionName = "keyDeliveryRisks";
+            var newData = ko.toJS(vm.data);
+            var content = { "keyDeliveryRisks": newData };
+            // save TODO
+            //window.localStorage.setItem(sectionLoaderViewModel.opptyID(), JSON.stringify(content));
+            var data = JSON.parse(localStorage.getItem(sectionLoaderViewModel.opptyID()));
+            if (data != undefined) { 
+                data[sectionName] = newData;
+            } else {
+                data = content;
+            }
+            window.localStorage.setItem(sectionLoaderViewModel.opptyID(), JSON.stringify(data));
+            
+        }
+    }
+
+    return {
+        name: ["Section0802", "sd-section-0802"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+
+});
+define('component/Section0803', function (require) {
+    "use strict";
+    var $ = require("jquery"),
+        ko = require("knockout"),
+        templateHtml = require("text!./Section0803Template.html"),
+        requestAPI = require('model/RequestAPI'),
+        vm = {},
+        sectionLoaderViewModel = {};
+
+    function setEscapeValue(val) {
+        return (val === undefined || val === null) ? null : escape(val);
+    }
+
+    function getUnEscapeValue(val) {
+        if (val != undefined && val != null) return unescape(val);
+        return null;
+    }
+
+    function KeyNonDeliveryRisks(data) {
+        if (data != null) {
+            this.offeringFuncArea = ko.observable(data.offeringFuncArea);
+            this.riskDescription = ko.observable(data.riskDescription);
+            this.mitigationPlan = ko.observable(data.mitigationPlan);
+            this.status = ko.observable(data.status);
+        } else {
+            this.offeringFuncArea = ko.observable("");
+            this.riskDescription = ko.observable("");
+            this.mitigationPlan = ko.observable("");
+            this.status = ko.observable("Red");
+        }
+    }
+
+    function unescapeData(data) {
+        if (data.content != null && data.content.length > 0) {
+            for (var i in data.content) {
+                data.content[i].offeringFuncArea = getUnEscapeValue(data.content[i].offeringFuncArea);
+                data.content[i].riskDescription = getUnEscapeValue(data.content[i].riskDescription);
+                data.content[i].mitigationPlan = getUnEscapeValue(data.content[i].mitigationPlan);
+                data.content[i].status = getUnEscapeValue(data.content[i].status);
+            }
+        } else {
+            data.content.push(new KeyNonDeliveryRisks(null));
+        }
+        vm.data.content(data.content);
+    }
+
+    function listenCustomEvent() {
+        $(window).off("opptySaving");
+        $(window).on("opptySaving", saveOppty);
+        $(window).off("updateSection");
+        $(window).on("updateSection", function (e, newViewModel) {
+            loadSection(newViewModel);
+        });
+    }
+
+    function onViewModelPreLoad() {
+        listenCustomEvent();
+    }
+
+    function createViewModel(params, componentInfo) {
+        onViewModelPreLoad();
+        sectionLoaderViewModel = params.viewModel;
+        var keyNonDeliveryRisksViewModel = function () {
+            var self = this;
+            self.editable = ko.observable(true);
+            self.data = {
+                content: ko.observableArray([new KeyNonDeliveryRisks(null)])
+            }
+            self.addRow = function () {
+                self.data.content.push(new KeyNonDeliveryRisks(null));
+            };
+            self.remove = function () {
+                self.data.content.remove(this);
+            }
+        };
+        vm = new keyNonDeliveryRisksViewModel(params);
+        loadSection();
+        return vm;
+    }
+
+    function loadSection(newViewModel) {
+        if (newViewModel) {
+            sectionLoaderViewModel = newViewModel;
+        }
+        vm.editable(sectionLoaderViewModel.editable());
+        // retrieve TODO
+        var data = JSON.parse(window.localStorage.getItem(sectionLoaderViewModel.opptyID()));
+        if (data != undefined && data.keyNonDeliveryRisks != undefined && data.keyNonDeliveryRisks.content != undefined)
+            unescapeData(data.keyNonDeliveryRisks);
+    }
+
+    function saveOppty(event, argu) {
+        var sid = argu.sid();
+        if (sid !== '0803') {
+            return;
+        } else {
+            var sectionName = "keyNonDeliveryRisks";
+            var newData = ko.toJS(vm.data);
+            var content = { "keyNonDeliveryRisks": newData };
+            // save TODO
+            //window.localStorage.setItem(sectionLoaderViewModel.opptyID(), JSON.stringify(content));
+            var data = JSON.parse(localStorage.getItem(sectionLoaderViewModel.opptyID()));
+            if (data != undefined) {
+                data[sectionName] = newData;
+            } else {
+                data = content;
+            }
+            window.localStorage.setItem(sectionLoaderViewModel.opptyID(), JSON.stringify(data));
+
+        }
+    }
+
+    return {
+        name: ["Section0803", "sd-section-0803"],
+        template: templateHtml,
+        viewModel: {
+            createViewModel: createViewModel
+        }
+    };
+
+});
 /*global define, alert, console, location*/
 define('component/SDContents', function (require) {
     "use strict";
@@ -7303,6 +7851,18 @@ define("component/SectionLoader", function (require) {
         section040506 = require('./Section040506'),
         section0406 = require('./Section0406'),
         section0407 = require('./Section0407'),
+
+        section0701 = require('./Section0701'),
+        section0702 = require('./Section0702'),
+        section0703 = require('./Section0703'),
+        section0704 = require('./Section0704'),
+        section0705 = require('./Section0705'),
+        section0706 = require('./Section0706'),
+        section0707 = require('./Section0707'),
+
+        section0801 = require('./Section0801'),
+        section0802 = require('./Section0802'),
+        section0803 = require('./Section0803'),
         appUtility = require('util/AppUtility'),
         saveCompleted = true,
         saveingSid = "",
@@ -7312,7 +7872,7 @@ define("component/SectionLoader", function (require) {
 
     function listenCustomEvent() {
         $(window).on('generateMsg', function (e, secName, error, updateMsg) {
-            $('.sd-update-message').text(updateMsg);            
+            $('.sd-update-message').text(updateMsg);
             if (error == 0) {
                 $('.sd-update-message').addClass('text-success');
                 setTimeout(function () {
@@ -7351,10 +7911,10 @@ define("component/SectionLoader", function (require) {
                             }
                         } else {
                             updateViewModel(argu.viewModel);
-                            //history.pushState("string-data", "section-name", "?sid=" + saveingSid + "&OpptyID=" + argu.viewModel.opptyID() + "")
-                        }                        
+                            history.pushState("string-data", "section-name", "?sid=" + saveingSid + "&OpptyID=" + argu.viewModel.opptyID() + "")
+                        }
                     }
-                    
+
                 });
             }
         });
@@ -7383,14 +7943,14 @@ define("component/SectionLoader", function (require) {
         if (viewModel.opptyID() === "") {
             if (sid == '') {
                 requestAPI.errorOppty('404');
-            } else if(sid == '0201'){   
+            } else if (sid == '0201') {
                 //create oppty
             } else {
                 viewModel.sectionNavigator(requestAPI.createSectionModel());
             }
         } else {
             viewModel.sectionNavigator(requestAPI.createSectionModel());
-        }           
+        }
         $('body').show();
     }
 
@@ -7419,15 +7979,24 @@ define("component/SectionLoader", function (require) {
                         $(window).trigger('updateSection', viewModel);
                     }
                 }
-                
+
             });
-        }        
+        }
+    }
+
+    function isNewSection(sid) {
+        var newSections = ["0701","0702","0703","0704","0705","0706","0707","0801","0802","0803"]
+        for (var i in newSections) {
+            if (sid == newSections[i])
+                return true;
+        }
+        return false;
     }
 
     function createViewModel(params, componentInfo) {
         onViewModelPreLoad();
         sectionModel = requestAPI.createSectionModel('C', 'apps', true);
-        var sectionViewModel = function (){
+        var sectionViewModel = function () {
             var self = this;
             self.oppty = {
                 OpptyName: ko.observable(""),
@@ -7456,14 +8025,16 @@ define("component/SectionLoader", function (require) {
             self.prevSid = ko.observable();
             self.nextSid = ko.observable();
 
-            self.sid.subscribe(function (newSid){
+            self.sid.subscribe(function (newSid) {
                 for (var i in self.sectionNavigator()) {
                     if (self.sectionNavigator()[i].sid === self.sid()) {
                         self.title(self.sectionNavigator()[i].title);
                         self.sectionName(self.sectionNavigator()[i].sectionName);
                         self.prevSid(self.sectionNavigator()[i].prevSid);
                         self.nextSid(self.sectionNavigator()[i].nextSid);
-                        retriveDocument(viewModel);
+                        if (!isNewSection(newSid)) {
+                            retriveDocument(viewModel);
+                        }                        
                         return;
                     }
                 }
@@ -7482,8 +8053,10 @@ define("component/SectionLoader", function (require) {
             });
 
             self.saveHome = function () {
-                            
+
             }
+
+            
             self.save = function () {
                 beforeSave();
                 $(window).triggerHandler("opptySaving", self);
@@ -7495,7 +8068,9 @@ define("component/SectionLoader", function (require) {
                     if (saveCompleted) {
                         saveingSid = self.nextSid();
                         $(window).triggerHandler("sectionChanged", viewModel);
-                    }                    
+                    }
+                } else if (isNewSection(viewModel.sid())) {
+                    viewModel.sid(self.nextSid());
                 } else {
                     $(window).triggerHandler("opptySaving", viewModel);
                     saveingSid = self.nextSid();
@@ -7509,7 +8084,9 @@ define("component/SectionLoader", function (require) {
                         saveingSid = self.prevSid();
                         $(window).triggerHandler("sectionChanged", viewModel);
                     }
-                } else {
+                } else if(isNewSection(viewModel.sid())) {
+                    viewModel.sid(self.prevSid());
+                } else{
                     $(window).triggerHandler("opptySaving", viewModel);
                     saveingSid = self.prevSid();
                 }
@@ -7571,6 +8148,18 @@ define("component/SectionLoader", function (require) {
             section040506,
             section0406,
             section0407,
+
+            section0701,
+            section0702,
+            section0703,
+            section0704,
+            section0705,
+            section0706,
+            section0707,
+
+            section0801,
+            section0802,
+            section0803,
             TopLink
         ]
     };
