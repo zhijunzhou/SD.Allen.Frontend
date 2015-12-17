@@ -1,0 +1,632 @@
+{
+  "opptyId": "OPP-1212121212",
+  "opptyOverview": {
+    "opptyData": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "opptyId": "Opportunity ID",
+        "opptyName": "Opportunity Name",
+        "salesStage": "Sales Stage",
+        "opptyType": "Opportunity Type",
+        "dealStatus": "Deal Status",
+        "clientName": "Customer Name",
+        "leadBizUnit": "Lead Business Unit",
+        "involvedGbu": {
+          "apps": {
+            "inScope": "In Scope",
+            "tcv": "TCV",
+            "fyr": "FYR"
+          },
+          "bps": {
+            "inScope": "In Scope",
+            "tcv": "TCV",
+            "fyr": "FYR"
+          },
+          "ess": {
+            "inScope": "In Scope",
+            "tcv": "TCV",
+            "fyr": "FYR"
+          },
+          "ito": {
+            "inScope": "In Scope",
+            "tcv": "TCV",
+            "fyr": "FYR"
+          },
+          "hpeOther": {
+            "inScope": "In Scope",
+            "tcv": "TCV",
+            "fyr": "FYR"
+          },
+          "hpi": {
+            "inScope": "In Scope",
+            "tcv": "TCV",
+            "fyr": "FYR"
+          }
+        },
+        "contractTerm": "Contract Term",
+        "contractSignDate": "Contract Sign Date",
+        "contractStartDate": "Contract Start Date",
+        "pursuitClassfication": "Pursuit Classification",
+        "solnGovTrack": "Solution Governance Track ",
+        "leadCntry": "Lead HP Country",
+        "leadRegion": "Region",
+        "region": {
+          "ams": {
+            "inScope": "inScope"
+          },
+          "apj": {
+            "inScope": "inScope"
+          },
+          "emea": {
+            "inScope": "inScope"
+          }
+        },
+        "clientCntry": "Customer Country",
+        "pursuitWeb": {
+          "title": "Link to Pursuit SharePoint(Web address)",
+          "link": "Link to Pursuit SharePoint(Home Page)"
+        },
+        "opptyTcv": "Opportunity TCV",
+        "opptyFyr": "Opportunity FYR"
+      }
+    },
+    "contact": {
+      "lastUpdated": "2015-11-09T07:06:22.996Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "coreTeam": {
+          "primary": {
+            "acctExecutive": "",
+            "bidMgr": "",
+            "dealAnalyst": "",
+            "deliveryOwner": "",
+            "hrLead": "",
+            "legalContractMgmtLead": "",
+            "opptyConsultant": "",
+            "proposalMgr": "",
+            "pursuitEngagementMgr": "",
+            "salesExecutive": "",
+            "solnConsultant": "",
+            "solnLead": "",
+            "strategicPursuitLead": "",
+            "tntLead": ""
+          },
+          "ams": {
+            "acctExecutive": "",
+            "bidMgr": "",
+            "dealAnalyst": "",
+            "deliveryOwner": "",
+            "hrLead": "",
+            "legalContractMgmtLead": "",
+            "opptyConsultant": "",
+            "proposalMgr": "",
+            "pursuitEngagementMgr": "",
+            "salesExecutive": "",
+            "solnConsultant": "",
+            "solnLead": "",
+            "strategicPursuitLead": "",
+            "tntLead": ""
+          },
+          "apj": {
+            "acctExecutive": "",
+            "bidMgr": "",
+            "dealAnalyst": "",
+            "deliveryOwner": "",
+            "hrLead": "",
+            "legalContractMgmtLead": "",
+            "opptyConsultant": "",
+            "proposalMgr": "",
+            "pursuitEngagementMgr": "",
+            "salesExecutive": "",
+            "solnConsultant": "",
+            "solnLead": "",
+            "strategicPursuitLead": "",
+            "tntLead": ""
+          },
+          "emea": {
+            "acctExecutive": "",
+            "bidMgr": "",
+            "dealAnalyst": "",
+            "deliveryOwner": "",
+            "hrLead": "",
+            "legalContractMgmtLead": "",
+            "opptyConsultant": "",
+            "proposalMgr": "",
+            "pursuitEngagementMgr": "",
+            "salesExecutive": "",
+            "solnConsultant": "",
+            "solnLead": "",
+            "strategicPursuitLead": "",
+            "tntLead": ""
+          }
+        },
+        "extendTeam": {
+          "primary": {
+            "dealIntake": "",
+            "dueDiligenceLead": "",
+            "otherIntlBizPartner": "",
+            "practiceArch": "",
+            "proposalSupport": ""
+          },
+          "ams": {
+            "dealIntake": "",
+            "dueDiligenceLead": "",
+            "otherIntlBizPartner": "",
+            "practiceArch": "",
+            "proposalSupport": ""
+          },
+          "apj": {
+            "dealIntake": "",
+            "dueDiligenceLead": "",
+            "otherIntlBizPartner": "",
+            "practiceArch": "",
+            "proposalSupport": ""
+          },
+          "emea": {
+            "dealIntake": "",
+            "dueDiligenceLead": "",
+            "otherIntlBizPartner": "",
+            "practiceArch": "",
+            "proposalSupport": ""
+          }
+        }
+      }
+    }
+  },
+  "bizSoln": {
+    "clientOverview": {
+      "lastUpdated": "2015-11-09T06:52:47.436Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "clientRevenue": "Client Revenue in US$ M",
+        "clientRevenueYear": "As of",
+        "noBusinessUnits": "No. Business Units",
+        "inWhatCountries": "In what countries",
+        "acctBizPlanImpactPointDetail": "For a current account, are there relevant points from the Account Business Plan/Roadmap that will impact the solution?",
+        "explainImpact": "If yes, please explain",
+        "priBizChlgDetail": "Primary business challenges and concerns?",
+        "clientCompellingEventDetail": "Client compelling events driving the opportunity?",
+        "curItStateDetail": "Current State of IT, challenges and concerns",
+        "keyDifferentiation": "Why will the client choose HPE? What will they view as our key differentiation?",
+        "buRelationDetail": "Describe any existing relationships with any HPE BU",
+        "hpiRelationDetail": "Describe existing relationships with HPE Inc.",
+        "clientEventDetail": "Test Display Name",
+        "clientFcnDetail": "Which client functional area initiated the request and why?",
+        "clientDecisionCriteriaDetail": "What are the client's decision criteria?",
+        "clientProcApproach": "What is the client's procurement approach?",
+        "accountDeliveryMgmtDetail": "What type of Account and Delivery Management structure will be required to support the client; i.e., dedicated or leveraged, global/regional/in-country, PMO?"
+      }
+    },
+    "winStrategy": {
+      "salesApproach": {
+        "lastUpdated": "2015-11-04T08:20:32.579Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "salesStrategyDetail": "",
+          "clientTransformationStrategyDetail": "",
+          "dealBenefitDetail": "",
+          "criticalSuccessFactorDetail": "",
+          "dealEssentialDetail": "",
+          "sumryRelationStrategyDetail": "",
+          "specificSolnRqmtDetail": "",
+          "supporterDetractorDetail": "",
+          "bizPartnerDetail": ""
+        }
+      },
+      "competitors": {
+        "lastUpdated": "2015-11-03T01:58:23.644Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "competitorNum": 2,
+          "content": [
+            {
+              "name": "Name",
+              "strengthDetail": "Strength",
+              "weaknessDetail": "Weakness",
+              "advantageDetail": "Advantage"
+            },
+            {
+              "name": "Name",
+              "strengthDetail": "Strength",
+              "weaknessDetail": "Weakness",
+              "advantageDetail": "Advantage"
+            },
+            {
+              "name": "Name",
+              "strengthDetail": "Strength",
+              "weaknessDetail": "Weakness",
+              "advantageDetail": "Advantage"
+            },
+            {
+              "name": "Name",
+              "strengthDetail": "Strength",
+              "weaknessDetail": "Weakness",
+              "advantageDetail": "Advantage"
+            }
+          ]
+        }
+      },
+      "mapValProps": {
+        "lastUpdated": "2015-11-03T01:58:26.049Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "content": [
+            {
+              "clientBizDetail": "Client Business Detail",
+              "chlgImpactDetail": "Challenge Impact Detail",
+              "capabilityDetail": "Capability Detail",
+              "evidenceDetail": "Evidence Detail"
+            }
+          ]
+        }
+      },
+      "pricingApproach": {
+        "lastUpdated": "2015-11-03T01:59:08.675Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "isYellowPadPrice": true,
+          "yellowPadPricePercentage": 34.67,
+          "clientPriceExpectDetail": "",
+          "clientPriceStrategyDetail": "",
+          "cmpyPriceStrategyDetail": "",
+          "competitorPriceStrategyDetail": "",
+          "majorFinancialIssue": ""
+        }
+      }
+    }
+  },
+  "solnOverview": {
+    "scope": {
+      "allOfferings": {
+        "lastUpdated": "2015-11-03T01:59:10.594Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "content": [
+            {
+              "serviceLine": "Service Line",
+              "offering": "12",
+              "clientVolume": "12",
+              "nStdComponent": "12www"
+            }
+          ]
+        }
+      },
+      "keyScopeItem": {
+        "lastUpdated": "2015-11-03T01:59:11.895Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "keyScopeItemDetail": ""
+        }
+      }
+    },
+    "clientArch": {
+      "lastUpdated": "2015-10-27T07:49:56.868Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "keyComponentDetail": "",
+        "painAreaDetail": "",
+        "keyTechDriverDetail": "",
+        "bizCriticalAreaDetail": "",
+        "serviceCollaborationDetail": "",
+        "integrationNeedDetail": "",
+        "archPrincipleDetail": "",
+        "archPrincipleConflictDetail": "",
+        "attachment": [
+          {
+            "title": "Penguins.jpg",
+            "link": "1/Penguins.jpg"
+          },
+          {
+            "title": "Tulips.jpg",
+            "link": "1/Tulips.jpg"
+          }
+        ]
+      }
+    },
+    "solnApproach": {
+      "summary": {
+        "lastUpdated": "2015-10-27T02:37:47.66Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "overviewDetail": "%3Cp%3E040301%3C/p%3E"
+        }
+      },
+      "xmo": {
+        "lastUpdated": "2015-11-03T01:59:19.427Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "cmoDetail": "%3Cp%3E040302%3C/p%3E",
+          "tmoDetail": "%3Cp%3E040302%3C/p%3E",
+          "fmoDetail": "%3Cp%3E040302%3C/p%3E",
+          "attachment": [
+            {
+              "title": "test.txt",
+              "link": "1/test.txt"
+            }
+          ]
+        }
+      },
+      "hrSoln": {
+        "lastUpdated": "2015-11-03T01:59:21.957Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "content": [
+            {
+              "inScope": true,
+              "hrIssue": "ClientEmployee",
+              "hrIssueTitle": "Client's Employees",
+              "approach": "%3C%21--%20ko%20if%3A%20%24component.editable%28%29--%3E"
+            },
+            {
+              "inScope": false,
+              "hrIssue": "ClientSubcontractor",
+              "hrIssueTitle": "Client's Subcontractors",
+              "approach": ""
+            },
+            {
+              "inScope": true,
+              "hrIssue": "ClientContractor",
+              "hrIssueTitle": "Client's Third Party Contractors",
+              "approach": "%3C%21--%20ko%20if%3A%20%24component.editable%28%29--%3E"
+            },
+            {
+              "inScope": false,
+              "hrIssue": "HPEmployee",
+              "hrIssueTitle": "Existing HPE Employees (Renewals only)",
+              "approach": ""
+            },
+            {
+              "inScope": true,
+              "hrIssue": "Other",
+              "hrIssueTitle": "<!-- ko if: $component.editable()-->",
+              "approach": "%3C%21--%20ko%20if%3A%20%24component.editable%28%29--%3E"
+            }
+          ]
+        }
+      },
+      "cmpyChallenge": {
+        "lastUpdated": "2015-10-27T02:38:07.729Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "content": [
+            {
+              "inScope": true,
+              "challenge": "Asset",
+              "challengeTitle": "Asset ownership/refresh",
+              "description": "040304"
+            },
+            {
+              "inScope": true,
+              "challenge": "Trade",
+              "challengeTitle": "Global Trade requirements",
+              "description": "040304"
+            },
+            {
+              "inScope": true,
+              "challenge": "Initiative",
+              "challengeTitle": "Internal initiatives that could impact deal",
+              "description": "040304"
+            },
+            {
+              "inScope": true,
+              "challenge": "Knowledge",
+              "challengeTitle": "Knowledge and supportability gaps",
+              "description": "040304"
+            },
+            {
+              "inScope": true,
+              "challenge": "Legal",
+              "challengeTitle": "Legal issues related to solution",
+              "description": "040304"
+            },
+            {
+              "inScope": true,
+              "challenge": "Sourcing",
+              "challengeTitle": "Location Sourcing limitations",
+              "description": "040304"
+            },
+            {
+              "inScope": true,
+              "challenge": "Staffing",
+              "challengeTitle": "Staffing Issues",
+              "description": "040304"
+            },
+            {
+              "inScope": true,
+              "challenge": "Other",
+              "challengeTitle": "",
+              "description": ""
+            }
+          ]
+        }
+      },
+      "designParam": {
+        "lastUpdated": "2015-11-03T01:59:24.808Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "solnParamDetail": "%3Cp%3E040305%3C/p%3E"
+        }
+      },
+      "deployStrategy": {
+        "lastUpdated": "2015-11-03T01:59:25.934Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "initialThoughtDetail": "%3Cp%3E040306%3C/p%3E"
+        }
+      },
+      "additionalInfo": {
+        "lastUpdated": "2015-10-16T02:08:27.788Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "explainDetail": "%3Cp%3E040307%3C/p%3E",
+          "attachment": []
+        }
+      }
+    },
+    "innovativeAspect": {
+      "lastUpdated": "2015-10-16T02:08:30.541Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "innovativeElementDetail": "%3Cp%3E0404%3C/p%3E"
+      }
+    },
+    "deliveryStrategies": {
+      "locationTarget": {
+        "lastUpdated": "2015-10-16T02:08:32.246Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "content": [
+            {
+              "offering": "12",
+              "clientVolume": "12",
+              "onShoreWorkLoad": "1",
+              "rdcWorkload": "2",
+              "gdcWorkload": "3",
+              "comment": "4"
+            }
+          ]
+        }
+      },
+      "svcDeliveryResp": {
+        "lastUpdated": "2015-11-03T02:38:48.637Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "content": [
+            {
+              "offering": "12",
+              "delivery": "Yes",
+              "otherBuDelivery": "HPETechnicalServices",
+              "specificBuDelivery": "",
+              "partnerDelivery": "040505",
+              "thirdPartyDelivery": "040505",
+              "comment": "040505"
+            }
+          ]
+        }
+      },
+      "clientRetainedResp": {
+        "lastUpdated": "2015-11-03T02:38:20.731Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "content": [
+            {
+              "retainedService": "comment",
+              "clientDelivery": true,
+              "clientPartnerDelivery": "comment",
+              "clientThirdPartyDelivery": "comment",
+              "comment": "comment"
+            }
+          ]
+        }
+      },
+      "emsTooling": {
+        "lastUpdated": "2015-11-03T02:38:47.276Z",
+        "editor": "i:0#.w|asiapacific\\zhouzh",
+        "data": {
+          "clientToolDetail": "%3Cp%3E040503%3C/p%3E",
+          "cmpyServiceDetail": "%3Cp%3E040503%3C/p%3E",
+          "cmpyApproachDetail": "%3Cp%3E040503%3C/p%3E"
+        }
+      }
+    },
+    "keyClientConstraint": {
+      "lastUpdated": "2015-11-03T02:38:45.599Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "inScope": true,
+            "constraint": "ClientStandard",
+            "constraintTitle": "Client-mandated%20standards%20and%20methods",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          },
+          {
+            "inScope": true,
+            "constraint": "ClientMandated",
+            "constraintTitle": "Client-mandated%20products%20or%20tools",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          },
+          {
+            "inScope": true,
+            "constraint": "ClientUnionizedSupport",
+            "constraintTitle": "Client-unionized%20support",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          },
+          {
+            "inScope": true,
+            "constraint": "Regulatory",
+            "constraintTitle": "Data%20privacy%20and%20regulatory%20issues",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          },
+          {
+            "inScope": true,
+            "constraint": "ExportImport",
+            "constraintTitle": "Export%20/%20import%20compliance",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          },
+          {
+            "inScope": true,
+            "constraint": "CMO",
+            "constraintTitle": "HPE%20CMO%20responsibilities",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          },
+          {
+            "inScope": true,
+            "constraint": "Resource",
+            "constraintTitle": "HPE%20or%20client%20resources",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          },
+          {
+            "inScope": true,
+            "constraint": "LoL",
+            "constraintTitle": "Limits%20of%20Liability",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          },
+          {
+            "inScope": true,
+            "constraint": "OffshoreLocation",
+            "constraintTitle": "No%20use%20of%20offshore%20locations",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          },
+          {
+            "inScope": true,
+            "constraint": "Timeline",
+            "constraintTitle": "Timelines%20and%20critical%20dates",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          },
+          {
+            "inScope": true,
+            "constraint": "Other",
+            "constraintTitle": "mitigation",
+            "description": "mitigation",
+            "mitigation": "mitigation"
+          }
+        ]
+      }
+    },
+    "costingReport": {
+      "lastUpdated": "2015-10-16T02:08:48.11Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "offering": "12",
+            "xmoApproach": "cmpyTarget",
+            "cmpyTarget": "cmpyTarget"
+          }
+        ]
+      }
+    }
+  }
+}

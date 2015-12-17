@@ -218,7 +218,7 @@ namespace ConvertingJson
                     }
                     else if (type == JTokenType.Object)
                     {
-                        //reset the property
+                        // reset the property
                         propertiesCount = 0;                        
                         addRow("Object", property.Name.ToString(),
                                property.Name.ToString(), property.Value.Type.ToString());

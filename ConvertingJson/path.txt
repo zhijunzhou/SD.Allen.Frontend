@@ -1,11 +1,3 @@
-opptyOverview.opptyData.data$opptyData$Opportunity Overview
-opptyOverview.contact.data$contact$Pursuit Team Contact
-bizSoln.clientOverview.data$clientOverview$Client Overview
-bizSoln.winStrategy.salesApproach.data$salesApproach$Sales Approach
-bizSoln.winStrategy.competitors.data$competitors$Competitors
-bizSoln.winStrategy.mapValProps.data$mapValProps$Map/Values Propositions
-bizSoln.winStrategy.pricingApproach.data$pricingApproach$Pricing Approach
-solnOverview.solnApproach.hrSoln.data$hrSoln$HR Solution
 ntnTransitTransformSoln.transitStrategyApproach.data$transitStrategyApproach$Transition Strategy and Approach
 ntnTransitTransformSoln.transformStrategyApproach.data$transformStrategyApproach$Transformation Strategy and Approach
 ntnTransitTransformSoln.clientBenefits.data$clientBenefits$T&T Client Benefits
