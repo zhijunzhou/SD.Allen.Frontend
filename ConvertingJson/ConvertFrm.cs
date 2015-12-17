@@ -36,7 +36,7 @@ namespace ConvertingJson
                 while ((line = reader.ReadLine()) != null)
                 {
                     String[] rc = line.Split('$');
-                    pathCollection.Add(new SectionPath(rc[0], rc[1], rc[2]));
+                    pathCollection.Add(new SectionPath(rc[0], rc[1], rc[2],rc[3]));
                     sectionCount++;                  
                 }
                 cb_sectionPath.DataSource = pathCollection;

@@ -1,7 +1,7 @@
-opptyOverview.opptyData.data$opptyData$Opportunity Overview
-opptyOverview.contact.data$contact$Pursuit Team Contacts
-bizSoln.clientOverview.data$clientOverview$Client Overview and Decision Factors
-bizSoln.winStrategy.salesApproach.data$salesApproach$Sales Approach
-bizSoln.winStrategy.competitors.data$competitors$Competitors
-bizSoln.winStrategy.mapValProps.data$mapValProps$Message Map/Value Proposition
-bizSoln.winStrategy.pricingApproach.data$pricingApproach$Pricing Approach
+2$opptyOverview.opptyData.data$opptyData$Opportunity Overview
+2$opptyOverview.contact.data$contact$Pursuit Team Contacts
+3$bizSoln.clientOverview.data$clientOverview$Client Overview and Decision Factors
+3$bizSoln.winStrategy.salesApproach.data$salesApproach$Sales Approach
+3$bizSoln.winStrategy.competitors.data$competitors$Competitors
+3$bizSoln.winStrategy.mapValProps.data$mapValProps$Message Map/Value Proposition
+3$bizSoln.winStrategy.pricingApproach.data$pricingApproach$Pricing Approach

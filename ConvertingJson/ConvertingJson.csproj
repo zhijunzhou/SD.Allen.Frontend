@@ -93,6 +93,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Json\07080910.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
