@@ -1,7 +1,7 @@
-ntnTransitTransformSoln.transitStrategyApproach.data$transitStrategyApproach$Transition Strategy and Approach
-ntnTransitTransformSoln.transformStrategyApproach.data$transformStrategyApproach$Transformation Strategy and Approach
-ntnTransitTransformSoln.clientBenefits.data$clientBenefits$T&T Client Benefits
-ntnTransitTransformSoln.dueDiligenceSum.data$dueDiligenceSum$Due Diligence Summary
-ntnTransitTransformSoln.keyProjTimelines.data$keyProjTimelines$Key T&T Projects and Timelines
-ntnTransitTransformSoln.keyProjInterDependencies.data$keyProjInterDependencies$Key T&T Project Interdependencies
-ntnTransitTransformSoln.govStructMgmtChange.data$govStructMgmtChange$Governance Structure and Management of Change
+opptyOverview.opptyData.data$opptyData$Opportunity Overview
+opptyOverview.contact.data$contact$Pursuit Team Contacts
+bizSoln.clientOverview.data$clientOverview$Client Overview and Decision Factors
+bizSoln.winStrategy.salesApproach.data$salesApproach$Sales Approach
+bizSoln.winStrategy.competitors.data$competitors$Competitors
+bizSoln.winStrategy.mapValProps.data$mapValProps$Message Map/Value Proposition
+bizSoln.winStrategy.pricingApproach.data$pricingApproach$Pricing Approach

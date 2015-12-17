@@ -1,0 +1,300 @@
+{
+  "ntnTransitTransformSoln": {
+    "transitStrategyApproach": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "attachment": [
+          {
+            "title": "title",
+            "link": "link"
+          }
+        ],
+        "strategyApproachArr": [
+          {
+            "strategyApproachName": "Transition Strategy/Approach Name",
+            "strategyApproachDescription": "Description",
+            "topAssumptions": "TopAssumptions",
+            "topRisks": "TopRisks",
+            "topDeliverables": "TopDeliverables",
+            "topMilestones": "TopMilestones"
+          }
+        ]
+      }
+    },
+    "transformStrategyApproach": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "attachment": [
+          {
+            "title": "title",
+            "link": "link"
+          }
+        ],
+        "strategyApproachArr": [
+          {
+            "strategyApproachName": "Transformation Strategy/Approach ",
+            "strategyApproachDescription": "Description",
+            "topAssumptions": "TopAssumptions",
+            "topRisks": "TopRisks",
+            "topDeliverables": "TopDeliverables",
+            "topMilestones": "TopMilestones"
+          }
+        ]
+      }
+    },
+    "clientBenefits": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "clientBizOutcomes": "Client Business Outcomes",
+            "transitTransformProj": "HPE Transition or Transformation Project",
+            "clientBenefits": "Client Benefits"
+          }
+        ]
+      }
+    },
+    "dueDiligenceSum": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "dueDiligenceFindingsImpacts": [
+          {
+            "inScope": true,
+            "finding": "Finding",
+            "impact": "Impact"
+          }
+        ],
+        "openIssuesRisks": [
+          {
+            "inScope": true,
+            "finding": "Finding",
+            "impact": "Impact"
+          }
+        ],
+        "openAssumptionActions": [
+          {
+            "inScope": true,
+            "finding": "Finding",
+            "impact": "Impact"
+          }
+        ],
+        "outStandingData": [
+          {
+            "inScope": true,
+            "finding": "Finding",
+            "impact": "Impact"
+          }
+        ]
+      }
+    },
+    "keyProjTimelines": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "highlevelTimelines": [
+          {
+            "title": "title",
+            "link": "link"
+          }
+        ],
+        "offeringspecificTimelines": [
+          {
+            "title": "title",
+            "link": "link"
+          }
+        ],
+        "clientInFlightProjTimelines": [
+          {
+            "title": "title",
+            "link": "link"
+          }
+        ],
+        "otherRelevantTimelines": [
+          {
+            "title": "title",
+            "link": "link"
+          }
+        ]
+      }
+    },
+    "keyProjInterDependencies": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "project": "Project",
+            "keyDependencies": "Key Dependencies",
+            "requiredAct": "Required Actions to Align Projects"
+          }
+        ]
+      }
+    },
+    "govStructMgmtChange": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "acctOrgChart": [
+          {
+            "title": "title",
+            "link": "link"
+          }
+        ],
+        "programTeamStruct": [
+          {
+            "title": "title",
+            "link": "link"
+          }
+        ],
+        "projStructByOffering": [
+          {
+            "title": "title",
+            "link": "link"
+          }
+        ],
+        "mocActivitiesTransitionPhase": "What Management of Change (MoC) activities are included in the Transition Phase?",
+        "mocActivitiesTransformPhase": "What MoC activities are included in the Transformation Phase?",
+        "clientObligProcDetail": "Are client obligations contractually documented to support the MoC process across all regions and business entities/departments?",
+        "contractRoleRespChangeImpact": "Describe how T&T contractual roles and responsibilities ensure that the client owns the responsibility for their internal MoC program, specifically related to the changes that impact their end users.",
+        "cmpyAcctGovClient": "Describe how the overall HPE account and client governance structure is positioned to trigger/support MoC activities.",
+        "offeringSolnDesignCostModel": "In which offering solution designs and cost model(s) has the necessary regional/business customization of the HPE solution been included?"
+      }
+    }
+  },
+  "assumptRiskMitigatnOverview": {
+    "keyAssumptions": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "offeringFuncArea": "",
+            "assumption": "",
+            "planToClose": ""
+          }
+        ]
+      }
+    },
+    "keyDeliveryRisks": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "offeringFuncArea": "",
+            "riskDescription": "",
+            "mitigationPlan": "",
+            "status": true
+          }
+        ]
+      }
+    },
+    "keyNonDeliveryRisks": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "offeringFuncArea": "",
+            "riskDescription": "",
+            "mitigationPlan": "",
+            "status": true
+          }
+        ]
+      }
+    }
+  },
+  "requiredDoc": {
+    "requiredDocData": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": [
+          {
+            "slaSloDoc": [
+              {
+                "title": "",
+                "link": ""
+              }
+            ],
+            "sowDoc": [
+              {
+                "title": "",
+                "link": ""
+              }
+            ],
+            "dairGuard": [
+              {
+                "title": "",
+                "link": ""
+              }
+            ],
+            "dueDiligenceReport": [
+              {
+                "title": "",
+                "link": ""
+              }
+            ],
+            "ttPlan": [
+              {
+                "title": "",
+                "link": ""
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "handoverToDelivery": {
+    "changeSummary": {
+      "data": {
+        "content": [
+          {
+            "changeIdName": "",
+            "changeDescription": "",
+            "changeCreateDate": "2015-11-09T07:11:49.628Z",
+            "decisionCloseDate": "2015-11-09T07:11:49.628Z"
+          }
+        ]
+      }
+    },
+    "changeLog": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "designDecisions": {
+          "changeIdName": "",
+          "changeCreateDate": "2015-11-09T07:11:49.628Z",
+          "changeDescription": "",
+          "changeAlternatives": "",
+          "interExterDescision": true,
+          "decisionDetail": "",
+          "issueStmt": "",
+          "assumptPreCondition": "",
+          "depndActRequired": "",
+          "relatedDecisionChanges": "",
+          "depndCompletion": "",
+          "depndCompletionDate": "2015-11-09T07:11:49.628Z",
+          "decisionCloseDate": "2015-11-09T07:11:49.628Z"
+        }
+      }
+    },
+    "glossary": {
+      "lastUpdated": "2015-11-09T07:11:49.628Z",
+      "editor": "i:0#.w|asiapacific\\zhouzh",
+      "data": {
+        "content": {
+          "termAcronym": "",
+          "meaningUsedIn": "",
+          "sectionWhereUsed": [ ]
+        }
+      }
+    }
+  }
+
+}
