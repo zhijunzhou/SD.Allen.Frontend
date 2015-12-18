@@ -213,24 +213,13 @@ define("component/SectionLoader", function (require) {
                         self.sectionName(self.sectionNavigator()[i].sectionName);
                         self.prevSid(self.sectionNavigator()[i].prevSid);
                         self.nextSid(self.sectionNavigator()[i].nextSid);
-                        if (!isNewSection(newSid)) {
-                            retriveDocument(viewModel);
-                        }                        
+                        if (isNewSection(newSid)) {
+                            self.sectionName(self.sectionNavigator()[0].sectionName);
+                        }
+                        retriveDocument(viewModel);
                         return;
                     }
                 }
-            });
-
-            self.pursuitClassfication.subscribe(function (newValue) {
-                viewModel.pursuitClassfication(newValue);
-            });
-
-            self.involvedGbu.subscribe(function (newValue) {
-                viewModel.involvedGbu(newValue);
-            });
-
-            self.appsInscope.subscribe(function (newValue) {
-                viewModel.appsInscope(newValue);
             });
 
             self.saveHome = function () {
@@ -250,8 +239,9 @@ define("component/SectionLoader", function (require) {
                         saveingSid = self.nextSid();
                         $(window).triggerHandler("sectionChanged", viewModel);
                     }
-                } else if (isNewSection(viewModel.sid())) {
+                } else if (isNewSection(viewModel.sid())) {                    
                     viewModel.sid(self.nextSid());
+                    history.pushState("string-data", "section-name", "?sid=" + viewModel.sid() + "&OpptyID=" + viewModel.opptyID() + "")
                 } else {
                     $(window).triggerHandler("opptySaving", viewModel);
                     saveingSid = self.nextSid();
@@ -265,8 +255,9 @@ define("component/SectionLoader", function (require) {
                         saveingSid = self.prevSid();
                         $(window).triggerHandler("sectionChanged", viewModel);
                     }
-                } else if(isNewSection(viewModel.sid())) {
+                } else if (isNewSection(viewModel.sid())) {
                     viewModel.sid(self.prevSid());
+                    history.pushState("string-data", "section-name", "?sid=" + viewModel.sid() + "&OpptyID=" + viewModel.opptyID() + "")
                 } else{
                     $(window).triggerHandler("opptySaving", viewModel);
                     saveingSid = self.prevSid();
@@ -274,8 +265,10 @@ define("component/SectionLoader", function (require) {
             }
             self.changeSection = function (sid) {
                 beforeSave();
-                $(window).triggerHandler("opptySaving", viewModel);
+                $(window).triggerHandler("opptySaving", self);
                 saveingSid = sid;
+                viewModel.sid(saveingSid);
+                history.pushState("string-data", "section-name", "?sid=" + viewModel.sid() + "&OpptyID=" + viewModel.opptyID() + "")
             }
         },
         viewModel = new sectionViewModel();

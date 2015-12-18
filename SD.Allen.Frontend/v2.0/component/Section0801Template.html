@@ -1,0 +1,52 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <p class="bg-success sd-info">
+            <label>Complete the information below to document key Delivery/Implementation, Commercial, Finance and HR assumptions that impact the solution. Do NOT include assumptions already documented in the End-to-End T&T Solution section.</label>
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table sd-table">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Offering or Functional Area</th>
+                    <th>Assumption</th>
+                    <th>Plan to Close</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:data.content">
+                <tr>
+                    <td>
+                        <!-- ko if:$parent.data.content().length > 1 && isNewAdd == true-->
+                        <a href="#" data-bind="click:$parent.remove"><span class="glyphicon glyphicon-minus-sign"></span></a>
+                        <!-- /ko -->
+                    </td>
+                    <td>
+                        <!-- ko if: isNewAdd == false-->
+                            <span class="control-label" data-bind="text:offeringFuncArea"></span>
+                        <!-- /ko-->
+                        <!-- ko if: isNewAdd == true-->
+                            <input class="form-control" type="text" placeholder="Functional Area" data-bind="value:offeringFuncArea" />
+                        <!-- /ko-->
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" data-bind="value:assumption" />
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" data-bind="value:planToClose" />
+                    </td>
+                </tr>                
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- ko if:$component.editable() -->
+<div class="row">
+    <div class="col-lg-12 pull-left">
+        <a class="btn btn-default btn-xs" href="#" data-bind="click:addRow"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+</div>
+<!-- /ko -->
+

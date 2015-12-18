@@ -1,0 +1,54 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <p class="bg-success sd-info">
+            <label>Complete the information below to document key Delivery/Implementation risks that impact the solution. Do NOT include risks already documented in the End-to-End T&T Solution section.</label>
+        </p>
+    </div>
+</div>
+<!--<p data-bind="foreach:data['content']">
+    <i data-bind="text:offeringFuncArea"></i>
+</p>-->
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table sd-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Offering or Functional Area</th>
+                    <th>Risk Description</th>
+                    <th>Mitigaton Plan</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody  data-bind="foreach:data.content">
+                <tr>
+                    <td>
+                        <!-- ko if:$parent.data.content().length > 1 -->
+                        <a href="#" data-bind="click:$parent.remove"><span class="glyphicon glyphicon-minus-sign"></span></a>
+                        <!-- /ko -->
+                    </td>
+                    <td>
+                        <textarea class="form-control sd-comment" rows="6" data-bind="value:offeringFuncArea"></textarea>
+                    </td>
+                    <td>
+                        <textarea class="form-control sd-comment" rows="6" data-bind="value:riskDescription"></textarea>
+                    </td>
+                    <td>
+                        <textarea class="form-control sd-comment" rows="6" data-bind="value:mitigationPlan"></textarea>
+                    </td>
+                    <td>
+                        <input type="radio" value="Red" class="radio-inline" checked="checked" data-bind="checked:status,attr:{name:'r' + $index()}" /> Red
+                        <input type="radio" value="Amber" class="radio-inline" data-bind="checked:status,attr:{name:'r' + $index()"  /> Amber
+                    </td>
+                </tr>                
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- ko if:$component.editable() -->
+<div class="row">
+    <div class="col-lg-12 pull-left">
+        <a class="btn btn-default btn-xs" href="#" data-bind="click:addRow"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+</div>
+<!-- /ko -->

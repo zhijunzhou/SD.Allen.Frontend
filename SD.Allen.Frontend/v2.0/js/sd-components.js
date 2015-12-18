@@ -7416,20 +7416,23 @@ define('component/Section0801', function (require) {
 
     function KeyAssumption(data) {
         if (data != null) {
-            this.offeringFuncArea = ko.observable(data.offeringFuncArea);
-            this.assumption = ko.observable(data.assumption);
-            this.planToClose = ko.observable(data.planToClose);
+            this.isNewAdd = data.isNewAdd;
+            this.offeringFuncArea = data.offeringFuncArea;
+            this.assumption = data.assumption;
+            this.planToClose = data.planToClose;
         } else {
-            this.offeringFuncArea = ko.observable("");
-            this.assumption = ko.observable("");
-            this.planToClose = ko.observable("");
+            this.isNewAdd = true;
+            this.offeringFuncArea = "";
+            this.assumption = "";
+            this.planToClose = "";
         }
     }
 
     function unescapeData(data) {
         if (data.content != null && data.content.length > 0) {
             for (var i in data.content) {
-                data.content[i].offeringFuncArea = getUnEscapeValue(data.content[i].offeringFuncArea);
+                data.content[i].isNewAdd = data.content[i].isNewAdd;
+                data.content[i].offeringFuncArea = data.content[i].offeringFuncArea;
                 data.content[i].assumption = getUnEscapeValue(data.content[i].assumption);
                 data.content[i].planToClose = getUnEscapeValue(data.content[i].planToClose);
             }
@@ -7438,6 +7441,8 @@ define('component/Section0801', function (require) {
         }
         vm.data.content(data.content);
     }
+
+
 
     function listenCustomEvent() {
         $(window).off("opptySaving");
@@ -7452,6 +7457,8 @@ define('component/Section0801', function (require) {
         listenCustomEvent();
     }
 
+    function onViewModelLoaded() {   }
+
     function createViewModel(params, componentInfo) {
         onViewModelPreLoad();
         sectionLoaderViewModel = params.viewModel;
@@ -7459,7 +7466,7 @@ define('component/Section0801', function (require) {
             var self = this;
             self.editable = ko.observable(true);
             self.data = {
-                content: ko.observableArray([new KeyAssumption(null)])
+                content: ko.observableArray()
             }
             self.addRow = function () {
                 self.data.content.push(new KeyAssumption(null));
@@ -7478,10 +7485,41 @@ define('component/Section0801', function (require) {
             sectionLoaderViewModel = newViewModel;
         }
         vm.editable(sectionLoaderViewModel.editable());
+        // get offering
+        var offerings = null;
+        var doc = ko.toJS(sectionLoaderViewModel.document);
+        if (doc != undefined && doc.solnOverview != undefined
+            && doc.solnOverview.scope.allOfferings != undefined
+            && doc.solnOverview.scope.allOfferings.data != undefined
+            && doc.solnOverview.scope.allOfferings.data.content != undefined) {
+            offerings = doc.solnOverview.scope.allOfferings.data.content;
+
+            retrieveAndCombineData(offerings);
+            vm.data.content.sort(function (a, b) {
+                return a.isNewAdd == true;
+            });
+        }
+    }
+
+    function retrieveAndCombineData(offerings) {
         // retrieve TODO
         var data = JSON.parse(window.localStorage.getItem(sectionLoaderViewModel.opptyID()));
         if (data != undefined && data.keyAssumptions != undefined && data.keyAssumptions.content != undefined)
             unescapeData(data.keyAssumptions);
+        // combine offering with current table
+        for (var o in offerings) {
+            var content = ko.toJS(vm.data.content());
+            var flag = true;
+            for (var ct in content) {
+                if (content[ct].offeringFuncArea == offerings[o].offering) {
+                    flag = false;
+                }
+            }
+            if (flag === true) {
+                var data = { isNewAdd: false, offeringFuncArea: offerings[o].offering, assumption: "", planToClose: "" };
+                vm.data.content.push(new KeyAssumption(data));
+            }            
+        }        
     }
 
     function saveOppty(event, argu) {
@@ -8032,24 +8070,13 @@ define("component/SectionLoader", function (require) {
                         self.sectionName(self.sectionNavigator()[i].sectionName);
                         self.prevSid(self.sectionNavigator()[i].prevSid);
                         self.nextSid(self.sectionNavigator()[i].nextSid);
-                        if (!isNewSection(newSid)) {
-                            retriveDocument(viewModel);
-                        }                        
+                        if (isNewSection(newSid)) {
+                            self.sectionName(self.sectionNavigator()[0].sectionName);
+                        }
+                        retriveDocument(viewModel);
                         return;
                     }
                 }
-            });
-
-            self.pursuitClassfication.subscribe(function (newValue) {
-                viewModel.pursuitClassfication(newValue);
-            });
-
-            self.involvedGbu.subscribe(function (newValue) {
-                viewModel.involvedGbu(newValue);
-            });
-
-            self.appsInscope.subscribe(function (newValue) {
-                viewModel.appsInscope(newValue);
             });
 
             self.saveHome = function () {
@@ -8069,8 +8096,9 @@ define("component/SectionLoader", function (require) {
                         saveingSid = self.nextSid();
                         $(window).triggerHandler("sectionChanged", viewModel);
                     }
-                } else if (isNewSection(viewModel.sid())) {
+                } else if (isNewSection(viewModel.sid())) {                    
                     viewModel.sid(self.nextSid());
+                    history.pushState("string-data", "section-name", "?sid=" + viewModel.sid() + "&OpptyID=" + viewModel.opptyID() + "")
                 } else {
                     $(window).triggerHandler("opptySaving", viewModel);
                     saveingSid = self.nextSid();
@@ -8084,8 +8112,9 @@ define("component/SectionLoader", function (require) {
                         saveingSid = self.prevSid();
                         $(window).triggerHandler("sectionChanged", viewModel);
                     }
-                } else if(isNewSection(viewModel.sid())) {
+                } else if (isNewSection(viewModel.sid())) {
                     viewModel.sid(self.prevSid());
+                    history.pushState("string-data", "section-name", "?sid=" + viewModel.sid() + "&OpptyID=" + viewModel.opptyID() + "")
                 } else{
                     $(window).triggerHandler("opptySaving", viewModel);
                     saveingSid = self.prevSid();
@@ -8093,8 +8122,10 @@ define("component/SectionLoader", function (require) {
             }
             self.changeSection = function (sid) {
                 beforeSave();
-                $(window).triggerHandler("opptySaving", viewModel);
+                $(window).triggerHandler("opptySaving", self);
                 saveingSid = sid;
+                viewModel.sid(saveingSid);
+                history.pushState("string-data", "section-name", "?sid=" + viewModel.sid() + "&OpptyID=" + viewModel.opptyID() + "")
             }
         },
         viewModel = new sectionViewModel();

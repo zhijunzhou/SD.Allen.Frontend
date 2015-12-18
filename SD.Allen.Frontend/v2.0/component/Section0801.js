@@ -18,20 +18,23 @@
 
     function KeyAssumption(data) {
         if (data != null) {
-            this.offeringFuncArea = ko.observable(data.offeringFuncArea);
-            this.assumption = ko.observable(data.assumption);
-            this.planToClose = ko.observable(data.planToClose);
+            this.isNewAdd = data.isNewAdd;
+            this.offeringFuncArea = data.offeringFuncArea;
+            this.assumption = data.assumption;
+            this.planToClose = data.planToClose;
         } else {
-            this.offeringFuncArea = ko.observable("");
-            this.assumption = ko.observable("");
-            this.planToClose = ko.observable("");
+            this.isNewAdd = true;
+            this.offeringFuncArea = "";
+            this.assumption = "";
+            this.planToClose = "";
         }
     }
 
     function unescapeData(data) {
         if (data.content != null && data.content.length > 0) {
             for (var i in data.content) {
-                data.content[i].offeringFuncArea = getUnEscapeValue(data.content[i].offeringFuncArea);
+                data.content[i].isNewAdd = data.content[i].isNewAdd;
+                data.content[i].offeringFuncArea = data.content[i].offeringFuncArea;
                 data.content[i].assumption = getUnEscapeValue(data.content[i].assumption);
                 data.content[i].planToClose = getUnEscapeValue(data.content[i].planToClose);
             }
@@ -40,6 +43,8 @@
         }
         vm.data.content(data.content);
     }
+
+
 
     function listenCustomEvent() {
         $(window).off("opptySaving");
@@ -54,6 +59,8 @@
         listenCustomEvent();
     }
 
+    function onViewModelLoaded() {   }
+
     function createViewModel(params, componentInfo) {
         onViewModelPreLoad();
         sectionLoaderViewModel = params.viewModel;
@@ -61,7 +68,7 @@
             var self = this;
             self.editable = ko.observable(true);
             self.data = {
-                content: ko.observableArray([new KeyAssumption(null)])
+                content: ko.observableArray()
             }
             self.addRow = function () {
                 self.data.content.push(new KeyAssumption(null));
@@ -80,10 +87,41 @@
             sectionLoaderViewModel = newViewModel;
         }
         vm.editable(sectionLoaderViewModel.editable());
+        // get offering
+        var offerings = null;
+        var doc = ko.toJS(sectionLoaderViewModel.document);
+        if (doc != undefined && doc.solnOverview != undefined
+            && doc.solnOverview.scope.allOfferings != undefined
+            && doc.solnOverview.scope.allOfferings.data != undefined
+            && doc.solnOverview.scope.allOfferings.data.content != undefined) {
+            offerings = doc.solnOverview.scope.allOfferings.data.content;
+
+            retrieveAndCombineData(offerings);
+            vm.data.content.sort(function (a, b) {
+                return a.isNewAdd == true;
+            });
+        }
+    }
+
+    function retrieveAndCombineData(offerings) {
         // retrieve TODO
         var data = JSON.parse(window.localStorage.getItem(sectionLoaderViewModel.opptyID()));
         if (data != undefined && data.keyAssumptions != undefined && data.keyAssumptions.content != undefined)
             unescapeData(data.keyAssumptions);
+        // combine offering with current table
+        for (var o in offerings) {
+            var content = ko.toJS(vm.data.content());
+            var flag = true;
+            for (var ct in content) {
+                if (content[ct].offeringFuncArea == offerings[o].offering) {
+                    flag = false;
+                }
+            }
+            if (flag === true) {
+                var data = { isNewAdd: false, offeringFuncArea: offerings[o].offering, assumption: "", planToClose: "" };
+                vm.data.content.push(new KeyAssumption(data));
+            }            
+        }        
     }
 
     function saveOppty(event, argu) {
